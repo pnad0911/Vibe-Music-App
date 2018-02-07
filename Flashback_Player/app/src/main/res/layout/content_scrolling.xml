@@ -18,18 +18,5 @@
 
 </android.support.v4.widget.NestedScrollView>
 
-<LinearLayout
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center_horizontal"
-android:orientation="horizontal">
-
-<MediaController
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-</MediaController>
-
-</LinearLayout>
 
 

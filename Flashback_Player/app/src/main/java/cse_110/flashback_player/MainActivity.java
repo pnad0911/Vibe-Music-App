@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,13 +27,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] myStringArray = new String[5];
+        String[] myStringArray = new String[10];
         myStringArray[0] = "AAA";
         myStringArray[1] = "BBB";
         myStringArray[2] = "CCC";
         myStringArray[3] = "DDD";
         myStringArray[4] = "EEE";
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.id.textview, myStringArray);
+        myStringArray[5] = "AAA";
+        myStringArray[6] = "BBB";
+        myStringArray[7] = "CCC";
+        myStringArray[8] = "DDD";
+        myStringArray[9] = "EEE";
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.song_list_row, myStringArray);
+
+        ListView listView = (ListView) findViewById(R.id.song_list);
+        listView.setAdapter(adapter);
     }
 
 }
