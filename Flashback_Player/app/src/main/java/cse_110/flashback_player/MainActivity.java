@@ -9,7 +9,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private ListView sListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +33,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] myStringArray = new String[10];
-        myStringArray[0] = "AAA";
-        myStringArray[1] = "BBB";
-        myStringArray[2] = "CCC";
-        myStringArray[3] = "DDD";
-        myStringArray[4] = "EEE";
-        myStringArray[5] = "AAA";
-        myStringArray[6] = "BBB";
-        myStringArray[7] = "CCC";
-        myStringArray[8] = "DDD";
-        myStringArray[9] = "EEE";
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.song_list_row, myStringArray);
+        sListView = (ListView) findViewById(R.id.song_list);
 
-        ListView listView = (ListView) findViewById(R.id.song_list);
-        listView.setAdapter(adapter);
+        final ArrayList<Song> songList = new ArrayList<Song>();
+        songList.add(new Song("Hey, Soul Sister", "Train", "Heyyyyyyy"));
+        songList.add(new Song("Hey, Soul Sister1", "Train1", "Heyyyyyyy1"));
+        songList.add(new Song("Hey, Soul Sister2", "Train2", "Heyyyyyyy2"));
+        songList.add(new Song("Hey, Soul Sister3", "Train3", "Heyyyyyyy3"));
+        songList.add(new Song("Hey, Soul Sister4", "Train4", "Heyyyyyyy4"));
+        songList.add(new Song("Hey, Soul Sister5", "Train5", "Heyyyyyyy5"));
+        songList.add(new Song("Hey, Soul Sister6", "Train6", "Heyyyyyyy6"));
+        songList.add(new Song("Hey, Soul Sister7", "Train7", "Heyyyyyyy7"));
+        songList.add(new Song("Hey, Soul Sister8", "Train8", "Heyyyyyyy8"));
+        songList.add(new Song("Hey, Soul Sister9", "Train9", "Heyyyyyyy9"));
+
+        SongAdapter adapter = new SongAdapter(this, songList);
+        sListView.setAdapter(adapter);
     }
 
 }
