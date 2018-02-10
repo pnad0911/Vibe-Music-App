@@ -42,6 +42,10 @@ public class SongPlayer {
         mediaPlayer.seekTo((int) (mediaPlayer.getDuration() * percent / 100));
     }
 
+    public boolean isPaused(){
+        return paused;
+    }
+
     public void pause(){
         if(isPlaying()){
             mediaPlayer.pause();
