@@ -11,10 +11,15 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SongPlayer {
 
-    MediaPlayer mediaPlayer;
-    AppCompatActivity activity;
-    Song nextSong;
+    private MediaPlayer mediaPlayer;
+    private AppCompatActivity activity;
+    private Song nextSong;
+    private boolean paused = false;
 
+    /**
+     * Creates a new SongPlayer object attached to the given activity
+     * @param activity Activity this SongPlayer is attached to.
+     */
     public SongPlayer(AppCompatActivity activity){
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -32,27 +37,43 @@ public class SongPlayer {
         return mediaPlayer.isPlaying(); //TODO
     }
 
+    public void seekTo(double percent){
+
+        mediaPlayer.seekTo((int) (mediaPlayer.getDuration() * percent / 100));
+    }
+
     public void pause(){
-        if(!isPlaying()){
+        if(isPlaying()){
             mediaPlayer.pause();
+            paused = true;
         }
     }
+
+    public void resume(){
+        if(paused){
+            mediaPlayer.start();
+            paused = false;
+        }
+    }
+
 
     public boolean play(Song song){
         if(song == null){
             return false;
         }
+        paused = false;
         mediaPlayer.reset();
         AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getID());
         try{
             mediaPlayer.setDataSource(assetFileDescriptor);
-            mediaPlayer.prepareAsync();
-            mediaPlayer.start();
-            return true;
+            mediaPlayer.prepare();
+
         }
         catch (Exception e){
             return false;
         }
+        mediaPlayer.start();
+        return true;
     }
 
     public boolean playNext(Song song){
@@ -91,5 +112,6 @@ public class SongPlayer {
     public interface SongPlayerCallback {
         public abstract void callback();
     }
+
 
 }
