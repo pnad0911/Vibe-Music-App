@@ -111,7 +111,6 @@ public class SongList {
         }
     }
 
-
     private List<String> songList(String AlbumName) {
         List<String> list = new ArrayList<String>();
         File AlbumFolder = getAlbumFile(AlbumName);
