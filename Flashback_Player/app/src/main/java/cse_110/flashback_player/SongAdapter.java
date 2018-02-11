@@ -55,7 +55,7 @@ public class SongAdapter extends BaseAdapter {
 
         Song song = (Song) getItem(position);
 
-        songNameView.setText(song.getName());
+        songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
 

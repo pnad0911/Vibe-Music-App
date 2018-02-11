@@ -10,25 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-<<<<<<< HEAD
-            android:name=".ScrollingActivity"
-            android:label=".ScrollingActivity"
-            android:theme="@style/AppTheme.NoActionBar">
 
-        </activity>
         <activity
             android:name=".MainActivity"
             android:label="Flashback_Player"
             android:theme="@style/AppTheme.NoActionBar">
 
-=======
-
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
->>>>>>> 9df9ba9f7d057b1abca818e78693585abfaa1f34
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
