@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
@@ -12,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 public class SongPlayer {
 
     private MediaPlayer mediaPlayer;
-    private AppCompatActivity activity;
+    private Activity activity;
     private Song nextSong;
     private boolean paused = false;
 
@@ -20,7 +21,7 @@ public class SongPlayer {
      * Creates a new SongPlayer object attached to the given activity
      * @param activity Activity this SongPlayer is attached to.
      */
-    public SongPlayer(AppCompatActivity activity){
+    public SongPlayer(Activity activity){
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -91,6 +92,7 @@ public class SongPlayer {
     public void clearNext(){
         nextSong = null;
     }
+
     public void clear(){
         clearNext();
         if(isPlaying()){

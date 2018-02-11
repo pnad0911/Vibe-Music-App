@@ -1,46 +1,52 @@
 package cse_110.flashback_player;
 
+/**
+ * Created by Yutong on 2/10/18.
+ */
+
+import android.content.Context;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class Tab1allsongs extends Fragment {
 
-
+    private int songIdx;
     private ListView sListView;
-    private int songIdx = 0; //index for song list
+    private Context context;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
         final ArrayList<Song> songList = new ArrayList<Song>();
         songList.add(new Song("Susume Tomorrow", R.raw.susume_tomorrow, "Sonoda Umi", "Susume Tomorrow"));
         songList.add(new Song("Soldier Game", R.raw.soldier_game, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));
 
-        sListView = (ListView) findViewById(R.id.song_list);
-        SongAdapter adapter = new SongAdapter(this, songList);
+        sListView = (ListView) rootView.findViewById(R.id.song_list);
+        SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
         sListView.setAdapter(adapter);
 
-        final SongPlayer songPlayer = new SongPlayer(this);
+        final SongPlayer songPlayer = new SongPlayer(this.getActivity());
 
-        final Button playButton = (Button) findViewById(R.id.play);
-        final Button resetButton = (Button) findViewById(R.id.reset);
-        final Button nextButton = (Button) findViewById(R.id.next);
-        final Button previousButton = (Button) findViewById(R.id.previous);
+        final Button playButton = (Button) rootView.findViewById(R.id.play);
+        final Button resetButton = (Button) rootView.findViewById(R.id.reset);
+        final Button nextButton = (Button) rootView.findViewById(R.id.next);
+        final Button previousButton = (Button) rootView.findViewById(R.id.previous);
 
         // play and pause are the same botton
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -96,16 +102,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Change song title and artist on song player
-        final TextView songTitleView = (TextView) findViewById(R.id.name);
-        final TextView songArtistView = (TextView) findViewById(R.id.artist);
-        final TextView songAlbumView = (TextView) findViewById(R.id.album);
+        final TextView songTitleView = (TextView) rootView.findViewById(R.id.name);
+        final TextView songArtistView = (TextView) rootView.findViewById(R.id.artist);
+        final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
 
         songTitleView.setText(songList.get(songIdx).getTitle());
         songArtistView.setText(songList.get(songIdx).getArtist());
         songAlbumView.setText(songList.get(songIdx).getAlbum());
 
-
+        return rootView;
 
     }
-
 }
