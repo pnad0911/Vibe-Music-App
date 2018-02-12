@@ -1,7 +1,7 @@
 package cse_110.flashback_player;
 
 /**
- * Created by Patrick on 2/7/2018.
+ * Created by Patrick and Yutong on 2/7/2018.
  */
 
 public class Song {
@@ -11,9 +11,18 @@ public class Song {
     private String artist;
     private String album;
 
+
+
     public Song(String title, int id, String artist, String album){
         setTitle(title);
         setID(id);
+        setArtist(artist);
+        setAlbum(album);
+    }
+
+    public Song(String title, String artist, String album){
+        setTitle(title);
+        setID(0);
         setArtist(artist);
         setAlbum(album);
     }
