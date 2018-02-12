@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class SongList {
     private static final String RAWPATH = "app/src/main/res/raw/";
-    private Map<String,List<String>> AlbumSongList;
+    private Map<String,List<Song>> AlbumSongList;
 
     /* Constructor  */
     public SongList() {
@@ -33,9 +33,9 @@ public class SongList {
      *         return empty List if there is no album
      */
     public List<String> getListOfAlbum() {
-        Set<Map.Entry<String,List<String>>> set = AlbumSongList.entrySet();
+        Set<Map.Entry<String,List<Song>>> set = AlbumSongList.entrySet();
         List<String> AlbumList = new ArrayList<>();
-        for(Map.Entry<String,List<String>> mem : set) {
+        for(Map.Entry<String,List<Song>> mem : set) {
             AlbumList.add(mem.getKey());
         }
         return AlbumList;
@@ -47,11 +47,11 @@ public class SongList {
      * Return: List<String>
      *         return empty List if there is no album
      */
-    public List<String> getListOfSong(String AlbumName) {
+    public List<Song> getListOfSong(String AlbumName) {
         if(isAlbumExist(AlbumName)) {
             return AlbumSongList.get(AlbumName);
         }
-        return new ArrayList<String>();
+        return new ArrayList<Song>();
     }
 
     /*
@@ -61,26 +61,27 @@ public class SongList {
      */
     public List<Song> getAllsong() {
         List<Song> l = new ArrayList<>();
-        for(Map.Entry<String, List<String>> entry: AlbumSongList.entrySet()) {
-            for(String a : entry.getValue()) {
+        for(Map.Entry<String, List<Song>> entry: AlbumSongList.entrySet()) {
+            for(Song a : entry.getValue()) {
 
 
 //  -------------------- Waiting for SongMetadata from Beverly ---------------------------------------------
 //                SongMetadata m = new SongMetadata(a);
 //                Song s = new Song(m.getSongName(),m.getArtistName(),m.getAlbumName());
 //                l.add(s);
-                Song s = new Song(a,"Yutong","Not yet released");
-                l.add(s);
+
+                //Song s = new Song(a.getTitle(),a.getID(),"Yutong","Not yet released");
+                l.add(a);
             }
         }
         return l;
     }
 
     //String All Song
-    public List<String> getAll() {
-        List<String> l = new ArrayList<>();
-        for(Map.Entry<String, List<String>> entry: AlbumSongList.entrySet()) {
-            for(String a : entry.getValue()) {
+    private List<Song> getAll() {
+        List<Song> l = new ArrayList<>();
+        for(Map.Entry<String, List<Song>> entry: AlbumSongList.entrySet()) {
+            for(Song a : entry.getValue()) {
                 l.add(a);
             }
         }
@@ -91,29 +92,30 @@ public class SongList {
 
     // --------------------- HELPER METHOD BEGIN HERE ----------------------------
     private void generateAll() {
-        AlbumSongList = new HashMap<String, List<String>>();
+        AlbumSongList = new HashMap<String, List<Song>>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         String s;
-        List<String> listOfSongs = new ArrayList<>();
+        List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
-                listOfSongs.add(f.getName());
+                Song so = new Song(f.getName(),f.getInt(null),"Yutong","Not yet released");
+                listOfSongs.add(so);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        for (String a : listOfSongs) {
-            String songName = a + ".mp3";
+        for (Song a : listOfSongs) {
+            String songName = a.getTitle() + ".mp3";
             if (isMp3File(songName)) {
-                Song song = new Song(a,"Yutong","Not yet released");
-                String album = song.getAlbum();
+                //Song song = new Song(a,"Yutong","Not yet released");
+                String album = a.getAlbum();
                 if (AlbumSongList.isEmpty() || !AlbumSongList.containsKey(album)) {
-                    ArrayList<String> array = new ArrayList<>();
-                    array.add(songName);
+                    ArrayList<Song> array = new ArrayList<>();
+                    array.add(a);
                     AlbumSongList.put(album, array);
                 } else {
-                    AlbumSongList.get(album).add(songName);
+                    AlbumSongList.get(album).add(a);
                 }
             }
         }
@@ -174,9 +176,9 @@ public class SongList {
 
     /*public static void main(String[] args) {
         SongList s = new SongList();
-        List<String> l = s.getListOfAlbum();
-        for(String a : l) {
-            System.out.println(a);
+        List<Song> l = s.getAllsong();
+        for(Song a : l) {
+            System.out.println(a.getID());
         }
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         for (Field f : raw) {
