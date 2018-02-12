@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.SharedPreferences;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+     //   MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+      //  SongMetadata sm = new SongMetadata("app/src/main/res/raw/after_the_storm.mp3", mmr);
+      //  System.out.println(sm.getSongName());
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override

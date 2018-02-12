@@ -38,6 +38,20 @@ public class SongList {
         return AlbumList;
     }
 
+    public List<String> getAllsong() {
+        List<String> list = new ArrayList<String>();
+        File AlbumFolder = new File(RAWPATH);
+        File[] listOfSongs = AlbumFolder.listFiles();
+
+        for(int i = 0; i < listOfSongs.length; i++) {
+            String songName = listOfSongs[i].getName();
+            if(listOfSongs[i].isFile() && isMp3File(RAWPATH+songName)) {
+                list.add(songName);
+            }
+        }
+        return list;
+    }
+
     /*
      * getListOfSong : get the list of the song name file
      * Parameter: String AlbumName

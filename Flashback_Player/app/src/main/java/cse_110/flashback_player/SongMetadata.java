@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.location.Location;
+import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
 import android.util.Log;
 
@@ -17,10 +18,25 @@ import static java.sql.DriverManager.println;
 
 public class SongMetadata {
 
-    MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    String songPath;
+    MediaMetadataRetriever mmr;
 
-    public SongMetadata(String songPath) {
-        mmr.setDataSource(songPath);
+    public SongMetadata(String songPath, MediaMetadataRetriever mmr) {
+
+        this.songPath = songPath;
+        this.mmr = mmr;
+        try {
+            this.mmr.setDataSource(songPath);
+        } catch (RuntimeException e) {
+            System.out.println("failed to set data source");
+
+        }
+        System.out.println("after set data source");
+        /*        try {
+            mmr.setDataSource(songPath);
+        } catch(RuntimeException e) {
+            Log.e(TAG, "Illegal song path");
+        }*/
     }
 
     // song location? (optional)
@@ -63,13 +79,19 @@ public class SongMetadata {
     }
 /*
     public static void main(String[] args) {
-        System.out.println("yo");
-        String path = "app/src/main/res/raw/after_the_storm.mp3";
-        SongMetadata sm = new SongMetadata(path);
-        String res = sm.getSongName();
-        System.out.println(res);
+        try {
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            String path = "app/src/main/res/raw/after_the_storm.mp3";
+            SongMetadata sm = new SongMetadata(path, mmr);
+            String res = sm.getSongName();
+            System.out.println(res);
+
+        } catch (RuntimeException e) {
+            System.out.println("catch");
+        }
+
     }
-    */
+*/
 }
 
     /*
