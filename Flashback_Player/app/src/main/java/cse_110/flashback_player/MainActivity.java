@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         final Button resetButton = (Button) findViewById(R.id.reset);
         final Button nextButton = (Button) findViewById(R.id.next);
         final Button previousButton = (Button) findViewById(R.id.previous);
-
         // play and pause are the same botton
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
