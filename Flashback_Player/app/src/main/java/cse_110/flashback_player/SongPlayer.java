@@ -15,6 +15,7 @@ public class SongPlayer {
     private AppCompatActivity activity;
     private Song nextSong;
     private boolean paused = false;
+    private MapsActivity mapsActivity;
 
     /**
      * Creates a new SongPlayer object attached to the given activity
@@ -29,6 +30,7 @@ public class SongPlayer {
                 clearNext();
             }
         });
+        mapsActivity = new MapsActivity();
         this.activity = activity;
     }
 
@@ -72,6 +74,9 @@ public class SongPlayer {
         catch (Exception e){
             return false;
         }
+        song.setLocation(mapsActivity.getLoc_lat(), mapsActivity.getLoc_long());
+        song.setDate(mapsActivity.getDate());
+
         mediaPlayer.start();
         return true;
     }
