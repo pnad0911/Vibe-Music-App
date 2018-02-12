@@ -61,15 +61,22 @@ public class SongMetadata {
     public String getYear() {
         return mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR);
     }
-/*
+
     public static void main(String[] args) {
+        //System.out.println("yo");
+        //String path = "app/src/main/res/raw/after_the_storm.mp3";
+        //SongMetadata sm = new SongMetadata();
+        //String res = sm.getSongName();
+        //System.out.println(res);
+        //try {
+        //MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         System.out.println("yo");
         String path = "app/src/main/res/raw/after_the_storm.mp3";
         SongMetadata sm = new SongMetadata(path);
         String res = sm.getSongName();
         System.out.println(res);
     }
-    */
+
 }
 
     /*
