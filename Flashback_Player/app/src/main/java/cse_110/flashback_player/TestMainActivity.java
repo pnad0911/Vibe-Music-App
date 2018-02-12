@@ -44,6 +44,7 @@ public class TestMainActivity extends AppCompatActivity {
         Button playbutton = (Button) findViewById(R.id.playbutton);
         Button pausebutton = (Button) findViewById(R.id.pausebutton);
         Button resetbutton = (Button) findViewById(R.id.resetbutton);
+      
         playbutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -78,3 +79,4 @@ public class TestMainActivity extends AppCompatActivity {
     }
 
 }
+
