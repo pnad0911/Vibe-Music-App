@@ -20,6 +20,7 @@ public class SongPlayer implements Parcelable{
     private Activity activity;
     private Song nextSong;
     private int paused = 0;
+    private MapsActivity mapsActivity;
 
     /**
      * Creates a new SongPlayer object attached to the given activity
@@ -34,6 +35,7 @@ public class SongPlayer implements Parcelable{
                 clearNext();
             }
         });
+        mapsActivity = new MapsActivity();
         this.activity = activity;
     }
 
@@ -82,6 +84,9 @@ public class SongPlayer implements Parcelable{
         catch (Exception e){
             return false;
         }
+        song.setLocation(mapsActivity.getLoc_lat(), mapsActivity.getLoc_long());
+        song.setDate(mapsActivity.getDate());
+
         mediaPlayer.start();
         return true;
     }
