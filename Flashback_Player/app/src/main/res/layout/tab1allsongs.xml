@@ -98,7 +98,7 @@
                 android:layout_alignParentEnd="true">
 
                 <Button
-                    android:id="@+id/next"
+                    android:id="@+id/previous"
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:text="-" />
@@ -118,7 +118,7 @@
                     android:textSize="8sp" />
 
                 <Button
-                    android:id="@+id/previous"
+                    android:id="@+id/next"
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:text="+" />

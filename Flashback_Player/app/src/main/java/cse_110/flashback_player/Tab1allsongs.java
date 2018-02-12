@@ -33,6 +33,9 @@ public class Tab1allsongs extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
+        Bundle bundle1 = this.getArguments();
+
+        // get items from song list
         final ArrayList<Song> songList = new ArrayList<Song>();
         songList.add(new Song("Susume Tomorrow", R.raw.susume_tomorrow, "Sonoda Umi", "Susume Tomorrow"));
         songList.add(new Song("Soldier Game", R.raw.soldier_game, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));
@@ -41,7 +44,8 @@ public class Tab1allsongs extends Fragment {
         SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
         sListView.setAdapter(adapter);
 
-        final SongPlayer songPlayer = new SongPlayer(this.getActivity());
+        // Actions with song Player
+        final SongPlayer songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         final Button playButton = (Button) rootView.findViewById(R.id.play);
         final Button resetButton = (Button) rootView.findViewById(R.id.reset);
@@ -63,7 +67,7 @@ public class Tab1allsongs extends Fragment {
                 else{
                     songPlayer.play(songList.get(songIdx));
                     Song nextSong;
-                    if(songIdx == songList.size()){
+                    if(songIdx == songList.size()-1){
                         nextSong = songList.get(0);
                     } else{
                         nextSong = songList.get(songIdx + 1);
@@ -90,8 +94,9 @@ public class Tab1allsongs extends Fragment {
                 }
 
                 songPlayer.play(songList.get(songIdx));
+                System.out.println(songList.get(songIdx).getTitle());
                 Song nextSong;
-                if(songIdx == songList.size()){
+                if(songIdx == songList.size()-1){
                     nextSong = songList.get(0);
                 } else{
                     nextSong = songList.get(songIdx + 1);

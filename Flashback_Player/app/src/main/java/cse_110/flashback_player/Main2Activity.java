@@ -25,8 +25,6 @@ import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity {
 
-
-
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -36,6 +34,7 @@ public class Main2Activity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private SongPlayer songPlayer = new SongPlayer(this);
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -83,7 +82,6 @@ public class Main2Activity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -100,14 +98,21 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
+            // At the same time it passes songPlayer to each tab so they share one reference
             switch (position){
                 case 0:
                     Tab1allsongs tab1 = new Tab1allsongs();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("songPlayer", songPlayer);
+                    tab1.setArguments(bundle);
                     return tab1;
                 case 1:
                     Tab2album tab2 = new Tab2album();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putParcelable("songPlayer", songPlayer);
+                    tab2.setArguments(bundle2);
                     return tab2;
                 default:
                     return null;
