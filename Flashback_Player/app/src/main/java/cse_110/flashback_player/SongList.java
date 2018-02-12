@@ -156,7 +156,6 @@ public class SongList {
             String songName = listOfSongs[i].getName();
             if (listOfSongs[i].isFile() && isMp3File(songName)) {
                 list.add(songName.substring(0,songName.length()-4));
-
             } else if (listOfSongs[i].isDirectory()) {
                 list.addAll(songList(AlbumName+ "/" + songName));
             }
