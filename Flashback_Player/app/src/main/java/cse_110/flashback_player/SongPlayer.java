@@ -1,27 +1,32 @@
 package cse_110.flashback_player;
 
+import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+
+import static android.os.UserHandle.readFromParcel;
 
 /**
  * Created by Patrick on 2/7/2018.
  */
 
-public class SongPlayer {
+public class SongPlayer implements Parcelable{
 
     private MediaPlayer mediaPlayer;
-    private AppCompatActivity activity;
+    private Activity activity;
     private Song nextSong;
-    private boolean paused = false;
+    private int paused = 0;
     private MapsActivity mapsActivity;
 
     /**
      * Creates a new SongPlayer object attached to the given activity
      * @param activity Activity this SongPlayer is attached to.
      */
-    public SongPlayer(AppCompatActivity activity){
+    public SongPlayer(Activity activity){
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -34,6 +39,7 @@ public class SongPlayer {
         this.activity = activity;
     }
 
+
     public boolean isPlaying(){
 
         return mediaPlayer.isPlaying(); //TODO
@@ -44,17 +50,21 @@ public class SongPlayer {
         mediaPlayer.seekTo((int) (mediaPlayer.getDuration() * percent / 100));
     }
 
+    public boolean isPaused(){
+        return (paused == 1);
+    }
+
     public void pause(){
         if(isPlaying()){
             mediaPlayer.pause();
-            paused = true;
+            paused = 1;
         }
     }
 
     public void resume(){
-        if(paused){
+        if(isPaused()){
             mediaPlayer.start();
-            paused = false;
+            paused = 0;
         }
     }
 
@@ -63,7 +73,7 @@ public class SongPlayer {
         if(song == null){
             return false;
         }
-        paused = false;
+        paused = 0;
         mediaPlayer.reset();
         AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getID());
         try{
@@ -92,6 +102,7 @@ public class SongPlayer {
     public void clearNext(){
         nextSong = null;
     }
+
     public void clear(){
         clearNext();
         if(isPlaying()){
@@ -114,9 +125,45 @@ public class SongPlayer {
             }
         });
     }
+
     public interface SongPlayerCallback {
         public abstract void callback();
     }
+
+    /*--------------------------------------------------------------
+     * Begin required override methods from implementing Parcelable
+     */
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeValue(mediaPlayer);
+        out.writeValue(activity);
+        out.writeValue(nextSong);
+        out.writeInt(paused);
+    }
+
+    public static final Parcelable.Creator<SongPlayer> CREATOR
+            = new Parcelable.Creator<SongPlayer>() {
+        public SongPlayer createFromParcel(Parcel in) {
+            return new SongPlayer(in);
+        }
+
+        public SongPlayer[] newArray(int size) {
+            return new SongPlayer[size];
+        }
+    };
+
+    private SongPlayer(Parcel in) {
+        mediaPlayer = (MediaPlayer) in.readValue(null);
+        activity = (Activity) in.readValue(null);
+        nextSong = (Song) in.readValue(null);
+        paused = in.readInt();
+    }
+
+    /* ENDS ---------------------------------------------------*/
 
 
 }
