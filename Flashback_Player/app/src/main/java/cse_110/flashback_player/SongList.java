@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 
 public class SongList {
-    private final String RAWPATH = "app/src/main/res/raw/";
+    private static final String RAWPATH = "app/src/main/res/raw/";
     private Map<String,List<String>> AlbumSongList;
 
     /* Constructor  */
@@ -51,29 +51,55 @@ public class SongList {
         return new ArrayList<String>();
     }
 
-
-
-
-    // --------------------- HELPER METHOD BEGIN HERE ----------------------------
-    private void generateAll() {
-        AlbumSongList = new HashMap<String,List<String>>();
+    /*
+     * getListOfAllSong: get the list of the song objects
+     * Parameter: none
+     * Return List<Song>
+     */
+    public List<Song> getAllsong() {
+        List<Song> list = new ArrayList<Song>();
         File AlbumFolder = new File(RAWPATH);
         File[] listOfSongs = AlbumFolder.listFiles();
 
         for(int i = 0; i < listOfSongs.length; i++) {
             String songName = listOfSongs[i].getName();
-            if(listOfSongs[i].isFile() && isMp3File(songName)) {
+            String path  = RAWPATH + songName;
+            SongMetadata songM = new SongMetadata(path);
+            if(listOfSongs[i].isFile() && isMp3File(path)) {
+                Song song = new Song(songM.getSongName(),songM.getArtistName(), songM.getAlbumName());
+                list.add(song);
+            }
+        }
+        return list;
+    }
+
+
+
+
+
+    // --------------------- HELPER METHOD BEGIN HERE ----------------------------
+    private void generateAll() {
+        AlbumSongList = new HashMap<String, List<String>>();
+        File AlbumFolder = new File(RAWPATH);
+
+        File[] listOfSongs = AlbumFolder.listFiles();
+        System.out.println(listOfSongs.length);
+
+        for (int i = 0; i < listOfSongs.length; i++) {
+            String songName = listOfSongs[i].getName();
+            if (listOfSongs[i].isFile() && isMp3File(songName)) {
                 Song song = new Song(songName);
                 String album = song.getAlbum();
                 if (AlbumSongList.isEmpty() || !AlbumSongList.containsKey(album)) {
                     ArrayList<String> array = new ArrayList<>();
                     array.add(songName);
-                    AlbumSongList.put(album,array);
+                    AlbumSongList.put(album, array);
                 } else {
                     AlbumSongList.get(album).add(songName);
                 }
             }
         }
+    }
         /*ArrayList<String> array = new ArrayList<>();
         array.add("aaa");array.add("bb b");array.add("c");array.add("dd");
         AlbumSongList.put("1",array);
@@ -83,7 +109,7 @@ public class SongList {
         AlbumSongList.put("2",array2);
         ArrayList<String> array3 = new ArrayList<>();
         AlbumSongList.put("3",array3);*/
-    }
+
 
 
     public boolean isAlbumExist(String AlbumName) {
@@ -138,14 +164,32 @@ public class SongList {
 
     //-------------------Main for testing-------------------------
 
-    /*public static void main(String[] args) {
-        SongList song = new SongList();
-        List<String> s  = song.getListOfAlbum();
-        for(String a : s) {
-            System.out.println(a);
-        }
-        List<String> s1  = song.getListOfSong("b");
+//    public static void main(String[] args) {
+//        SongList song = new SongList();
+//        List<String> s  = song.getListOfAlbum();
+//        for(String a : s) {
+//            System.out.println(a);
+//            List<String> s1  = song.getListOfSong(a);
+//            for(String a2 : s1) {
+//                System.out.println(a2);
+//            }
+//        }
+//
+//
+//    }
 
-    }*/
+    public static void main(String[] args) {
+//        String RAWPATH = "app/src/main/res/raw/";
+        File AlbumFolder = new File(RAWPATH);
+        File[] listOfSongs = AlbumFolder.listFiles();
+
+        for(int i = 0; i < listOfSongs.length; i++) {
+            String songName = listOfSongs[i].getName();
+            if(listOfSongs[i].isFile() ) {
+                System.out.println(songName);
+            }
+        }
+
+    }
 }
 

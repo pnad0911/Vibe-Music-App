@@ -16,11 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tab1allsongs extends Fragment {
 
@@ -34,19 +36,35 @@ public class Tab1allsongs extends Fragment {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
         Bundle bundle1 = this.getArguments();
+        final SongPlayer songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        final ArrayList<Song> songList = new ArrayList<Song>();
-        songList.add(new Song("Susume Tomorrow", R.raw.susume_tomorrow, "Sonoda Umi", "Susume Tomorrow"));
-        songList.add(new Song("Soldier Game", R.raw.soldier_game, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));
+        SongList songListGen = new SongList();
+        final List<Song> songList = songListGen.getAllsong();
 
         sListView = (ListView) rootView.findViewById(R.id.song_list);
         SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
         sListView.setAdapter(adapter);
 
-        // Actions with song Player
-        final SongPlayer songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
+        // Handle on click event
+        sListView.setClickable(true);
+        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                Song song = (Song) sListView.getItemAtPosition(position);
+                songIdx = position;
+                int idx = getNextSongIdx(songList);
+                Song nextSong = songList.get(idx);
+
+                songPlayer.play(song);
+                songPlayer.playNext(nextSong);
+
+            }
+        });
+
+        // Actions with song Player
         final Button playButton = (Button) rootView.findViewById(R.id.play);
         final Button resetButton = (Button) rootView.findViewById(R.id.reset);
         final Button nextButton = (Button) rootView.findViewById(R.id.next);
@@ -66,13 +84,8 @@ public class Tab1allsongs extends Fragment {
                 }
                 else{
                     songPlayer.play(songList.get(songIdx));
-                    Song nextSong;
-                    if(songIdx == songList.size()-1){
-                        nextSong = songList.get(0);
-                    } else{
-                        nextSong = songList.get(songIdx + 1);
-                    }
-                    songPlayer.playNext(nextSong);
+                    int idx = getNextSongIdx(songList);
+                    songPlayer.playNext(songList.get(idx));
                 }
             }
         });
@@ -87,24 +100,23 @@ public class Tab1allsongs extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if (songIdx == songList.size()-1){
-                    songIdx = 0;
-                } else {
-                    songIdx += 1;
-                }
-
                 songPlayer.play(songList.get(songIdx));
-                System.out.println(songList.get(songIdx).getTitle());
-                Song nextSong;
-                if(songIdx == songList.size()-1){
-                    nextSong = songList.get(0);
-                } else{
-                    nextSong = songList.get(songIdx + 1);
-                }
-                songPlayer.playNext(nextSong);
+                int idx = getNextSongIdx(songList);
+                songPlayer.playNext(songList.get(idx));
             }
 
         });
+
+        songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
+             @Override
+             public void callback() {
+                 int idx = getNextSongIdx(songList);
+                 songIdx = idx+1;
+                 songPlayer.play(songList.get(songIdx));
+                 idx = getNextSongIdx(songList);
+                 songPlayer.playNext(songList.get(idx));
+             }
+         });
 
         // Change song title and artist on song player
         final TextView songTitleView = (TextView) rootView.findViewById(R.id.name);
@@ -117,5 +129,15 @@ public class Tab1allsongs extends Fragment {
 
         return rootView;
 
+    }
+
+    public int getNextSongIdx(List<Song> songs){
+        int idx = 0;
+        if(songIdx == songs.size()-1){
+            idx = 0;
+        } else{
+            idx=songIdx + 1;
+        }
+        return idx;
     }
 }
