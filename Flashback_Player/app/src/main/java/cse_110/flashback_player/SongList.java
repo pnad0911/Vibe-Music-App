@@ -106,7 +106,7 @@ public class SongList {
         for (String a : listOfSongs) {
             String songName = a + ".mp3";
             if (isMp3File(songName)) {
-                Song song = new Song(songName);
+                Song song = new Song(a,"Yutong","Not yet released");
                 String album = song.getAlbum();
                 if (AlbumSongList.isEmpty() || !AlbumSongList.containsKey(album)) {
                     ArrayList<String> array = new ArrayList<>();
@@ -174,7 +174,7 @@ public class SongList {
 
     /*public static void main(String[] args) {
         SongList s = new SongList();
-        List<String> l = s.getAll();
+        List<String> l = s.getListOfAlbum();
         for(String a : l) {
             System.out.println(a);
         }
