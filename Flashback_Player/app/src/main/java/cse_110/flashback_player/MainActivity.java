@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +108,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void save(String mode) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("currentMode",mode);
+        editor.apply();
+    }
+
+    public void display(String mode) {
+        //EditText en = findViewById(R.id.name);
+        SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+        String right = sharedPreferences.getString("currentMode","");
+        //String unk = en.getText().toString();
     }
 
 }
