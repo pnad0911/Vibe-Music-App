@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<Song> songList = new ArrayList<Song>();
         songList.add(new Song("Susume Tomorrow", R.raw.susume_tomorrow, "Sonoda Umi", "Susume Tomorrow"));
-        songList.add(new Song("Soldier Game", R.raw.soldier_game, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));
+        songList.add(new Song("Soldier Game", R.raw.origin, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));
 
         sListView = (ListView) findViewById(R.id.song_list);
         SongAdapter adapter = new SongAdapter(this, songList);

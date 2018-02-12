@@ -20,7 +20,7 @@ public class TestMainActivity extends AppCompatActivity {
 
         final SongPlayer songPlayer = new SongPlayer(this);
         final Song susume_tomorrow = new Song("Susume Tomorrow", R.raw.susume_tomorrow, "Sonoda Umi", "Susume Tomorrow");
-        final Song soldier_game = new Song("Soldier Game", R.raw.soldier_game, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game");
+        final Song soldier_game = new Song("Soldier Game", R.raw.origin, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game");
         final Song mp5_sound = new Song("mp5_sound", R.raw.mp5_sound, "", "");
         Button playbutton = null; //= (Button) findViewById(R.id.playbutton);
         Button pausebutton = null; //= (Button) findViewById(R.id.pausebutton);
