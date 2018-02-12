@@ -12,17 +12,17 @@ import java.util.List;
 
 /**
  * Created by Yutong on 2/7/18.
- * Adaptor that populates songs into the list view.
+ * Adaptor that populates albums into the list view.
  */
 
 //tutorial from https://www.raywenderlich.com/124438/android-listview-tutorial
-public class SongAdapter extends BaseAdapter {
+public class AlbumAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private List<Song> mDataSource;
+    private List<String> mDataSource;
 
-    public SongAdapter(Context context, List<Song> items){
+    public AlbumAdapter(Context context, List<String> items){
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,18 +47,14 @@ public class SongAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent){
 
         //get view for row item
-        View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
+        View rowView = mInflater.inflate(R.layout.album_list_row, parent, false);
 
         //get view elements in list row
-        TextView songNameView = (TextView) rowView.findViewById((R.id.name));
-        TextView artistView = (TextView) rowView.findViewById((R.id.artist));
-        TextView albumView = (TextView) rowView.findViewById((R.id.album));
+        TextView albumNameView = (TextView) rowView.findViewById((R.id.name));
 
-        Song song = (Song) getItem(position);
+        String albumName = (String) getItem(position);
 
-        songNameView.setText(song.getTitle());
-        artistView.setText(song.getArtist());
-        albumView.setText(song.getAlbum());
+        albumNameView.setText(albumName);
 
         return rowView;
     }
