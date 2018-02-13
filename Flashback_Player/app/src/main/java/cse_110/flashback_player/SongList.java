@@ -1,5 +1,7 @@
 package cse_110.flashback_player;
 
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaMetadataRetriever;
 import android.provider.MediaStore;
 
 import java.io.File;
@@ -63,14 +65,6 @@ public class SongList {
         List<Song> l = new ArrayList<>();
         for(Map.Entry<String, List<Song>> entry: AlbumSongList.entrySet()) {
             for(Song a : entry.getValue()) {
-
-
-//  -------------------- Waiting for SongMetadata from Beverly ---------------------------------------------
-//                SongMetadata m = new SongMetadata(a);
-//                Song s = new Song(m.getSongName(),m.getArtistName(),m.getAlbumName());
-//                l.add(s);
-
-                //Song s = new Song(a.getTitle(),a.getID(),"Yutong","Not yet released");
                 l.add(a);
             }
         }
@@ -89,16 +83,16 @@ public class SongList {
     }
 
 
-
-    // --------------------- HELPER METHOD BEGIN HERE ----------------------------
+//  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
         AlbumSongList = new HashMap<String, List<Song>>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        String s;
+        //String s;
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
-                Song so = new Song(f.getName(),f.getInt(null),"Yutong","Not yet released");
+                Map<String,String[]> da = Main2Activity.data;
+                Song so = new Song(da.get(f.getName())[0],f.getInt(null),da.get(f.getName())[1],da.get(f.getName())[2]);
                 listOfSongs.add(so);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -108,7 +102,6 @@ public class SongList {
         for (Song a : listOfSongs) {
             String songName = a.getTitle() + ".mp3";
             if (isMp3File(songName)) {
-                //Song song = new Song(a,"Yutong","Not yet released");
                 String album = a.getAlbum();
                 if (AlbumSongList.isEmpty() || !AlbumSongList.containsKey(album)) {
                     ArrayList<Song> array = new ArrayList<>();
@@ -174,20 +167,20 @@ public class SongList {
 
     //-------------------Main for testing-------------------------
 
-    /*public static void main(String[] args) {
-        SongList s = new SongList();
-        List<Song> l = s.getAllsong();
-        for(Song a : l) {
-            System.out.println(a.getID());
-        }
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                //System.out.println(f.get());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
+//    public static void main(String[] args) {
+//        SongList s = new SongList();
+//        List<Song> l = s.getAllsong();
+//        for(Song a : l) {
+//            System.out.println(a.getID());
+//        }
+//        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
+//        for (Field f : raw) {
+//            try {
+//                //System.out.println(f.get());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }
 
