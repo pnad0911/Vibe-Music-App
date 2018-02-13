@@ -8,7 +8,10 @@ import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.LinkedList;
+import java.util.List;
 import static android.os.UserHandle.readFromParcel;
+
 
 /**
  * Created by Patrick on 2/7/2018.
@@ -19,6 +22,7 @@ public class SongPlayer implements Parcelable{
     private MediaPlayer mediaPlayer;
     private Activity activity;
     private Song nextSong;
+    private List<SongPlayerCallback> callbackList;
     private int paused = 0;
     private MapsActivity mapsActivity;
 
@@ -26,12 +30,17 @@ public class SongPlayer implements Parcelable{
      * Creates a new SongPlayer object attached to the given activity
      * @param activity Activity this SongPlayer is attached to.
      */
-    public SongPlayer(Activity activity){
+    public SongPlayer(Activity activity) {
+        callbackList = new LinkedList<>();
+
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 play(nextSong); //TODO change if mediaplayer is choppy after songs
+                for (SongPlayerCallback cb:callbackList) {
+                    cb.callback();
+                }
                 clearNext();
             }
         });
@@ -117,13 +126,9 @@ public class SongPlayer implements Parcelable{
     public void setVolume(int volume){
         mediaPlayer.setVolume(volume, volume);
     }
+
     public void setEndListener(final SongPlayerCallback callback){
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                callback.callback();
-            }
-        });
+        callbackList.add(callback);
     }
 
     public interface SongPlayerCallback {

@@ -82,11 +82,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true">
 
-                <!--<Button-->
-                    <!--android:id="@+id/next"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:text="-" />-->
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:text="-" />
 
                 <Button
                     android:id="@+id/play"
@@ -102,11 +102,11 @@
                     android:text="Reset"
                     android:textSize="8sp" />
 
-                <!--<Button-->
-                    <!--android:id="@+id/previous"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:text="+" />-->
+                <Button
+                    android:id="@+id/previous"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:text="+" />
 
             </LinearLayout>
 
