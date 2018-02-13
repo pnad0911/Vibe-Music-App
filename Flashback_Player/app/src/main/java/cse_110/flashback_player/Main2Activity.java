@@ -1,5 +1,8 @@
 package cse_110.flashback_player;
 
+import android.content.res.AssetFileDescriptor;
+import android.content.res.Resources;
+import android.media.MediaMetadataRetriever;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,8 +24,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * Created by Yutong on 2/9/2018.
+ * Added helper method 2/12/2018 (Duy)
+ */
 public class Main2Activity extends AppCompatActivity {
 
     /**
@@ -35,6 +47,9 @@ public class Main2Activity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SongPlayer songPlayer = new SongPlayer(this);
+
+    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    public static Map<String,String[]> data;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -60,6 +75,8 @@ public class Main2Activity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
     }
 
@@ -135,6 +152,27 @@ public class Main2Activity extends AppCompatActivity {
                 default:
                     return null;
             }
+        }
+    }
+
+    // --------------------------------- Here Is The Reason ------------------------------
+    public void getData() {
+        data = new HashMap<>();
+        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
+        for (Field f : raw) {
+            try {
+                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
+                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+                String[] list = new String[3];
+                list[0] = ti;list[1] = ar;list[2] = al;
+                data.put(f.getName(),list);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
