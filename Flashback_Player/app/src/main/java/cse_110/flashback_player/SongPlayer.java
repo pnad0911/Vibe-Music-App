@@ -74,6 +74,8 @@ public class SongPlayer {
         catch (Exception e){
             return false;
         }
+        song.setPreviousLocation(song.getLoc_lat(),song.getLoc_long());
+        song.setPreviousDate(song.getDate());
         song.setLocation(mapsActivity.getLoc_lat(), mapsActivity.getLoc_long());
         song.setDate(mapsActivity.getDate());
 
