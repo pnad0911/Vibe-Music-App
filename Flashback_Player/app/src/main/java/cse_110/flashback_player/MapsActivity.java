@@ -112,3 +112,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates(locationProvider, 0, 0, locationListener);
     }
 }
+
