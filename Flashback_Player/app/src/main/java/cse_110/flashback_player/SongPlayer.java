@@ -30,8 +30,7 @@ public class SongPlayer implements Parcelable{
      * Creates a new SongPlayer object attached to the given activity
      * @param activity Activity this SongPlayer is attached to.
      */
-    public SongPlayer(Activity activity) {
-        callbackList = new LinkedList<>();
+    public SongPlayer(Activity activity){
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
