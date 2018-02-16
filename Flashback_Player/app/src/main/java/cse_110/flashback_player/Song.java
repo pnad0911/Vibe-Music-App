@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 /**
@@ -22,7 +23,8 @@ public class Song {
     private int minute;
     private Double previousloc_lat;
     private Double previousloc_long;
-    private Date previousDate;
+    private OffsetDateTime previousDate;
+    private OffsetDateTime currentDate;
 
     private String nameofMP3file;
     private final String RAWPATH = "app/src/main/res/raw/";
@@ -69,13 +71,13 @@ public class Song {
         this.album = album;
     }
 
-    public void setPreviousDate(int year, String month, int day, int hour, int minutes)
+    public void setPreviousDate(OffsetDateTime date)
     {
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        this.hour = hour;
-        this.minute = minutes;
+        previousDate = date;
+    }
+
+    public void setCurrentDate(OffsetDateTime date){
+        currentDate = date;
     }
 
     public void setPreviousLocation(Double loc_lat, Double loc_long){
@@ -99,19 +101,13 @@ public class Song {
         return this.album;
     }
 
+    public OffsetDateTime getPreviousDate(){return this.previousDate; }
+
+    public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
     public Double getPreviousloc_lat(){return this.previousloc_lat;}
 
     public Double getPreviousloc_long(){return this.previousloc_long;}
 
-    public int getPreviousYear(){return this.year;}
-
-    public String getPreviousMonth(){return this.month;}
-
-    public int getPreviousDay(){return this.day;}
-
-    public int getPreviousMinutes(){return this.minute;}
-
-    public int getPreviousHour(){return this.hour;}
 }
 
