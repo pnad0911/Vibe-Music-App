@@ -29,19 +29,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Double loc_lat;
     private Double loc_long;
-    private Date date;
-
-    public Double getLoc_lat(){
-        return this.loc_lat;
-    }
-
-    public Double getLoc_long(){
-        return this.loc_long;
-    }
-
-    public Date getDate(){
-        return this.date;
-    }
+    private LocationManager locationManager;
+    private String locationProvider;
 
 
     @Override
@@ -68,13 +57,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        locationProvider = LocationManager.GPS_PROVIDER;
 
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                date = new Date();
                 loc_lat = location.getLatitude();
                 loc_long = location.getLongitude();
+
+                System.out.println("here is location changed");
             }
 
             @Override
@@ -106,10 +98,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
-
-        LocationManager locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        String locationProvider = LocationManager.GPS_PROVIDER;
         locationManager.requestLocationUpdates(locationProvider, 0, 0, locationListener);
+    }
+
+    public Double getLoc_lat(){return this.loc_lat;}
+
+    public Double getLoc_long(){
+        return this.loc_long;
     }
 }
 
