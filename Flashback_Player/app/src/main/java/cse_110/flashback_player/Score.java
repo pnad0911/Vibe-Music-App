@@ -5,4 +5,11 @@ package cse_110.flashback_player;
  */
 
 public class Score {
+
+    Song song;
+
+    public double getScore() {
+
+    }
+
 }

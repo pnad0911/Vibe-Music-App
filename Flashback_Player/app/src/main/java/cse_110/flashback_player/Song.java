@@ -16,6 +16,7 @@ public class Song {
     private Double loc_lat;
     private Double loc_long;
     private Date date;
+    private double score;
 
     private Double previousloc_lat;
     private Double previousloc_long;
@@ -126,6 +127,10 @@ public class Song {
 
     public boolean getIsDisliked(){
         return isDisliked;
+    }
+
+    public double getScore() {
+        
     }
 
 }
