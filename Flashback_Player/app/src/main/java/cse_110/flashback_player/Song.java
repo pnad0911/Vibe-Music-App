@@ -16,6 +16,8 @@ public class Song {
     private Double loc_lat;
     private Double loc_long;
     private Date date;
+    private boolean isFavorite;
+    private boolean isDisliked;
 
     private String nameofMP3file;
     private final String RAWPATH = "app/src/main/res/raw/";
@@ -90,5 +92,21 @@ public class Song {
     public Double getLoc_long(){ return this.loc_long; }
 
     public Date getDate(){ return  this.date; }
+
+    public void toggleFavorite(){
+        isFavorite = !isFavorite;
+    }
+
+    public void toggleDisliked(){
+        isDisliked = !isDisliked;
+    }
+
+    public boolean getIsFavorite(){
+        return isFavorite;
+    }
+
+    public boolean getIsDisliked(){
+        return isDisliked;
+    }
 }
 
