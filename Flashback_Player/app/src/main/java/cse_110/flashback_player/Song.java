@@ -3,9 +3,6 @@ package cse_110.flashback_player;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
-import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.SECONDS;
-
 /**
  * Created by Patrick and Yutong on 2/7/2018.
  * Added new constructor (Mp3 file name)-------- Duy
@@ -19,16 +16,21 @@ public class Song {
     private String album;
     private Double loc_lat;
     private Double loc_long;
-    private Date date;
-    private double score;
 
-    private Double previousloc_lat;
-    private Double previousloc_long;
-    private OffsetDateTime previousDate;
+    private double score;
 
     private boolean isFavorite;
     private boolean isDisliked;
 
+    private int day;
+    private int year;
+    private String month;
+    private int hour;
+    private int minute;
+    private Double previousloc_lat;
+    private Double previousloc_long;
+    private OffsetDateTime previousDate;
+    private OffsetDateTime currentDate;
 
     private String nameofMP3file;
     private final String RAWPATH = "app/src/main/res/raw/";
@@ -75,14 +77,15 @@ public class Song {
         this.album = album;
     }
 
-    public void setLocation(Double loc_lat, Double loc_long){
-        this.loc_lat = loc_lat;
-        this.loc_long = loc_long;
+    public void setPreviousDate(OffsetDateTime date)
+    {
+        previousDate = date;
     }
 
-    public void setDate(Date date){this.date = date; }
+    public void setCurrentDate(OffsetDateTime date){
+        currentDate = date;
+    }
 
-    public void setPreviousDate(Date date){this.previousDate = OffsetDateTime.now(); }
 
     public void setPreviousLocation(Double loc_lat, Double loc_long){
         this.previousloc_lat = loc_lat;
@@ -105,17 +108,15 @@ public class Song {
         return this.album;
     }
 
-    public Double getLoc_lat(){ return this.loc_lat; }
+    public OffsetDateTime getPreviousDate(){return this.previousDate; }
+
+    public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
     public Double getPreviousloc_lat(){return this.previousloc_lat;}
 
     public Double getPreviousloc_long(){return this.previousloc_long;}
 
     public Double getLoc_long(){ return this.loc_long; }
-
-    public Date getDate(){ return  this.date; }
-
-    public OffsetDateTime getPreviousDate(){return this.previousDate;}
 
     public void toggleFavorite(){
         isFavorite = !isFavorite;
@@ -142,6 +143,7 @@ public class Song {
                 (previousDate.getHour() * 60 + previousDate.getSecond()),2);
         return locScore + dateScore + timeScore;
     }
+
 
 }
 
