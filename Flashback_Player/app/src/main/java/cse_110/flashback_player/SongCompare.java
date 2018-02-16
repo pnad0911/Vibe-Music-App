@@ -11,7 +11,7 @@ public class SongCompare<T extends Song> implements Comparator<T extends Song> {
     @Override
     public int compare(T t1, T t2) {
 
-        if(t1.getScore() != t2.getScore){
+        if(t1.getScore() != t2.getScore()){
             if(t1.getScore() > t2.getScore()){
                 return -1;
             }

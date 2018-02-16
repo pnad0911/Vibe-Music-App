@@ -1,6 +1,10 @@
 package cse_110.flashback_player;
 
+import java.time.OffsetDateTime;
 import java.util.Date;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -20,7 +24,7 @@ public class Song {
 
     private Double previousloc_lat;
     private Double previousloc_long;
-    private Date previousDate;
+    private OffsetDateTime previousDate;
 
     private boolean isFavorite;
     private boolean isDisliked;
@@ -78,7 +82,7 @@ public class Song {
 
     public void setDate(Date date){this.date = date; }
 
-    public void setPreviousDate(Date date){this.previousDate = date; }
+    public void setPreviousDate(Date date){this.previousDate = OffsetDateTime.now(); }
 
     public void setPreviousLocation(Double loc_lat, Double loc_long){
         this.previousloc_lat = loc_lat;
@@ -111,7 +115,7 @@ public class Song {
 
     public Date getDate(){ return  this.date; }
 
-    public Date getPreviousDate(){return this.previousDate;}
+    public OffsetDateTime getPreviousDate(){return this.previousDate;}
 
     public void toggleFavorite(){
         isFavorite = !isFavorite;
@@ -130,7 +134,13 @@ public class Song {
     }
 
     public double getScore() {
-        
+        OffsetDateTime now = OffsetDateTime.now();
+
+        double locScore = Math.sqrt(Math.pow(loc_lat - previousloc_lat, 2) + Math.pow(loc_long - previousloc_long, 2));
+        double dateScore = Math.pow(now.getDayOfYear() - previousDate.getDayOfYear(), 2);
+        double timeScore = Math.pow((now.getHour() * 60 + now.getSecond()) -
+                (previousDate.getHour() * 60 + previousDate.getSecond()),2);
+        return locScore + dateScore + timeScore;
     }
 
 }
