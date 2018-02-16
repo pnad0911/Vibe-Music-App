@@ -15,7 +15,11 @@ public class Song {
     private String album;
     private Double loc_lat;
     private Double loc_long;
-    private Date date;
+    private int day;
+    private int year;
+    private String month;
+    private int hour;
+    private int minute;
     private Double previousloc_lat;
     private Double previousloc_long;
     private Date previousDate;
@@ -65,14 +69,14 @@ public class Song {
         this.album = album;
     }
 
-    public void setLocation(Double loc_lat, Double loc_long){
-        this.loc_lat = loc_lat;
-        this.loc_long = loc_long;
+    public void setPreviousDate(int year, String month, int day, int hour, int minutes)
+    {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minutes;
     }
-
-    public void setDate(Date date){this.date = date; }
-
-    public void setPreviousDate(Date date){this.previousDate = date; }
 
     public void setPreviousLocation(Double loc_lat, Double loc_long){
         this.previousloc_lat = loc_lat;
@@ -95,15 +99,19 @@ public class Song {
         return this.album;
     }
 
-    public Double getLoc_lat(){ return this.loc_lat; }
 
     public Double getPreviousloc_lat(){return this.previousloc_lat;}
 
     public Double getPreviousloc_long(){return this.previousloc_long;}
 
-    public Double getLoc_long(){ return this.loc_long; }
+    public int getPreviousYear(){return this.year;}
 
-    public Date getDate(){ return  this.date; }
-    public Date getPreviousDate(){return this.previousDate;}
+    public String getPreviousMonth(){return this.month;}
+
+    public int getPreviousDay(){return this.day;}
+
+    public int getPreviousMinutes(){return this.minute;}
+
+    public int getPreviousHour(){return this.hour;}
 }
 
