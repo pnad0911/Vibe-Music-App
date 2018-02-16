@@ -43,6 +43,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return this.date;
     }
 
+    //public void setDate(Date date){ this.date = date; }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
