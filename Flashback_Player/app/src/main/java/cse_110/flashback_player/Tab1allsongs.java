@@ -67,8 +67,8 @@ public class Tab1allsongs extends Fragment {
         currSong = songList.get(songIdx);
 
         // configure listview
-        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
         sListView.setClickable(true);
