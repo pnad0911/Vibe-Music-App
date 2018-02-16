@@ -1,5 +1,7 @@
 package cse_110.flashback_player;
 
+import java.util.Date;
+
 /**
  * Created by Patrick and Yutong on 2/7/2018.
  * Added new constructor (Mp3 file name)-------- Duy
@@ -11,6 +13,12 @@ public class Song {
     private int id;
     private String artist;
     private String album;
+    private Double loc_lat;
+    private Double loc_long;
+    private Date date;
+    private Double previousloc_lat;
+    private Double previousloc_long;
+    private Date previousDate;
 
     private String nameofMP3file;
     private final String RAWPATH = "app/src/main/res/raw/";
@@ -57,6 +65,20 @@ public class Song {
         this.album = album;
     }
 
+    public void setLocation(Double loc_lat, Double loc_long){
+        this.loc_lat = loc_lat;
+        this.loc_long = loc_long;
+    }
+
+    public void setDate(Date date){this.date = date; }
+
+    public void setPreviousDate(Date date){this.previousDate = date; }
+
+    public void setPreviousLocation(Double loc_lat, Double loc_long){
+        this.previousloc_lat = loc_lat;
+        this.previousloc_long = loc_long;
+    }
+
     public String getTitle(){
         return title;
     }
@@ -72,5 +94,16 @@ public class Song {
     public String getAlbum(){
         return this.album;
     }
+
+    public Double getLoc_lat(){ return this.loc_lat; }
+
+    public Double getPreviousloc_lat(){return this.previousloc_lat;}
+
+    public Double getPreviousloc_long(){return this.previousloc_long;}
+
+    public Double getLoc_long(){ return this.loc_long; }
+
+    public Date getDate(){ return  this.date; }
+    public Date getPreviousDate(){return this.previousDate;}
 }
 

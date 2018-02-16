@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Flashback_Player/app/src/androidTest/androidTest.iml" filepath="$PROJECT_DIR$/Flashback_Player/app/src/androidTest/androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/Flashback_Player/app/src/main/main.iml" filepath="$PROJECT_DIR$/Flashback_Player/app/src/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/Flashback_Player/app/src/test/test.iml" filepath="$PROJECT_DIR$/Flashback_Player/app/src/test/test.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/cse-110-team-project-team-17.iml" filepath="$PROJECT_DIR$/.idea/cse-110-team-project-team-17.iml" />
+>>>>>>> db216b404cb1e66feb8c03436488d10bfc26f32a
     </modules>
   </component>
 </project>
