@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.LinkedList;
@@ -49,13 +50,12 @@ public class SongPlayer implements Parcelable{
     private List<SongPlayerCallback> callbackList;
     private int paused = 0;
     private MapsActivity mapsActivity;
-    private GoogleMap mMap;
     private Double loc_lat;
     private Double loc_long;
     private Date date;
     private Bundle bundle;
     private Intent intent;
-    private Instant timestamp;
+    private OffsetDateTime timestamp;
     private LocalDateTime ldt;
 
     /**
@@ -65,6 +65,8 @@ public class SongPlayer implements Parcelable{
     public SongPlayer(Activity activity) {
         callbackList = new LinkedList<>();
         mapsActivity = new MapsActivity();
+
+
 
         /*bundle = new Bundle();
         intent = new Intent();
@@ -136,13 +138,19 @@ public class SongPlayer implements Parcelable{
             return false;
         }
 
-        timestamp = Instant.now().minus(Duration.ofHours(8));
-        ldt = LocalDateTime.ofInstant(timestamp, ZoneId.systemDefault());
-        song.setPreviousDate(ldt.getYear(),ldt.getMonth().toString(),ldt.getDayOfMonth(),ldt.getHour(),ldt.getMinute());
+        timestamp = OffsetDateTime.now().minusHours(8);
 
 
-        //song.setPreviousLocation(song.getLoc_lat(),song.getLoc_long());
-        //song.setPreviousDate(song.getDate());
+
+        System.out.println("time!");
+        System.out.println(timestamp.getDayOfMonth());
+        System.out.println(timestamp.getHour());
+
+        song.setPreviousDate(song.getCurrentDate());
+
+        song.setCurrentDate(timestamp);
+
+        song.setPreviousLocation(mapsActivity.getLoc_lat(),mapsActivity.getLoc_long());
 
         mediaPlayer.start();
         return true;
