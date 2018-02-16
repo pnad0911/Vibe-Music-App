@@ -30,22 +30,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-     //   MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-      //  SongMetadata sm = new SongMetadata("app/src/main/res/raw/after_the_storm.mp3", mmr);
-      //  System.out.println(sm.getSongName());
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        sListView = (ListView) findViewById(R.id.song_list);
-
-
         final ArrayList<Song> songList = new ArrayList<Song>();
         songList.add(new Song("Susume Tomorrow", R.raw.after_the_storm, "Sonoda Umi", "Susume Tomorrow"));
         songList.add(new Song("Soldier Game", R.raw.america_religious, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));

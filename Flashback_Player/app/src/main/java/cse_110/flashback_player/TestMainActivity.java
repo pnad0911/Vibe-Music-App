@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+
 public class TestMainActivity extends AppCompatActivity {
 
 
@@ -19,12 +20,14 @@ public class TestMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final SongPlayer songPlayer = new SongPlayer(this);
+
         final Song susume_tomorrow = new Song("Susume Tomorrow", R.raw.after_the_storm, "Sonoda Umi", "Susume Tomorrow");
         final Song soldier_game = new Song("Soldier Game", R.raw.at_midnight, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game");
         final Song mp5_sound = new Song("mp5_sound", R.raw.america_religious, "", "");
         Button playbutton = null; //= (Button) findViewById(R.id.playbutton);
         Button pausebutton = null; //= (Button) findViewById(R.id.pausebutton);
         Button resetbutton = null; //= (Button) findViewById(R.id.resetbutton);
+
         playbutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
