@@ -1,18 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="cse_110.flashback_player.MainActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:showIn="@layout/activity_main">
+    tools:context="cse_110.flashback_player.Tab1allsongs">
+
+    <!--<TextView-->
+        <!--android:id="@+id/section_label"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+        <!--android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+        <!--android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+        <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/constraintLayout"-->
+        <!--tools:layout_constraintLeft_creator="1"-->
+        <!--tools:layout_constraintTop_creator="1" />-->
 
     <ListView
         android:id="@+id/song_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="parent">
 
     </ListView>
 
@@ -20,7 +31,7 @@
     <LinearLayout
         android:id="@+id/media_player"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="96dp"
         android:background="#5e5e5e"
         android:gravity="center_vertical"
         android:orientation="vertical"
@@ -74,8 +85,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Album"
-                        android:textSize="15sp"
-                        android:textColor="#e3e3e3" />
+                        android:textColor="#e3e3e3"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -87,7 +98,7 @@
                 android:layout_alignParentEnd="true">
 
                 <Button
-                    android:id="@+id/next"
+                    android:id="@+id/previous"
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:text="-" />
@@ -97,17 +108,17 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="Play"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" />
 
                 <Button
                     android:id="@+id/reset"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="Reset"
-                    android:textSize="8sp"/>
+                    android:textSize="8sp" />
 
                 <Button
-                    android:id="@+id/previous"
+                    android:id="@+id/next"
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:text="+" />

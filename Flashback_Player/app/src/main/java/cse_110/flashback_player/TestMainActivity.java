@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+
 public class TestMainActivity extends AppCompatActivity {
 
 
@@ -25,6 +26,7 @@ public class TestMainActivity extends AppCompatActivity {
         Button playbutton = null; //= (Button) findViewById(R.id.playbutton);
         Button pausebutton = null; //= (Button) findViewById(R.id.pausebutton);
         Button resetbutton = null; //= (Button) findViewById(R.id.resetbutton);
+
         playbutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -59,3 +61,4 @@ public class TestMainActivity extends AppCompatActivity {
     }
 
 }
+
