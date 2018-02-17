@@ -34,6 +34,10 @@ public class TestMainActivity extends AppCompatActivity {
                 songPlayer.playNext(susume_tomorrow);
             }
         });
+/*
+        playbutton.setOnClickListener(
+               (view)->System.out.println("whoa")
+        );*/
         pausebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
