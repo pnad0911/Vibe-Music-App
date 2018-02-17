@@ -10,6 +10,8 @@ import java.util.Date;
 
 public class Song {
 
+    private boolean like = true;
+
     private String title;
     private int id;
     private String artist;
@@ -26,13 +28,6 @@ public class Song {
     private OffsetDateTime previousDate;
     private OffsetDateTime currentDate;
 
-    private String nameofMP3file;
-    private final String RAWPATH = "app/src/main/res/raw/";
-
-
-    public Song(String nameofMP3file) {
-        this.nameofMP3file = nameofMP3file;
-    }
 
     public Song(String title, int id, String artist, String album){
         setTitle(title);
@@ -109,5 +104,8 @@ public class Song {
 
     public Double getPreviousloc_long(){return this.previousloc_long;}
 
+    public Boolean songCurrentlyLiked() { return like;}
+    public void likeSong() { like = true; }
+    public void dislikeSong() { like = false; }
 }
 

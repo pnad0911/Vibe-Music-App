@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class SongAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         //get view for row item
         View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
@@ -57,20 +58,35 @@ public class SongAdapter extends BaseAdapter {
         TextView artistView = (TextView) rowView.findViewById((R.id.artist));
         TextView albumView = (TextView) rowView.findViewById((R.id.album));
 
-        Song song = (Song) getItem(position);
+        final Song song = (Song) getItem(position);
 
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
 
-        Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
+        final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
+         if(song.songCurrentlyLiked()) {
+            likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
+         } else {
+             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_bad_black_24dp, 0);
+         }
         likeBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //songNameView.setText("Duy");
+            toggle(likeBt,song);
             }
         });
 
         return rowView;
+    }
+
+    private void toggle(Button button, Song song) {
+        if(song.songCurrentlyLiked()) {
+            song.dislikeSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_bad_black_24dp, 0);
+        } else {
+            song.likeSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
+        }
     }
 }
