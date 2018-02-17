@@ -58,6 +58,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         final TextView songTitleView = (TextView) rootView.findViewById(R.id.name);
         final TextView songArtistView = (TextView) rootView.findViewById(R.id.artist);
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
+        final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
 
         // get items from song list
         final SongList songListGen = new SongList();

@@ -56,6 +56,7 @@ public class Tab1allsongs extends Fragment {
         final TextView songTitleView = (TextView) rootView.findViewById(R.id.name);
         final TextView songArtistView = (TextView) rootView.findViewById(R.id.artist);
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
+        final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
 
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
@@ -83,7 +84,7 @@ public class Tab1allsongs extends Fragment {
         });
 
         changeDisplay(songTitleView, songArtistView, songAlbumView);
-
+        //songTimeView.setText("-----");
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){

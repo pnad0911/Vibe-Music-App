@@ -68,7 +68,7 @@ public class SongAdapter extends BaseAdapter {
          if(song.songCurrentlyLiked()) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
          } else {
-             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_bad_black_24dp, 0);
+             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
          }
         likeBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +83,7 @@ public class SongAdapter extends BaseAdapter {
     private void toggle(Button button, Song song) {
         if(song.songCurrentlyLiked()) {
             song.dislikeSong();
-            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_bad_black_24dp, 0);
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
             song.likeSong();
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
