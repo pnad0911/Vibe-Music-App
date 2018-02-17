@@ -5,9 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yutong on 2/7/18.
@@ -19,9 +23,9 @@ public class SongAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Song> mDataSource;
+    private List<Song> mDataSource;
 
-    public SongAdapter(Context context, ArrayList<Song> items){
+    public SongAdapter(Context context, List<Song> items){
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,7 +53,7 @@ public class SongAdapter extends BaseAdapter {
         View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
 
         //get view elements in list row
-        TextView songNameView = (TextView) rowView.findViewById((R.id.name));
+        final TextView songNameView = (TextView) rowView.findViewById((R.id.name));
         TextView artistView = (TextView) rowView.findViewById((R.id.artist));
         TextView albumView = (TextView) rowView.findViewById((R.id.album));
 
@@ -58,6 +62,14 @@ public class SongAdapter extends BaseAdapter {
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
+
+        Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
+        likeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //songNameView.setText("Duy");
+            }
+        });
 
         return rowView;
     }

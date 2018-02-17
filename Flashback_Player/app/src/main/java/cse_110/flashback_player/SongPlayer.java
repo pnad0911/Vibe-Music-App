@@ -1,16 +1,38 @@
 package cse_110.flashback_player;
 
+import android.*;
 import android.app.Activity;
+import android.app.IntentService;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import java.time.Duration;
+import java.time.Instant;
+
+import com.google.android.gms.location.LocationServices;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import static android.os.UserHandle.readFromParcel;
+
 
 
 /**
@@ -24,16 +46,20 @@ public class SongPlayer implements Parcelable{
     private Song nextSong;
     private List<SongPlayerCallback> callbackList;
     private int paused = 0;
-    private MapsActivity mapsActivity;
+    private Double loc_lat;
+    private Double loc_long;
+    private Date date;
+    private Bundle bundle;
+    private Intent intent;
+    private OffsetDateTime timestamp;
+    private LocalDateTime ldt;
 
     /**
      * Creates a new SongPlayer object attached to the given activity
      * @param activity Activity this SongPlayer is attached to.
      */
-    public SongPlayer(AppCompatActivity activity){
+    public SongPlayer(Activity activity) {
         callbackList = new LinkedList<>();
-
-    public SongPlayer(Activity activity){
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -45,7 +71,6 @@ public class SongPlayer implements Parcelable{
                 clearNext();
             }
         });
-        mapsActivity = new MapsActivity();
         this.activity = activity;
     }
 
@@ -94,8 +119,12 @@ public class SongPlayer implements Parcelable{
         catch (Exception e){
             return false;
         }
-        song.setLocation(mapsActivity.getLoc_lat(), mapsActivity.getLoc_long());
-        song.setDate(mapsActivity.getDate());
+
+        timestamp = OffsetDateTime.now().minusHours(8);
+
+        song.setPreviousDate(song.getCurrentDate());
+
+        song.setCurrentDate(timestamp);
 
         mediaPlayer.start();
         return true;
