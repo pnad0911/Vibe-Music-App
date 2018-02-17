@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.SharedPreferences;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,82 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         sListView = (ListView) findViewById(R.id.song_list);
+        final ArrayList<Song> songList = new ArrayList<Song>();
+        songList.add(new Song("Susume Tomorrow", R.raw.after_the_storm, "Sonoda Umi", "Susume Tomorrow"));
+        songList.add(new Song("Soldier Game", R.raw.america_religious, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game"));
+
+        sListView = (ListView) findViewById(R.id.song_list);
+        SongAdapter adapter = new SongAdapter(this, songList);
+        sListView.setAdapter(adapter);
+
+        final SongPlayer songPlayer = new SongPlayer(this);
+
+        final Button playButton = (Button) findViewById(R.id.play);
+        final Button resetButton = (Button) findViewById(R.id.reset);
+        final Button nextButton = (Button) findViewById(R.id.next);
+        final Button previousButton = (Button) findViewById(R.id.previous);
+        // play and pause are the same botton
+        playButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(songPlayer.isPlaying()) {
+                    songPlayer.pause();
+                    playButton.setText("Play");
+                }
+                else if (songPlayer.isPaused()) {
+                    songPlayer.resume();
+                    playButton.setText("Pause");
+                }
+                else{
+                    songPlayer.play(songList.get(songIdx));
+                    Song nextSong;
+                    if(songIdx == songList.size()){
+                        nextSong = songList.get(0);
+                    } else{
+                        nextSong = songList.get(songIdx + 1);
+                    }
+                    songPlayer.playNext(nextSong);
+                }
+            }
+        });
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                songPlayer.stop();
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (songIdx == songList.size()-1){
+                    songIdx = 0;
+                } else {
+                    songIdx += 1;
+                }
+
+                songPlayer.play(songList.get(songIdx));
+                Song nextSong;
+                if(songIdx == songList.size()){
+                    nextSong = songList.get(0);
+                } else{
+                    nextSong = songList.get(songIdx + 1);
+                }
+                songPlayer.playNext(nextSong);
+            }
+
+        });
+
+        // Change song title and artist on song player
+        final TextView songTitleView = (TextView) findViewById(R.id.name);
+        final TextView songArtistView = (TextView) findViewById(R.id.artist);
+        final TextView songAlbumView = (TextView) findViewById(R.id.album);
+
+        songTitleView.setText(songList.get(songIdx).getTitle());
+        songArtistView.setText(songList.get(songIdx).getArtist());
+        songAlbumView.setText(songList.get(songIdx).getAlbum());
+
 
         final ArrayList<Song> songList = new ArrayList<Song>();
         songList.add(new Song("Hey, Soul Sister", "Train", "Heyyyyyyy"));

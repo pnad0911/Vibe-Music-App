@@ -19,9 +19,10 @@ public class TestMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final SongPlayer songPlayer = new SongPlayer(this);
-        final Song susume_tomorrow = new Song("Susume Tomorrow", R.raw.susume_tomorrow, "Sonoda Umi", "Susume Tomorrow");
-        final Song soldier_game = new Song("Soldier Game", R.raw.soldier_game, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game");
-        final Song mp5_sound = new Song("mp5_sound", R.raw.mp5_sound, "", "");
+
+        final Song susume_tomorrow = new Song("Susume Tomorrow", R.raw.after_the_storm, "Sonoda Umi", "Susume Tomorrow");
+        final Song soldier_game = new Song("Soldier Game", R.raw.at_midnight, "Sonoda Umi, Nishikino Maki, Ayase Eli", "Soldier Game");
+        final Song mp5_sound = new Song("mp5_sound", R.raw.america_religious, "", "");
         Button playbutton = null; //= (Button) findViewById(R.id.playbutton);
         Button pausebutton = null; //= (Button) findViewById(R.id.pausebutton);
         Button resetbutton = null; //= (Button) findViewById(R.id.resetbutton);
@@ -46,14 +47,6 @@ public class TestMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 songPlayer.stop();
-            }
-        });
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }

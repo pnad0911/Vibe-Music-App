@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yutong on 2/7/18.
@@ -19,9 +20,9 @@ public class SongAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Song> mDataSource;
+    private List<Song> mDataSource;
 
-    public SongAdapter(Context context, ArrayList<Song> items){
+    public SongAdapter(Context context, List<Song> items){
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
