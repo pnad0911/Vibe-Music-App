@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class Main2Activity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SongPlayer songPlayer = new SongPlayer(this);
+
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String,String[]> data;
 
@@ -59,6 +61,7 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
 
         setSupportActionBar(toolbar);
 
@@ -78,6 +81,7 @@ public class Main2Activity extends AppCompatActivity {
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,6 +105,7 @@ public class Main2Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -119,115 +124,60 @@ public class Main2Activity extends AppCompatActivity {
             switch (position){
 
                 case 0:
-
                     Tab1allsongs tab1 = new Tab1allsongs();
-
                     Bundle bundle = new Bundle();
-
                     bundle.putParcelable("songPlayer", songPlayer);
-
                     tab1.setArguments(bundle);
-
                     return tab1;
-
                 case 1:
-
                     Tab2album tab2 = new Tab2album();
-
                     Bundle bundle2 = new Bundle();
-
                     bundle2.putParcelable("songPlayer", songPlayer);
-
                     tab2.setArguments(bundle2);
-
                     return tab2;
-
                 default:
-
                     return null;
-
             }
-
         }
 
-
-
         @Override
-
         public int getCount() {
-
             // Show 2 total pages.
-
             return 2;
-
         }
-
-
 
         @Override
-
         public CharSequence getPageTitle(int position){
-
             switch (position){
-
                 case 0:
-
                     return "SONGS";
-
                 case 1:
-
                     return "ALBUMS";
-
                 default:
-
                     return null;
-
             }
-
         }
-
     }
-
-
 
     // --------------------------------- Here Is The Reason ------------------------------
-
     public void getData() {
-
         data = new HashMap<>();
-
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-
         for (Field f : raw) {
-
             try {
-
                 AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-
                 mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-
                 String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-
                 String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-
                 String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-
                 String[] list = new String[3];
-
                 list[0] = ti;list[1] = ar;list[2] = al;
-
                 data.put(f.getName(),list);
-
             } catch (Exception e) {
-
                 e.printStackTrace();
-
             }
 
-
-
         }
-
     }
-
 }
+
