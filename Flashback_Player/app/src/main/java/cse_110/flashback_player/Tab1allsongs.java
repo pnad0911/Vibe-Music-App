@@ -26,9 +26,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class Tab1allsongs extends Fragment {
 
@@ -84,7 +86,7 @@ public class Tab1allsongs extends Fragment {
         });
 
         changeDisplay(songTitleView, songArtistView, songAlbumView);
-        //songTimeView.setText("-----");
+        songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){

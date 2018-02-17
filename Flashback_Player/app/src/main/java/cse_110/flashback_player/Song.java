@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Song {
 
-    private boolean like = true;
+    private Boolean like;
 
     private String title;
     private int id;
@@ -107,5 +107,6 @@ public class Song {
     public Boolean songCurrentlyLiked() { return like;}
     public void likeSong() { like = true; }
     public void dislikeSong() { like = false; }
+    public void neutralSong() {like = null; };
 }
 
