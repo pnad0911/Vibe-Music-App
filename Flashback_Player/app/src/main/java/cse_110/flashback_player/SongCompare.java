@@ -6,7 +6,7 @@ import java.util.Comparator;
  * Created by Patrick on 2/15/2018.
  */
 
-public class SongCompare<T extends Song> implements Comparator<T extends Song> {
+public class SongCompare<T extends Song> implements Comparator<T> {
     private static final double DISTANCE = 1000;
     @Override
     public int compare(T t1, T t2) {
@@ -29,7 +29,7 @@ public class SongCompare<T extends Song> implements Comparator<T extends Song> {
             }
         }
 
-        if(t1.getDate().after(t2.getDate())){
+        if(t1.getPreviousDate().isAfter(t2.getPreviousDate())){
             return -1;
         }
 

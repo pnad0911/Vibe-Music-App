@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 /**
@@ -17,20 +18,17 @@ public class Song {
     private Double loc_lat;
     private Double loc_long;
 
-    private double score;
-
     private boolean isFavorite;
     private boolean isDisliked;
 
-    private int day;
-    private int year;
-    private String month;
-    private int hour;
-    private int minute;
     private Double previousloc_lat;
     private Double previousloc_long;
     private OffsetDateTime previousDate;
     private OffsetDateTime currentDate;
+    private final double fiveam = 300; // times are in minutes
+    private final double elevenam = 660;
+    private final double fivepm = 1020;
+    private final double locRange = 1000; // feet
 
     private String nameofMP3file;
     private final String RAWPATH = "app/src/main/res/raw/";
@@ -134,16 +132,70 @@ public class Song {
         return isDisliked;
     }
 
+    /**
+     * Gets weighted score of song (max 300)
+     * @return
+     */
     public double getScore() {
-        OffsetDateTime now = OffsetDateTime.now();
-
-        double locScore = Math.sqrt(Math.pow(loc_lat - previousloc_lat, 2) + Math.pow(loc_long - previousloc_long, 2));
-        double dateScore = Math.pow(now.getDayOfYear() - previousDate.getDayOfYear(), 2);
-        double timeScore = Math.pow((now.getHour() * 60 + now.getSecond()) -
-                (previousDate.getHour() * 60 + previousDate.getSecond()),2);
+        double locScore = getLocationScore();
+        double dateScore = getDateScore();
+        double timeScore = getTimeScore();
         return locScore + dateScore + timeScore;
     }
 
+    /**
+     * helper for getScore
+     * @return location score
+     */
+    private double getLocationScore() {
+        double distance = Math.sqrt(Math.pow(loc_lat - previousloc_lat, 2) +
+                Math.pow(loc_long - previousloc_long, 2));
+        if (distance > locRange) {
+            return 0;
+        }
+        return 100 - (distance/10);
+    }
+
+    /**
+     * helper for getScore
+     * @return date score
+     */
+    private double getDateScore() {
+        if (currentDate.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
+            return 100;
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getScore
+     * @return time score
+     */
+    private double getTimeScore() {
+        double currentTime = currentDate.getHour()*60 + currentDate.getMinute();
+        double previousTime = previousDate.getHour()*60 + previousDate.getMinute();
+        String currentTimeOfDay = getTimeofDay(currentTime);
+        String previousTimeOfDay = getTimeofDay(previousTime);
+        if (currentTimeOfDay.equals(previousTimeOfDay)) {
+            return 100;
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getTimeScore
+     * @param time
+     * @return String time of day
+     */
+    private String getTimeofDay(double time) {
+        if (time >= fiveam && time <= elevenam) {
+            return "morning";
+        } else if (time > elevenam && time <= fivepm) {
+            return "afternoon";
+        } else {
+             return "evening";
+        }
+    }
 
 }
 
