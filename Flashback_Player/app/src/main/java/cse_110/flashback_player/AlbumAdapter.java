@@ -28,6 +28,7 @@ public class AlbumAdapter extends BaseAdapter {
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+
     @Override
     public int getCount(){
         return mDataSource.size();

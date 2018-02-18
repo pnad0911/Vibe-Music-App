@@ -33,7 +33,6 @@ import android.widget.ToggleButton;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,8 +58,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.Gson;
-
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 
@@ -68,7 +65,7 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class Main2Activity extends AppCompatActivity {
+public class Main3Activity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -93,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-    private static Location loc;
+    private Location loc;
     private Context mContext;
 
     private LocationManager locationManager;
@@ -109,18 +106,13 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
+        setContentView(R.layout.activity_main3);
         contextOfApplication = getApplicationContext();
-
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
-        if(sharedPreferences.getString("current","").equalsIgnoreCase("flashback")) {
-            Intent intent = new Intent(this, Main3Activity.class);
-            startActivity(intent);
-        }
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("current","normal");
+        editor.putString("current","flashback");
         editor.apply();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
@@ -143,25 +135,27 @@ public class Main2Activity extends AppCompatActivity {
 
 
         setLocationReadyCallback(new LocationReadyCallback() {
-                                     @Override
-                                     public void locationReady() {
-                                         getLocation();
-                                     }
-                                 });
-                getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+            @Override
+            public void locationReady() {
+                getLocation();
+            }
+        });
+        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
 
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
                 songPlayer.pause();
-                startActivity(intent);
+                SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("current","normal");
+                editor.apply();
+                finish();
             }
         });
     }
-
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -178,23 +172,12 @@ public class Main2Activity extends AppCompatActivity {
 
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
-            switch (position){
 
-                case 0:
-                    Tab1allsongs tab1 = new Tab1allsongs();
+                    TabFlashback tab1 = new TabFlashback();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
-                case 1:
-                    Tab2album tab2 = new Tab2album();
-                    Bundle bundle2 = new Bundle();
-                    bundle2.putParcelable("songPlayer", songPlayer);
-                    tab2.setArguments(bundle2);
-                    return tab2;
-                default:
-                    return null;
-            }
         }
 
         @Override
@@ -205,14 +188,7 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position){
-            switch (position){
-                case 0:
-                    return "SONGS";
-                case 1:
-                    return "ALBUMS";
-                default:
-                    return null;
-            }
+            return "Play List";
         }
     }
 
@@ -239,9 +215,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
 //   ---------------------------------- Get Location method here  ---------------------------------
-
     /* Get current Location */
-    public static Location getLocation(){
+    public Location getLocation(){
         return loc;
     }
 
@@ -297,32 +272,5 @@ public class Main2Activity extends AppCompatActivity {
     public static Context getContextOfApplication(){
         return contextOfApplication;
     }
-
-//    public void updateTimeNLocation(Song song) {
-//        SharedPreferences sharedTime = getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    public void getTimeNLocation(Song song) {
-//        SharedPreferences sharedTime = getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
 }
 
