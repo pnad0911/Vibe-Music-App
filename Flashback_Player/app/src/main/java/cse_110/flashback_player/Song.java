@@ -136,7 +136,6 @@ public class Song {
         this.currentLocation = loc;
     }
 
-
     /**
      * Gets weighted score of song (max 300)
      * @return
