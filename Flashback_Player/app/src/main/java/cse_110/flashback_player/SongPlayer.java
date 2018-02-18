@@ -24,9 +24,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -49,7 +46,6 @@ public class SongPlayer implements Parcelable{
     private Song nextSong;
     private List<SongPlayerCallback> callbackList;
     private int paused = 0;
-    private MapsActivity mapsActivity;
     private Double loc_lat;
     private Double loc_long;
     private Date date;
@@ -64,20 +60,6 @@ public class SongPlayer implements Parcelable{
      */
     public SongPlayer(Activity activity) {
         callbackList = new LinkedList<>();
-        mapsActivity = new MapsActivity();
-
-
-
-        /*bundle = new Bundle();
-        intent = new Intent();
-
-        intent.putExtras(bundle);
-        startActivity(intent);
-
-        System.out.println("start");
-        mapsActivity.onCreate(bundle);*/
-
-
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -140,17 +122,9 @@ public class SongPlayer implements Parcelable{
 
         timestamp = OffsetDateTime.now().minusHours(8);
 
-
-
-        System.out.println("time!");
-        System.out.println(timestamp.getDayOfMonth());
-        System.out.println(timestamp.getHour());
-
         song.setPreviousDate(song.getCurrentDate());
 
         song.setCurrentDate(timestamp);
-
-        song.setPreviousLocation(mapsActivity.getLoc_lat(),mapsActivity.getLoc_long());
 
         mediaPlayer.start();
         return true;

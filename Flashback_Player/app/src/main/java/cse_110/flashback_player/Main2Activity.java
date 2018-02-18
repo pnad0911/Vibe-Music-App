@@ -1,6 +1,9 @@
 package cse_110.flashback_player;
 
+
 import android.content.Intent;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.media.MediaMetadataRetriever;
@@ -9,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -34,6 +35,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
+import android.os.Looper;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnSuccessListener;
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+
 
 /**
  * Created by Yutong on 2/9/2018.
@@ -54,11 +77,28 @@ public class Main2Activity extends AppCompatActivity {
 
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String,String[]> data;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    private String mProviderName;
+    private LocationManager mLocationManager;
+    private LocationListener mLocationListener;
+    private Location loc;
+    private Context mContext;
+
+    private LocationManager locationManager;
+    private String locationProvider;
+
+
+    private LocationRequest mLocationRequest;
+
+    private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
+    private long FASTEST_INTERVAL = 2000; /* 2 sec */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +106,8 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
         setSupportActionBar(toolbar);
 
         // Create the adapter that will return a fragment for each of the three
@@ -94,31 +136,74 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
-        return true;
+    /* Get current Location */
+    public Location getLocation(){
+        startLocationUpdates();
+        return loc;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void startLocationUpdates(){
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
+        checkPermission();
+
+        mFusedLocationClient = getFusedLocationProviderClient(this);
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        loc = locationResult.getLastLocation();
+                    }
+                },
+                Looper.myLooper());
+    }
+
+    public void checkPermission(){
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ){//Can add more as per requirement
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION/*,android.Manifest.permission.ACCESS_COARSE_LOCATION*/},
+                    100);
         }
-        return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main2, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     /**
@@ -137,6 +222,7 @@ public class Main2Activity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
             switch (position){
+
                 case 0:
                     Tab1allsongs tab1 = new Tab1allsongs();
                     Bundle bundle = new Bundle();
@@ -194,3 +280,4 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 }
+
