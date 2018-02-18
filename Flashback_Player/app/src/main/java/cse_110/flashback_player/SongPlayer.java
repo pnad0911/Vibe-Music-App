@@ -47,7 +47,7 @@ public class SongPlayer {
     private Song nextSong;
     private boolean paused = false;
     private List<SongPlayerCallback> callbackList;
-    private int paused = 0;
+   // private int paused = 0;
     private Double loc_lat;
     private Double loc_long;
     private Date date;
@@ -61,7 +61,6 @@ public class SongPlayer {
      * @param activity Activity this SongPlayer is attached to.
      */
     public SongPlayer(AppCompatActivity activity){
-    public SongPlayer(Activity activity) {
         callbackList = new LinkedList<>();
 
         mediaPlayer = new MediaPlayer();
