@@ -43,6 +43,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 
+import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -88,7 +89,7 @@ public class Main2Activity extends AppCompatActivity {
     private LocationManager locationManager;
     private String locationProvider;
 
-
+    private LocationReadyCallback locationCallback;
     private LocationRequest mLocationRequest;
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
@@ -118,13 +119,14 @@ public class Main2Activity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        startLocationUpdates();
+
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
     }
 
     /* Get current Location */
     public Location getLocation(){
-        startLocationUpdates();
         return loc;
     }
 
@@ -147,6 +149,9 @@ public class Main2Activity extends AppCompatActivity {
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
+                        if(loc == null && locationCallback != null){
+                            locationCallback.locationReady();
+                        }
                         loc = locationResult.getLastLocation();
                     }
                 },
@@ -159,7 +164,7 @@ public class Main2Activity extends AppCompatActivity {
                 ){//Can add more as per requirement
 
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION/*,android.Manifest.permission.ACCESS_COARSE_LOCATION*/},
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     100);
         }
     }
@@ -261,5 +266,16 @@ public class Main2Activity extends AppCompatActivity {
 
         }
     }
+
+    public interface LocationReadyCallback{
+        public abstract void locationReady();
+
+    }
+
+    public void setLocationReadyCallback(LocationReadyCallback locationCallback){
+        this.locationCallback = locationCallback;
+    }
+
+
 }
 
