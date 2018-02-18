@@ -1,5 +1,7 @@
 package cse_110.flashback_player;
 
+import android.location.Location;
+
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -17,14 +19,12 @@ public class Song {
     private String artist;
     private String album;
 
-    private Double loc_lat;
-    private Double loc_long;
+    private Location previousLocation;
+    private Location currentLocation;
 
     private boolean isFavorite;
     private boolean isDisliked;
 
-    private Double previousloc_lat;
-    private Double previousloc_long;
     private OffsetDateTime previousDate;
     private OffsetDateTime currentDate;
     private final double fiveam = 300; // times are in minutes
@@ -87,12 +87,6 @@ public class Song {
         currentDate = date;
     }
 
-
-    public void setPreviousLocation(Double loc_lat, Double loc_long){
-        this.previousloc_lat = loc_lat;
-        this.previousloc_long = loc_long;
-    }
-
     public String getTitle(){
         return title;
     }
@@ -109,16 +103,15 @@ public class Song {
         return this.album;
     }
 
+    public Location getPreviousLocation(){ return this.previousLocation; }
+
+    public Location getCurrentLocation(){ return this.currentLocation; }
+
 
     public OffsetDateTime getPreviousDate(){return this.previousDate; }
 
     public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
-    public Double getPreviousloc_lat(){return this.previousloc_lat;}
-
-    public Double getPreviousloc_long(){return this.previousloc_long;}
-
-    public Double getLoc_long(){ return this.loc_long; }
 
     public void toggleFavorite(){
         isFavorite = !isFavorite;
@@ -136,6 +129,15 @@ public class Song {
         return isDisliked;
     }
 
+    public void setPreviousLocation(Location loc){
+        this.previousLocation = loc;
+    }
+
+    public void setCurrentLocation(Location loc){
+        this.currentLocation = loc;
+    }
+
+
     /**
      * Gets weighted score of song (max 300)
      * @return
@@ -152,8 +154,8 @@ public class Song {
      * @return location score
      */
     private double getLocationScore() {
-        double distance = Math.sqrt(Math.pow(loc_lat - previousloc_lat, 2) +
-                Math.pow(loc_long - previousloc_long, 2));
+        double distance = Math.sqrt(Math.pow(this.currentLocation.getLatitude() - this.previousLocation.getLatitude(), 2) +
+                Math.pow(this.currentLocation.getLongitude() - this.previousLocation.getLongitude(), 2));
         if (distance > locRange) {
             return 0;
         }
