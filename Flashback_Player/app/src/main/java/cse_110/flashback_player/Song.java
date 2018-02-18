@@ -13,12 +13,13 @@ package cse_110.flashback_player;
 
 public class Song {
 
-    private Boolean like;
+    /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
+    private int like;
 
-    public Boolean songCurrentlyLiked() { return like;}
-    public void likeSong() { like = true; }
-    public void dislikeSong() { like = false; }
-    public void neutralSong() {like = null; };
+    public void like() { like = 1; }
+    public void dislike() { like = -1; }
+    public void neutral() { like = 0; }
+    public int getSongStatus() { return like;}
 
     private String title;
     private int id;
@@ -110,21 +111,12 @@ public class Song {
 
     public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
-    /* true -> favorited, null -> neutral, false -> disliked */
-    public void setLikedStatus(Boolean newStatus) {
-        isLiked = newStatus;
-    }
-
     public void setPreviousLocation(Location loc){
         this.previousLocation = loc;
     }
 
     public void setCurrentLocation(Location loc){
         this.currentLocation = loc;
-    }
-
-    public Boolean getLikedStatus() {
-        return isLiked;
     }
 
     /**

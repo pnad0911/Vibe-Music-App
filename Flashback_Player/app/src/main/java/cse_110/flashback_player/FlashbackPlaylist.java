@@ -14,9 +14,6 @@ import java.util.PriorityQueue;
 
 public class FlashbackPlaylist {
 
-    /* Entire list of songs in the app */
-    private SongList entireSongList;
-
     /* List of viable songs to be placed in the playlist (played b4, not disliked) */
     private HashSet<Song> viableSongs;
 
@@ -32,7 +29,7 @@ public class FlashbackPlaylist {
     /* Constructor */
     public FlashbackPlaylist() {
         // get entire song list
-        entireSongList = new SongList();
+        SongList entireSongList = new SongList();
 
         // initialize set of viable songs
         viableSongs = new HashSet<>();
@@ -43,10 +40,7 @@ public class FlashbackPlaylist {
             // 1. not disliked
             // 2. having valid previous and current locations
             // 3. having a valid date
-            if (song.getLikedStatus() != true
-                    && song.getPreviousLocation() != null
-                    && song.getCurrentLocation() != null
-                    && song.getCurrentDate() != null) {
+            if (isPlayable(song)) {
                 viableSongs.add(song);
             }
         }
@@ -56,32 +50,14 @@ public class FlashbackPlaylist {
     }
 
     /* Update and return a list of songs in the priority queue based on a location/time */
-    public List<Song> getFlashbackSong(Location newLocation, OffsetDateTime newDate) {
-        // update current location and date
-        location = newLocation;
-        date = newDate;
+    public List<Song> getFlashbackSong() {
 
         // populate playlist based on new data
         playlist.clear();
         for (Song song : viableSongs) {
             // if a song is played for the first time
-            if (song.getPreviousLocation() == null || song.getPreviousDate() == null) {
-                // initialize
-                song.setPreviousLocation(location);
-                song.setPreviousDate(date);
-                song.setCurrentLocation(location);
-                song.setCurrentDate(date);
-            } else {
-                // adjust previous location/date
-                song.setPreviousLocation(song.getCurrentLocation());
-                song.setPreviousDate(song.getCurrentDate());
-
-                // set new current location/date according to parameters
-                song.setCurrentLocation(location);
-                song.setCurrentDate(date);
-                if (song.getScore() > 0) {
-                    playlist.add(song);
-                }
+            if (song.getScore() > 0) {
+                playlist.add(song);
             }
         }
 
@@ -97,9 +73,9 @@ public class FlashbackPlaylist {
         return returnList;
     }
 
-    /* Updates the status of a song if it is liked */
+    /* Updates the status of a song if it is favorited */
     public void likeSong(Song song) {
-        song.setLikedStatus(true);
+        song.like();
 
         viableSongs.add(song);
 
@@ -112,7 +88,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is disliked */
     public void dislikeSong(Song song) {
-        song.setLikedStatus(false);
+        song.dislike();
 
         viableSongs.remove(song);
         playlist.remove(song);
@@ -120,16 +96,28 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is neutral */
     public void neutralSong(Song song) {
-        song.setLikedStatus(null);
+        song.neutral();
 
         viableSongs.add(song);
-        if (!playlist.contains(song) && song.getScore() > 0) {
+        if (song.getScore() > 0 && !playlist.contains(song)) {
             playlist.add(song);
         }
     }
 
-    /* true -> favorited, null -> neutral, false -> disliked */
-    public Boolean songCurrentlyLiked(Song song) {
-        return song.getLikedStatus();
+    /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
+    public int getSongStatus(Song song) {
+        return song.getSongStatus();
+    }
+
+    /* Determines whether a song is viable for playability; song must be:
+        1. Not disliked
+        2. Have a current and previous location/date
+     */
+    private boolean isPlayable(Song song) {
+        return song.getSongStatus() != -1
+                && song.getPreviousLocation() != null
+                && song.getPreviousDate() != null
+                && song.getCurrentLocation() != null
+                && song.getCurrentDate() != null;
     }
 }
