@@ -129,7 +129,7 @@ public class Main2Activity extends AppCompatActivity {
                                          getLocation();
                                      }
                                  });
-                getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
     }
 

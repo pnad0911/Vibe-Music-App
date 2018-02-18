@@ -1,4 +1,4 @@
-package cse_110.flashback_player;
+package tests;
 
 import android.location.Location;
 import android.location.LocationManager;
@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
+import cse_110.flashback_player.Song;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,7 +18,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class GetScoreUnitTests {
     @Test
     public void getTimeOfDay_isCorrect() throws Exception {
         Song song = new Song("My Song", "Beverly", "My Album");
