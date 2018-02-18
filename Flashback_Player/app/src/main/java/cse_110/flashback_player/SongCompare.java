@@ -5,7 +5,6 @@ import android.location.Location;
 import java.time.OffsetDateTime;
 import android.content.Context;
 
->>>>>>> f4a7cb1493e8ca5be81b6bd4bc7051ab76a94dfb
 import java.util.Comparator;
 
 /**
