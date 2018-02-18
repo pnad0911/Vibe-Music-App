@@ -7,6 +7,7 @@ package cse_110.flashback_player;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,21 +22,23 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
-public class Tab2album extends Fragment { //TODO: to be changed to album list and album functionalities
+public class TabFlashback extends Fragment {
 
-    private int songIdx = 0;
-    private ListView sListView;
-    private List<Song> songList;
-    private SongPlayer songPlayer;
+    private int songIdx=0;
     private Context context;
     private Song currSong;
+    private List<Song> songList;
+    private SongPlayer songPlayer;
 
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -43,52 +46,47 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab2album, container, false);
+        View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
-        // Actions with song Player
-        Bundle bundle1 = getArguments();
-        songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
-
+        /*
+        * Get Buttons and TextViews*/
         final Button playButton = (Button) rootView.findViewById(R.id.play);
         final Button resetButton = (Button) rootView.findViewById(R.id.reset);
         final Button nextButton = (Button) rootView.findViewById(R.id.next);
         final Button previousButton = (Button) rootView.findViewById(R.id.previous);
 
-        // Change song title and artist on song player
         final TextView songTitleView = (TextView) rootView.findViewById(R.id.name);
         final TextView songArtistView = (TextView) rootView.findViewById(R.id.artist);
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
 
+        /* Get songPlayer from main activity*/
+        Bundle bundle1 = this.getArguments();
+        songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
+
         // get items from song list
-        final SongList songListGen = new SongList();
-        List<String> albumNames = songListGen.getListOfAlbum();
+        SongList songListGen = new SongList();
+        songList = songListGen.getAllsong();
+        currSong = songList.get(songIdx);
 
-        sListView = (ListView) rootView.findViewById(R.id.album_list);
-        AlbumAdapter adapter = new AlbumAdapter(this.getActivity(), albumNames);
+        // configure listview
+        SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
-
         // Handle on click event
         sListView.setClickable(true);
         sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                String aName = (String) sListView.getItemAtPosition(position);
-                songList = songListGen.getListOfSong(aName);
-                songIdx = 0;
-                play(songTitleView, songArtistView, songAlbumView);
+                System.out.println("clicked");
+                songIdx = position;
+                play();
+                changeDisplay(songTitleView, songArtistView, songAlbumView);
             }
         });
 
-        songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
-            @Override
-            public void callback() {
-                songIdx = getNextSongIdx();
-                play(songTitleView, songArtistView, songAlbumView);
-            }
-        });
-
+        changeDisplay(songTitleView, songArtistView, songAlbumView);
+        songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -103,7 +101,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
                     playButton.setText("Pause");
                 }
                 else{
-                    play(songTitleView, songArtistView, songAlbumView);
+                    play();
                     playButton.setText("Pause");
                 }
             }
@@ -119,8 +117,9 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getNextSongIdx();
-                play(songTitleView, songArtistView, songAlbumView);
+                songIdx = getNextSongIdx(songList);
+                play();
+                changeDisplay(songTitleView, songArtistView, songAlbumView);
             }
 
         });
@@ -128,8 +127,18 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getPreviousSongIdx();
-                play(songTitleView, songArtistView, songAlbumView);
+                songIdx = getPreviousSongIdx(songList);
+                play();
+                changeDisplay(songTitleView, songArtistView, songAlbumView);
+            }
+        });
+
+        songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
+            @Override
+            public void callback() {
+                songIdx = getNextSongIdx(songList);
+                play();
+                changeDisplay(songTitleView, songArtistView, songAlbumView);
             }
         });
 
@@ -138,18 +147,9 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         return rootView;
     }
 
-    /* Calls play and nextPlay function in songPlayer*/
-    public void play(TextView songTitleView, TextView songArtistView, TextView songAlbumView){
-        currSong = songList.get(songIdx);
-        songPlayer.play(currSong);
-        int idx = getNextSongIdx();
-        songPlayer.playNext(songList.get(idx));
-        changeDisplay(songTitleView, songArtistView, songAlbumView);
-    }
-
-    public int getNextSongIdx(){
+    public int getNextSongIdx(List<Song> songs){
         int idx = 0;
-        if(songIdx == songList.size()-1){
+        if(songIdx == songs.size()-1){
             idx = 0;
         } else{
             idx=songIdx + 1;
@@ -157,15 +157,23 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         return idx;
     }
 
-
-    public int getPreviousSongIdx(){
+    public int getPreviousSongIdx(List<Song> songs){
         int idx = 0;
         if(songIdx == 0){
-            idx = songList.size()-1;
+            idx = songs.size()-1;
         } else{
             idx=songIdx - 1;
         }
         return idx;
+    }
+
+    /* Calls play and nextPlay function in songPlayer*/
+    public void play(){
+        currSong = songList.get(songIdx);
+        songPlayer.play(currSong);
+        int idx = getNextSongIdx(songList);
+        songPlayer.playNext(songList.get(idx));
+//        System.out.println(currSong.getDate());
     }
 
     /* change display on media player to current playing song*/
@@ -195,6 +203,4 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
 
         }
     }
-
-
 }

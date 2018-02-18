@@ -26,6 +26,18 @@
             app:title="@string/app_name">
 
         </android.support.v7.widget.Toolbar>
+        <!--<ToggleButton-->
+            <!--android:id="@+id/mode"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:textOff="Flashback Mode"-->
+            <!--android:textOn="Normal Mode"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="#f00"-->
+            <!--android:textStyle="bold|italic"-->
+            <!--android:drawableLeft="@drawable/ic_star_black_24dp"-->
+            <!--android:drawableRight="@drawable/ic_star_black_24dp"-->
+            <!--android:background="@color/colorPrimaryDark"/>-->
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
@@ -44,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_2" />
 
+
         </android.support.design.widget.TabLayout>
 
 
@@ -55,7 +68,20 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="110dp" />
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mode"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_place_black_24dp"
+        app:borderWidth="13dp"
+        app:elevation="10dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@android:color/black" />
 
 
 </android.support.design.widget.CoordinatorLayout>

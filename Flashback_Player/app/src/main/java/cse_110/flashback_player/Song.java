@@ -13,6 +13,13 @@ package cse_110.flashback_player;
 
 public class Song {
 
+    private Boolean like;
+
+    public Boolean songCurrentlyLiked() { return like;}
+    public void likeSong() { like = true; }
+    public void dislikeSong() { like = false; }
+    public void neutralSong() {like = null; };
+
     private String title;
     private int id;
     private String artist;
@@ -30,13 +37,6 @@ public class Song {
     private final double fivepm = 1020;
     private final double locRange = 1000; // feet
 
-    private String nameofMP3file;
-    private final String RAWPATH = "app/src/main/res/raw/";
-
-
-    public Song(String nameofMP3file) {
-        this.nameofMP3file = nameofMP3file;
-    }
 
     public Song(String title, int id, String artist, String album){
         setTitle(title);

@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class SongAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Song> mDataSource;
+    private static long lastPressTime = 0;
+    private final int DOUBLE_PRESS_INTERVAL = 500;
 
     public SongAdapter(Context context, List<Song> items){
         mContext = context;
@@ -47,7 +51,7 @@ public class SongAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         //get view for row item
         View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
@@ -57,20 +61,59 @@ public class SongAdapter extends BaseAdapter {
         TextView artistView = (TextView) rowView.findViewById((R.id.artist));
         TextView albumView = (TextView) rowView.findViewById((R.id.album));
 
-        Song song = (Song) getItem(position);
+        final Song song = (Song) getItem(position);
 
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
 
-        Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
+        final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
+         if(song.songCurrentlyLiked() == null) {
+            likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
+         } else if(song.songCurrentlyLiked()) {
+             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
+         } else {
+             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
+         }
         likeBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //songNameView.setText("Duy");
+                toggle(likeBt,song);
             }
         });
 
         return rowView;
     }
+
+    private void toggle(Button button, Song song) {
+        Boolean songLiked = song.songCurrentlyLiked();
+        if(songLiked == null) {
+//            if(isDoubleClick()) {
+//                song.dislikeSong();
+//                button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
+//            } else {
+            song.likeSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
+//            }
+        } else if(songLiked){
+            song.dislikeSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
+        } else {
+            song.neutralSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
+        }
+    }
+
+//    private boolean isDoubleClick() {
+//        boolean isDoubleClick;
+//        long pressTime = System.currentTimeMillis();
+//        if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL) {
+//            isDoubleClick = true;
+//        } else {
+//            isDoubleClick = false;
+//        }
+//        lastPressTime = pressTime;
+//        return isDoubleClick;
+//    }
+
 }
