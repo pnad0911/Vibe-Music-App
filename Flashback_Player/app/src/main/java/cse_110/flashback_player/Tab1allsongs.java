@@ -45,8 +45,9 @@ public class Tab1allsongs extends Fragment {
     private List<Song> songList;
     private SongPlayer songPlayer;
     private Location loc;
+    private boolean locationAvailable;
     private OffsetDateTime date;
-
+    private Main2Activity activity;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -155,7 +156,7 @@ public class Tab1allsongs extends Fragment {
                  play();
                  changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
              }
-         });
+        });
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
@@ -197,15 +198,19 @@ public class Tab1allsongs extends Fragment {
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong)) {
             OffsetDateTime time = currSong.getPreviousDate();
+            System.out.println(currSong.getTitle());
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
                     currSong.getPreviousLocation().getLongitude()+":"+currSong.getPreviousLocation().getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
+
         currSong.setPreviousLocation(Main2Activity.getLocation());
+        System.out.println(currSong.getPreviousLocation());
         currSong.setPreviousDate();
     }
+
     private boolean isNullDate(Song song) {
         if(song.getPreviousDate() == null) return true;
         else return false;

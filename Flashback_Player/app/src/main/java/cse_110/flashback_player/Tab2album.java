@@ -184,6 +184,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             songTimeView.setText("N/A");
         }
         currSong.setPreviousLocation(Main2Activity.getLocation());
+
         currSong.setPreviousDate();
     }
 

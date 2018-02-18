@@ -134,7 +134,7 @@ public class Main2Activity extends AppCompatActivity {
                                          getLocation();
                                      }
                                  });
-                getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
 
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
@@ -271,13 +271,12 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-    public interface LocationReadyCallback{
-        public abstract void locationReady();
-
-    }
-
     public void setLocationReadyCallback(LocationReadyCallback locationCallback){
         this.locationCallback = locationCallback;
+    }
+
+    public interface LocationReadyCallback{
+        public abstract void locationReady();
     }
 
 

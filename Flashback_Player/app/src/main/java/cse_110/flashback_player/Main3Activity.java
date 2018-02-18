@@ -127,7 +127,6 @@ public class Main3Activity extends AppCompatActivity {
 
         startLocationUpdates();
 
-
         setLocationReadyCallback(new LocationReadyCallback() {
             @Override
             public void locationReady() {
