@@ -36,6 +36,9 @@ public class FlashbackPlaylist {
 
         // populate viable song set
         for (Song song : entireSongList.getAllsong()) {
+            song.getCurrentDate();
+            song.getCurrentLocation();
+
             // song must be:
             // 1. not disliked
             // 2. having valid previous and current locations
