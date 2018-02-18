@@ -103,6 +103,14 @@ public class FlashbackPlaylist {
         }
     }
 
+    /* Adds a song to the viable song list */
+    public void addSong(Song song) {
+        viableSongs.add(song);
+        if (isPlayable(song) && !playlist.contains(song)) {
+            playlist.add(song);
+        }
+    }
+
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     public int getSongStatus(Song song) {
         return song.getSongStatus();
