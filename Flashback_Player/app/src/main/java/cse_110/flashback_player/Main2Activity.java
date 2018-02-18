@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.media.MediaMetadataRetriever;
@@ -21,8 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -63,6 +66,7 @@ public class Main2Activity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -77,8 +81,19 @@ public class Main2Activity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-
+        FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
+        toggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
+
 
 
     @Override
