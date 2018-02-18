@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.Context;
+import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
@@ -43,6 +44,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 
+import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -88,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
     private LocationManager locationManager;
     private String locationProvider;
 
-
+    private LocationReadyCallback locationCallback;
     private LocationRequest mLocationRequest;
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
@@ -118,13 +120,21 @@ public class Main2Activity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+        startLocationUpdates();
+
+
+        setLocationReadyCallback(new LocationReadyCallback() {
+                                     @Override
+                                     public void locationReady() {
+                                         getLocation();
+                                     }
+                                 });
+                getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
     }
 
     /* Get current Location */
     public Location getLocation(){
-        startLocationUpdates();
         return loc;
     }
 
@@ -147,7 +157,11 @@ public class Main2Activity extends AppCompatActivity {
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
+                        Location oldLoc = loc;
                         loc = locationResult.getLastLocation();
+                        if(oldLoc == null && locationCallback != null){
+                            locationCallback.locationReady();
+                        }
                     }
                 },
                 Looper.myLooper());
@@ -159,7 +173,7 @@ public class Main2Activity extends AppCompatActivity {
                 ){//Can add more as per requirement
 
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION/*,android.Manifest.permission.ACCESS_COARSE_LOCATION*/},
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     100);
         }
     }
@@ -261,5 +275,16 @@ public class Main2Activity extends AppCompatActivity {
 
         }
     }
+
+    public interface LocationReadyCallback{
+        public abstract void locationReady();
+
+    }
+
+    public void setLocationReadyCallback(LocationReadyCallback locationCallback){
+        this.locationCallback = locationCallback;
+    }
+
+
 }
 
