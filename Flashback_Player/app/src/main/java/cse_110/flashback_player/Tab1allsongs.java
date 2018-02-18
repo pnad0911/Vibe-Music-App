@@ -6,6 +6,7 @@ package cse_110.flashback_player;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,10 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +44,8 @@ public class Tab1allsongs extends Fragment {
     private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
+    private Location loc;
+    private OffsetDateTime date;
 
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -65,8 +72,16 @@ public class Tab1allsongs extends Fragment {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        SongList songListGen = new SongList();
-        songList = songListGen.getAllsong();
+//        SongList songListGen = new SongList();
+//        songList = songListGen.getAllsong();
+        Location targetLocation = new Location("");//provider name is unnecessary
+        targetLocation.setLatitude(0.0d);//your coords of course
+        targetLocation.setLongitude(0.0d);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
+                .atOffset(ZoneOffset.UTC);
+        FlashbackPlaylist songListGen = new FlashbackPlaylist();
+        songList = songListGen.getFlashbackSong(targetLocation,date);
         currSong = songList.get(songIdx);
 
         // configure listview
