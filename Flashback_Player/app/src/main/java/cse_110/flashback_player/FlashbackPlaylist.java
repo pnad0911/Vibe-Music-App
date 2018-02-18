@@ -70,7 +70,7 @@ public class FlashbackPlaylist {
         for (Song song : viableSongs) {
             song.setCurrentLocation(location);
             song.setCurrentDate(date);
-            if (song.getScore() != 0) {
+            if (song.getScore() > 0) {
                 playlist.add(song);
             }
         }
@@ -92,8 +92,10 @@ public class FlashbackPlaylist {
         viableSongs.add(song);
 
         // reinsert song to update its priority
-        playlist.remove(song);
-        playlist.add(song);
+        if (song.getScore() > 0) {
+            playlist.remove(song);
+            playlist.add(song);
+        }
     }
 
     /* Updates the status of a song if it is disliked */
@@ -105,7 +107,7 @@ public class FlashbackPlaylist {
     /* Updates the status of a song if it is neutral */
     public void neutralSong(Song song) {
         viableSongs.add(song);
-        if (!playlist.contains(song)) {
+        if (!playlist.contains(song) && song.getScore() > 0) {
             playlist.add(song);
         }
     }
