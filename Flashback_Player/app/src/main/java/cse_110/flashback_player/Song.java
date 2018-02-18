@@ -28,8 +28,7 @@ public class Song {
     private Location previousLocation;
     private Location currentLocation;
 
-    private boolean isFavorite;
-    private boolean isDisliked;
+    private Boolean isLiked;
 
     private OffsetDateTime previousDate;
     private OffsetDateTime currentDate;
@@ -111,21 +110,9 @@ public class Song {
 
     public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
-
-    public void toggleFavorite(){
-        isFavorite = !isFavorite;
-    }
-
-    public void toggleDisliked(){
-        isDisliked = !isDisliked;
-    }
-
-    public boolean getIsFavorite(){
-        return isFavorite;
-    }
-
-    public boolean getIsDisliked(){
-        return isDisliked;
+    /* true -> favorited, null -> neutral, false -> disliked */
+    public void setLikedStatus(Boolean newStatus) {
+        isLiked = newStatus;
     }
 
     public void setPreviousLocation(Location loc){
@@ -136,6 +123,9 @@ public class Song {
         this.currentLocation = loc;
     }
 
+    public Boolean getLikedStatus() {
+        return isLiked;
+    }
 
     /**
      * Gets weighted score of song (max 300)
