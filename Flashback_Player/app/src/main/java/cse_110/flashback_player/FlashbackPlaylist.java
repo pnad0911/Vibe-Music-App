@@ -30,7 +30,7 @@ public class FlashbackPlaylist {
     private OffsetDateTime date;
 
     /* Constructor */
-    public FlashbackPlaylist(Location location, OffsetDateTime date) {
+    public FlashbackPlaylist() {
         // get entire song list
         entireSongList = new SongList();
 
@@ -43,17 +43,13 @@ public class FlashbackPlaylist {
             // 1. not disliked
             // 2. having valid previous and current locations
             // 3. having a valid date
-            if (!song.getIsDisliked()
+            if (!song.getLikedStatus()
                     && song.getPreviousLocation() != null
                     && song.getCurrentLocation() != null
                     && song.getCurrentDate() != null) {
                 viableSongs.add(song);
             }
         }
-
-        // initialize location and date
-        this.location = location;
-        this.date = date;
 
         // build priority queue
         playlist = new PriorityQueue<>(1, new SongCompare<>());
@@ -68,6 +64,11 @@ public class FlashbackPlaylist {
         // populate playlist based on new data
         playlist.clear();
         for (Song song : viableSongs) {
+            // adjust previous location/date
+            song.setPreviousLocation(song.getCurrentLocation());
+            song.setPreviousDate(song.getCurrentDate());
+
+            // set new current location/date according to parameters
             song.setCurrentLocation(location);
             song.setCurrentDate(date);
             if (song.getScore() > 0) {
@@ -89,6 +90,8 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is liked */
     public void likeSong(Song song) {
+        song.setLikedStatus(true);
+
         viableSongs.add(song);
 
         // reinsert song to update its priority
@@ -100,20 +103,24 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is disliked */
     public void dislikeSong(Song song) {
+        song.setLikedStatus(false);
+
         viableSongs.remove(song);
         playlist.remove(song);
     }
 
     /* Updates the status of a song if it is neutral */
     public void neutralSong(Song song) {
+        song.setLikedStatus(null);
+
         viableSongs.add(song);
         if (!playlist.contains(song) && song.getScore() > 0) {
             playlist.add(song);
         }
     }
 
-    /* Returns whether or not the song is currently favorited */
-    public boolean songCurrentlyLiked(Song song) {
-        return song.getIsFavorite();
+    /* true -> favorited, null -> neutral, false -> disliked */
+    public Boolean songCurrentlyLiked(Song song) {
+        return song.getLikedStatus();
     }
 }
