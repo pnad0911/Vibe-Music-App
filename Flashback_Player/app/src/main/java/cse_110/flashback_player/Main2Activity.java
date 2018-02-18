@@ -130,8 +130,8 @@ public class Main2Activity extends AppCompatActivity {
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+                startActivity(intent);
             }
         });
     }

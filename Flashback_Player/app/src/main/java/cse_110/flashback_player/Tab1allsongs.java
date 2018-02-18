@@ -72,16 +72,16 @@ public class Tab1allsongs extends Fragment {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-//        SongList songListGen = new SongList();
-//        songList = songListGen.getAllsong();
+        SongList songListGen = new SongList();
+        songList = songListGen.getAllsong();
         Location targetLocation = new Location("");//provider name is unnecessary
         targetLocation.setLatitude(0.0d);//your coords of course
         targetLocation.setLongitude(0.0d);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
                 .atOffset(ZoneOffset.UTC);
-        FlashbackPlaylist songListGen = new FlashbackPlaylist();
-        songList = songListGen.getFlashbackSong(targetLocation,date);
+//        FlashbackPlaylist songListGen = new FlashbackPlaylist();
+//        songList = songListGen.getFlashbackSong(targetLocation,date);
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
 
