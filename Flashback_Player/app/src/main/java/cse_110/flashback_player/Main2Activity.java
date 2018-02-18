@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,12 +82,14 @@ public class Main2Activity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+
+
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+//                startActivity(intent);
             }
         });
     }

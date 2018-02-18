@@ -12,6 +12,11 @@ public class Song {
 
     private Boolean like;
 
+    public Boolean songCurrentlyLiked() { return like;}
+    public void likeSong() { like = true; }
+    public void dislikeSong() { like = false; }
+    public void neutralSong() {like = null; };
+
     private String title;
     private int id;
     private String artist;
@@ -104,9 +109,5 @@ public class Song {
 
     public Double getPreviousloc_long(){return this.previousloc_long;}
 
-    public Boolean songCurrentlyLiked() { return like;}
-    public void likeSong() { like = true; }
-    public void dislikeSong() { like = false; }
-    public void neutralSong() {like = null; };
 }
 
