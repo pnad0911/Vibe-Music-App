@@ -80,8 +80,8 @@ public class Tab1allsongs extends Fragment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
                 .atOffset(ZoneOffset.UTC);
-        FlashbackPlaylist songListGen = new FlashbackPlaylist();
-        songList = songListGen.getFlashbackSong(targetLocation,date);
+//        FlashbackPlaylist songListGen = new FlashbackPlaylist();
+//        songList = songListGen.getFlashbackSong(targetLocation,date);
         currSong = songList.get(songIdx);
 
         // configure listview
