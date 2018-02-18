@@ -82,8 +82,12 @@ public class Song {
     {
         timestamp = OffsetDateTime.now().minusHours(8);
 
-        this.previousDate = this.currentDate;
-
+        if(this.previousDate == null){
+            this.previousDate = timestamp;
+        }
+        else{
+            this.previousDate = this.currentDate;
+        }
         this.currentDate = timestamp;
     }
 
