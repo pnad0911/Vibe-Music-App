@@ -91,7 +91,7 @@ public class TabFlashback extends Fragment {
             }
         });
 
-        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+//        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
         play();
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
