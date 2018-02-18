@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import java.lang.reflect.Field;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class TabFlashback extends Fragment {
     private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
-
+    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -70,7 +71,7 @@ public class TabFlashback extends Fragment {
         currSong = songList.get(songIdx);
 
         // configure listview
-        SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+        SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
@@ -81,13 +82,12 @@ public class TabFlashback extends Fragment {
                 System.out.println("clicked");
                 songIdx = position;
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
-        changeDisplay(songTitleView, songArtistView, songAlbumView);
-        songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
-
+        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+        play();
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -106,7 +106,6 @@ public class TabFlashback extends Fragment {
                 }
             }
         });
-
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +118,7 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 songIdx = getNextSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
 
         });
@@ -129,7 +128,7 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 songIdx = getPreviousSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
@@ -138,7 +137,7 @@ public class TabFlashback extends Fragment {
             public void callback() {
                 songIdx = getNextSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
@@ -169,20 +168,39 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
+
+//        ----------------- Will replace this ---------------------------------------
+//        songList = flashbackPlaylist.getFlashbackSong(currSong.getCurrentLocation(),currSong.getCurrentDate());
+
+
+        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
-//        System.out.println(currSong.getDate());
     }
 
     /* change display on media player to current playing song*/
-    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView){
+    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
+        if(!isNullDate(currSong)) {
+            OffsetDateTime time = currSong.getPreviousDate();
+            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+                    currSong.getPreviousLocation().getLongitude()+":"+currSong.getPreviousLocation().getLatitude() + " )");
+        }
+        else {
+            songTimeView.setText("N/A");
+        }
+        currSong.setPreviousLocation(Main2Activity.getLocation());
+        currSong.setPreviousDate();
     }
 
+    private boolean isNullDate(Song song) {
+        if(song.getPreviousDate() == null) return true;
+        else return false;
+    }
     // --------------------------------- Here Is The Reason ------------------------------
     public void getData() {
         data = new HashMap<>();

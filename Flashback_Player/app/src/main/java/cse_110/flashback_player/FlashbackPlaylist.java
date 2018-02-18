@@ -62,24 +62,24 @@ public class FlashbackPlaylist {
         playlist.clear();
         for (Song song : viableSongs) {
             // if a song is played for the first time
-            if (song.getPreviousLocation() == null || song.getPreviousDate() == null) {
-                // initialize
-                song.setPreviousLocation(location);
-                song.setPreviousDate(date);
-                song.setCurrentLocation(location);
-                song.setCurrentDate(date);
-            } else {
-                // adjust previous location/date
-                song.setPreviousLocation(song.getCurrentLocation());
-                song.setPreviousDate(song.getCurrentDate());
-
-                // set new current location/date according to parameters
-                song.setCurrentLocation(location);
-                song.setCurrentDate(date);
-                if (song.getScore() > 0) {
-                    playlist.add(song);
-                }
-            }
+//            if (song.getPreviousLocation() == null || song.getPreviousDate() == null) {
+//                // initialize
+//                song.setPreviousLocation(location);
+//                song.setPreviousDate(date);
+//                song.setCurrentLocation(location);
+//                song.setCurrentDate(date);
+//            } else {
+//                // adjust previous location/date
+//                song.setPreviousLocation(song.getCurrentLocation());
+//                song.setPreviousDate(song.getCurrentDate());
+//
+//                // set new current location/date according to parameters
+//                song.setCurrentLocation(location);
+//                song.setCurrentDate(date);
+//                if (song.getScore() > 0) {
+//                    playlist.add(song);
+//                }
+//            }
         }
 
         // duplicate playlist to return in a list

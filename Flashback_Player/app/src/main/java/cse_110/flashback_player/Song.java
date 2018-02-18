@@ -25,13 +25,14 @@ public class Song {
     private String artist;
     private String album;
 
-    private Location previousLocation;
+    private OffsetDateTime timestamp;
+    private Location previousLocation = null;
     private Location currentLocation;
 
     private Boolean isLiked;
 
-    private OffsetDateTime previousDate;
-    private OffsetDateTime currentDate;
+    private OffsetDateTime previousDate = null;
+    private OffsetDateTime currentDate = null;
     private final double fiveam = 300; // times are in minutes
     private final double elevenam = 660;
     private final double fivepm = 1020;
@@ -76,13 +77,21 @@ public class Song {
     }
 
 
-    public void setPreviousDate(OffsetDateTime date)
+    public void setCurrentDate()
     {
-        previousDate = date;
+        timestamp = OffsetDateTime.now().minusHours(8);
+        this.currentDate = timestamp;
+//        if(this.previousDate == null){
+//            this.previousDate = timestamp;
+//        }
+//        else{
+//            this.previousDate = this.currentDate;
+//        }
+//        this.currentDate = timestamp;
     }
-
-    public void setCurrentDate(OffsetDateTime date){
-        currentDate = date;
+    public void setPreviousDate() {
+        timestamp = OffsetDateTime.now().minusHours(8);
+        this.previousDate = timestamp;
     }
 
     public String getTitle(){

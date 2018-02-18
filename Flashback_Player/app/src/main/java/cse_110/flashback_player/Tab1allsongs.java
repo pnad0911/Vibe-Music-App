@@ -74,12 +74,12 @@ public class Tab1allsongs extends Fragment {
         // get items from song list
         SongList songListGen = new SongList();
         songList = songListGen.getAllsong();
-        Location targetLocation = new Location("");//provider name is unnecessary
-        targetLocation.setLatitude(0.0d);//your coords of course
-        targetLocation.setLongitude(0.0d);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
-        OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
-                .atOffset(ZoneOffset.UTC);
+//        Location targetLocation = new Location("");//provider name is unnecessary
+//        targetLocation.setLatitude(0.0d);//your coords of course
+//        targetLocation.setLongitude(0.0d);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+////        OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
+//                .atOffset(ZoneOffset.UTC);
 //        FlashbackPlaylist songListGen = new FlashbackPlaylist();
 //        songList = songListGen.getFlashbackSong(targetLocation,date);
         if(!songList.isEmpty()) {
@@ -97,18 +97,16 @@ public class Tab1allsongs extends Fragment {
                     System.out.println("clicked");
                     songIdx = position;
                     play();
-                    changeDisplay(songTitleView, songArtistView, songAlbumView);
+                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
                 }
             });
-
-            changeDisplay(songTitleView, songArtistView, songAlbumView);
-            songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
         }
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
+                    Main2Activity.getLocation();
                     songPlayer.pause();
                     playButton.setText("Play");
                 }
@@ -135,7 +133,7 @@ public class Tab1allsongs extends Fragment {
             public void onClick(View view){
                 songIdx = getNextSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
 
         });
@@ -145,7 +143,7 @@ public class Tab1allsongs extends Fragment {
             public void onClick(View view){
                 songIdx = getPreviousSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
@@ -154,7 +152,7 @@ public class Tab1allsongs extends Fragment {
              public void callback() {
                  songIdx = getNextSongIdx(songList);
                  play();
-                 changeDisplay(songTitleView, songArtistView, songAlbumView);
+                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
              }
          });
 
@@ -189,14 +187,27 @@ public class Tab1allsongs extends Fragment {
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
-//        System.out.println(currSong.getDate());
     }
 
     /* change display on media player to current playing song*/
-    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView){
+    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
+        if(!isNullDate(currSong)) {
+            OffsetDateTime time = currSong.getPreviousDate();
+            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+                    currSong.getPreviousLocation().getLongitude()+":"+currSong.getPreviousLocation().getLatitude() + " )");
+        }
+        else {
+            songTimeView.setText("N/A");
+        }
+        currSong.setPreviousLocation(Main2Activity.getLocation());
+        currSong.setPreviousDate();
+    }
+    private boolean isNullDate(Song song) {
+        if(song.getPreviousDate() == null) return true;
+        else return false;
     }
 
     // --------------------------------- Here Is The Reason ------------------------------

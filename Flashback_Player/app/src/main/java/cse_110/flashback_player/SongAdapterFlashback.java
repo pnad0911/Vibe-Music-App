@@ -21,13 +21,13 @@ import java.util.List;
  */
 
 //tutorial from https://www.raywenderlich.com/124438/android-listview-tutorial
-public class SongAdapter extends BaseAdapter {
+public class SongAdapterFlashback extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Song> mDataSource;
 
-    public SongAdapter(Context context, List<Song> items){
+    public SongAdapterFlashback(Context context, List<Song> items){
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,7 +52,7 @@ public class SongAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //get view for row item
-        View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
+        View rowView = mInflater.inflate(R.layout.song_list_row_flashback, parent, false);
 
         //get view elements in list row
         final TextView songNameView = (TextView) rowView.findViewById((R.id.name));
@@ -64,6 +64,38 @@ public class SongAdapter extends BaseAdapter {
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
+        final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
+        Boolean like = TabFlashback.flashbackPlaylist.songCurrentlyLiked(song);
+        if(like == null) {
+            likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
+        } else if(like) {
+            likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
+        } else {
+            likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
+        }
+        likeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggle(likeBt,song);
+            }
+        });
+
         return rowView;
+    }
+    private void toggle(Button button, Song song) {
+        Boolean songLiked = song.songCurrentlyLiked();
+        if(songLiked == null) {
+//            TabFlashback.flashbackPlaylist.likeSong(song);
+            song.likeSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
+        } else if(songLiked){
+//            TabFlashback.flashbackPlaylist.dislikeSong(song);
+            song.dislikeSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
+        } else {
+//            TabFlashback.flashbackPlaylist.neutralSong(song);
+            song.neutralSong();
+            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
+        }
     }
 }

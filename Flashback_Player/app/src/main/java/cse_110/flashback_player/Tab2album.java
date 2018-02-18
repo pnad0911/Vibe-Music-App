@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         final TextView songTitleView = (TextView) rootView.findViewById(R.id.name);
         final TextView songArtistView = (TextView) rootView.findViewById(R.id.artist);
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
-        final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
+        final TextView songTimeView = (TextView) rootView.findViewById(R.id.timeAl);
 
         // get items from song list
         final SongList songListGen = new SongList();
@@ -77,7 +78,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
                 String aName = (String) sListView.getItemAtPosition(position);
                 songList = songListGen.getListOfSong(aName);
                 songIdx = 0;
-                play(songTitleView, songArtistView, songAlbumView);
+                play(songTitleView, songArtistView, songAlbumView,songTimeView);
             }
         });
 
@@ -85,7 +86,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             @Override
             public void callback() {
                 songIdx = getNextSongIdx();
-                play(songTitleView, songArtistView, songAlbumView);
+                play(songTitleView, songArtistView, songAlbumView,songTimeView);
             }
         });
 
@@ -103,7 +104,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
                     playButton.setText("Pause");
                 }
                 else{
-                    play(songTitleView, songArtistView, songAlbumView);
+                    play(songTitleView, songArtistView, songAlbumView,songTimeView);
                     playButton.setText("Pause");
                 }
             }
@@ -120,7 +121,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             @Override
             public void onClick(View view){
                 songIdx = getNextSongIdx();
-                play(songTitleView, songArtistView, songAlbumView);
+                play(songTitleView, songArtistView, songAlbumView,songTimeView);
             }
 
         });
@@ -129,7 +130,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             @Override
             public void onClick(View view){
                 songIdx = getPreviousSongIdx();
-                play(songTitleView, songArtistView, songAlbumView);
+                play(songTitleView, songArtistView, songAlbumView ,songTimeView);
             }
         });
 
@@ -139,12 +140,13 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
     }
 
     /* Calls play and nextPlay function in songPlayer*/
-    public void play(TextView songTitleView, TextView songArtistView, TextView songAlbumView){
+    public void play(TextView songTitleView, TextView songArtistView, TextView songAlbumView ,TextView songTimeView){
         currSong = songList.get(songIdx);
+        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
         songPlayer.play(currSong);
         int idx = getNextSongIdx();
         songPlayer.playNext(songList.get(idx));
-        changeDisplay(songTitleView, songArtistView, songAlbumView);
+
     }
 
     public int getNextSongIdx(){
@@ -169,12 +171,26 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
     }
 
     /* change display on media player to current playing song*/
-    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView){
+    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView,TextView songTimeView){
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
+        if(!isNullDate(currSong)) {
+            OffsetDateTime time = currSong.getPreviousDate();
+            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+                    currSong.getPreviousLocation().getLongitude()+":"+currSong.getPreviousLocation().getLatitude() + " )");
+        }
+        else {
+            songTimeView.setText("N/A");
+        }
+        currSong.setPreviousLocation(Main2Activity.getLocation());
+        currSong.setPreviousDate();
     }
 
+    public boolean isNullDate(Song song) {
+        if(song.getPreviousDate() == null) return true;
+        else return false;
+    }
     // --------------------------------- Here Is The Reason ------------------------------
     public void getData() {
         data = new HashMap<>();
