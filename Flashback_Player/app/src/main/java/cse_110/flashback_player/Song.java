@@ -1,10 +1,16 @@
 package cse_110.flashback_player;
 
+        import android.content.Context;
+        import android.content.SharedPreferences;
         import android.location.Location;
+
+        import com.google.gson.Gson;
 
         import java.time.OffsetDateTime;
         import java.time.ZoneOffset;
         import java.util.Date;
+
+        import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -89,11 +95,23 @@ public class Song {
 //        }
 //        this.currentDate = timestamp;
     }
-    public void setPreviousDate() {
-        timestamp = OffsetDateTime.now().minusHours(8);
-        this.previousDate = timestamp;
+    public void setPreviousDate(Context context) {
+        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedTime.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(OffsetDateTime.now().minusHours(8));
+        editor.putString(getTitle(),json);
+        editor.commit();
+        setPreviousDateShared(OffsetDateTime.now().minusHours(8));
     }
 
+    public void setPreviousDateShared(OffsetDateTime time) {
+        this.previousDate = time;
+    }
+
+    public void setPreviousLocationShared(Location location) {
+        this.previousLocation = location;
+    }
     public String getTitle(){
         return title;
     }
@@ -110,12 +128,26 @@ public class Song {
         return this.album;
     }
 
-    public Location getPreviousLocation(){ return this.previousLocation; }
+    public Location getPreviousLocation(Context context){
+        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+        Gson gson2 = new Gson();
+        String json2 = sharedLocation.getString(getTitle(), "");
+        Location location = gson2.fromJson(json2, Location.class);
+        setPreviousLocationShared(location);
+        return this.previousLocation;
+    }
 
     public Location getCurrentLocation(){ return this.currentLocation; }
 
 
-    public OffsetDateTime getPreviousDate(){return this.previousDate; }
+    public OffsetDateTime getPreviousDate(Context context){
+        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedTime.getString(getTitle(), "");
+        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
+        this.previousDate = time;
+        return this.previousDate;
+    }
 
     public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
@@ -124,11 +156,23 @@ public class Song {
         isLiked = newStatus;
     }
 
-    public void setPreviousLocation(Location loc){
+    public void setPreviousLocation(Location loc, Context context){
+        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedLocation.edit();
+        Gson gson2 = new Gson();
+        String json2 = gson2.toJson(loc);
+        editor2.putString(getTitle(),json2);
+        editor2.commit();
         this.previousLocation = loc;
     }
 
-    public void setCurrentLocation(Location loc){
+    public void setCurrentLocation(Location loc,Context context){
+        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedLocation.edit();
+        Gson gson2 = new Gson();
+        String json2 = gson2.toJson(loc);
+        editor2.putString(getTitle(),json2);
+        editor2.commit();
         this.currentLocation = loc;
     }
 
@@ -200,6 +244,33 @@ public class Song {
             return "evening";
         }
     }
+
+//    private void updateTimeNLocation(Song song, Context context) {
+//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedTime.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(song.getPreviousDate());
+//        editor.putString(song.getTitle(),json);
+//        editor.commit();
+//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+//        SharedPreferences.Editor editor2 = sharedLocation.edit();
+//        Gson gson2 = new Gson();
+//        String json2 = gson2.toJson(song.getPreviousLocation());
+//        editor2.putString(song.getTitle(),json2);
+//        editor2.commit();
+//    }
+//    private void getTimeNLocation(Song song, Context context) {
+//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+//        Gson gson = new Gson();
+//        String json = sharedTime.getString(song.getTitle(), "");
+//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
+//        song.setPreviousDateShared(time);
+//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+//        Gson gson2 = new Gson();
+//        String json2 = sharedLocation.getString(song.getTitle(), "");
+//        Location location = gson2.fromJson(json2, Location.class);
+//        song.setPreviousLocationShared(location);
+//    }
 
 }
 

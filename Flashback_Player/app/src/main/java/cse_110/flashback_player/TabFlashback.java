@@ -5,7 +5,9 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
+import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.gson.Gson;
+
 import java.lang.reflect.Field;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class TabFlashback extends Fragment {
 
@@ -69,7 +75,6 @@ public class TabFlashback extends Fragment {
         SongList songListGen = new SongList();
         songList = songListGen.getAllsong();
         currSong = songList.get(songIdx);
-
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
@@ -183,23 +188,24 @@ public class TabFlashback extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
+        Context applicationContext =  Main2Activity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
-        if(!isNullDate(currSong)) {
-            OffsetDateTime time = currSong.getPreviousDate();
+        if(!isNullDate(currSong,applicationContext)) {
+            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation().getLongitude()+":"+currSong.getPreviousLocation().getLatitude() + " )");
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setPreviousLocation(Main2Activity.getLocation());
-        currSong.setPreviousDate();
+        currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
+        currSong.setPreviousDate(applicationContext);
     }
 
-    private boolean isNullDate(Song song) {
-        if(song.getPreviousDate() == null) return true;
+    private boolean isNullDate(Song song,Context context) {
+        if(song.getPreviousDate(context) == null) return true;
         else return false;
     }
     // --------------------------------- Here Is The Reason ------------------------------
@@ -222,4 +228,31 @@ public class TabFlashback extends Fragment {
 
         }
     }
+
+//    private void updateTimeNLocation(Song song, Context context) {
+//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedTime.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(song.getPreviousDate());
+//        editor.putString(song.getTitle(),json);
+//        editor.commit();
+//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+//        SharedPreferences.Editor editor2 = sharedLocation.edit();
+//        Gson gson2 = new Gson();
+//        String json2 = gson2.toJson(song.getPreviousLocation());
+//        editor2.putString(song.getTitle(),json2);
+//        editor2.commit();
+//    }
+//    private void getTimeNLocation(Song song, Context context) {
+//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+//        Gson gson = new Gson();
+//        String json = sharedTime.getString(song.getTitle(), "");
+//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
+//        song.setPreviousDateShared(time);
+//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
+//        Gson gson2 = new Gson();
+//        String json2 = sharedLocation.getString(song.getTitle(), "");
+//        Location location = gson2.fromJson(json2, Location.class);
+//        song.setPreviousLocationShared(location);
+//    }
 }

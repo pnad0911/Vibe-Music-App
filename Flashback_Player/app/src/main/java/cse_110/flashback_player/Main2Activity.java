@@ -3,6 +3,7 @@ package cse_110.flashback_player;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -32,6 +33,7 @@ import android.widget.ToggleButton;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.Gson;
+
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 
@@ -100,13 +104,23 @@ public class Main2Activity extends AppCompatActivity {
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
-
+    public static Context contextOfApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        contextOfApplication = getApplicationContext();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+        if(sharedPreferences.getString("current","").equalsIgnoreCase("flashback")) {
+            Intent intent = new Intent(this, Main3Activity.class);
+            startActivity(intent);
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("current","normal");
+        editor.apply();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
@@ -280,6 +294,35 @@ public class Main2Activity extends AppCompatActivity {
         this.locationCallback = locationCallback;
     }
 
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
+    }
 
+//    public void updateTimeNLocation(Song song) {
+//        SharedPreferences sharedTime = getSharedPreferences("time", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedTime.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(song.getPreviousDate());
+//        editor.putString(song.getTitle(),json);
+//        editor.commit();
+//        SharedPreferences sharedLocation = getSharedPreferences("location", MODE_PRIVATE);
+//        SharedPreferences.Editor editor2 = sharedLocation.edit();
+//        Gson gson2 = new Gson();
+//        String json2 = gson2.toJson(song.getPreviousLocation());
+//        editor2.putString(song.getTitle(),json2);
+//        editor2.commit();
+//    }
+//    public void getTimeNLocation(Song song) {
+//        SharedPreferences sharedTime = getSharedPreferences("time", MODE_PRIVATE);
+//        Gson gson = new Gson();
+//        String json = sharedTime.getString(song.getTitle(), "");
+//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
+//        song.setPreviousDateShared(time);
+//        SharedPreferences sharedLocation = getSharedPreferences("location", MODE_PRIVATE);
+//        Gson gson2 = new Gson();
+//        String json2 = sharedLocation.getString(song.getTitle(), "");
+//        Location location = gson2.fromJson(json2, Location.class);
+//        song.setPreviousLocationShared(location);
+//    }
 }
 
