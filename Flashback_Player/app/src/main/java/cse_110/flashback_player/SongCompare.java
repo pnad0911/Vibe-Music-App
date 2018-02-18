@@ -19,7 +19,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
                 return 1;
             }
         }
-        
+
         if(t1.getLikedStatus() != t2.getLikedStatus()){
             if(t1.getLikedStatus() == true){
                 return -1;
