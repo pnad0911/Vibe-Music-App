@@ -162,6 +162,7 @@ public class Main2Activity extends AppCompatActivity {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
                         loc = locationResult.getLastLocation();
+
                     }
                 },
                 Looper.myLooper());
