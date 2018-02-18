@@ -120,12 +120,6 @@ public class SongPlayer implements Parcelable{
             return false;
         }
 
-        timestamp = OffsetDateTime.now().minusHours(8);
-
-        song.setPreviousDate(song.getCurrentDate());
-
-        song.setCurrentDate(timestamp);
-
         mediaPlayer.start();
         return true;
     }

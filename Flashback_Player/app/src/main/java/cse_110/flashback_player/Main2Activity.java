@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.Context;
+import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
@@ -121,7 +122,14 @@ public class Main2Activity extends AppCompatActivity {
 
         startLocationUpdates();
 
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+
+        setLocationReadyCallback(new LocationReadyCallback() {
+                                     @Override
+                                     public void locationReady() {
+                                         getLocation();
+                                     }
+                                 });
+                getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
     }
 
@@ -149,10 +157,11 @@ public class Main2Activity extends AppCompatActivity {
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
-                        if(loc == null && locationCallback != null){
+                        Location oldLoc = loc;
+                        loc = locationResult.getLastLocation();
+                        if(oldLoc == null && locationCallback != null){
                             locationCallback.locationReady();
                         }
-                        loc = locationResult.getLastLocation();
                     }
                 },
                 Looper.myLooper());
