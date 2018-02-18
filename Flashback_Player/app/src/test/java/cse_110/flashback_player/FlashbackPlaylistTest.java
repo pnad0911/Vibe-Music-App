@@ -34,7 +34,6 @@ public class FlashbackPlaylistTest {
 
     @Test
     public void testLikeSong() {
-        playlist.likeSong()
     }
 
     @Test

@@ -55,8 +55,7 @@ public class FlashbackPlaylist {
         // populate playlist based on new data
         playlist.clear();
         for (Song song : viableSongs) {
-            // if a song is played for the first time
-            if (song.getScore() > 0) {
+            if (isPlayable(song)) {
                 playlist.add(song);
             }
         }
@@ -80,7 +79,7 @@ public class FlashbackPlaylist {
         viableSongs.add(song);
 
         // reinsert song to update its priority
-        if (song.getScore() > 0) {
+        if (isPlayable(song)) {
             playlist.remove(song);
             playlist.add(song);
         }
@@ -99,7 +98,7 @@ public class FlashbackPlaylist {
         song.neutral();
 
         viableSongs.add(song);
-        if (song.getScore() > 0 && !playlist.contains(song)) {
+        if (isPlayable(song) && !playlist.contains(song)) {
             playlist.add(song);
         }
     }
