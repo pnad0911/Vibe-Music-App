@@ -43,10 +43,7 @@ public class FlashbackPlaylist {
             // 1. not disliked
             // 2. having valid previous and current locations
             // 3. having a valid date
-            if (song.getLikedStatus() != true
-                    && song.getPreviousLocation() != null
-                    && song.getCurrentLocation() != null
-                    && song.getCurrentDate() != null) {
+            if (song.getLikedStatus() != new Boolean(false)) {
                 viableSongs.add(song);
             }
         }

@@ -80,29 +80,30 @@ public class Tab1allsongs extends Fragment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
                 .atOffset(ZoneOffset.UTC);
-//        FlashbackPlaylist songListGen = new FlashbackPlaylist();
-//        songList = songListGen.getFlashbackSong(targetLocation,date);
-        currSong = songList.get(songIdx);
+        FlashbackPlaylist songListGen = new FlashbackPlaylist();
+        songList = songListGen.getFlashbackSong(targetLocation,date);
+        if(!songList.isEmpty()) {
+            currSong = songList.get(songIdx);
 
-        // configure listview
-        SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
-        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
-        sListView.setAdapter(adapter);
-        // Handle on click event
-        sListView.setClickable(true);
-        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                System.out.println("clicked");
-                songIdx = position;
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
-            }
-        });
+            // configure listview
+            SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+            final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
+            sListView.setAdapter(adapter);
+            // Handle on click event
+            sListView.setClickable(true);
+            sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                    System.out.println("clicked");
+                    songIdx = position;
+                    play();
+                    changeDisplay(songTitleView, songArtistView, songAlbumView);
+                }
+            });
 
-        changeDisplay(songTitleView, songArtistView, songAlbumView);
-        songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
-
+            changeDisplay(songTitleView, songArtistView, songAlbumView);
+            songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
+        }
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
