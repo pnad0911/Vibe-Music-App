@@ -67,7 +67,7 @@ public class FlashbackPlaylist {
             // if a song is played for the first time
             if (song.getPreviousLocation() == null || song.getPreviousDate() == null) {
                 // initialize
-                song.setPreviousDate(location);
+                song.setPreviousLocation(location);
                 song.setPreviousDate(date);
                 song.setCurrentLocation(location);
                 song.setCurrentDate(date);
