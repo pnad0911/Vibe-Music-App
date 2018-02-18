@@ -180,6 +180,7 @@ public class TabFlashback extends Fragment {
         songPlayer.playNext(songList.get(idx));
     }
 
+
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         songTitleView.setText(currSong.getTitle());

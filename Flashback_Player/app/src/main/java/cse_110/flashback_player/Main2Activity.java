@@ -223,6 +223,7 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+
 //   ---------------------------------- Get Location method here  ---------------------------------
 
     /* Get current Location */

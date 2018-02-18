@@ -101,6 +101,7 @@ public class Tab1allsongs extends Fragment {
                 }
             });
         }
+
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -187,6 +187,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         currSong.setPreviousDate();
     }
 
+
     public boolean isNullDate(Song song) {
         if(song.getPreviousDate() == null) return true;
         else return false;

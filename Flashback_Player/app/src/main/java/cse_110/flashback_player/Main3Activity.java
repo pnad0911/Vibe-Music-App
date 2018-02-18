@@ -203,6 +203,7 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
+
 //   ---------------------------------- Get Location method here  ---------------------------------
     /* Get current Location */
     public Location getLocation(){
