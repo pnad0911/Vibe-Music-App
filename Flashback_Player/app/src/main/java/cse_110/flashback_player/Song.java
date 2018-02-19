@@ -206,7 +206,10 @@ public class Song {
      * helper for getDateScore
      * @return time score
      */
-    public double getTimeScore(OffsetDateTime presentTime) {
+    public int getTimeScore(OffsetDateTime presentTime) {
+        if (presentTime == null || previousDate == null){
+            return 0;
+        }
         double currentTime = presentTime.getHour()*60 + presentTime.getMinute();
         double previousTime = previousDate.getHour()*60 + previousDate.getMinute();
         String currentTimeOfDay = getTimeofDay(currentTime);

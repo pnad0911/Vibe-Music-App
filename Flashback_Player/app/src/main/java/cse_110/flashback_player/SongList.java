@@ -71,17 +71,6 @@ public class SongList {
         return l;
     }
 
-    //String All Song
-    private List<Song> getAll() {
-        List<Song> l = new ArrayList<>();
-        for(Map.Entry<String, List<Song>> entry: AlbumSongList.entrySet()) {
-            for(Song a : entry.getValue()) {
-                l.add(a);
-            }
-        }
-        return l;
-    }
-
 
 //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
@@ -132,7 +121,7 @@ public class SongList {
         }
     }
 
-    private File getAlbumFile(String AlbumName) {
+    /*private File getAlbumFile(String AlbumName) {
         if(isAlbumExist(AlbumName)) {
             return new File(RAWPATH + AlbumName);
         } else {
@@ -154,7 +143,7 @@ public class SongList {
             }
         }
         return list;
-    }
+    }*/
 
     private boolean isMp3File(String songName) {
         if(songName.endsWith(".mp3")) {
