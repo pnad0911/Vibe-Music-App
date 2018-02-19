@@ -2,14 +2,17 @@ package cse_110.flashback_player;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import org.junit.Test;
 
-import java.time.OffsetDateTime;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
+import cse_110.flashback_player.Song;
+
+import static android.content.ContentValues.TAG;
 import static org.junit.Assert.*;
 
 /**
@@ -17,12 +20,8 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class GetScoreUnitTests {
     @Test
-    public void getScore_isCorrect() throws Exception {
-        Song song = new Song("My Song", "Beverly", "My Album");
-        song.setPreviousDate(OffsetDateTime.now());
-        song.setCurrentDate(OffsetDateTime.of(2018, 2, 16, 16, 3, 30, 100, ZoneOffset(-08:00));
     public void getTimeOfDay_isCorrect() throws Exception {
         Song song = new Song("My Song", "Beverly", "My Album");
 
@@ -55,7 +54,7 @@ public class ExampleUnitTest {
         song.setPreviousDate(present);
         assertEquals(song.getDateScore(present), 100, .01);
         song.setPreviousDate(OffsetDateTime.of(
-                LocalDateTime.of(2018, 02, song.getPreviousDate().getDayOfMonth() - 1, 9, 50),
+                LocalDateTime.of(2018, 02, song.getCurrentDate().getDayOfMonth() - 1, 9, 50),
                 ZoneOffset.ofHoursMinutes(-8,0)));
         assertEquals(song.getDateScore(present), 0, .01);
     }
@@ -65,23 +64,27 @@ public class ExampleUnitTest {
         Song song = new Song("My Song", "Beverly", "My Album");
         String locationProvider = LocationManager.GPS_PROVIDER;
         Location myLoc = new Location(locationProvider);
-        myLoc.setLatitude(100);
-        myLoc.setLongitude(100);
 
-        System.out.println(myLoc.getLatitude());
+        myLoc.setLatitude(0);
+        myLoc.setLongitude(0);
+        song.setPreviousLocationShared(myLoc);
+        assertEquals(song.getLocationScore(myLoc), 100, .01);
 
-        System.out.println(myLoc.getLongitude());
-
-        song.setPreviousLocation(myLoc);
-        //assertEquals(song.getLocationScore(myLoc), 100, .01);
         myLoc.setLatitude(166.0001);
-        assertEquals(song.getLocationScore(myLoc), 96.3472, .0001);/*
-        myLoc.setLongitude(.1);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 0, .0001);
+        myLoc.setLongitude(134.45);
+        song.setPreviousLocationShared(myLoc);
+        myLoc.setLatitude(166);
+        myLoc.setLongitude(134.45);
+        assertEquals(song.getLocationScore(myLoc), 96.3477, .0001);
+
+        myLoc.setLongitude(1);
+        assertEquals(song.getLocationScore(myLoc), 0, .0001);
+
         myLoc.setLatitude(0);
         myLoc.setLongitude(.003);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 8.6275, 0.0001);*/
+        song.setPreviousLocationShared(myLoc);
+        myLoc.setLatitude(0);
+        myLoc.setLongitude(0);
+        assertEquals(song.getLocationScore(myLoc), 8.2675, 0.0001);
     }
 }
