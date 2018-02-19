@@ -54,7 +54,7 @@ public class GetScoreUnitTests {
         song.setPreviousDate(present);
         assertEquals(song.getDateScore(present), 100, .01);
         song.setPreviousDate(OffsetDateTime.of(
-                LocalDateTime.of(2018, 02, song.getPreviousDate().getDayOfMonth() - 1, 9, 50),
+                LocalDateTime.of(2018, 02, song.getCurrentDate().getDayOfMonth() - 1, 9, 50),
                 ZoneOffset.ofHoursMinutes(-8,0)));
         assertEquals(song.getDateScore(present), 0, .01);
     }
@@ -67,23 +67,24 @@ public class GetScoreUnitTests {
 
         myLoc.setLatitude(0);
         myLoc.setLongitude(0);
-        song.setPreviousLocation(myLoc);
+        song.setPreviousLocationShared(myLoc);
         assertEquals(song.getLocationScore(myLoc), 100, .01);
 
         myLoc.setLatitude(166.0001);
         myLoc.setLongitude(134.45);
-        song.setPreviousLocation(myLoc);
-        Location newLoc = new Location(locationProvider);
-        newLoc.setLatitude(166);
-        newLoc.setLongitude(134.45);
-        song.setCurrentLocation(myLoc);
-        assertEquals(song.getLocationScore(newLoc), 96.3477, .0001);/*
-        myLoc.setLongitude(.1);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 0, .0001);
+        song.setPreviousLocationShared(myLoc);
+        myLoc.setLatitude(166);
+        myLoc.setLongitude(134.45);
+        assertEquals(song.getLocationScore(myLoc), 96.3477, .0001);
+
+        myLoc.setLongitude(1);
+        assertEquals(song.getLocationScore(myLoc), 0, .0001);
+
         myLoc.setLatitude(0);
         myLoc.setLongitude(.003);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 8.6275, 0.0001);*/
+        song.setPreviousLocationShared(myLoc);
+        myLoc.setLatitude(0);
+        myLoc.setLongitude(0);
+        assertEquals(song.getLocationScore(myLoc), 8.2675, 0.0001);
     }
 }

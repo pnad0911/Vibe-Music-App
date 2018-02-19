@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ public class SongAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         //get view for row item
         View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
@@ -57,20 +59,11 @@ public class SongAdapter extends BaseAdapter {
         TextView artistView = (TextView) rowView.findViewById((R.id.artist));
         TextView albumView = (TextView) rowView.findViewById((R.id.album));
 
-        Song song = (Song) getItem(position);
+        final Song song = (Song) getItem(position);
 
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
-
-        Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
-        likeBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //songNameView.setText("Duy");
-            }
-        });
-
         return rowView;
     }
 }

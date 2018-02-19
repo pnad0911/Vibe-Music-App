@@ -1,6 +1,9 @@
 package cse_110.flashback_player;
 
+
+import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -16,17 +19,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +59,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.Gson;
+
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 
@@ -73,7 +82,7 @@ public class Main2Activity extends AppCompatActivity {
     private SongPlayer songPlayer = new SongPlayer(this);
 
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-    public static Map<String,String[]> data;
+    public static Map<String, String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
 
     /**
@@ -84,7 +93,7 @@ public class Main2Activity extends AppCompatActivity {
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-    private Location loc;
+    private static Location loc;
     private Context mContext;
 
     private LocationManager locationManager;
@@ -95,13 +104,23 @@ public class Main2Activity extends AppCompatActivity {
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
-
+    public static Context contextOfApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        contextOfApplication = getApplicationContext();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+        if (sharedPreferences.getString("current", "").equalsIgnoreCase("flashback")) {
+            Intent intent = new Intent(this, Main3Activity.class);
+            startActivity(intent);
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("current", "normal");
+        editor.apply();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
@@ -124,81 +143,24 @@ public class Main2Activity extends AppCompatActivity {
 
 
         setLocationReadyCallback(new LocationReadyCallback() {
-                                     @Override
-                                     public void locationReady() {
-                                         getLocation();
-                                     }
-                                 });
+            @Override
+            public void locationReady() {
+                getLocation();
+                getLocation();
+            }
+        });
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
-    }
 
-    /* Get current Location */
-    public Location getLocation(){
-        return loc;
-    }
-
-    protected void startLocationUpdates(){
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        LocationSettingsRequest locationSettingsRequest = builder.build();
-
-        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
-        settingsClient.checkLocationSettings(locationSettingsRequest);
-
-        checkPermission();
-
-        mFusedLocationClient = getFusedLocationProviderClient(this);
-        mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        Location oldLoc = loc;
-                        loc = locationResult.getLastLocation();
-                        if(oldLoc == null && locationCallback != null){
-                            locationCallback.locationReady();
-                        }
-                    }
-                },
-                Looper.myLooper());
-    }
-
-    public void checkPermission(){
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                ){//Can add more as per requirement
-
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION},
-                    100);
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
+        toggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+                songPlayer.pause();
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -217,7 +179,7 @@ public class Main2Activity extends AppCompatActivity {
 
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
-            switch (position){
+            switch (position) {
 
                 case 0:
                     Tab1allsongs tab1 = new Tab1allsongs();
@@ -243,8 +205,8 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position){
-            switch (position){
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
                 case 0:
                     return "SONGS";
                 case 1:
@@ -262,13 +224,15 @@ public class Main2Activity extends AppCompatActivity {
         for (Field f : raw) {
             try {
                 AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                mmr.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                 String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
                 String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
                 String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
                 String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
+                list[0] = ti;
+                list[1] = ar;
+                list[2] = al;
+                data.put(f.getName(), list);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -276,15 +240,64 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-    public interface LocationReadyCallback{
-        public abstract void locationReady();
 
+//   ---------------------------------- Get Location method here  ---------------------------------
+
+    /* Get current Location */
+    public static Location getLocation() {
+        return loc;
     }
 
-    public void setLocationReadyCallback(LocationReadyCallback locationCallback){
+    protected void startLocationUpdates() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
+        checkPermission();
+
+        mFusedLocationClient = getFusedLocationProviderClient(this);
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        Location oldLoc = loc;
+                        loc = locationResult.getLastLocation();
+                        if (oldLoc == null && locationCallback != null) {
+                            locationCallback.locationReady();
+                        }
+                    }
+                },
+                Looper.myLooper());
+    }
+
+    public void checkPermission() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ) {//Can add more as per requirement
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    100);
+        }
+    }
+
+    public void setLocationReadyCallback(LocationReadyCallback locationCallback) {
         this.locationCallback = locationCallback;
     }
 
+    public interface LocationReadyCallback {
+        public abstract void locationReady();
+    }
+
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
+    }
 
 }
-
