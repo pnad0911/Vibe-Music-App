@@ -30,6 +30,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
         if(t1.getScore(location,time) != t2.getScore(location,time)){
             if(t1.getScore(location,time) > t2.getScore(location,time)){
 
+
                 return -1;
             }
             else{
@@ -51,5 +52,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
 
         return 1;
     }
-    Boolean a = null;
+
 }
+
+

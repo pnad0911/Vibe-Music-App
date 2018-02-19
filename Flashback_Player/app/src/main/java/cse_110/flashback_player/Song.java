@@ -1,16 +1,22 @@
 package cse_110.flashback_player;
 
-        import android.content.Context;
-        import android.content.SharedPreferences;
-        import android.location.Location;
+import android.location.Location;
 
-        import com.google.gson.Gson;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 
-        import java.time.OffsetDateTime;
-        import java.time.ZoneOffset;
-        import java.util.Date;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.location.Location;
 
-        import static android.content.Context.MODE_PRIVATE;
+import com.google.gson.Gson;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -304,7 +310,7 @@ public class Song {
         } else if (time > elevenam && time <= fivepm) {
             return "afternoon";
         } else {
-            return "evening";
+          return "evening";
         }
     }
 }
