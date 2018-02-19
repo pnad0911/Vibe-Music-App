@@ -2,13 +2,18 @@
 package cse_110.flashback_player;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
+import android.util.Log;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Daniel on 2/17/2018.
@@ -16,25 +21,37 @@ import java.util.PriorityQueue;
 
 public class FlashbackPlaylist {
 
+    /* Entire list of songs */
+    private SongList entireSongList;
+
     /* List of viable songs to be placed in the playlist (played b4, not disliked) */
     private HashSet<Song> viableSongs;
 
     /* Priority queue used to build the playlist */
     private PriorityQueue<Song> playlist;
 
-    /* Current location playlist is based on */
-    private Location location;
+    /* Context provided by Main2Activity */
+    private Context context;
 
-    /* Current time playlist is based on */
-    private OffsetDateTime date;
+    private OffsetDateTime currentTime;
 
     /* Constructor */
-    public FlashbackPlaylist(SongList songlist) {
+    public FlashbackPlaylist() {
+        entireSongList = new SongList();
+
         // initialize set of viable songs
         viableSongs = new HashSet<>();
 
+        // initialize context
+        context =  Main2Activity.getContextOfApplication();
+
         // populate viable song set
-        for (Song song : songlist.getAllsong()) {
+        for (Song song : entireSongList.getAllsong()) {
+            song.getPreviousDate(context);
+            song.getPreviousLocation(context);
+
+            System.out.println(song.getPreviousLocation(context));
+
             // song must be:
             // 1. not disliked
             // 2. having valid previous and current locations
@@ -43,16 +60,16 @@ public class FlashbackPlaylist {
                 viableSongs.add(song);
             }
         }
-
-        // build priority queue
-        //playlist = new PriorityQueue<>(1, new SongCompare<>());
     }
 
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getFlashbackSong() {
+        currentTime = OffsetDateTime.now().minusHours(8);
+
+        // build priority queue
+        playlist = new PriorityQueue<>(1, new SongCompare<>(Main3Activity.getLocation(), currentTime));
 
         // populate playlist based on new data
-        playlist.clear();
         for (Song song : viableSongs) {
             if (isPlayable(song)) {
                 playlist.add(song);
@@ -73,7 +90,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is favorited */
     public void likeSong(Song song) {
-        song.like();
+        song.like(Main3Activity.getContextOfApplication());
 
         viableSongs.add(song);
 
@@ -86,7 +103,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is disliked */
     public void dislikeSong(Song song) {
-        song.dislike();
+        song.dislike(Main3Activity.getContextOfApplication());
 
         viableSongs.remove(song);
         playlist.remove(song);
@@ -94,7 +111,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is neutral */
     public void neutralSong(Song song) {
-        song.neutral();
+        song.neutral(Main3Activity.getContextOfApplication());
 
         viableSongs.add(song);
         if (isPlayable(song) && !playlist.contains(song)) {
@@ -112,7 +129,7 @@ public class FlashbackPlaylist {
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     public int getSongStatus(Song song) {
-        return song.getSongStatus();
+        return song.getSongStatus(Main3Activity.getContextOfApplication());
     }
 
     /* Determines whether a song is viable for playability; song must be:
@@ -120,11 +137,8 @@ public class FlashbackPlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
-        Context applicationContext =  Main2Activity.getContextOfApplication();
-        return song.getSongStatus() != -1
-                && song.getPreviousLocation(applicationContext) != null
-                && song.getPreviousDate(applicationContext) != null
-                && song.getCurrentLocation() != null
-                && song.getCurrentDate() != null;
+        return song.getSongStatus(Main3Activity.getContextOfApplication()) != -1
+                && song.getPreviousLocation(context) != null
+                && song.getPreviousDate(context) != null;
     }
 }

@@ -41,13 +41,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class TabFlashback extends Fragment {
 
-    private int songIdx=0;
+    public static int songIdx=0;
     private Context context;
     private Song currSong;
     private List<Song> songList;
     private List<Song> songList2;
     private SongPlayer songPlayer;
-    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist(new SongList());
+    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -77,6 +77,9 @@ public class TabFlashback extends Fragment {
         songList = songListGen.getAllsong();
 //        songList2.get(0).like();songList2.get(1).like();
 
+//        Context applicationContext =  Main2Activity.getContextOfApplication();
+
+//        System.out.println(songList.get(0).getPreviousLocation(applicationContext).getLatitude());
 
 //        songList = flashbackPlaylist.getFlashbackSong();
         //currSong = songList.get(songIdx);
@@ -89,7 +92,6 @@ public class TabFlashback extends Fragment {
         sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                System.out.println("clicked");
                 songIdx = position;
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -127,6 +129,7 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -137,6 +140,7 @@ public class TabFlashback extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getPreviousSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -179,11 +183,6 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-
-//        ----------------- Will replace this ---------------------------------------
-        //songList = flashbackPlaylist.getFlashbackSong();
-
-//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
