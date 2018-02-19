@@ -28,8 +28,8 @@ public class TabFlashback extends Fragment {
     public static int songIdx=0;
     private Context context;
     private Song currSong;
-    private List<Song> songList;
-    private List<Song> songList2;
+    //private List<Song> songList;
+    //private List<Song> songList2;
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;

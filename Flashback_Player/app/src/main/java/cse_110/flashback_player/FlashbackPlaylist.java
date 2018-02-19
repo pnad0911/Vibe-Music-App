@@ -37,7 +37,7 @@ public class FlashbackPlaylist {
         viableSongs = new HashSet<>();
 
         // initialize context
-        context =  NormalActivity.getContextOfApplication();
+        context = NormalActivity.getContextOfApplication();
 
         // populate viable song set
         for (Song song : entireSongList.getAllsong()) {
@@ -54,7 +54,7 @@ public class FlashbackPlaylist {
                 viableSongs.add(song);
             }
         }
-
+    }
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getFlashbackSong() {
         currentTime = OffsetDateTime.now().minusHours(8);
