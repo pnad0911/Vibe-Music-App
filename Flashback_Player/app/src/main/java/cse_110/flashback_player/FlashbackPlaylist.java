@@ -85,6 +85,9 @@ public class FlashbackPlaylist {
             returnList.add(returnPQ.poll());
         }
 
+        System.out.println("------------");
+        System.out.println(returnList.size());
+
         return returnList;
     }
 

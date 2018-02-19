@@ -44,10 +44,10 @@ public class TabFlashback extends Fragment {
     public static int songIdx=0;
     private Context context;
     private Song currSong;
-    private List<Song> songList;
     private List<Song> songList2;
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
+    private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -73,30 +73,24 @@ public class TabFlashback extends Fragment {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        SongList songListGen = new SongList();
-        songList = songListGen.getAllsong();
-//        songList2.get(0).like();songList2.get(1).like();
+        songList = flashbackPlaylist.getFlashbackSong();
+//        SongList songListGen = new SongList();
+//        songList = songListGen.getAllsong();
 
-//        Context applicationContext =  Main2Activity.getContextOfApplication();
-
-//        System.out.println(songList.get(0).getPreviousLocation(applicationContext).getLatitude());
-
-//        songList = flashbackPlaylist.getFlashbackSong();
-        //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
-        sListView.setClickable(true);
-        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                songIdx = position;
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
-            }
-        });
+//        sListView.setClickable(true);
+//        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+//                songIdx = position;
+//                play();
+//                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+//            }
+//        });
 
 //        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
         play();
@@ -107,15 +101,18 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
                     songPlayer.pause();
-                    playButton.setText("Play");
+//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-                    playButton.setText("Pause");
+//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play();
-                    playButton.setText("Pause");
+//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
         });
@@ -155,6 +152,8 @@ public class TabFlashback extends Fragment {
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
+
+        //changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
