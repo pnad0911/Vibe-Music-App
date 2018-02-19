@@ -61,10 +61,10 @@ public class TestFlashbackPlaylist {
     @Test
     /* Test if only the three songs here are in the playlist */
     public void testGetPlaylist(){
-        assertEquals(playlist.getPlaylist().size(), 3);
-        assertEquals(playlist.getPlaylist().contains(song1), true);
-        assertEquals(playlist.getPlaylist().contains(song2), true);
-        assertEquals(playlist.getPlaylist().contains(song3), true);
+        assertEquals(playlist.getFlashbackSong().size(), 3);
+        assertEquals(playlist.getFlashbackSong().contains(song1), true);
+        assertEquals(playlist.getFlashbackSong().contains(song2), true);
+        assertEquals(playlist.getFlashbackSong().contains(song3), true);
     }
 
     @Test

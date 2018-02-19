@@ -17,6 +17,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Daniel on 2/17/2018.
+ * This playlist is for dedicated use in Flashback Mode; the playlist is adjusted based
+ * on a current location and date relative to previous location and date fields for each
+ * song.
  */
 
 public class FlashbackPlaylist {
