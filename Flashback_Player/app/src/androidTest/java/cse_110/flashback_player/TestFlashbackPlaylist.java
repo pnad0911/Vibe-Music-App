@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package cse_110.flashback_player;
 
 import android.location.Location;
@@ -94,3 +95,5 @@ public class TestFlashbackPlaylist {
         assertEquals(song1.getPlaylist().contains(song1), true);
     }
 }
+=======
+>>>>>>> 347ddda10b4efc70404418f8154573b77b7faa0b
