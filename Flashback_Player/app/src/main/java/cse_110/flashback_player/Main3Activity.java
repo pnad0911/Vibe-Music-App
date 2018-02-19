@@ -90,7 +90,7 @@ public class Main3Activity extends AppCompatActivity {
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-    private Location loc;
+    private static Location loc;
     private Context mContext;
 
     private LocationManager locationManager;
@@ -132,7 +132,6 @@ public class Main3Activity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         startLocationUpdates();
-
 
         setLocationReadyCallback(new LocationReadyCallback() {
             @Override
@@ -216,7 +215,7 @@ public class Main3Activity extends AppCompatActivity {
 
 //   ---------------------------------- Get Location method here  ---------------------------------
     /* Get current Location */
-    public Location getLocation(){
+    public static Location getLocation(){
         return loc;
     }
 

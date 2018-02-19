@@ -19,12 +19,15 @@ package cse_110.flashback_player;
 
 public class Song {
 
-    private Boolean like;
+    /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
+       /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
+    private int like;
 
-    public Boolean songCurrentlyLiked() { return like;}
-    public void likeSong() { like = true; }
-    public void dislikeSong() { like = false; }
-    public void neutralSong() {like = null; };
+    public void like(Context context) { like = 1; setPreviousLike(like, context); }
+    public void dislike(Context context) { like = -1; setPreviousLike(like, context); }
+    public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
+    public int getSongStatus(Context context) { return getPreviousLike(context); }
+
 
     private String title;
     private int id;
@@ -39,17 +42,28 @@ public class Song {
 
     private OffsetDateTime previousDate = null;
     private OffsetDateTime currentDate = null;
+
     private final double fiveam = 300; // times are in minutes
     private final double elevenam = 660;
     private final double fivepm = 1020;
     private final double locRange = 1000; // feet
-
+    private final double latToFeet = 365228;
+    private final double longToFeet = 305775;
 
     public Song(String title, int id, String artist, String album){
         setTitle(title);
         setID(id);
         setArtist(artist);
         setAlbum(album);
+    }
+
+    public Song(String title, int id, String artist, String album, Location loc, OffsetDateTime time){
+        setTitle(title);
+        setID(id);
+        setArtist(artist);
+        setAlbum(album);
+        this.previousDate = time;
+        this.previousLocation = loc;
     }
 
     public Song(String title, String artist, String album){
@@ -82,19 +96,11 @@ public class Song {
         this.album = album;
     }
 
-
-    public void setCurrentDate()
-    {
+    public void setPreviousDate() {
         timestamp = OffsetDateTime.now().minusHours(8);
-        this.currentDate = timestamp;
-//        if(this.previousDate == null){
-//            this.previousDate = timestamp;
-//        }
-//        else{
-//            this.previousDate = this.currentDate;
-//        }
-//        this.currentDate = timestamp;
+        this.previousDate = timestamp;
     }
+
     public void setPreviousDate(Context context) {
         SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedTime.edit();
@@ -102,15 +108,19 @@ public class Song {
         String json = gson.toJson(OffsetDateTime.now().minusHours(8));
         editor.putString(getTitle(),json);
         editor.commit();
-        setPreviousDateShared(OffsetDateTime.now().minusHours(8));
-    }
-
-    public void setPreviousDateShared(OffsetDateTime time) {
-        this.previousDate = time;
+        System.out.println(sharedTime.contains(getTitle()));
+        this.previousDate = OffsetDateTime.now().minusHours(8);
     }
 
     public void setPreviousLocationShared(Location location) {
         this.previousLocation = location;
+    }
+    /**
+     * for testing, delete later
+     * @param time
+     */
+    public void setPreviousDate(OffsetDateTime time) {
+        this.previousDate = time;
     }
     public String getTitle(){
         return title;
@@ -139,14 +149,30 @@ public class Song {
 
     public Location getCurrentLocation(){ return this.currentLocation; }
 
-
     public OffsetDateTime getPreviousDate(Context context){
-        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedTime.getString(getTitle(), "");
-        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-        this.previousDate = time;
+        try {
+            SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
+            this.previousDate = time;
+        } catch (Exception e) {
+            this.previousDate = null;
+        }
         return this.previousDate;
+    }
+
+    public int getPreviousLike(Context context){
+        try {
+            SharedPreferences sharedTime = context.getSharedPreferences("like", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            Integer liked = gson.fromJson(json, Integer.class);
+            this.like = liked;
+        } catch (Exception e) {
+            this.like = 0;
+        }
+        return this.like;
     }
 
     public OffsetDateTime getCurrentDate(){return this.currentDate; }
@@ -166,6 +192,22 @@ public class Song {
         this.previousLocation = loc;
     }
 
+    public void setPreviousLike(int like,Context context){
+        SharedPreferences sharedLocation = context.getSharedPreferences("like", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedLocation.edit();
+        Gson gson2 = new Gson();
+        String json2 = gson2.toJson(like);
+        editor2.putString(getTitle(),json2);
+        editor2.commit();
+        this.like = like;
+    }
+    public void setPreviousLocation(Location loc){
+        this.previousLocation = loc;
+    }
+    public void setPreviousTime(OffsetDateTime time){
+        this.previousDate = time;
+    }
+
     public void setCurrentLocation(Location loc,Context context){
         SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = sharedLocation.edit();
@@ -176,18 +218,14 @@ public class Song {
         this.currentLocation = loc;
     }
 
-    public Boolean getLikedStatus() {
-        return isLiked;
-    }
-
     /**
      * Gets weighted score of song (max 300)
      * @return
      */
-    public double getScore() {
-        double locScore = getLocationScore();
-        double dateScore = getDateScore();
-        double timeScore = getTimeScore();
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {
+        double locScore = getLocationScore(userLocation);
+        double dateScore = getDateScore(presentTime);
+        double timeScore = getTimeScore(presentTime);
         return locScore + dateScore + timeScore;
     }
 
@@ -195,32 +233,57 @@ public class Song {
      * helper for getScore
      * @return location score
      */
-    private double getLocationScore() {
-        double distance = Math.sqrt(Math.pow(this.currentLocation.getLatitude() - this.previousLocation.getLatitude(), 2) +
-                Math.pow(this.currentLocation.getLongitude() - this.previousLocation.getLongitude(), 2));
+    public double getLocationScore(Location userLocation) {
+        /*try {
+            previousLocation.getLatitude();
+            previousLocation.getLongitude();
+            userLocation.getLatitude();
+            userLocation.getLongitude();
+        } catch (RuntimeException e) {
+            System.out.println("failed to get location in getLocationScore");
+            return 0;
+        }*/
+        if (userLocation == null) {
+            return 0;
+        }
+        double prevFeetLat = previousLocation.getLatitude() * latToFeet;
+        System.out.println(previousLocation.getLatitude());
+        double prevFeetLong = previousLocation.getLongitude() * longToFeet;
+        double currFeetLat = userLocation.getLatitude() * latToFeet;
+        System.out.println(userLocation.getLatitude());
+        double currFeetLong = userLocation.getLongitude() * longToFeet;
+        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
+                Math.pow(currFeetLong - prevFeetLong, 2));
         if (distance > locRange) {
             return 0;
         }
-        return 100 - (distance/10);
+        return 100 - (distance / 10);
     }
 
     /**
      * helper for getScore
      * @return date score
      */
-    private double getDateScore() {
-        if (currentDate.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
+    public double getDateScore(OffsetDateTime presentTime) {
+
+        if (presentTime == null) {
+            return 0;
+        }
+        if (presentTime.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
             return 100;
         }
         return 0;
     }
 
     /**
-     * helper for getScore
+     * helper for getDateScore
      * @return time score
      */
-    private double getTimeScore() {
-        double currentTime = currentDate.getHour()*60 + currentDate.getMinute();
+    public int getTimeScore(OffsetDateTime presentTime) {
+        if (presentTime == null || previousDate == null){
+            return 0;
+        }
+        double currentTime = presentTime.getHour()*60 + presentTime.getMinute();
         double previousTime = previousDate.getHour()*60 + previousDate.getMinute();
         String currentTimeOfDay = getTimeofDay(currentTime);
         String previousTimeOfDay = getTimeofDay(previousTime);
@@ -235,7 +298,7 @@ public class Song {
      * @param time
      * @return String time of day
      */
-    private String getTimeofDay(double time) {
+    public String getTimeofDay(double time) {
         if (time >= fiveam && time <= elevenam) {
             return "morning";
         } else if (time > elevenam && time <= fivepm) {
@@ -244,33 +307,5 @@ public class Song {
             return "evening";
         }
     }
-
-//    private void updateTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    private void getTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
-
 }
 

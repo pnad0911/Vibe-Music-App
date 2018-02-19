@@ -41,10 +41,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class TabFlashback extends Fragment {
 
-    private int songIdx=0;
+    public static int songIdx=0;
     private Context context;
     private Song currSong;
     private List<Song> songList;
+    private List<Song> songList2;
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
     public static Map<String,String[]> data;
@@ -74,7 +75,14 @@ public class TabFlashback extends Fragment {
         // get items from song list
         SongList songListGen = new SongList();
         songList = songListGen.getAllsong();
-        currSong = songList.get(songIdx);
+//        songList2.get(0).like();songList2.get(1).like();
+
+//        Context applicationContext =  Main2Activity.getContextOfApplication();
+
+//        System.out.println(songList.get(0).getPreviousLocation(applicationContext).getLatitude());
+
+//        songList = flashbackPlaylist.getFlashbackSong();
+        //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
@@ -84,15 +92,15 @@ public class TabFlashback extends Fragment {
         sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                System.out.println("clicked");
                 songIdx = position;
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
-        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+//        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
         play();
+
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -121,6 +129,7 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -131,6 +140,7 @@ public class TabFlashback extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getPreviousSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -173,12 +183,6 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-
-//        ----------------- Will replace this ---------------------------------------
-//        songList = flashbackPlaylist.getFlashbackSong(currSong.getCurrentLocation(),currSong.getCurrentDate());
-
-
-        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
@@ -228,31 +232,4 @@ public class TabFlashback extends Fragment {
 
         }
     }
-
-//    private void updateTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    private void getTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
 }

@@ -51,8 +51,9 @@ public class Tab1allsongs extends Fragment {
     private List<Song> songList;
     private SongPlayer songPlayer;
     private Location loc;
+    private boolean locationAvailable;
     private OffsetDateTime date;
-
+    private Main2Activity activity;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -115,15 +116,15 @@ public class Tab1allsongs extends Fragment {
                 if(songPlayer.isPlaying()) {
                     Main2Activity.getLocation();
                     songPlayer.pause();
-                    playButton.setText("Play");
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
         });
@@ -161,7 +162,7 @@ public class Tab1allsongs extends Fragment {
                  play();
                  changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
              }
-         });
+        });
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
@@ -199,22 +200,24 @@ public class Tab1allsongs extends Fragment {
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         Context applicationContext =  Main2Activity.getContextOfApplication();
-//        getTimeNLocation(currSong,applicationContext);
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
+
         if(!isNullDate(currSong, applicationContext)) {
             OffsetDateTime time = currSong.getPreviousDate(applicationContext);
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+
+                    ":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
         currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
-//        updateTimeNLocation(currSong , applicationContext);
     }
+
+
     private boolean isNullDate(Song song, Context context) {
         if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
         else return false;
@@ -241,30 +244,4 @@ public class Tab1allsongs extends Fragment {
         }
     }
 
-//    private void updateTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    private void getTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
 }
