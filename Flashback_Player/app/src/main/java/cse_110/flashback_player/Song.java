@@ -42,6 +42,7 @@ public class Song {
 
     private OffsetDateTime previousDate = null;
     private OffsetDateTime currentDate = null;
+
     private final double fiveam = 300; // times are in minutes
     private final double elevenam = 660;
     private final double fivepm = 1020;
@@ -86,19 +87,11 @@ public class Song {
         this.album = album;
     }
 
-
-    public void setCurrentDate()
-    {
+    public void setPreviousDate() {
         timestamp = OffsetDateTime.now().minusHours(8);
-        this.currentDate = timestamp;
-//        if(this.previousDate == null){
-//            this.previousDate = timestamp;
-//        }
-//        else{
-//            this.previousDate = this.currentDate;
-//        }
-//        this.currentDate = timestamp;
+        this.previousDate = timestamp;
     }
+
     public void setPreviousDate(Context context) {
         SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedTime.edit();
@@ -113,11 +106,9 @@ public class Song {
         this.previousDate = time;
     }
 
-<<<<<<< HEAD
     public void setPreviousLocationShared(Location location) {
         this.previousLocation = location;
     }
-=======
     /**
      * for testing, delete later
      * @param time
@@ -125,8 +116,6 @@ public class Song {
     public void setPreviousDate(OffsetDateTime time) {
         this.previousDate = time;
     }
-
->>>>>>> master
     public String getTitle(){
         return title;
     }
@@ -153,7 +142,6 @@ public class Song {
     }
 
     public Location getCurrentLocation(){ return this.currentLocation; }
-
 
     public OffsetDateTime getPreviousDate(Context context){
         SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
