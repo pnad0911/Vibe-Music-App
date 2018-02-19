@@ -195,7 +195,7 @@ public class Song {
         String json2 = gson2.toJson(loc);
         editor2.putString(getTitle(),json2);
         editor2.commit();
-        this.previousLocation = loc;
+        setPreviousLocation(loc);
     }
 
     public void setPreviousLike(int like,Context context){
@@ -208,7 +208,7 @@ public class Song {
         this.like = like;
     }
     public void setPreviousLocation(Location loc){
-        this.previousLocation = loc;
+        this.previousLocation = new Location(loc);
     }
     public void setPreviousTime(OffsetDateTime time){
         this.previousDate = time;
