@@ -5,43 +5,24 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.location.Location;
 import android.media.MediaMetadataRetriever;
-import android.preference.PreferenceManager;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-
-import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class Tab1allsongs extends Fragment {
 
@@ -53,7 +34,7 @@ public class Tab1allsongs extends Fragment {
     private Location loc;
     private boolean locationAvailable;
     private OffsetDateTime date;
-    private Main2Activity activity;
+    private NormalActivity activity;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -114,7 +95,7 @@ public class Tab1allsongs extends Fragment {
             @Override
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
-                    Main2Activity.getLocation();
+                    NormalActivity.getLocation();
                     songPlayer.pause();
                     playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
@@ -199,7 +180,7 @@ public class Tab1allsongs extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
-        Context applicationContext =  Main2Activity.getContextOfApplication();
+        Context applicationContext =  NormalActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -213,7 +194,7 @@ public class Tab1allsongs extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
+        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
 

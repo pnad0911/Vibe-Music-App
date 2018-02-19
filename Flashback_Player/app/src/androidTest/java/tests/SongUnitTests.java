@@ -1,18 +1,14 @@
 package tests;
 
-import android.location.Location;
-import android.location.LocationManager;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
-import cse_110.flashback_player.Main2Activity;
+import cse_110.flashback_player.NormalActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;
 
@@ -24,7 +20,7 @@ public class SongUnitTests {
     Song song;
 
     @Rule
-    public ActivityTestRule<Main2Activity> main2Activity = new ActivityTestRule<Main2Activity>(Main2Activity.class);
+    public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
 
 
     @Before
