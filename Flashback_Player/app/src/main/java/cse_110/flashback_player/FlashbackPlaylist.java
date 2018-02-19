@@ -54,7 +54,6 @@ public class FlashbackPlaylist {
                 viableSongs.add(song);
             }
         }
-    }
 
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getFlashbackSong() {
