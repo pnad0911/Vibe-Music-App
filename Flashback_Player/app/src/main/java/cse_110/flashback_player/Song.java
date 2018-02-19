@@ -46,7 +46,8 @@ public class Song {
     private final double elevenam = 660;
     private final double fivepm = 1020;
     private final double locRange = 1000; // feet
-
+    private final double latToFeet = 365228;
+    private final double longToFeet = 305775;
 
     public Song(String title, int id, String artist, String album){
         setTitle(title);
@@ -112,9 +113,20 @@ public class Song {
         this.previousDate = time;
     }
 
+<<<<<<< HEAD
     public void setPreviousLocationShared(Location location) {
         this.previousLocation = location;
     }
+=======
+    /**
+     * for testing, delete later
+     * @param time
+     */
+    public void setPreviousDate(OffsetDateTime time) {
+        this.previousDate = time;
+    }
+
+>>>>>>> master
     public String getTitle(){
         return title;
     }
@@ -182,10 +194,10 @@ public class Song {
      * Gets weighted score of song (max 300)
      * @return
      */
-    public double getScore() {
-        double locScore = getLocationScore();
-        double dateScore = getDateScore();
-        double timeScore = getTimeScore();
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {
+        double locScore = getLocationScore(userLocation);
+        double dateScore = getDateScore(presentTime);
+        double timeScore = getTimeScore(presentTime);
         return locScore + dateScore + timeScore;
     }
 
@@ -193,32 +205,51 @@ public class Song {
      * helper for getScore
      * @return location score
      */
-    private double getLocationScore() {
-        double distance = Math.sqrt(Math.pow(this.currentLocation.getLatitude() - this.previousLocation.getLatitude(), 2) +
-                Math.pow(this.currentLocation.getLongitude() - this.previousLocation.getLongitude(), 2));
+    public double getLocationScore(Location userLocation) {
+        /*try {
+            previousLocation.getLatitude();
+            previousLocation.getLongitude();
+            userLocation.getLatitude();
+            userLocation.getLongitude();
+        } catch (RuntimeException e) {
+            System.out.println("failed to get location in getLocationScore");
+            return 0;
+        }*/
+        double prevFeetLat = previousLocation.getLatitude() * latToFeet;
+        System.out.println(previousLocation.getLatitude());
+        double prevFeetLong = previousLocation.getLongitude() * longToFeet;
+        double currFeetLat = userLocation.getLatitude() * latToFeet;
+        System.out.println(userLocation.getLatitude());
+        double currFeetLong = userLocation.getLongitude() * longToFeet;
+        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
+                Math.pow(currFeetLong - prevFeetLong, 2));
         if (distance > locRange) {
             return 0;
         }
-        return 100 - (distance/10);
+        return 100 - (distance / 10);
     }
 
     /**
      * helper for getScore
      * @return date score
      */
-    private double getDateScore() {
-        if (currentDate.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
+    public double getDateScore(OffsetDateTime presentTime) {
+
+        if (presentTime.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
             return 100;
         }
         return 0;
     }
 
     /**
-     * helper for getScore
+     * helper for getDateScore
      * @return time score
      */
-    private double getTimeScore() {
-        double currentTime = currentDate.getHour()*60 + currentDate.getMinute();
+    public int getTimeScore(OffsetDateTime presentTime) {
+        if (presentTime == null || previousDate == null){
+            return 0;
+        }
+        double currentTime = presentTime.getHour()*60 + presentTime.getMinute();
         double previousTime = previousDate.getHour()*60 + previousDate.getMinute();
         String currentTimeOfDay = getTimeofDay(currentTime);
         String previousTimeOfDay = getTimeofDay(previousTime);
@@ -233,7 +264,7 @@ public class Song {
      * @param time
      * @return String time of day
      */
-    private String getTimeofDay(double time) {
+    public String getTimeofDay(double time) {
         if (time >= fiveam && time <= elevenam) {
             return "morning";
         } else if (time > elevenam && time <= fivepm) {
