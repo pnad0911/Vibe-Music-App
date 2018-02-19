@@ -58,9 +58,6 @@ public class FlashbackPlaylist {
                 viableSongs.add(song);
             }
         }
-
-        // build priority queue
-        //playlist = new PriorityQueue<>(1, new SongCompare<>());
     }
 
     /* Update and return a list of songs in the priority queue based on a location/time */

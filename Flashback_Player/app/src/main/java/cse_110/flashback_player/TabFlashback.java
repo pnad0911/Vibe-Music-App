@@ -74,11 +74,10 @@ public class TabFlashback extends Fragment {
 
         // get items from song list
         SongList songListGen = new SongList();
-        songList = songListGen.getAllsong();
-//        songList2.get(0).like();songList2.get(1).like();
+//        songList = songListGen.getAllsong();
 
 
-//        songList = flashbackPlaylist.getFlashbackSong();
+        songList = flashbackPlaylist.getFlashbackSong();
         //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
