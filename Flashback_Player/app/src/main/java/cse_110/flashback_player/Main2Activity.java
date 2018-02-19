@@ -146,6 +146,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void locationReady() {
                 getLocation();
+                getLocation();
             }
         });
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------

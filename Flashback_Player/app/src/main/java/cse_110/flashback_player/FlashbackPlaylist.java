@@ -53,11 +53,6 @@ public class FlashbackPlaylist {
             song.getPreviousDate(context);
             song.getPreviousLocation(context);
 
-<<<<<<< HEAD
-=======
-            System.out.println(song.getPreviousLocation(context));
-
->>>>>>> 347ddda10b4efc70404418f8154573b77b7faa0b
             // song must be:
             // 1. not disliked
             // 2. having valid previous and current locations
@@ -96,7 +91,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is favorited */
     public void likeSong(Song song) {
-        song.like(Main3Activity.getContextOfApplication());
+        song.like();
 
         viableSongs.add(song);
 
@@ -109,7 +104,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is disliked */
     public void dislikeSong(Song song) {
-        song.dislike(Main3Activity.getContextOfApplication());
+        song.dislike();
 
         viableSongs.remove(song);
         playlist.remove(song);
@@ -117,7 +112,7 @@ public class FlashbackPlaylist {
 
     /* Updates the status of a song if it is neutral */
     public void neutralSong(Song song) {
-        song.neutral(Main3Activity.getContextOfApplication());
+        song.neutral();
 
         viableSongs.add(song);
         if (isPlayable(song) && !playlist.contains(song)) {
@@ -135,7 +130,7 @@ public class FlashbackPlaylist {
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     public int getSongStatus(Song song) {
-        return song.getSongStatus(Main3Activity.getContextOfApplication());
+        return song.getSongStatus();
     }
 
     /* Determines whether a song is viable for playability; song must be:
@@ -143,16 +138,10 @@ public class FlashbackPlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
-<<<<<<< HEAD
         return song.getSongStatus() != -1
                 && song.getPreviousLocation(context) != null
                 && song.getPreviousDate(context) != null
                 && song.getCurrentLocation() != null
                 && song.getCurrentDate() != null;
-=======
-        return song.getSongStatus(Main3Activity.getContextOfApplication()) != -1
-                && song.getPreviousLocation(context) != null
-                && song.getPreviousDate(context) != null;
->>>>>>> 347ddda10b4efc70404418f8154573b77b7faa0b
     }
 }

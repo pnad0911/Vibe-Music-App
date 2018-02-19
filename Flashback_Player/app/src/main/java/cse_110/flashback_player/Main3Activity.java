@@ -90,10 +90,6 @@ public class Main3Activity extends AppCompatActivity {
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-<<<<<<< HEAD
-=======
-    private static Location loc;
->>>>>>> 347ddda10b4efc70404418f8154573b77b7faa0b
     private Context mContext;
 
     private LocationManager locationManager;
