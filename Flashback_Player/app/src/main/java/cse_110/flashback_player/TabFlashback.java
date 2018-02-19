@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class TabFlashback extends Fragment {
 
-    public static int songIdx=0;
+    private int songIdx=0;
     private Context context;
     private Song currSong;
     //private List<Song> songList;
@@ -71,9 +71,7 @@ public class TabFlashback extends Fragment {
 //        SongList songListGen = new SongList();
 //        songList = songListGen.getAllsong();
 
-//        System.out.println(songList.get(0).getPreviousLocation(applicationContext).getLatitude());
-
-//        songList = flashbackPlaylist.getFlashbackSong();
+        songList = flashbackPlaylist.getFlashbackSong();
         //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
@@ -84,6 +82,7 @@ public class TabFlashback extends Fragment {
         sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                System.out.println("clicked");
                 songIdx = position;
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -121,7 +120,6 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -175,6 +173,11 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
+
+//        ----------------- Will replace this ---------------------------------------
+        //songList = flashbackPlaylist.getFlashbackSong();
+
+//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);

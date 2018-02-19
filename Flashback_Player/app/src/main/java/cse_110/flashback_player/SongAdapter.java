@@ -47,7 +47,7 @@ public class SongAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //get view for row item
-        View rowView = mInflater.inflate(R.layout.song_list_row_flashback, parent, false);
+        View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
 
         //get view elements in list row
         final TextView songNameView = (TextView) rowView.findViewById((R.id.name));
@@ -96,6 +96,3 @@ public class SongAdapter extends BaseAdapter {
         System.out.println(TabFlashback.flashbackPlaylist.getFlashbackSong());
     }
 }
-
-
-
