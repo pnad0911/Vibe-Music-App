@@ -122,7 +122,7 @@ public class Song {
     }
 
     public void setPreviousLocationShared(Location location) {
-        this.previousLocation = location;
+        this.previousLocation = new Location(location);
     }
     /**
      * for testing, delete later
@@ -200,7 +200,7 @@ public class Song {
         String json2 = gson2.toJson(loc);
         editor2.putString(getTitle(),json2);
         editor2.commit();
-        this.currentLocation = loc;
+        this.currentLocation = new Location(loc);
     }
 
     /**
@@ -232,13 +232,12 @@ public class Song {
             return 0;
         }
         double prevFeetLat = previousLocation.getLatitude() * latToFeet;
-        System.out.println(previousLocation.getLatitude());
         double prevFeetLong = previousLocation.getLongitude() * longToFeet;
         double currFeetLat = userLocation.getLatitude() * latToFeet;
-        System.out.println(userLocation.getLatitude());
         double currFeetLong = userLocation.getLongitude() * longToFeet;
         double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
                 Math.pow(currFeetLong - prevFeetLong, 2));
+
         if (distance > locRange) {
             return 0;
         }
