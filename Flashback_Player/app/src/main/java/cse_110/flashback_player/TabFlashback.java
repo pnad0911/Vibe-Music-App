@@ -47,7 +47,7 @@ public class TabFlashback extends Fragment {
     private List<Song> songList;
     private List<Song> songList2;
     private SongPlayer songPlayer;
-    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist(new SongList());
+    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 

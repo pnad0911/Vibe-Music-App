@@ -18,13 +18,6 @@ public class FlashbackPlaylistTest {
 
     @Before
     public void initialize() {
-        playlist = new FlashbackPlaylist();
-        // Specific date time from LocalDateTime with an offset
-        OffsetDateTime dateTime = OffsetDateTime.of(LocalDateTime.of(1111, 11, 11, 11, 11),
-                ZoneOffset.ofHoursMinutes(6, 30));
-        // Specific location
-        System.out.println(dateTime);
-
     }
 
     @Test
