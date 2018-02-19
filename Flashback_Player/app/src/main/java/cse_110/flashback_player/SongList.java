@@ -1,22 +1,12 @@
 package cse_110.flashback_player;
 
-import android.content.res.AssetFileDescriptor;
-import android.media.MediaMetadataRetriever;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.provider.MediaStore;
-
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Duy on 2/9/2018.
@@ -86,7 +76,7 @@ public class SongList {
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
-                Map<String, String[]> da = Main2Activity.data;
+                Map<String, String[]> da = NormalActivity.data;
                 Song so = new Song(da.get(f.getName())[0], f.getInt(null), da.get(f.getName())[1], da.get(f.getName())[2]);
                 listOfSongs.add(so);
             } catch (Exception e) {
@@ -135,6 +125,7 @@ public class SongList {
             return false;
         }
     }
+
 }
 
 

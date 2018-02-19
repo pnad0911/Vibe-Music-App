@@ -22,9 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-       <activity
-            android:name=".Main2Activity"
-            android:label="Flashback_Player"
+        <activity
+            android:name=".NormalActivity"
+            android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -48,7 +48,7 @@
             android:value="AIzaSyBXdlVG4MjnHDOys6JSWBqHf4pkWT1nJIs"/>
 
         <activity
-            android:name=".Main3Activity"
+            android:name=".FlashBackActivity"
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
