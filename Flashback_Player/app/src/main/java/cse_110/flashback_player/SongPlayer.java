@@ -40,7 +40,7 @@ import static android.os.UserHandle.readFromParcel;
  * Created by Patrick on 2/7/2018.
  */
 
-public class SongPlayer {
+public class SongPlayer implements Parcelable{
 
     private MediaPlayer mediaPlayer;
     private AppCompatActivity activity;
@@ -119,7 +119,7 @@ public class SongPlayer {
 
         song.setPreviousDate(song.getCurrentDate());
 
-        song.setCurrentDate(timestamp);
+        //song.setCurrentDate(timestamp); //shouldn't be using this
 
         mediaPlayer.start();
         return true;
@@ -141,6 +141,10 @@ public class SongPlayer {
         if(isPlaying()){
             stop();
         }
+    }
+
+    public boolean isPaused(){
+        return paused;
     }
 
     public void stop(){

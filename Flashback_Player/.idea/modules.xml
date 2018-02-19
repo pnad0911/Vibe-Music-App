@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Flashback_Player.iml" filepath="$PROJECT_DIR$/Flashback_Player.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Flashback_Player.iml" filepath="$PROJECT_DIR$/Flashback_Player.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\Beverly Li\CSE110Project\cse-110-team-project-team-17\Flashback_Player\app\app.iml" filepath="C:\Users\Beverly Li\CSE110Project\cse-110-team-project-team-17\Flashback_Player\app\app.iml" />
     </modules>
