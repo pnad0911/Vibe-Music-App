@@ -143,11 +143,11 @@ public class Song {
     }
 
     public void setPreviousLocation(Location loc){
-        this.previousLocation = loc;
+        this.previousLocation = new Location(loc);
     }
 
     public void setCurrentLocation(Location loc){
-        this.currentLocation = loc;
+        this.currentLocation = new Location(loc);
     }
 
 
@@ -167,23 +167,14 @@ public class Song {
      * @return location score
      */
     public double getLocationScore(Location userLocation) {
-        /*try {
-            previousLocation.getLatitude();
-            previousLocation.getLongitude();
-            userLocation.getLatitude();
-            userLocation.getLongitude();
-        } catch (RuntimeException e) {
-            System.out.println("failed to get location in getLocationScore");
-            return 0;
-        }*/
+
         double prevFeetLat = previousLocation.getLatitude() * latToFeet;
-        System.out.println(previousLocation.getLatitude());
         double prevFeetLong = previousLocation.getLongitude() * longToFeet;
         double currFeetLat = userLocation.getLatitude() * latToFeet;
-        System.out.println(userLocation.getLatitude());
         double currFeetLong = userLocation.getLongitude() * longToFeet;
         double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
                 Math.pow(currFeetLong - prevFeetLong, 2));
+
         if (distance > locRange) {
             return 0;
         }

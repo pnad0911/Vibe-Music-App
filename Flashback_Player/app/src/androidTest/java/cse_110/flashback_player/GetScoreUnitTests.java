@@ -2,6 +2,7 @@ package cse_110.flashback_player;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import org.junit.Test;
 
@@ -9,6 +10,9 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
+import cse_110.flashback_player.Song;
+
+import static android.content.ContentValues.TAG;
 import static org.junit.Assert.*;
 
 /**
@@ -16,7 +20,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class GetScoreUnitTests {
     @Test
     public void getTimeOfDay_isCorrect() throws Exception {
         Song song = new Song("My Song", "Beverly", "My Album");
@@ -60,17 +64,20 @@ public class ExampleUnitTest {
         Song song = new Song("My Song", "Beverly", "My Album");
         String locationProvider = LocationManager.GPS_PROVIDER;
         Location myLoc = new Location(locationProvider);
-        myLoc.setLatitude(100);
-        myLoc.setLongitude(100);
 
-        System.out.println(myLoc.getLatitude());
-
-        System.out.println(myLoc.getLongitude());
-
+        myLoc.setLatitude(0);
+        myLoc.setLongitude(0);
         song.setPreviousLocation(myLoc);
-        //assertEquals(song.getLocationScore(myLoc), 100, .01);
+        assertEquals(song.getLocationScore(myLoc), 100, .01);
+
         myLoc.setLatitude(166.0001);
-        assertEquals(song.getLocationScore(myLoc), 96.3472, .0001);/*
+        myLoc.setLongitude(134.45);
+        song.setPreviousLocation(myLoc);
+        Location newLoc = new Location(locationProvider);
+        newLoc.setLatitude(166);
+        newLoc.setLongitude(134.45);
+        song.setCurrentLocation(myLoc);
+        assertEquals(song.getLocationScore(newLoc), 96.3477, .0001);/*
         myLoc.setLongitude(.1);
         song.setCurrentLocation(myLoc);
         //assertEquals(song.getLocationScore(), 0, .0001);
