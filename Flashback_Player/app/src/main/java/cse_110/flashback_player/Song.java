@@ -57,6 +57,15 @@ public class Song {
         setAlbum(album);
     }
 
+    public Song(String title, int id, String artist, String album, Location loc, OffsetDateTime time){
+        setTitle(title);
+        setID(id);
+        setArtist(artist);
+        setAlbum(album);
+        this.previousDate = time;
+        this.previousLocation = loc;
+    }
+
     public Song(String title, String artist, String album){
         setTitle(title);
         setID(0);
@@ -144,11 +153,15 @@ public class Song {
     public Location getCurrentLocation(){ return this.currentLocation; }
 
     public OffsetDateTime getPreviousDate(Context context){
-        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedTime.getString(getTitle(), "");
-        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-        this.previousDate = time;
+        try {
+            SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
+            this.previousDate = time;
+        } catch (Exception e) {
+            this.previousDate = null;
+        }
         return this.previousDate;
     }
 
@@ -166,6 +179,12 @@ public class Song {
         String json2 = gson2.toJson(loc);
         editor2.putString(getTitle(),json2);
         this.previousLocation = loc;
+    }
+    public void setPreviousLocation(Location loc){
+        this.previousLocation = loc;
+    }
+    public void setPreviousTime(OffsetDateTime time){
+        this.previousDate = time;
     }
 
     public void setCurrentLocation(Location loc,Context context){
@@ -203,6 +222,9 @@ public class Song {
             System.out.println("failed to get location in getLocationScore");
             return 0;
         }*/
+        if (userLocation == null) {
+            return 0;
+        }
         double prevFeetLat = previousLocation.getLatitude() * latToFeet;
         System.out.println(previousLocation.getLatitude());
         double prevFeetLong = previousLocation.getLongitude() * longToFeet;
@@ -223,6 +245,9 @@ public class Song {
      */
     public double getDateScore(OffsetDateTime presentTime) {
 
+        if (presentTime == null) {
+            return 0;
+        }
         if (presentTime.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
             return 100;
         }
