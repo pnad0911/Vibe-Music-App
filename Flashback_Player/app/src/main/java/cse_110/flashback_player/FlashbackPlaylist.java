@@ -115,6 +115,7 @@ public class FlashbackPlaylist {
     /* Adds a song to the viable song list */
     public void addSong(Song song) {
         viableSongs.add(song);
+        System.out.println(isPlayable(song));
         if (isPlayable(song) && !playlist.contains(song)) {
             playlist.add(song);
         }
