@@ -23,7 +23,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
 
     @Override
     public int compare(T t1, T t2) {
-        Context applicationContext =  Main2Activity.getContextOfApplication();
+        Context applicationContext =  NormalActivity.getContextOfApplication();
         if (location == null || time == null) {
             return 0;
         }
@@ -37,8 +37,8 @@ public class SongCompare<T extends Song> implements Comparator<T> {
             }
         }
 
-        if(t1.getSongStatus(Main3Activity.getContextOfApplication()) != t2.getSongStatus(Main3Activity.getContextOfApplication())){
-            if(t1.getSongStatus(Main3Activity.getContextOfApplication()) == 1){
+        if(t1.getSongStatus(FlashBackActivity.getContextOfApplication()) != t2.getSongStatus(FlashBackActivity.getContextOfApplication())){
+            if(t1.getSongStatus(FlashBackActivity.getContextOfApplication()) == 1){
                 return -1;
             }
             else{

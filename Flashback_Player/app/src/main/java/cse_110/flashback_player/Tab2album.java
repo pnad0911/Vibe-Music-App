@@ -5,18 +5,11 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
-import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,16 +17,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.lang.reflect.Field;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class Tab2album extends Fragment { //TODO: to be changed to album list and album functionalities
 
@@ -103,15 +91,15 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
                     songPlayer.pause();
-                    playButton.setText("Play");
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play(songTitleView, songArtistView, songAlbumView,songTimeView);
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
         });
@@ -178,7 +166,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView,TextView songTimeView){
-        Context applicationContext =  Main2Activity.getContextOfApplication();
+        Context applicationContext =  NormalActivity.getContextOfApplication();
 //        getTimeNLocation(currSong,applicationContext);
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
@@ -192,8 +180,8 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             songTimeView.setText("N/A");
         }
 
-//        System.out.println("Yolo --------------------" + Main2Activity.getLocation().getLatitude());
-        currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
+//        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
+        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
 
     }

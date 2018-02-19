@@ -5,39 +5,23 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
-import android.location.Location;
 import android.media.MediaMetadataRetriever;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-
-import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class TabFlashback extends Fragment {
 
@@ -47,7 +31,8 @@ public class TabFlashback extends Fragment {
     private List<Song> songList;
     private List<Song> songList2;
     private SongPlayer songPlayer;
-    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
+    public static FlashbackPlaylist flashbackPlaylist;
+    private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -55,6 +40,8 @@ public class TabFlashback extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
+
+        flashbackPlaylist = new FlashbackPlaylist();
 
         /*
         * Get Buttons and TextViews*/
@@ -73,11 +60,16 @@ public class TabFlashback extends Fragment {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        SongList songListGen = new SongList();
-        songList = songListGen.getAllsong();
-//        songList2.get(0).like();songList2.get(1).like();
+        songList = flashbackPlaylist.getFlashbackSong();
 
-//        Context applicationContext =  Main2Activity.getContextOfApplication();
+        if (songList.size() == 0){
+            SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
+            final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
+            sListView.setAdapter(adapter);
+            return rootView;
+        }
+//        SongList songListGen = new SongList();
+//        songList = songListGen.getAllsong();
 
 //        System.out.println(songList.get(0).getPreviousLocation(applicationContext).getLatitude());
 
@@ -140,7 +132,7 @@ public class TabFlashback extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
+//                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getPreviousSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -192,7 +184,7 @@ public class TabFlashback extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
-        Context applicationContext =  Main2Activity.getContextOfApplication();
+        Context applicationContext =  NormalActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -204,7 +196,7 @@ public class TabFlashback extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
+        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
 
