@@ -33,7 +33,6 @@ import android.widget.ToggleButton;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,8 +58,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.Gson;
-
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 
@@ -68,7 +65,7 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class Main2Activity extends AppCompatActivity {
+public class Main3Activity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -82,7 +79,7 @@ public class Main2Activity extends AppCompatActivity {
     private SongPlayer songPlayer = new SongPlayer(this);
 
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-    public static Map<String, String[]> data;
+    public static Map<String,String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
 
     /**
@@ -93,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-    private static Location loc;
+    private Location loc;
     private Context mContext;
 
     private LocationManager locationManager;
@@ -109,18 +106,13 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
+        setContentView(R.layout.activity_main3);
         contextOfApplication = getApplicationContext();
-
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
-        if (sharedPreferences.getString("current", "").equalsIgnoreCase("flashback")) {
-            Intent intent = new Intent(this, Main3Activity.class);
-            startActivity(intent);
-        }
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("current", "normal");
+        editor.putString("current","flashback");
         editor.apply();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
@@ -141,11 +133,9 @@ public class Main2Activity extends AppCompatActivity {
 
         startLocationUpdates();
 
-
         setLocationReadyCallback(new LocationReadyCallback() {
             @Override
             public void locationReady() {
-                getLocation();
                 getLocation();
             }
         });
@@ -156,13 +146,15 @@ public class Main2Activity extends AppCompatActivity {
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
                 songPlayer.pause();
-                startActivity(intent);
+                SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("current","normal");
+                editor.apply();
+                finish();
             }
         });
     }
-
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -179,23 +171,12 @@ public class Main2Activity extends AppCompatActivity {
 
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
-            switch (position) {
 
-                case 0:
-                    Tab1allsongs tab1 = new Tab1allsongs();
+                    TabFlashback tab1 = new TabFlashback();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
-                case 1:
-                    Tab2album tab2 = new Tab2album();
-                    Bundle bundle2 = new Bundle();
-                    bundle2.putParcelable("songPlayer", songPlayer);
-                    tab2.setArguments(bundle2);
-                    return tab2;
-                default:
-                    return null;
-            }
         }
 
         @Override
@@ -205,15 +186,8 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SONGS";
-                case 1:
-                    return "ALBUMS";
-                default:
-                    return null;
-            }
+        public CharSequence getPageTitle(int position){
+            return "Play List";
         }
     }
 
@@ -224,15 +198,13 @@ public class Main2Activity extends AppCompatActivity {
         for (Field f : raw) {
             try {
                 AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
                 String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
                 String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
                 String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
                 String[] list = new String[3];
-                list[0] = ti;
-                list[1] = ar;
-                list[2] = al;
-                data.put(f.getName(), list);
+                list[0] = ti;list[1] = ar;list[2] = al;
+                data.put(f.getName(),list);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -242,13 +214,12 @@ public class Main2Activity extends AppCompatActivity {
 
 
 //   ---------------------------------- Get Location method here  ---------------------------------
-
     /* Get current Location */
-    public static Location getLocation() {
+    public Location getLocation(){
         return loc;
     }
 
-    protected void startLocationUpdates() {
+    protected void startLocationUpdates(){
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(UPDATE_INTERVAL);
@@ -269,7 +240,7 @@ public class Main2Activity extends AppCompatActivity {
                     public void onLocationResult(LocationResult locationResult) {
                         Location oldLoc = loc;
                         loc = locationResult.getLastLocation();
-                        if (oldLoc == null && locationCallback != null) {
+                        if(oldLoc == null && locationCallback != null){
                             locationCallback.locationReady();
                         }
                     }
@@ -277,27 +248,28 @@ public class Main2Activity extends AppCompatActivity {
                 Looper.myLooper());
     }
 
-    public void checkPermission() {
+    public void checkPermission(){
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                ) {//Can add more as per requirement
+                ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ){//Can add more as per requirement
 
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     100);
         }
     }
 
-    public void setLocationReadyCallback(LocationReadyCallback locationCallback) {
+    public interface LocationReadyCallback{
+        public abstract void locationReady();
+
+    }
+
+    public void setLocationReadyCallback(LocationReadyCallback locationCallback){
         this.locationCallback = locationCallback;
     }
 
-    public interface LocationReadyCallback {
-        public abstract void locationReady();
-    }
-
-    public static Context getContextOfApplication() {
+    public static Context getContextOfApplication(){
         return contextOfApplication;
     }
-
 }
+

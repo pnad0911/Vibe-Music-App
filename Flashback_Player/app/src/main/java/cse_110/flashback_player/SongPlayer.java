@@ -163,4 +163,40 @@ public class SongPlayer {
     }
 
 
+    /*--------------------------------------------------------------
+     * Begin required override methods from implementing Parcelable
+     */
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+//        out.writeValue(mediaPlayer);
+//        out.writeValue(activity);
+//        out.writeValue(nextSong);
+//        out.writeInt(paused);
+    }
+
+    public static final Parcelable.Creator<SongPlayer> CREATOR
+            = new Parcelable.Creator<SongPlayer>() {
+        public SongPlayer createFromParcel(Parcel in) {
+            return new SongPlayer(in);
+        }
+
+        public SongPlayer[] newArray(int size) {
+            return new SongPlayer[size];
+        }
+    };
+
+    private SongPlayer(Parcel in) {
+//        mediaPlayer = (MediaPlayer) in.readValue(null);
+//        activity = (Activity) in.readValue(null);
+//        nextSong = (Song) in.readValue(null);
+//        paused = in.readInt();
+    }
+
+    /* ENDS ---------------------------------------------------*/
+
+
 }
