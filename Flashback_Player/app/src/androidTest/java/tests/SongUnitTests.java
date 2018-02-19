@@ -50,6 +50,11 @@ public class SongUnitTests {
         OffsetDateTime currentTime = OffsetDateTime.parse("2018-02-18T10:00:00+00:00");
         song.setPreviousDate(time);
         assertEquals(0,song.getTimeScore(currentTime));
+
+        Song emptySong = new Song("My Song","Winnieee","Album");
+        assertEquals(0,emptySong.getTimeScore(time));
+
+        assertEquals(0,song.getTimeScore(null));
     }
 
     @Test
