@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+
 import android.*;
 import android.app.Activity;
 import android.app.IntentService;
@@ -39,13 +40,14 @@ import static android.os.UserHandle.readFromParcel;
  * Created by Patrick on 2/7/2018.
  */
 
-public class SongPlayer implements Parcelable{
+public class SongPlayer {
 
     private MediaPlayer mediaPlayer;
-    private Activity activity;
+    private AppCompatActivity activity;
     private Song nextSong;
+    private boolean paused = false;
     private List<SongPlayerCallback> callbackList;
-    private int paused = 0;
+   // private int paused = 0;
     private Double loc_lat;
     private Double loc_long;
     private Date date;
@@ -58,22 +60,19 @@ public class SongPlayer implements Parcelable{
      * Creates a new SongPlayer object attached to the given activity
      * @param activity Activity this SongPlayer is attached to.
      */
-    public SongPlayer(Activity activity) {
+    public SongPlayer(AppCompatActivity activity){
         callbackList = new LinkedList<>();
+
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 play(nextSong); //TODO change if mediaplayer is choppy after songs
-                for (SongPlayerCallback cb:callbackList) {
-                    cb.callback();
-                }
                 clearNext();
             }
         });
         this.activity = activity;
     }
-
 
     public boolean isPlaying(){
 
@@ -85,21 +84,17 @@ public class SongPlayer implements Parcelable{
         mediaPlayer.seekTo((int) (mediaPlayer.getDuration() * percent / 100));
     }
 
-    public boolean isPaused(){
-        return (paused == 1);
-    }
-
     public void pause(){
         if(isPlaying()){
             mediaPlayer.pause();
-            paused = 1;
+            paused = true;
         }
     }
 
     public void resume(){
-        if(isPaused()){
+        if(paused){
             mediaPlayer.start();
-            paused = 0;
+            paused = false;
         }
     }
 
@@ -108,7 +103,7 @@ public class SongPlayer implements Parcelable{
         if(song == null){
             return false;
         }
-        paused = 0;
+        paused = false;
         mediaPlayer.reset();
         AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getID());
         try{
@@ -119,6 +114,12 @@ public class SongPlayer implements Parcelable{
         catch (Exception e){
             return false;
         }
+
+        timestamp = OffsetDateTime.now().minusHours(8);
+
+        song.setPreviousDate(song.getCurrentDate());
+
+        song.setCurrentDate(timestamp);
 
         mediaPlayer.start();
         return true;
@@ -135,7 +136,6 @@ public class SongPlayer implements Parcelable{
     public void clearNext(){
         nextSong = null;
     }
-
     public void clear(){
         clearNext();
         if(isPlaying()){
@@ -150,14 +150,18 @@ public class SongPlayer implements Parcelable{
     public void setVolume(int volume){
         mediaPlayer.setVolume(volume, volume);
     }
-
     public void setEndListener(final SongPlayerCallback callback){
-        callbackList.add(callback);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                callback.callback();
+            }
+        });
     }
-
     public interface SongPlayerCallback {
         public abstract void callback();
     }
+
 
     /*--------------------------------------------------------------
      * Begin required override methods from implementing Parcelable

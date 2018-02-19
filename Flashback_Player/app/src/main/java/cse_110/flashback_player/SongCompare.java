@@ -49,5 +49,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
 
         return 1;
     }
-    Boolean a = null;
+
 }
+
+

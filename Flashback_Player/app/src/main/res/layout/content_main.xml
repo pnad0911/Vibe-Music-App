@@ -9,6 +9,7 @@
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/activity_main">
 
+
     <ListView
         android:id="@+id/song_list"
         android:layout_width="wrap_content"
@@ -25,7 +26,7 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="@id/song_list">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -94,17 +95,9 @@
 
                 <Button
                     android:id="@+id/play"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="Play"
-                    android:textSize="10sp"/>
-
-                <Button
-                    android:id="@+id/reset"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:text="Reset"
-                    android:textSize="8sp"/>
+                    android:text="Play" />
 
                 <Button
                     android:id="@+id/previous"
@@ -126,4 +119,5 @@
 
     </LinearLayout>
 
+>>>>>>> 9df9ba9f7d057b1abca818e78693585abfaa1f34
 </android.support.constraint.ConstraintLayout>
