@@ -73,18 +73,6 @@ public class SongList {
         return l;
     }
 
-    //String All Song
-    private List<Song> getAll() {
-        List<Song> l = new ArrayList<>();
-        for (Map.Entry<String, List<Song>> entry : AlbumSongList.entrySet()) {
-            for (Song a : entry.getValue()) {
-                l.add(a);
-            }
-        }
-        return l;
-    }
-
-
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
         AlbumSongList = new HashMap<String, List<Song>>();
@@ -134,29 +122,6 @@ public class SongList {
         }
     }
 
-    private File getAlbumFile(String AlbumName) {
-        if (isAlbumExist(AlbumName)) {
-            return new File(RAWPATH + AlbumName);
-        } else {
-            return null;
-        }
-    }
-
-    private List<String> songList(String AlbumName) {
-        List<String> list = new ArrayList<String>();
-        File AlbumFolder = getAlbumFile(AlbumName);
-        File[] listOfSongs = AlbumFolder.listFiles();
-
-        for (int i = 0; i < listOfSongs.length; i++) {
-            String songName = listOfSongs[i].getName();
-            if (listOfSongs[i].isFile() && isMp3File(songName)) {
-                list.add(songName.substring(0, songName.length() - 4));
-            } else if (listOfSongs[i].isDirectory()) {
-                list.addAll(songList(AlbumName + "/" + songName));
-            }
-        }
-        return list;
-    }
 
     private boolean isMp3File(String songName) {
         if (songName.endsWith(".mp3")) {

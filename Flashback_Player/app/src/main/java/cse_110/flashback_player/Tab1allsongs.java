@@ -5,9 +5,11 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.location.Location;
 import android.media.MediaMetadataRetriever;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +27,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.gson.Gson;
+
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -36,6 +40,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Tab1allsongs extends Fragment {
 
@@ -110,15 +116,15 @@ public class Tab1allsongs extends Fragment {
                 if(songPlayer.isPlaying()) {
                     Main2Activity.getLocation();
                     songPlayer.pause();
-                    playButton.setText("Play");
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
         });
@@ -193,26 +199,28 @@ public class Tab1allsongs extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
+        Context applicationContext =  Main2Activity.getContextOfApplication();
+//        getTimeNLocation(currSong,applicationContext);
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
-        if(!isNullDate(currSong)) {
-            OffsetDateTime time = currSong.getPreviousDate();
-            System.out.println(currSong.getTitle());
+
+        if(!isNullDate(currSong, applicationContext)) {
+            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation().getLongitude()+":"+currSong.getPreviousLocation().getLatitude() + " )");
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-
-        currSong.setPreviousLocation(Main2Activity.getLocation());
-        System.out.println(currSong.getPreviousLocation());
+        currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
+        System.out.println(currSong.getPreviousLocation(applicationContext));
         currSong.setPreviousDate();
     }
 
-    private boolean isNullDate(Song song) {
-        if(song.getPreviousDate() == null) return true;
+
+    private boolean isNullDate(Song song, Context context) {
+        if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
         else return false;
     }
 
@@ -236,4 +244,5 @@ public class Tab1allsongs extends Fragment {
 
         }
     }
+
 }

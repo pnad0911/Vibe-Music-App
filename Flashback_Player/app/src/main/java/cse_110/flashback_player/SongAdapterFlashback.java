@@ -65,10 +65,10 @@ public class SongAdapterFlashback extends BaseAdapter {
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
         final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
-        Boolean like = TabFlashback.flashbackPlaylist.songCurrentlyLiked(song);
-        if(like == null) {
+        int like = TabFlashback.flashbackPlaylist.getSongStatus(song);
+        if(like == 0) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
-        } else if(like) {
+        } else if(like == 1) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
         } else {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
@@ -83,20 +83,21 @@ public class SongAdapterFlashback extends BaseAdapter {
         return rowView;
     }
     private void toggle(Button button, Song song) {
-        Boolean songLiked = song.songCurrentlyLiked();
-        if(songLiked == null) {
-//            TabFlashback.flashbackPlaylist.likeSong(song);
-            song.likeSong();
+        int songLiked = song.getSongStatus();
+        if(songLiked == 0) {
+            TabFlashback.flashbackPlaylist.likeSong(song);
+//            song.like();
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
-        } else if(songLiked){
-//            TabFlashback.flashbackPlaylist.dislikeSong(song);
-            song.dislikeSong();
+        } else if(songLiked == 1){
+            TabFlashback.flashbackPlaylist.dislikeSong(song);
+//            song.dislikeSong();
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
-//            TabFlashback.flashbackPlaylist.neutralSong(song);
-            song.neutralSong();
+            TabFlashback.flashbackPlaylist.neutralSong(song);
+//            song.neutralSong();
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
+        System.out.println(TabFlashback.flashbackPlaylist.getFlashbackSong());
     }
 }
 

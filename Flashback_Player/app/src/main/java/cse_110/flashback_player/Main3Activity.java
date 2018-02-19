@@ -3,6 +3,7 @@ package cse_110.flashback_player;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -100,12 +101,17 @@ public class Main3Activity extends AppCompatActivity {
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
-
+    public static Context contextOfApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        contextOfApplication = getApplicationContext();
+        SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("current","flashback");
+        editor.apply();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -141,6 +147,10 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 songPlayer.pause();
+                SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("current","normal");
+                editor.apply();
                 finish();
             }
         });
@@ -258,6 +268,8 @@ public class Main3Activity extends AppCompatActivity {
         this.locationCallback = locationCallback;
     }
 
-
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
+    }
 }
 
