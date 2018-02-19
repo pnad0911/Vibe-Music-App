@@ -19,12 +19,15 @@ package cse_110.flashback_player;
 
 public class Song {
 
-    private Boolean like;
+    /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
+       /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
+    private int like;
 
-    public Boolean songCurrentlyLiked() { return like;}
-    public void likeSong() { like = true; }
-    public void dislikeSong() { like = false; }
-    public void neutralSong() {like = null; };
+    public void like() { like = 1; }
+    public void dislike() { like = -1; }
+    public void neutral() { like = 0; }
+    public int getSongStatus() { return like;}
+
 
     private String title;
     private int id;
@@ -162,7 +165,6 @@ public class Song {
         Gson gson2 = new Gson();
         String json2 = gson2.toJson(loc);
         editor2.putString(getTitle(),json2);
-        editor2.commit();
         this.previousLocation = loc;
     }
 
@@ -174,10 +176,6 @@ public class Song {
         editor2.putString(getTitle(),json2);
         editor2.commit();
         this.currentLocation = loc;
-    }
-
-    public Boolean getLikedStatus() {
-        return isLiked;
     }
 
     /**
@@ -244,33 +242,5 @@ public class Song {
             return "evening";
         }
     }
-
-//    private void updateTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    private void getTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
-
 }
 

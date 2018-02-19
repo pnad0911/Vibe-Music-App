@@ -115,15 +115,15 @@ public class Tab1allsongs extends Fragment {
                 if(songPlayer.isPlaying()) {
                     Main2Activity.getLocation();
                     songPlayer.pause();
-                    playButton.setText("Play");
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play();
-                    playButton.setText("Pause");
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
         });

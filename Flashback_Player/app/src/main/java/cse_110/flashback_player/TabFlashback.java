@@ -45,8 +45,9 @@ public class TabFlashback extends Fragment {
     private Context context;
     private Song currSong;
     private List<Song> songList;
+    private List<Song> songList2;
     private SongPlayer songPlayer;
-    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist();
+    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist(new SongList());
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -74,7 +75,11 @@ public class TabFlashback extends Fragment {
         // get items from song list
         SongList songListGen = new SongList();
         songList = songListGen.getAllsong();
-        currSong = songList.get(songIdx);
+//        songList2.get(0).like();songList2.get(1).like();
+
+
+//        songList = flashbackPlaylist.getFlashbackSong();
+        //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
@@ -175,8 +180,7 @@ public class TabFlashback extends Fragment {
     public void play(){
 
 //        ----------------- Will replace this ---------------------------------------
-//        songList = flashbackPlaylist.getFlashbackSong(currSong.getCurrentLocation(),currSong.getCurrentDate());
-
+        //songList = flashbackPlaylist.getFlashbackSong();
 
         songIdx = 0;
         currSong = songList.get(songIdx);
@@ -228,31 +232,4 @@ public class TabFlashback extends Fragment {
 
         }
     }
-
-//    private void updateTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    private void getTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
 }
