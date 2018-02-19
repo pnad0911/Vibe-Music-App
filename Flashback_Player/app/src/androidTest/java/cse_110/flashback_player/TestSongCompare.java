@@ -65,7 +65,7 @@ public class TestSongCompare {
 
     @Test
     public void testFavorite(){
-        song1.like(FlashBackActivity.getContextOfApplication());
+        song1.like();
         assertEquals(-1, songCompare.compare(song1, song2));
     }
 }
