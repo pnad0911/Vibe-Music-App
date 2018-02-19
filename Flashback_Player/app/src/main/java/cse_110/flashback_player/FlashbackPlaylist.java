@@ -1,5 +1,7 @@
+
 package cse_110.flashback_player;
 
+import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
@@ -29,25 +31,12 @@ public class FlashbackPlaylist {
     private OffsetDateTime date;
 
     /* Constructor */
-    public FlashbackPlaylist() {
-        // get entire song list
-        SongList entireSongList = new SongList();
-
-        Map<String,?> keys = prefs.getAll();
-
-        for(Map.Entry<String,?> entry : keys.entrySet()){
-            Log.d("map values",entry.getKey() + ": " +
-                    entry.getValue().toString());
-        }
-
+    public FlashbackPlaylist(SongList songlist) {
         // initialize set of viable songs
         viableSongs = new HashSet<>();
 
         // populate viable song set
-        for (Song song : entireSongList.getAllsong()) {
-            song.getCurrentDate();
-            song.getCurrentLocation();
-
+        for (Song song : songlist.getAllsong()) {
             // song must be:
             // 1. not disliked
             // 2. having valid previous and current locations
@@ -133,9 +122,10 @@ public class FlashbackPlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
+        Context applicationContext =  Main2Activity.getContextOfApplication();
         return song.getSongStatus() != -1
-                && song.getPreviousLocation() != null
-                && song.getPreviousDate() != null
+                && song.getPreviousLocation(applicationContext) != null
+                && song.getPreviousDate(applicationContext) != null
                 && song.getCurrentLocation() != null
                 && song.getCurrentDate() != null;
     }

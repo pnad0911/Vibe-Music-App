@@ -26,8 +26,6 @@ public class SongAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Song> mDataSource;
-    private static long lastPressTime = 0;
-    private final int DOUBLE_PRESS_INTERVAL = 500;
 
     public SongAdapter(Context context, List<Song> items){
         mContext = context;
@@ -66,54 +64,6 @@ public class SongAdapter extends BaseAdapter {
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
-
-        final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
-         if(song.songCurrentlyLiked() == null) {
-            likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
-         } else if(song.songCurrentlyLiked()) {
-             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
-         } else {
-             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
-         }
-        likeBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggle(likeBt,song);
-            }
-        });
-
         return rowView;
     }
-
-    private void toggle(Button button, Song song) {
-        Boolean songLiked = song.songCurrentlyLiked();
-        if(songLiked == null) {
-//            if(isDoubleClick()) {
-//                song.dislikeSong();
-//                button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
-//            } else {
-            song.likeSong();
-            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
-//            }
-        } else if(songLiked){
-            song.dislikeSong();
-            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
-        } else {
-            song.neutralSong();
-            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
-        }
-    }
-
-//    private boolean isDoubleClick() {
-//        boolean isDoubleClick;
-//        long pressTime = System.currentTimeMillis();
-//        if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL) {
-//            isDoubleClick = true;
-//        } else {
-//            isDoubleClick = false;
-//        }
-//        lastPressTime = pressTime;
-//        return isDoubleClick;
-//    }
-
 }

@@ -2,6 +2,8 @@ package cse_110.flashback_player;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 
 import java.io.File;
@@ -22,7 +24,7 @@ import java.util.regex.Pattern;
 
 public class SongList {
     private static final String RAWPATH = "app/src/main/res/raw/";
-    private Map<String,List<Song>> AlbumSongList;
+    private Map<String, List<Song>> AlbumSongList;
 
     /* Constructor  */
     public SongList() {
@@ -35,9 +37,9 @@ public class SongList {
      *         return empty List if there is no album
      */
     public List<String> getListOfAlbum() {
-        Set<Map.Entry<String,List<Song>>> set = AlbumSongList.entrySet();
+        Set<Map.Entry<String, List<Song>>> set = AlbumSongList.entrySet();
         List<String> AlbumList = new ArrayList<>();
-        for(Map.Entry<String,List<Song>> mem : set) {
+        for (Map.Entry<String, List<Song>> mem : set) {
             AlbumList.add(mem.getKey());
         }
         return AlbumList;
@@ -50,7 +52,7 @@ public class SongList {
      *         return empty List if there is no album
      */
     public List<Song> getListOfSong(String AlbumName) {
-        if(isAlbumExist(AlbumName)) {
+        if (isAlbumExist(AlbumName)) {
             return AlbumSongList.get(AlbumName);
         }
         return new ArrayList<Song>();
@@ -63,27 +65,15 @@ public class SongList {
      */
     public List<Song> getAllsong() {
         List<Song> l = new ArrayList<>();
-        for(Map.Entry<String, List<Song>> entry: AlbumSongList.entrySet()) {
-            for(Song a : entry.getValue()) {
+        for (Map.Entry<String, List<Song>> entry : AlbumSongList.entrySet()) {
+            for (Song a : entry.getValue()) {
                 l.add(a);
             }
         }
         return l;
     }
 
-    //String All Song
-    private List<Song> getAll() {
-        List<Song> l = new ArrayList<>();
-        for(Map.Entry<String, List<Song>> entry: AlbumSongList.entrySet()) {
-            for(Song a : entry.getValue()) {
-                l.add(a);
-            }
-        }
-        return l;
-    }
-
-
-//  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
+    //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
         AlbumSongList = new HashMap<String, List<Song>>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
@@ -91,8 +81,8 @@ public class SongList {
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
-                Map<String,String[]> da = Main2Activity.data;
-                Song so = new Song(da.get(f.getName())[0],f.getInt(null),da.get(f.getName())[1],da.get(f.getName())[2]);
+                Map<String, String[]> da = Main2Activity.data;
+                Song so = new Song(da.get(f.getName())[0], f.getInt(null), da.get(f.getName())[1], da.get(f.getName())[2]);
                 listOfSongs.add(so);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,67 +110,26 @@ public class SongList {
     }
 
     private boolean isAlbumExistFolder(String AlbumName) {
-        if(AlbumName.isEmpty() || AlbumName.contains(" ")) return false;
+        if (AlbumName.isEmpty() || AlbumName.contains(" ")) return false;
 
         String path = RAWPATH + AlbumName;
         System.out.println(path);
         File file = new File(path);
-        if(file.exists()) {
+        if (file.exists()) {
             return true;
         } else {
             return false;
         }
     }
 
-    private File getAlbumFile(String AlbumName) {
-        if(isAlbumExist(AlbumName)) {
-            return new File(RAWPATH + AlbumName);
-        } else {
-            return null;
-        }
-    }
-
-    private List<String> songList(String AlbumName) {
-        List<String> list = new ArrayList<String>();
-        File AlbumFolder = getAlbumFile(AlbumName);
-        File[] listOfSongs = AlbumFolder.listFiles();
-
-        for (int i = 0; i < listOfSongs.length; i++) {
-            String songName = listOfSongs[i].getName();
-            if (listOfSongs[i].isFile() && isMp3File(songName)) {
-                list.add(songName.substring(0,songName.length()-4));
-            } else if (listOfSongs[i].isDirectory()) {
-                list.addAll(songList(AlbumName+ "/" + songName));
-            }
-        }
-        return list;
-    }
 
     private boolean isMp3File(String songName) {
-        if(songName.endsWith(".mp3")) {
+        if (songName.endsWith(".mp3")) {
             return true;
         } else {
             return false;
         }
     }
-
-
-    //-------------------Main for testing-------------------------
-
-//    public static void main(String[] args) {
-//        SongList s = new SongList();
-//        List<Song> l = s.getAllsong();
-//        for(Song a : l) {
-//            System.out.println(a.getID());
-//        }
-//        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-//        for (Field f : raw) {
-//            try {
-//                //System.out.println(f.get());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 }
+
 

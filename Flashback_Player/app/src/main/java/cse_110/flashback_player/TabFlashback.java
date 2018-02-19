@@ -5,7 +5,9 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
+import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,7 +26,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.gson.Gson;
+
 import java.lang.reflect.Field;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,14 +37,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class TabFlashback extends Fragment {
 
     private int songIdx=0;
     private Context context;
     private Song currSong;
     private List<Song> songList;
+    private List<Song> songList2;
     private SongPlayer songPlayer;
-
+    public static FlashbackPlaylist flashbackPlaylist = new FlashbackPlaylist(new SongList());
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -67,10 +75,13 @@ public class TabFlashback extends Fragment {
         // get items from song list
         SongList songListGen = new SongList();
         songList = songListGen.getAllsong();
-        currSong = songList.get(songIdx);
+//        songList2.get(0).like();songList2.get(1).like();
 
+
+//        songList = flashbackPlaylist.getFlashbackSong();
+        //currSong = songList.get(songIdx);
         // configure listview
-        SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+        SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
@@ -81,12 +92,12 @@ public class TabFlashback extends Fragment {
                 System.out.println("clicked");
                 songIdx = position;
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
-        changeDisplay(songTitleView, songArtistView, songAlbumView);
-        songTimeView.setText("AT SomePlaceeeeeeeeee AT some timeeeeeeee");
+//        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+        play();
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -106,7 +117,6 @@ public class TabFlashback extends Fragment {
                 }
             }
         });
-
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +129,7 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 songIdx = getNextSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
 
         });
@@ -129,7 +139,7 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 songIdx = getPreviousSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
@@ -138,7 +148,7 @@ public class TabFlashback extends Fragment {
             public void callback() {
                 songIdx = getNextSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
@@ -169,20 +179,40 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
+
+//        ----------------- Will replace this ---------------------------------------
+        //songList = flashbackPlaylist.getFlashbackSong();
+
+//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
-//        System.out.println(currSong.getDate());
     }
 
+
     /* change display on media player to current playing song*/
-    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView){
+    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
+        Context applicationContext =  Main2Activity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
+        if(!isNullDate(currSong,applicationContext)) {
+            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
+            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+        }
+        else {
+            songTimeView.setText("N/A");
+        }
+        currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
+        currSong.setPreviousDate(applicationContext);
     }
 
+    private boolean isNullDate(Song song,Context context) {
+        if(song.getPreviousDate(context) == null) return true;
+        else return false;
+    }
     // --------------------------------- Here Is The Reason ------------------------------
     public void getData() {
         data = new HashMap<>();
