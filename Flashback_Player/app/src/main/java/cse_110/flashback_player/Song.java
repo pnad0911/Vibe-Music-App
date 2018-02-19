@@ -2,6 +2,8 @@ package cse_110.flashback_player;
 
         import android.location.Location;
 
+        import java.sql.Timestamp;
+        import java.time.LocalDateTime;
         import java.time.OffsetDateTime;
         import java.time.ZoneOffset;
         import java.util.Date;
@@ -33,6 +35,7 @@ public class Song {
 
     private OffsetDateTime previousDate = null;
     private OffsetDateTime currentDate = null;
+
     private final double fiveam = 300; // times are in minutes
     private final double elevenam = 660;
     private final double fivepm = 1020;
@@ -75,22 +78,28 @@ public class Song {
     private void setAlbum(String album){
         this.album = album;
     }
-
-
-    public void setCurrentDate()
-    {
-        timestamp = OffsetDateTime.now().minusHours(8);
-        this.currentDate = timestamp;
-//        if(this.previousDate == null){
-//            this.previousDate = timestamp;
-//        }
-//        else{
-//            this.previousDate = this.currentDate;
-//        }
+//
+//
+//    public void setCurrentDate()
+//    {
+//        timestamp = OffsetDateTime.now().minusHours(8);
 //        this.currentDate = timestamp;
-    }
+////        if(this.previousDate == null){
+////            this.previousDate = timestamp;
+////        }
+////        else{
+////            this.previousDate = this.currentDate;
+////        }
+////        this.currentDate = timestamp;
+//    }
+
     public void setPreviousDate() {
         timestamp = OffsetDateTime.now().minusHours(8);
+        this.previousDate = timestamp;
+    }
+
+    //for test
+    public void setPreviousDate(OffsetDateTime timestamp){
         this.previousDate = timestamp;
     }
 
@@ -113,7 +122,6 @@ public class Song {
     public Location getPreviousLocation(){ return this.previousLocation; }
 
     public Location getCurrentLocation(){ return this.currentLocation; }
-
 
     public OffsetDateTime getPreviousDate(){return this.previousDate; }
 
