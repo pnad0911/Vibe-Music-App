@@ -191,9 +191,10 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         else {
             songTimeView.setText("N/A");
         }
+
         currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
-//        updateTimeNLocation(currSong , applicationContext);
+
     }
 
 
@@ -221,32 +222,5 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
 
         }
     }
-
-//    private void updateTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(song.getPreviousDate());
-//        editor.putString(song.getTitle(),json);
-//        editor.commit();
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(song.getPreviousLocation());
-//        editor2.putString(song.getTitle(),json2);
-//        editor2.commit();
-//    }
-//    private void getTimeNLocation(Song song, Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String json = sharedTime.getString(song.getTitle(), "");
-//        OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//        song.setPreviousDateShared(time);
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(song.getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        song.setPreviousLocationShared(location);
-//    }
 
 }

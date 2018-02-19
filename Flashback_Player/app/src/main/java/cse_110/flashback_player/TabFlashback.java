@@ -98,6 +98,7 @@ public class TabFlashback extends Fragment {
 
 //        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
         play();
+
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -182,7 +183,7 @@ public class TabFlashback extends Fragment {
 //        ----------------- Will replace this ---------------------------------------
         //songList = flashbackPlaylist.getFlashbackSong();
 
-        songIdx = 0;
+//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
