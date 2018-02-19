@@ -11,6 +11,9 @@ import java.util.PriorityQueue;
 
 /**
  * Created by Daniel on 2/17/2018.
+ * This playlist is for dedicated use in Flashback Mode; the playlist is adjusted based
+ * on a current location and date relative to previous location and date fields for each
+ * song.
  */
 
 public class FlashbackPlaylist {
@@ -43,8 +46,6 @@ public class FlashbackPlaylist {
         for (Song song : entireSongList.getAllsong()) {
             song.getPreviousDate(context);
             song.getPreviousLocation(context);
-
-            System.out.println(song.getPreviousLocation(context));
 
             // song must be:
             // 1. not disliked
@@ -132,6 +133,8 @@ public class FlashbackPlaylist {
     private boolean isPlayable(Song song) {
         return song.getSongStatus(FlashBackActivity.getContextOfApplication()) != -1
                 && song.getPreviousLocation(context) != null
-                && song.getPreviousDate(context) != null;
+                && song.getPreviousDate(context) != null
+                && song.getCurrentLocation() != null
+                && song.getCurrentDate() != null;
     }
 }
