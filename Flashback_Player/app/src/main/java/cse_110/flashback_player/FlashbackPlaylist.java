@@ -1,11 +1,13 @@
 package cse_110.flashback_player;
 
 import android.location.Location;
+import android.util.Log;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -30,6 +32,13 @@ public class FlashbackPlaylist {
     public FlashbackPlaylist() {
         // get entire song list
         SongList entireSongList = new SongList();
+
+        Map<String,?> keys = prefs.getAll();
+
+        for(Map.Entry<String,?> entry : keys.entrySet()){
+            Log.d("map values",entry.getKey() + ": " +
+                    entry.getValue().toString());
+        }
 
         // initialize set of viable songs
         viableSongs = new HashSet<>();

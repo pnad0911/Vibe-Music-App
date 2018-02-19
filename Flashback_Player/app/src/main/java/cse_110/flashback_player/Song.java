@@ -29,8 +29,6 @@ public class Song {
     private Location previousLocation;
     private Location currentLocation;
 
-    private Boolean isLiked;
-
     private OffsetDateTime previousDate;
     private OffsetDateTime currentDate;
     private final double fiveam = 300; // times are in minutes
