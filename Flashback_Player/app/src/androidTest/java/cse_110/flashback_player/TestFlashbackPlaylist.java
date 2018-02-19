@@ -63,8 +63,8 @@ public class TestFlashbackPlaylist {
     public void testGetPlaylist(){
         assertEquals(playlist.getPlaylist().size(), 3);
         assertEquals(playlist.getPlaylist().contains(song1), true);
-        ssertEquals(playlist.getPlaylist().contains(song2), true);
-        ssertEquals(playlist.getPlaylist().contains(song3), true);
+        assertEquals(playlist.getPlaylist().contains(song2), true);
+        assertEquals(playlist.getPlaylist().contains(song3), true);
     }
 
     @Test

@@ -192,6 +192,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             songTimeView.setText("N/A");
         }
 
+//        System.out.println("Yolo --------------------" + Main2Activity.getLocation().getLatitude());
         currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
 

@@ -59,24 +59,24 @@ public class SongUnitTests {
 
     @Test
     public void getLocationScoreCorrect() {
-        Song song = new Song("My Song", "Beverly", "My Album");
-        Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
-        myLoc.setLatitude(100);
-        System.out.println(myLoc.getLatitude());
-        myLoc.setLongitude(100);
-        System.out.println(myLoc.getLongitude());
-
-        song.setPreviousLocation(myLoc);
-        //assertEquals(song.getLocationScore(myLoc), 100, .01);
-        myLoc.setLatitude(166.0001);
-        assertEquals(song.getLocationScore(myLoc), 96.3472, .0001);/*
-        myLoc.setLongitude(.1);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 0, .0001);
-        myLoc.setLatitude(0);
-        myLoc.setLongitude(.003);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 8.6275, 0.0001);*/
+//        Song song = new Song("My Song", "Beverly", "My Album");
+//        Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
+//        myLoc.setLatitude(100);
+//        System.out.println(myLoc.getLatitude());
+//        myLoc.setLongitude(100);
+//        System.out.println(myLoc.getLongitude());
+//
+//        song.setPreviousLocation(myLoc);
+//        //assertEquals(song.getLocationScore(myLoc), 100, .01);
+//        myLoc.setLatitude(166.0001);
+//        assertEquals(song.getLocationScore(myLoc), 96.3472, .0001);/*
+//        myLoc.setLongitude(.1);
+//        song.setCurrentLocation(myLoc);
+//        //assertEquals(song.getLocationScore(), 0, .0001);
+//        myLoc.setLatitude(0);
+//        myLoc.setLongitude(.003);
+//        song.setCurrentLocation(myLoc);
+//        //assertEquals(song.getLocationScore(), 8.6275, 0.0001);*/
     }
 
 }

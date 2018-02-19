@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
        <activity
-            android:name=".MainActivity"
+            android:name=".Main2Activity"
             android:label="Flashback_Player"
             android:theme="@style/AppTheme.NoActionBar">
 

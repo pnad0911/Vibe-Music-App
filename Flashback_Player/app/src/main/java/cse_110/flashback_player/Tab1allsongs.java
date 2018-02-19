@@ -200,7 +200,6 @@ public class Tab1allsongs extends Fragment {
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         Context applicationContext =  Main2Activity.getContextOfApplication();
-//        getTimeNLocation(currSong,applicationContext);
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -214,7 +213,7 @@ public class Tab1allsongs extends Fragment {
             songTimeView.setText("N/A");
         }
         currSong.setPreviousLocation(Main2Activity.getLocation(),applicationContext);
-        System.out.println(currSong.getPreviousLocation(applicationContext));
+        //System.out.println(currSong.getPreviousLocation(applicationContext));
         currSong.setPreviousDate();
     }
 
