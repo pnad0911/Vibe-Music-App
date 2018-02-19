@@ -1,13 +1,12 @@
 package tests;
 
 import android.support.test.rule.ActivityTestRule;
-import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import cse_110.flashback_player.Main2Activity;
+import cse_110.flashback_player.NormalActivity;
 import cse_110.flashback_player.SongList;
 
 import static org.junit.Assert.assertEquals;
@@ -21,7 +20,7 @@ import static org.junit.Assert.assertEquals;
         private SongList songList;
 
         @Rule
-        public ActivityTestRule<Main2Activity> main2Activity = new ActivityTestRule<Main2Activity>(Main2Activity.class);
+        public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
 
         @Before
         public void setUp(){

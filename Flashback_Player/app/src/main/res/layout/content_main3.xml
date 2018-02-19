@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="cse_110.flashback_player.Main3Activity"
+    tools:context="cse_110.flashback_player.FlashBackActivity"
     tools:showIn="@layout/activity_main3">
 
 </android.support.constraint.ConstraintLayout>

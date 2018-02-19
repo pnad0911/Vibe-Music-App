@@ -1,18 +1,14 @@
 package tests;
 
-import android.location.Location;
-import android.location.LocationManager;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
-import cse_110.flashback_player.Main2Activity;
+import cse_110.flashback_player.NormalActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;
 
@@ -24,7 +20,7 @@ public class SongUnitTests {
     Song song;
 
     @Rule
-    public ActivityTestRule<Main2Activity> main2Activity = new ActivityTestRule<Main2Activity>(Main2Activity.class);
+    public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
 
 
     @Before
@@ -57,27 +53,6 @@ public class SongUnitTests {
         assertEquals(0,song.getTimeScore(null));
     }
 
-    @Test
-    public void getLocationScoreCorrect() {
-        Song song = new Song("My Song", "Beverly", "My Album");
-        Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
-        myLoc.setLatitude(100);
-        System.out.println(myLoc.getLatitude());
-        myLoc.setLongitude(100);
-        System.out.println(myLoc.getLongitude());
-
-        song.setPreviousLocation(myLoc);
-        //assertEquals(song.getLocationScore(myLoc), 100, .01);
-        myLoc.setLatitude(166.0001);
-        assertEquals(song.getLocationScore(myLoc), 96.3472, .0001);/*
-        myLoc.setLongitude(.1);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 0, .0001);
-        myLoc.setLatitude(0);
-        myLoc.setLongitude(.003);
-        song.setCurrentLocation(myLoc);
-        //assertEquals(song.getLocationScore(), 8.6275, 0.0001);*/
-    }
 
 }
 
