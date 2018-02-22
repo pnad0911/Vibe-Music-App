@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class TabFlashback extends Fragment {
 
-    public static int songIdx=0;
+    private int songIdx=0;
     private Context context;
     private Song currSong;
     //private List<Song> songList;
@@ -117,7 +117,6 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -171,6 +170,11 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
+
+//        ----------------- Will replace this ---------------------------------------
+        //songList = flashbackPlaylist.getFlashbackSong();
+
+//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);

@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+
 import android.content.Context;
 import android.location.Location;
 import android.support.test.rule.ActivityTestRule;
@@ -31,7 +32,6 @@ public class TestFlashbackPlaylist {
 
     /* Context provided by NormalActivity */
     private Context context;
-
     Song song1;
     Song song2;
     Song song3;

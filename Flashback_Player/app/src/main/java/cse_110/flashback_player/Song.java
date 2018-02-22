@@ -1,16 +1,22 @@
 package cse_110.flashback_player;
 
-        import android.content.Context;
-        import android.content.SharedPreferences;
-        import android.location.Location;
+import android.location.Location;
 
-        import com.google.gson.Gson;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 
-        import java.time.OffsetDateTime;
-        import java.time.ZoneOffset;
-        import java.util.Date;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.location.Location;
 
-        import static android.content.Context.MODE_PRIVATE;
+import com.google.gson.Gson;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -23,10 +29,10 @@ public class Song {
        /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like;
 
-    public void like(Context context) { like = 1; setPreviousLike(like, context); }
-    public void dislike(Context context) { like = -1; setPreviousLike(like, context); }
-    public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
-    public int getSongStatus(Context context) { return getPreviousLike(context); }
+    public void like() { like = 1; }
+    public void dislike() { like = -1; }
+    public void neutral() { like = 0; }
+    public int getSongStatus() { return like;}
 
 
     private String title;
@@ -108,12 +114,15 @@ public class Song {
         String json = gson.toJson(OffsetDateTime.now().minusHours(8));
         editor.putString(getTitle(),json);
         editor.commit();
-        System.out.println(sharedTime.contains(getTitle()));
-        this.previousDate = OffsetDateTime.now().minusHours(8);
+        setPreviousDateShared(OffsetDateTime.now().minusHours(8));
+    }
+
+    public void setPreviousDateShared(OffsetDateTime time) {
+        this.previousDate = time;
     }
 
     public void setPreviousLocationShared(Location location) {
-        this.previousLocation = location;
+        this.previousLocation = new Location(location);
     }
     /**
      * for testing, delete later
@@ -162,19 +171,6 @@ public class Song {
         return this.previousDate;
     }
 
-    public int getPreviousLike(Context context){
-        try {
-            SharedPreferences sharedTime = context.getSharedPreferences("like", MODE_PRIVATE);
-            Gson gson = new Gson();
-            String json = sharedTime.getString(getTitle(), "");
-            Integer liked = gson.fromJson(json, Integer.class);
-            this.like = liked;
-        } catch (Exception e) {
-            this.like = 0;
-        }
-        return this.like;
-    }
-
     public OffsetDateTime getCurrentDate(){return this.currentDate; }
 
     /* true -> favorited, null -> neutral, false -> disliked */
@@ -189,20 +185,11 @@ public class Song {
         String json2 = gson2.toJson(loc);
         editor2.putString(getTitle(),json2);
         editor2.commit();
-        this.previousLocation = loc;
-    }
+        setPreviousLocation(loc);
 
-    public void setPreviousLike(int like,Context context){
-        SharedPreferences sharedLocation = context.getSharedPreferences("like", MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = sharedLocation.edit();
-        Gson gson2 = new Gson();
-        String json2 = gson2.toJson(like);
-        editor2.putString(getTitle(),json2);
-        editor2.commit();
-        this.like = like;
     }
     public void setPreviousLocation(Location loc){
-        this.previousLocation = loc;
+        this.previousLocation = new Location(loc);
     }
     public void setPreviousTime(OffsetDateTime time){
         this.previousDate = time;
@@ -215,7 +202,7 @@ public class Song {
         String json2 = gson2.toJson(loc);
         editor2.putString(getTitle(),json2);
         editor2.commit();
-        this.currentLocation = loc;
+        this.currentLocation = new Location(loc);
     }
 
     /**
@@ -247,13 +234,12 @@ public class Song {
             return 0;
         }
         double prevFeetLat = previousLocation.getLatitude() * latToFeet;
-        System.out.println(previousLocation.getLatitude());
         double prevFeetLong = previousLocation.getLongitude() * longToFeet;
         double currFeetLat = userLocation.getLatitude() * latToFeet;
-        System.out.println(userLocation.getLatitude());
         double currFeetLong = userLocation.getLongitude() * longToFeet;
         double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
                 Math.pow(currFeetLong - prevFeetLong, 2));
+
         if (distance > locRange) {
             return 0;
         }
@@ -304,7 +290,7 @@ public class Song {
         } else if (time > elevenam && time <= fivepm) {
             return "afternoon";
         } else {
-            return "evening";
+          return "evening";
         }
     }
 }

@@ -90,7 +90,6 @@ public class FlashBackActivity extends AppCompatActivity {
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-    private static Location loc;
     private Context mContext;
 
     private LocationManager locationManager;
@@ -102,6 +101,8 @@ public class FlashBackActivity extends AppCompatActivity {
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
+
+    private static Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

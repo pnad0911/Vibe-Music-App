@@ -189,8 +189,7 @@ public class Tab1allsongs extends Fragment {
         if(!isNullDate(currSong, applicationContext)) {
             OffsetDateTime time = currSong.getPreviousDate(applicationContext);
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+
-                    ":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
