@@ -47,7 +47,7 @@ public class SongAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //get view for row item
-        View rowView = mInflater.inflate(R.layout.song_list_row, parent, false);
+        View rowView = mInflater.inflate(R.layout.song_list_row_flashback, parent, false);
 
         //get view elements in list row
         final TextView songNameView = (TextView) rowView.findViewById((R.id.name));
@@ -93,6 +93,5 @@ public class SongAdapter extends BaseAdapter {
 //            TabFlashback.flashbackPlaylist.neutralSong(song);
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
-        System.out.println(TabFlashback.flashbackPlaylist.getFlashbackSong());
     }
 }

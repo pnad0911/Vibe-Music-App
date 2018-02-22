@@ -25,11 +25,10 @@ import java.util.Map;
 
 public class TabFlashback extends Fragment {
 
-    private int songIdx=0;
+    public static int songIdx=0;
     private Context context;
     private Song currSong;
-    //private List<Song> songList;
-    //private List<Song> songList2;
+    private List<Song> songList2;
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;
@@ -71,8 +70,6 @@ public class TabFlashback extends Fragment {
 //        SongList songListGen = new SongList();
 //        songList = songListGen.getAllsong();
 
-        songList = flashbackPlaylist.getFlashbackSong();
-        //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
@@ -82,7 +79,6 @@ public class TabFlashback extends Fragment {
         sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                System.out.println("clicked");
                 songIdx = position;
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -98,15 +94,18 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
                     songPlayer.pause();
-                    playButton.setText("Play");
+//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-                    playButton.setText("Pause");
+//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play();
-                    playButton.setText("Pause");
+//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
         });
@@ -120,6 +119,7 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -145,6 +145,8 @@ public class TabFlashback extends Fragment {
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
+
+        //changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
@@ -173,11 +175,6 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-
-//        ----------------- Will replace this ---------------------------------------
-        //songList = flashbackPlaylist.getFlashbackSong();
-
-//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
