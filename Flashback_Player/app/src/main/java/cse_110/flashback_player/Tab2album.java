@@ -89,17 +89,17 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(songPlayer.isPlaying()) {
-                    songPlayer.pause();
-                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-                }
-                else if (songPlayer.isPaused()) {
-                    songPlayer.resume();
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
-                }
-                else{
-                    play(songTitleView, songArtistView, songAlbumView,songTimeView);
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                if (songList != null) {
+                    if (songPlayer.isPlaying()) {
+                        songPlayer.pause();
+                        playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    } else if (songPlayer.isPaused()) {
+                        songPlayer.resume();
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    } else {
+                        play(songTitleView, songArtistView, songAlbumView, songTimeView);
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    }
                 }
             }
         });
@@ -171,14 +171,14 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
-        if(!isNullDate(currSong,applicationContext)) {
-            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
-            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
-        }
-        else {
-            songTimeView.setText("N/A");
-        }
+//        if(!isNullDate(currSong,applicationContext)) {
+//            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
+//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+//                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+//        }
+//        else {
+//            songTimeView.setText("N/A");
+//        }
 
 //        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
         currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);

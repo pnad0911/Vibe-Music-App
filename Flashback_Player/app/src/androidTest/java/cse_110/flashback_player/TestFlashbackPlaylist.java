@@ -1,5 +1,7 @@
 package cse_110.flashback_player;
 
+
+import android.content.Context;
 import android.location.Location;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -10,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import static android.location.LocationManager.GPS_PROVIDER;
 import static org.junit.Assert.*;
@@ -22,16 +25,13 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class TestFlashbackPlaylist {
 
-
-    public TestFlashbackPlaylist(){
-
-    }
-
     @Rule
-    public ActivityTestRule<Main2Activity> mainActivity = new ActivityTestRule<Main2Activity>(Main2Activity.class);
+    public ActivityTestRule<NormalActivity> mainActivity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
 
     private FlashbackPlaylist playlist;
 
+    /* Context provided by NormalActivity */
+    private Context context;
     Song song1;
     Song song2;
     Song song3;
@@ -44,13 +44,18 @@ public class TestFlashbackPlaylist {
     Location dummyL2;
     Location dummyL3;
 
+    List<Song> list;
+
     @Before
     public void setUp(){
         playlist = new FlashbackPlaylist();
 
-        song1 = new Song("test1", R.raw.cant_find_love, "artist", "album");
-        song2 = new Song("test2", R.raw.america_religious, "artist", "album");
-        song3 = new Song("test3", R.raw.at_midnight, "artist", "album");
+        song1 = new Song("cant_find_love", R.raw.cant_find_love, "artist", "album");
+        song2 = new Song("america_religious", R.raw.america_religious, "artist", "album");
+        song3 = new Song("at_midnight", R.raw.at_midnight, "artist", "album");
+
+        // initialize context
+        context =  NormalActivity.getContextOfApplication();
 
         dummyT1 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
         dummyT2 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
@@ -77,16 +82,23 @@ public class TestFlashbackPlaylist {
 
         song3.setPreviousLocation(dummyL3);
         song3.setPreviousDate(dummyT3);
+
+        playlist.neutralSong(song1);
+        playlist.neutralSong(song2);
+        playlist.neutralSong(song3);
+
+        list = playlist.getFlashbackSong();
+        System.out.println(list.size());
     }
 
         /* Test if only the three songs here are in the playlist */
 
     @Test
     public void testGetPlaylist(){
-        assertEquals(playlist.getFlashbackSong().size(), 3);
-        assertEquals(playlist.getFlashbackSong().contains(song1), true);
-        assertEquals(playlist.getFlashbackSong().contains(song2), true);
-        assertEquals(playlist.getFlashbackSong().contains(song3), true);
+        assertEquals(list.size(), 3);
+        assertEquals(list.contains(song1), true);
+        assertEquals(list.contains(song2), true);
+        assertEquals(list.contains(song3), true);
     }
 
     @Test
@@ -94,7 +106,7 @@ public class TestFlashbackPlaylist {
     public void testLikedSong(){
         playlist.likeSong(song1);
 
-        assertEquals(song1.getSongStatus(),true);
+        assertEquals(song1.getSongStatus(context),1);
         assertEquals(playlist.getFlashbackSong().get(0).getID(), song1.getID());
     }
 
@@ -103,7 +115,7 @@ public class TestFlashbackPlaylist {
     public void testDislikedSong(){
         playlist.dislikeSong(song1);
 
-        assertEquals(song1.getSongStatus(),false);
+        assertEquals(song1.getSongStatus(context),-1);
         assertEquals(playlist.getFlashbackSong().contains(song1), false);
     }
 
@@ -112,7 +124,7 @@ public class TestFlashbackPlaylist {
     public void testNeutralSong(){
         playlist.neutralSong(song1);
 
-        assertEquals(song1.getSongStatus(),0);
-        assertEquals(playlist.getFlashbackSong().contains(song1), true);
+        assertEquals(song1.getSongStatus(context),0);
+        assertEquals(list.contains(song1), true);
     }
 }
