@@ -25,11 +25,10 @@ import java.util.Map;
 
 public class TabFlashback extends Fragment {
 
-    private int songIdx=0;
+    public static int songIdx=0;
     private Context context;
     private Song currSong;
-    //private List<Song> songList;
-    //private List<Song> songList2;
+    private List<Song> songList2;
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;
@@ -117,6 +116,7 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -142,6 +142,8 @@ public class TabFlashback extends Fragment {
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
+
+        //changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
@@ -170,11 +172,6 @@ public class TabFlashback extends Fragment {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-
-//        ----------------- Will replace this ---------------------------------------
-        //songList = flashbackPlaylist.getFlashbackSong();
-
-//        songIdx = 0;
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);

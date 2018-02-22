@@ -81,21 +81,15 @@ public class SongAdapterFlashback extends BaseAdapter {
         int songLiked = song.getSongStatus(FlashBackActivity.getContextOfApplication());
         if(songLiked == 0) {
             TabFlashback.flashbackPlaylist.likeSong(song);
-//            song.like(FlashBackActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
         } else if(songLiked == 1){
             TabFlashback.flashbackPlaylist.dislikeSong(song);
             TabFlashback.songIdx = 0;
-//            song.dislike(FlashBackActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
             TabFlashback.flashbackPlaylist.neutralSong(song);
-//            song.neutral(FlashBackActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
-        System.out.println(TabFlashback.flashbackPlaylist.getFlashbackSong());
+//        System.out.println(TabFlashback.flashbackPlaylist.getFlashbackSong());
     }
 }
-
-
-
