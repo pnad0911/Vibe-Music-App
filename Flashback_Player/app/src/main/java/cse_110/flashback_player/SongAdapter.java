@@ -93,7 +93,6 @@ public class SongAdapter extends BaseAdapter {
 //            TabFlashback.flashbackPlaylist.neutralSong(song);
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
-        System.out.println(TabFlashback.flashbackPlaylist.getFlashbackSong());
     }
 }
 

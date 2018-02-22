@@ -72,6 +72,7 @@ public class Tab1allsongs extends Fragment {
 //        songList = songListGen.getFlashbackSong(targetLocation,date);
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
+            changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
             // configure listview
             SongAdapter adapter = new SongAdapter(this.getActivity(), songList);

@@ -68,30 +68,26 @@ public class TabFlashback extends Fragment {
             sListView.setAdapter(adapter);
             return rootView;
         }
-//        SongList songListGen = new SongList();
-//        songList = songListGen.getAllsong();
 
-//        System.out.println(songList.get(0).getPreviousLocation(applicationContext).getLatitude());
-
-//        songList = flashbackPlaylist.getFlashbackSong();
-        //currSong = songList.get(songIdx);
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
-        // Handle on click event
-        sListView.setClickable(true);
-        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                songIdx = position;
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
-            }
-        });
 
-//        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+//        // Handle on click event
+//        sListView.setClickable(true);
+//        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+//                songIdx = position;
+//                play();
+//                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+//            }
+//        });
+
         play();
+        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -204,7 +200,8 @@ public class TabFlashback extends Fragment {
         if(song.getPreviousDate(context) == null) return true;
         else return false;
     }
-    // --------------------------------- Here Is The Reason ------------------------------
+
+    // Gets metadata from songs in file
     public void getData() {
         data = new HashMap<>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();

@@ -171,14 +171,14 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
-        if(!isNullDate(currSong,applicationContext)) {
-            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
-            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
-        }
-        else {
-            songTimeView.setText("N/A");
-        }
+//        if(!isNullDate(currSong,applicationContext)) {
+//            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
+//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+//                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+//        }
+//        else {
+//            songTimeView.setText("N/A");
+//        }
 
 //        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
         currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
