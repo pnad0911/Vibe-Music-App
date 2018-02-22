@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Field;
@@ -133,11 +134,19 @@ public class NormalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(NormalActivity.this, FlashBackActivity.class);
                 songPlayer.pause();
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Intent refresh = new Intent(this, NormalActivity.class);
+            startActivity(refresh);
+            this.finish();
+        }
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

@@ -29,7 +29,6 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
     private ListView sListView;
     private List<Song> songList;
     private SongPlayer songPlayer;
-    private Context context;
     private Song currSong;
 
     public static Map<String,String[]> data;
@@ -174,7 +173,8 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         if(!isNullDate(currSong,applicationContext)) {
             OffsetDateTime time = currSong.getPreviousDate(applicationContext);
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+
+                    currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");

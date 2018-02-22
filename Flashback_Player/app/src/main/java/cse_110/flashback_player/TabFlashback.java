@@ -26,9 +26,7 @@ import java.util.Map;
 public class TabFlashback extends Fragment {
 
     public static int songIdx=0;
-    private Context context;
     private Song currSong;
-    private List<Song> songList2;
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;
@@ -62,13 +60,8 @@ public class TabFlashback extends Fragment {
         songList = flashbackPlaylist.getFlashbackSong();
 
         if (songList.size() == 0){
-            SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
-            final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
-            sListView.setAdapter(adapter);
             return rootView;
         }
-//        SongList songListGen = new SongList();
-//        songList = songListGen.getAllsong();
 
         // configure listview
         SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
@@ -85,8 +78,8 @@ public class TabFlashback extends Fragment {
             }
         });
 
-//        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
         play();
+        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -94,17 +87,14 @@ public class TabFlashback extends Fragment {
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
                     songPlayer.pause();
-//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
                     playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
                 else if (songPlayer.isPaused()) {
                     songPlayer.resume();
-//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
                     playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
                 else{
                     play();
-//                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
                     playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
                 }
             }
@@ -130,7 +120,7 @@ public class TabFlashback extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-//                songList = flashbackPlaylist.getFlashbackSong();
+                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getPreviousSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -145,8 +135,6 @@ public class TabFlashback extends Fragment {
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
-
-        //changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
@@ -191,7 +179,8 @@ public class TabFlashback extends Fragment {
         if(!isNullDate(currSong,applicationContext)) {
             OffsetDateTime time = currSong.getPreviousDate(applicationContext);
             songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+
+                    currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
