@@ -115,7 +115,6 @@ public class SongPlayer {
             return false;
         }
 
-
         timestamp = OffsetDateTime.now().minusHours(8);
 
         song.setPreviousDate(song.getCurrentDate());

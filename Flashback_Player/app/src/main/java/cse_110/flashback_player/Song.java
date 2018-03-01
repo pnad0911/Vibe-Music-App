@@ -19,6 +19,7 @@ public class Song {
     private String artist;
     private String album;
 
+    private OffsetDateTime timestamp;
     private Location previousLocation;
     private Location currentLocation;
 
@@ -78,13 +79,17 @@ public class Song {
     }
 
 
-    public void setPreviousDate(OffsetDateTime date)
+    public void setCurrentDate()
     {
-        previousDate = date;
-    }
+        timestamp = OffsetDateTime.now().minusHours(8);
 
-    public void setCurrentDate(OffsetDateTime date){
-        currentDate = date;
+        if(this.previousDate == null){
+            this.previousDate = timestamp;
+        }
+        else{
+            this.previousDate = this.currentDate;
+        }
+        this.currentDate = timestamp;
     }
 
     public String getTitle(){
