@@ -1,30 +1,36 @@
 package cse_110.flashback_player;
 
-import java.util.Comparator;
+import android.content.Context;
+
+import android.location.Location;
+import android.util.Log;
+
 import java.time.OffsetDateTime;
+import java.util.Comparator;
+
 /**
  * Created by Patrick on 2/15/2018.
  */
 
-
-
 public class SongCompare<T extends Song> implements Comparator<T> {
     private static final double DISTANCE = 1000;
+    private Location location;
+    private OffsetDateTime time;
 
-    double currentLat, currentLong;
-    OffsetDateTime currentTime;
-
-    public SongCompare(double currentLat, double currentLong, OffsetDateTime currentTime){
-        this.currentLat = currentLat;
-        this.currentLong = currentLong;
-        this.currentTime = currentTime;
+    public SongCompare(Location location, OffsetDateTime time){
+        this.location = location;
+        this.time = time;
     }
 
     @Override
     public int compare(T t1, T t2) {
+        Context applicationContext =  NormalActivity.getContextOfApplication();
+        if (location == null || time == null) {
+            return 0;
+        }
+        if(t1.getScore(location,time) != t2.getScore(location,time)){
+            if(t1.getScore(location,time) > t2.getScore(location,time)){
 
-        if(t1.getScore() != t2.getScore){
-            if(t1.getScore() > t2.getScore()){
                 return -1;
             }
             else{
@@ -32,19 +38,26 @@ public class SongCompare<T extends Song> implements Comparator<T> {
             }
         }
 
-        if(t1.getIsFavorite() != t2.getIsFavorite()){
-            if(t1.getIsFavorite()){
+        Log.i("SongCompare", "" + t1.getSongStatus(FlashBackActivity.getContextOfApplication()));
+        Log.i("SongCompare", "" + t2.getSongStatus(FlashBackActivity.getContextOfApplication()));
+
+        if(t1.getSongStatus(FlashBackActivity.getContextOfApplication()) != t2.getSongStatus(FlashBackActivity.getContextOfApplication())){
+            if(t1.getSongStatus(FlashBackActivity.getContextOfApplication()) == 1){
                 return -1;
             }
             else{
                 return 1;
             }
         }
-
-        if(t1.getDate().after(t2.getDate())){
+        if(t1.getPreviousDate(applicationContext).isAfter(t2.getPreviousDate(applicationContext))){
             return -1;
         }
 
         return 1;
     }
+    Boolean a = null;
 }
+
+
+
+
