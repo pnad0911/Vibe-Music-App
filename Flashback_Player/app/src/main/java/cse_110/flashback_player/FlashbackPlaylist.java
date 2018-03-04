@@ -44,7 +44,7 @@ public class FlashbackPlaylist {
             song.getPreviousDate(context);
             song.getPreviousLocation(context);
 
-            System.out.println(song.getPreviousLocation(context));
+//            System.out.println(song.getPreviousLocation(context));
 
             // song must be:
             // 1. not disliked

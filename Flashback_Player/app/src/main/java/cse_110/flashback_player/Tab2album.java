@@ -134,7 +134,13 @@ public class Tab2album extends Fragment {
         });
         return rootView;
     }
-
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
     /* Calls play and nextPlay function in songPlayer*/
     public void play(TextView songTitleView, TextView songArtistView, TextView songAlbumView ,TextView songTimeView){
         currSong = songList.get(songIdx);

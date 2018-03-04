@@ -72,7 +72,7 @@ public class Tab1allsongs extends Fragment {
             sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                    System.out.println("clicked");
+//                    System.out.println("clicked");
                     songIdx = position;
                     play();
                     changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -137,7 +137,13 @@ public class Tab1allsongs extends Fragment {
         return rootView;
     }
 
-
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
     public int getNextSongIdx(List<Song> songs){
         int idx = 0;
         if(songIdx == songs.size()-1){
@@ -186,7 +192,6 @@ public class Tab1allsongs extends Fragment {
         currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
-
 
     private boolean isNullDate(Song song, Context context) {
         if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
