@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cse_110.flashback_player.Tab2album">
+    tools:context="cse_110.flashback_player.TabAlbum">
 
     <ExpandableListView
         android:id="@+id/album_list"

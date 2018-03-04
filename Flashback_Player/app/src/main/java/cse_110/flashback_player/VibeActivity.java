@@ -42,7 +42,7 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class FlashBackActivity extends AppCompatActivity {
+public class VibeActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -156,12 +156,23 @@ public class FlashBackActivity extends AppCompatActivity {
 
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
+            switch (position) {
 
+                case 1:
                     TabFlashback tab1 = new TabFlashback();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
+                case 0:
+                    TabUpcoming tab2 = new TabUpcoming();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putParcelable("songPlayer", songPlayer);
+                    tab2.setArguments(bundle2);
+                    return tab2;
+                default:
+                    return null;
+            }
         }
 
         @Override
@@ -172,7 +183,15 @@ public class FlashBackActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position){
-            return "Play List";
+
+            switch (position) {
+                case 0:
+                    return "UPCOMING";
+                case 1:
+                    return "DOWNLOADED";
+                default:
+                    return null;
+            }
         }
     }
 

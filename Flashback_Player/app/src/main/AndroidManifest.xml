@@ -45,7 +45,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".FlashBackActivity"
+            android:name=".VibeActivity"
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

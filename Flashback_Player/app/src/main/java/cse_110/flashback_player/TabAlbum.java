@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class Tab2album extends Fragment {
+public class TabAlbum extends Fragment {
 
     private int songIdx = 0;
     private ExpandableListView sListView;

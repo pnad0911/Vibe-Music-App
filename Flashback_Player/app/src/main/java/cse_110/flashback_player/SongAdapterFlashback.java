@@ -78,7 +78,7 @@ public class SongAdapterFlashback extends BaseAdapter {
         return rowView;
     }
     private void toggle(Button button, Song song) {
-        int songLiked = song.getSongStatus(FlashBackActivity.getContextOfApplication());
+        int songLiked = song.getSongStatus(VibeActivity.getContextOfApplication());
         if(songLiked == 0) {
             TabFlashback.flashbackPlaylist.likeSong(song);
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);

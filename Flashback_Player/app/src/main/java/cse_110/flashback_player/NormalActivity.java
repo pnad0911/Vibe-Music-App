@@ -93,7 +93,7 @@ public class NormalActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
         if (sharedPreferences.getString("current", "").equalsIgnoreCase("flashback")) {
-            Intent intent = new Intent(this, FlashBackActivity.class);
+            Intent intent = new Intent(this, VibeActivity.class);
             startActivity(intent);
         }
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -144,7 +144,7 @@ public class NormalActivity extends AppCompatActivity {
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NormalActivity.this, FlashBackActivity.class);
+                Intent intent = new Intent(NormalActivity.this, VibeActivity.class);
                 songPlayer.pause();
                 startActivityForResult(intent, 1);
             }
@@ -178,13 +178,13 @@ public class NormalActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    Tab1allsongs tab1 = new Tab1allsongs();
+                    TabSongs tab1 = new TabSongs();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-                    Tab2album tab2 = new Tab2album();
+                    TabAlbum tab2 = new TabAlbum();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);

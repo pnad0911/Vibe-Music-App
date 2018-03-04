@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cse_110.flashback_player.Tab1allsongs">
+    tools:context="cse_110.flashback_player.TabSongs">
 
     <ListView
         android:id="@+id/song_list"

@@ -69,7 +69,6 @@ public class SongList {
     private void generateAll() {
         AlbumSongList = new HashMap<String, List<Song>>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        //String s;
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {

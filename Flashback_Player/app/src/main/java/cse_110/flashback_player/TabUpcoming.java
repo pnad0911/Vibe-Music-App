@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Tab1allsongs extends Fragment {
+public class TabUpcoming extends Fragment {
 
     private int songIdx=0;
     private Context context;
@@ -127,12 +127,12 @@ public class Tab1allsongs extends Fragment {
         });
 
         songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
-             @Override
-             public void callback() {
-                 songIdx = getNextSongIdx(songList);
-                 play();
-                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
-             }
+            @Override
+            public void callback() {
+                songIdx = getNextSongIdx(songList);
+                play();
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+            }
         });
         return rootView;
     }
@@ -188,7 +188,6 @@ public class Tab1allsongs extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-//        songTimeView.setSelected(true);
         currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
