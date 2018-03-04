@@ -6,21 +6,14 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 /**
- * Created by Yutong on 3/1/18.
+ * Created by winnieli on 3/4/18.
  */
 
-public class Friend{
-
+public class User {
     private String userId;
     private Location currLocation;
     private OffsetDateTime currTime;
-    ArrayList<SongObserver> soArray = new ArrayList<SongObserver>();
-
-    public Friend(String uid, Location location, OffsetDateTime time){
-        userId = uid;
-        currLocation = location;
-        currTime = time;
-    }
+    private ArrayList<Friend> friendsList = new ArrayList<Friend>();
 
     /* GETTER */
     public String getID(){ return userId; }
@@ -35,6 +28,5 @@ public class Friend{
     public void setTime(OffsetDateTime time){
         this.currTime = time;
     }
-
 
 }
