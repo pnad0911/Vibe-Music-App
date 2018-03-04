@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class SongList {
     private static final String RAWPATH = "app/src/main/res/raw/";
-    private Map<String, List<Song>> AlbumSongList;
+    public Map<String, List<Song>> AlbumSongList;
 
     /* Constructor  */
     public SongList() {
@@ -34,7 +34,9 @@ public class SongList {
         }
         return AlbumList;
     }
-
+    public Map<String, List<Song>> getB() {
+        return AlbumSongList;
+    }
     /*
      * getListOfSong : get the list of the song name file
      * Parameter: String AlbumName

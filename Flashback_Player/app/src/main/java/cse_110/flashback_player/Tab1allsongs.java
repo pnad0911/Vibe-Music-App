@@ -10,6 +10,7 @@ import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +32,6 @@ public class Tab1allsongs extends Fragment {
     private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
-    private Location loc;
-    private boolean locationAvailable;
-    private OffsetDateTime date;
-    private NormalActivity activity;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -55,6 +52,7 @@ public class Tab1allsongs extends Fragment {
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
 
+
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
@@ -62,14 +60,6 @@ public class Tab1allsongs extends Fragment {
         // get items from song list
         SongList songListGen = new SongList();
         songList = songListGen.getAllsong();
-//        Location targetLocation = new Location("");//provider name is unnecessary
-//        targetLocation.setLatitude(0.0d);//your coords of course
-//        targetLocation.setLongitude(0.0d);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
-////        OffsetDateTime date = LocalDateTime.parse("2017-02-03 12:30:30", formatter)
-//                .atOffset(ZoneOffset.UTC);
-//        FlashbackPlaylist songListGen = new FlashbackPlaylist();
-//        songList = songListGen.getFlashbackSong(targetLocation,date);
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
 
@@ -144,11 +134,9 @@ public class Tab1allsongs extends Fragment {
                  changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
              }
         });
-
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-
         return rootView;
     }
+
 
     public int getNextSongIdx(List<Song> songs){
         int idx = 0;
@@ -184,16 +172,17 @@ public class Tab1allsongs extends Fragment {
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
-
         if(!isNullDate(currSong, applicationContext)) {
             OffsetDateTime time = currSong.getPreviousDate(applicationContext);
-            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() +
+                    " O'clock  at Coordinates ( " +
                     currSong.getPreviousLocation(applicationContext).getLongitude()+
-                    ":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+                    ":"+ currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
+//        songTimeView.setSelected(true);
         currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
@@ -203,26 +192,4 @@ public class Tab1allsongs extends Fragment {
         if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
         else return false;
     }
-
-    // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
 }

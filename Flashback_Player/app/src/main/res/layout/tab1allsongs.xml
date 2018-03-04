@@ -123,8 +123,14 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="3dp"
-            android:text="N/A"
-            android:textColor="#ffdb58" />
+            android:text="@string/n_a"
+            android:textColor="#ffdb58"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true" />
 
     </LinearLayout>
 

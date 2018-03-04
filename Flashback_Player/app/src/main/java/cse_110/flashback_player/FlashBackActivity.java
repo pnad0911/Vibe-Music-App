@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -89,9 +91,19 @@ public class FlashBackActivity extends AppCompatActivity {
         editor.apply();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
         setSupportActionBar(toolbar);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout container = (LinearLayout) findViewById(R.id.appbar);
+                AnimationDrawable anim = (AnimationDrawable) container.getBackground();
+                anim.setEnterFadeDuration(6000);
+                anim.setExitFadeDuration(5000);
+                anim.start();
+            }
+        });
+        thread.start();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -114,9 +126,6 @@ public class FlashBackActivity extends AppCompatActivity {
                 getLocation();
             }
         });
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-
-
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,7 +246,6 @@ public class FlashBackActivity extends AppCompatActivity {
 
     public interface LocationReadyCallback{
         public abstract void locationReady();
-
     }
 
     public void setLocationReadyCallback(LocationReadyCallback locationCallback){
