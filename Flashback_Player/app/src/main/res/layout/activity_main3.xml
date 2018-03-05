@@ -42,8 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_d" />
-
-
         </android.support.design.widget.TabLayout>
 
 
@@ -54,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="110dp" />
+        android:layout_marginTop="140dp" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mode"
         android:layout_gravity="right"
@@ -69,6 +67,11 @@
         app:fabSize="normal"
         app:pressedTranslationZ="12dp"
         app:rippleColor="@android:color/black" />
+    <Spinner
+        android:layout_marginTop="110dp"
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

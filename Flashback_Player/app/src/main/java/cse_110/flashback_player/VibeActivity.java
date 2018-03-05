@@ -18,7 +18,9 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.location.Location;
@@ -26,7 +28,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -36,13 +41,15 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 
 /**
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class VibeActivity extends AppCompatActivity {
+public class VibeActivity extends AppCompatActivity implements OnItemSelectedListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -83,6 +90,7 @@ public class VibeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main3);
         contextOfApplication = getApplicationContext();
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
@@ -104,6 +112,15 @@ public class VibeActivity extends AppCompatActivity {
             }
         });
         thread.start();
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+        List<String> sortingOptions = new ArrayList<String>();
+        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -140,7 +157,17 @@ public class VibeActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
 
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
