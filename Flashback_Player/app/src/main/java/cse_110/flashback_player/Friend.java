@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Yutong on 3/1/18.
  */
 
-public class Friend implements FriendSubject{
+public class Friend{
 
     private String userId;
     private Location currLocation;
@@ -30,23 +30,11 @@ public class Friend implements FriendSubject{
     /* SETTER */
     public void setLocation(Location location){
         currLocation = location;
-        notifySong();
     }
 
     public void setTime(OffsetDateTime time){
         this.currTime = time;
-        notifySong();
     }
 
-    public void register(SongObserver songOb){
-        soArray.add(songOb);
-    }
-
-    public void notifySong(){
-        for (SongObserver so : soArray){
-            so.update(currLocation, currTime);
-        }
-
-    }
 
 }
