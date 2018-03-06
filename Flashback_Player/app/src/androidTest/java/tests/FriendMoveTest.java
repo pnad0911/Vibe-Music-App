@@ -23,6 +23,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import cse_110.flashback_player.Friend;
 import cse_110.flashback_player.NormalActivity;
@@ -41,8 +42,8 @@ public class FriendMoveTest {
     Friend friend2;
     Location location1;
     Location location2;
-    Long time1;
-    Long time2;
+    OffsetDateTime time1;
+    OffsetDateTime time2;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference();
@@ -61,8 +62,8 @@ public class FriendMoveTest {
         location2.setLatitude(2000);
         location2.setLongitude(1000);
 
-        time1 = (long) 123456789;
-        time2 = (long) 349857203;
+        time1 = OffsetDateTime.of(2000,10,10,10,10,10,10, ZoneOffset.UTC);
+        time2 = OffsetDateTime.of(2010,11,12,10,10,10,10, ZoneOffset.UTC);
 
         friend = new Friend("abc", location1, time1 );
         friend2 = new Friend("def", location2, time2 );
@@ -73,13 +74,23 @@ public class FriendMoveTest {
     @Test
     public void testSongConstructor(){
 
-        assertEquals(song.getLatitude(), location1.getLatitude(),0);
-        assertEquals(song.getCurrentDate().toString(), time1.toString());
+        assertEquals(song.getLocations().get("1000"), Integer.toString((int)location1.getLongitude()));
+        assertEquals(song.getDate(), time1.toString());
 
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
+
+
+
+
+
+    }
+
+    @Test
+    public void testUpdate(){
 
         song.addUser("def");
+        song.update();
 
+        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
         Query queryRef = songRef.orderByChild("title").equalTo("aaa");
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -89,8 +100,8 @@ public class FriendMoveTest {
 
                 }
                 else {
-                    Log.println(Log.DEBUG, "info", snapshot.child("aaa").child("userNames").getValue().toString());
-
+                    Log.println(Log.DEBUG, "info", snapshot.child("aaa").getValue(Song.class).toString());
+                    assertEquals(((Map<String, String> ) snapshot.child("aaa").child("userNames").getValue()).get("def").toString(), "def");
                 }
             }
 

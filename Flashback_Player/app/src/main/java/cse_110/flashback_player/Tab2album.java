@@ -171,24 +171,24 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
-            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
-            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+
-                    currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
+//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+//                    currSong.getLocations().get(0).first+
+//                    ":"+currSong.getLocations().get(0).second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
 
 //        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
-        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
-        currSong.setPreviousDate(applicationContext);
+        currSong.addLocation(NormalActivity.getLocation());
+        currSong.setDate(OffsetDateTime.now());
 
     }
 
 
     public boolean isNullDate(Song song,Context context) {
-        if(song.getPreviousDate(context) == null) return true;
+        if(song.getDate() == null) return true;
         else return false;
     }
     // --------------------------------- Here Is The Reason ------------------------------

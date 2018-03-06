@@ -41,10 +41,10 @@ public class FlashbackPlaylist {
 
         // populate viable song set
         for (Song song : entireSongList.getAllsong()) {
-            song.getPreviousDate(context);
-            song.getPreviousLocation(context);
-
-            System.out.println(song.getPreviousLocation(context));
+//            song.getPreviousDate(context);
+//            song.getPreviousLocation(context);
+//
+//            System.out.println(song.getPreviousLocation(context));
 
             // song must be:
             // 1. not disliked
@@ -135,8 +135,8 @@ public class FlashbackPlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
-        return song.getSongStatus(FlashBackActivity.getContextOfApplication()) != -1
-                && song.getPreviousLocation(context) != null
-                && song.getPreviousDate(context) != null;
+        return song.getSongStatus(FlashBackActivity.getContextOfApplication()) != -1;
+//                && song.getPreviousLocation(context) != null
+//                && song.getPreviousDate(context) != null;
     }
 }

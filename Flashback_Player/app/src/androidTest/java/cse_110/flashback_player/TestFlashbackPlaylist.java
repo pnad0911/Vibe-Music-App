@@ -74,14 +74,14 @@ public class TestFlashbackPlaylist {
         dummyL3.setLatitude(100);
         dummyL3.setLongitude(100);
 
-        song1.setPreviousLocation(dummyL1);
-        song1.setPreviousDate(dummyT1);
+        song1.addLocation(dummyL1);
+        song1.setDate(dummyT1);
 
-        song2.setPreviousLocation(dummyL2);
-        song2.setPreviousDate(dummyT2);
+        song2.addLocation(dummyL2);
+        song2.setDate(dummyT2);
 
-        song3.setPreviousLocation(dummyL3);
-        song3.setPreviousDate(dummyT3);
+        song3.addLocation(dummyL3);
+        song3.setDate(dummyT3);
 
         playlist.neutralSong(song1);
         playlist.neutralSong(song2);

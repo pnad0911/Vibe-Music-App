@@ -186,21 +186,21 @@ public class Tab1allsongs extends Fragment {
         songAlbumView.setText(currSong.getAlbum());
 
         if(!isNullDate(currSong, applicationContext)) {
-            OffsetDateTime time = currSong.getPreviousDate(applicationContext);
-            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+
-                    ":"+currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
+//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
+//                    currSong.getLocations().+
+//                    ":"+currSong.getLocations().get(0).second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
-        currSong.setPreviousDate(applicationContext);
+        currSong.addLocation(NormalActivity.getLocation());
+        currSong.setDate(OffsetDateTime.now());
     }
 
 
     private boolean isNullDate(Song song, Context context) {
-        if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
+        if(song.getDate() == null || song.getLocations() == null) return true;
         else return false;
     }
 

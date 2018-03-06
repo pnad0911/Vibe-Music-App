@@ -45,9 +45,9 @@ public class SongCompare<T extends Song> implements Comparator<T> {
                 return 1;
             }
         }
-        if(t1.getPreviousDate(applicationContext).isAfter(t2.getPreviousDate(applicationContext))){
-            return -1;
-        }
+//        if(t1.getPreviousDate(applicationContext).isAfter(t2.getPreviousDate(applicationContext))){
+//            return -1;
+//        }
 
         return 1;
     }

@@ -25,7 +25,7 @@ public class Friend{
     /* GETTER */
     public String getID(){ return userId; }
     public Location getLocation(){ return currLocation; }
-    public OffsetDateTime getTime() { return currTime; }
+    public String getTime() { return currTime.toString(); }
 
     /* SETTER */
     public void setLocation(Location location){
