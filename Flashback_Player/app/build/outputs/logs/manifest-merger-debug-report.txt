@@ -1,0 +1,434 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+MERGED from [com.google.android.gms:play-services-location:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.0.1.aar/607dbb790a59d03f94ee389d7a7c3ce2/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.firebase:firebase-core:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-core-11.0.1.aar/847bcf382343343b807d7895dd912dc2/AndroidManifest.xml:2:1-6:12
+MERGED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/0de1d3d758180fe69e259640b6480555/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.firebase:firebase-database:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-database-11.0.1.aar/770c957502a40f7508f031b4a71f9a60/AndroidManifest.xml:2:1-4:12
+MERGED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:16:1-21:12
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:16:1-35:12
+MERGED from [com.google.firebase:firebase-database-connection:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-11.0.1.aar/9935718f84bd097da389086e7e2674d6/AndroidManifest.xml:2:1-4:12
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:16:1-29:12
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:16:1-50:12
+MERGED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-tasks:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.0.1.aar/4ad7d74c1c19f2047fc08c3f7a6dedb4/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:16:1-23:12
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:17:1-31:12
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:17:1-30:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+	package
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:3:5-39
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-53:12
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:5:5-98
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:5:22-95
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:6:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:7:22-76
+uses-permission#android.permission.INTERNET
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:20:5-66
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:20:5-66
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:20:5-66
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:20:5-66
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:20:5-66
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:20:5-66
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:8:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:9:5-79
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:21:5-78
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:21:5-78
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:21:5-78
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:21:5-78
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:19:5-78
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:19:5-78
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:10:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:11:5-80
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:11:22-77
+uses-permission#android.permission.READ_CONTACTS
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:12:5-72
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:12:22-69
+permission#android
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:15:5-42
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:15:17-39
+application
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:17:5-51:19
+MERGED from [com.google.android.gms:play-services-location:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.0.1.aar/607dbb790a59d03f94ee389d7a7c3ce2/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-location:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.0.1.aar/607dbb790a59d03f94ee389d7a7c3ce2/AndroidManifest.xml:4:5-19
+MERGED from [com.google.firebase:firebase-core:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-core-11.0.1.aar/847bcf382343343b807d7895dd912dc2/AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-core:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-core-11.0.1.aar/847bcf382343343b807d7895dd912dc2/AndroidManifest.xml:5:5-20
+MERGED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/0de1d3d758180fe69e259640b6480555/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/0de1d3d758180fe69e259640b6480555/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:24:5-34:19
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:24:5-34:19
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:28:5-49:19
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:28:5-49:19
+MERGED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:4:5-7:19
+MERGED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:4:5-7:19
+MERGED from [com.google.android.gms:play-services-tasks:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.0.1.aar/4ad7d74c1c19f2047fc08c3f7a6dedb4/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-tasks:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.0.1.aar/4ad7d74c1c19f2047fc08c3f7a6dedb4/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:19:5-21:19
+MERGED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:19:5-21:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:25:5-29:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:24:5-28:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:24:5-28:19
+	android:supportsRtl
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:22:9-35
+	android:label
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:20:9-41
+	android:roundIcon
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:21:9-54
+	android:icon
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:19:9-43
+	android:allowBackup
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:18:9-35
+	android:theme
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:23:9-40
+activity#cse_110.flashback_player.NormalActivity
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:24:9-33:20
+	android:label
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:26:13-57
+	android:theme
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:27:13-56
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:25:13-43
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:28:13-32:29
+action#android.intent.action.MAIN
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:29:17-69
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:29:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:31:17-77
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:31:27-74
+meta-data#com.google.android.geo.API_KEY
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:43:9-45:55
+	android:value
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:45:13-52
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:44:13-58
+activity#cse_110.flashback_player.FlashBackActivity
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:47:9-50:59
+	android:label
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:49:13-57
+	android:theme
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:50:13-56
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:48:13-46
+uses-sdk
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+MERGED from [com.google.android.gms:play-services-location:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.0.1.aar/607dbb790a59d03f94ee389d7a7c3ce2/AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-location:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.0.1.aar/607dbb790a59d03f94ee389d7a7c3ce2/AndroidManifest.xml:3:5-43
+MERGED from [com.google.firebase:firebase-core:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-core-11.0.1.aar/847bcf382343343b807d7895dd912dc2/AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-core:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-core-11.0.1.aar/847bcf382343343b807d7895dd912dc2/AndroidManifest.xml:4:5-43
+MERGED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/0de1d3d758180fe69e259640b6480555/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/0de1d3d758180fe69e259640b6480555/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-database:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-database-11.0.1.aar/770c957502a40f7508f031b4a71f9a60/AndroidManifest.xml:3:5-43
+MERGED from [com.google.firebase:firebase-database:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-database-11.0.1.aar/770c957502a40f7508f031b4a71f9a60/AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-database-connection:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-11.0.1.aar/9935718f84bd097da389086e7e2674d6/AndroidManifest.xml:3:5-43
+MERGED from [com.google.firebase:firebase-database-connection:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-11.0.1.aar/9935718f84bd097da389086e7e2674d6/AndroidManifest.xml:3:5-43
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:3:5-43
+MERGED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-tasks:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.0.1.aar/4ad7d74c1c19f2047fc08c3f7a6dedb4/AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-tasks:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.0.1.aar/4ad7d74c1c19f2047fc08c3f7a6dedb4/AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:17:5-43
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:21:5-23:58
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/a74a720450406a54c2cc6aca8127f6fa/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/e5c1d600642388b0bf933d57e2d1f720/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/b95786076ad75ce231c5fe3f66a073e9/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/48e05f89c52f9970d290c3efc0156ee3/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3054c4a70546791ee3f1cdad01b03f1b/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/eb581ec00647afd5227ac9fbb8df5341/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/994c816314289c4d5f56d9acb3e9c006/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/a4b8fd92d4613ce659061cb026e86af7/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/e664ab5232eb81a0e726c0ebb278a91c/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:design:26.1.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/a1bac7534cf536c086c6788c6826f102/AndroidManifest.xml:27:13-51
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/65a1b54383078f54034d53545ac57a00/AndroidManifest.xml:19:19-85
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:21:5-67
+MERGED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:21:5-67
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:22:22-65
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:25:7-26:18
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:25:7-26:18
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:25:7-26:18
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:25:90-112
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:25:113-137
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:25:17-89
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:27:7-31:18
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:27:162-184
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:27:185-208
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:27:105-161
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:27:17-104
+intent-filter#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:28:11-30:27
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:29:15-76
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:29:23-74
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:32:7-137
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:27:7-137
+MERGED from [com.google.firebase:firebase-analytics-impl:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.0.1.aar/3764466b6607b099d20d43e8dbe859cd/AndroidManifest.xml:27:7-137
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:32:88-110
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:32:111-135
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:32:16-87
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:33:7-197
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:33:148-170
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:33:171-195
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:33:91-147
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.0.1.aar/27ae585b0317f4402d4349b8e8e57172/AndroidManifest.xml:33:16-90
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:22:5-81
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:22:22-79
+permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:24:5-109
+	android:protectionLevel
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:24:72-107
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:24:17-71
+permission#cse_110.flashback_player.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:24:5-109
+	android:protectionLevel
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:24:72-107
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:24:17-71
+uses-permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:26:5-78
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:26:22-76
+uses-permission#cse_110.flashback_player.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:26:5-78
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:26:22-76
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:30:9-35:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:30:85-108
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:30:109-169
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:30:19-84
+intent-filter#${applicationId}+com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:31:13-34:29
+intent-filter#com.google.android.c2dm.intent.RECEIVE+cse_110.flashback_player
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:31:13-34:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:32:17-80
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:32:25-78
+category#${applicationId}
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:33:17-60
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:33:27-58
+category#cse_110.flashback_player
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:33:17-60
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:33:27-58
+receiver#com.google.firebase.iid.FirebaseInstanceIdInternalReceiver
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:39:9-119
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:39:93-117
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:39:19-92
+service#com.google.firebase.iid.FirebaseInstanceIdService
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:43:9-47:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:43:83-106
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:43:18-82
+intent-filter#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:44:13-46:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:44:28-51
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:45:17-79
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.0.1.aar/8625aee2610a42d7b2d185d24c899fb6/AndroidManifest.xml:45:25-77
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:6:9-194
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:6:19-78
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:6:144-168
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:6:169-192
+	android:name
+		ADDED from [com.google.firebase:firebase-common:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-common-11.0.1.aar/4d8b142ab4d59fe50354eeec16f1aa5d/AndroidManifest.xml:6:79-143
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:11.0.1] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/435855705ca19dbb816250840abac8b6/AndroidManifest.xml:20:20-65
+meta-data#android.arch.lifecycle.VERSION
+ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:25:9-27:47
+	android:value
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:27:13-44
+	android:name
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:26:13-58
