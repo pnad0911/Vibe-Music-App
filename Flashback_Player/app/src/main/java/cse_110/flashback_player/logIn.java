@@ -190,4 +190,8 @@ public class logIn extends AppCompatActivity{
         }
     }
 
+    public User getUser(){
+        return user;
+    }
+
 }
