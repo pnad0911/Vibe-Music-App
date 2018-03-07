@@ -28,6 +28,7 @@ import com.google.api.services.people.v1.model.ListConnectionsResponse;
 import com.google.api.services.people.v1.model.Person;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,6 +43,7 @@ public class logIn extends AppCompatActivity{
     JacksonFactory jsonFactory;
     GoogleTokenResponse tokenResponse;
     String redirectUrl;
+    static User user = new User();
 
 
     @Override
@@ -101,6 +103,9 @@ public class logIn extends AppCompatActivity{
     }
 
     public void updateUI(GoogleSignInAccount account){
+
+        user.setFirstName(account.getGivenName());
+        user.setLastName(account.getFamilyName());
         try {
             setUp();
         }catch(IOException e) {
@@ -144,8 +149,13 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
-                    System.out.println("people" + connections.size());
-                    connections.get(0).getNames();
+                    ArrayList<Friend> friends = new ArrayList<Friend>();
+                    for(int i = 0;i<connections.size();i++){
+                        Friend friend = new Friend();
+                        friend.setFirstName(connections.get(i).getNames().get(0).getGivenName());
+                        friend.setLastName(connections.get(i).getNames().get(0).getFamilyName());
+                        friends.add(friend);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();

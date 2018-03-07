@@ -1,8 +1,5 @@
 package cse_110.flashback_player;
 
-import android.location.Location;
-
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 /**
@@ -10,29 +7,27 @@ import java.util.ArrayList;
  */
 
 public class User {
-    private String userId;
-    private Location currLocation;
-    private OffsetDateTime currTime;
+    private String firstName;
+    private String lastName;
     private ArrayList<Friend> friendsList = new ArrayList<Friend>();
 
     /* GETTER */
-    public String getID(){ return userId; }
-    public Location getLocation(){ return currLocation; }
-    public OffsetDateTime getTime() { return currTime; }
+    public String getFirstName(){ return firstName; }
+    public String getLastName(){ return lastName; }
 
-    /* SETTER */
-    public void setLocation(Location location){
-        currLocation = location;
+    public void setFirstName(String name){
+        this.firstName = name;
     }
-
-    public void setTime(OffsetDateTime time){
-        this.currTime = time;
+    public void setLastName(String name){
+        this.lastName = name;
     }
 
     public ArrayList<Friend> getFriendlist(){
-
         return friendsList;
     }
 
+    public void setFriendsList(ArrayList<Friend> friends){
+        friendsList = friends;
+    }
 
 }
