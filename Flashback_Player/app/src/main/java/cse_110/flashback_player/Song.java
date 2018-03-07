@@ -204,7 +204,7 @@ public class Song {
     public void setPreviousLocation(Location loc){
         this.previousLocation = loc;
     }
-    public void setPreviousTime(OffsetDateTime time){
+    public void setPreviousTikme(OffsetDateTime time){
         this.previousDate = time;
     }
 
@@ -247,10 +247,8 @@ public class Song {
             return 0;
         }
         double prevFeetLat = previousLocation.getLatitude() * latToFeet;
-//        System.out.println(previousLocation.getLatitude());
         double prevFeetLong = previousLocation.getLongitude() * longToFeet;
         double currFeetLat = userLocation.getLatitude() * latToFeet;
-//        System.out.println(userLocation.getLatitude());
         double currFeetLong = userLocation.getLongitude() * longToFeet;
         double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
                 Math.pow(currFeetLong - prevFeetLong, 2));

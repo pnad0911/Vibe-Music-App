@@ -102,9 +102,7 @@ public class SongList {
 
     private boolean isAlbumExistFolder(String AlbumName) {
         if (AlbumName.isEmpty() || AlbumName.contains(" ")) return false;
-
         String path = RAWPATH + AlbumName;
-//        System.out.println(path);
         File file = new File(path);
         if (file.exists()) {
             return true;

@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,8 @@ import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -113,15 +117,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         });
         thread.start();
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-        List<String> sortingOptions = new ArrayList<String>();
-        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
-
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -156,6 +151,22 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
                 finish();
             }
         });
+
+        ImageButton download = findViewById(R.id.download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Download", Toast.LENGTH_LONG).show();
+            }
+        });
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+        List<String> sortingOptions = new ArrayList<String>();
+        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setDropDownWidth(252);
+        spinner.setAdapter(dataAdapter);
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -204,7 +215,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
             return 2;
         }
 
