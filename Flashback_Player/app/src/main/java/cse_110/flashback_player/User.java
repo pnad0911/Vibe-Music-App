@@ -29,4 +29,10 @@ public class User {
         this.currTime = time;
     }
 
+    public ArrayList<Friend> getFriendlist(){
+
+        return friendsList;
+    }
+
+
 }

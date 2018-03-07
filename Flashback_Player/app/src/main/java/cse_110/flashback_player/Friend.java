@@ -16,10 +16,8 @@ public class Friend{
     private OffsetDateTime currTime;
     ArrayList<SongObserver> soArray = new ArrayList<SongObserver>();
 
-    public Friend(String uid, Location location, OffsetDateTime time){
+    public Friend(String uid){
         userId = uid;
-        currLocation = location;
-        currTime = time;
     }
 
     /* GETTER */
@@ -35,6 +33,5 @@ public class Friend{
     public void setTime(OffsetDateTime time){
         this.currTime = time;
     }
-
 
 }
