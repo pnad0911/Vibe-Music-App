@@ -6,9 +6,11 @@ package cse_110.flashback_player;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabFlashback extends Fragment {
+public class TabSongs extends Fragment {
 
-    public static int songIdx=0;
+    private int songIdx=0;
+    private Context context;
     private Song currSong;
-    private SongPlayer songPlayer;
-    public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;
+    private SongPlayer songPlayer;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -37,8 +39,6 @@ public class TabFlashback extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
-
-        flashbackPlaylist = new FlashbackPlaylist();
 
         /*
         * Get Buttons and TextViews*/
@@ -52,40 +52,40 @@ public class TabFlashback extends Fragment {
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
 
+
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        songList = flashbackPlaylist.getFlashbackSong();
+        SongList songListGen = new SongList();
+        songList = songListGen.getAllsong();
+        if(!songList.isEmpty()) {
+            currSong = songList.get(songIdx);
 
-        if (songList.size() == 0){
-            return rootView;
+            // configure listview
+            SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+            final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
+            sListView.setAdapter(adapter);
+            // Handle on click event
+            sListView.setClickable(true);
+            sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+//                    System.out.println("clicked");
+                    songIdx = position;
+                    play();
+                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                }
+            });
         }
-
-        // configure listview
-        SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
-        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
-        sListView.setAdapter(adapter);
-        // Handle on click event
-        sListView.setClickable(true);
-        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                songIdx = position;
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
-            }
-        });
-
-        play();
-        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
+                    NormalActivity.getLocation();
                     songPlayer.pause();
                     playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
@@ -99,6 +99,7 @@ public class TabFlashback extends Fragment {
                 }
             }
         });
+
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +110,6 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -120,7 +120,6 @@ public class TabFlashback extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
                 songIdx = getPreviousSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -128,19 +127,23 @@ public class TabFlashback extends Fragment {
         });
 
         songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
-            @Override
-            public void callback() {
-                songIdx = getNextSongIdx(songList);
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
-            }
+             @Override
+             public void callback() {
+                 songIdx = getNextSongIdx(songList);
+                 play();
+                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+             }
         });
-
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-
         return rootView;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
     public int getNextSongIdx(List<Song> songs){
         int idx = 0;
         if(songIdx == songs.size()-1){
@@ -169,48 +172,29 @@ public class TabFlashback extends Fragment {
         songPlayer.playNext(songList.get(idx));
     }
 
-
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         Context applicationContext =  NormalActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
-        if(!isNullDate(currSong,applicationContext)) {
+        if(!isNullDate(currSong, applicationContext)) {
             OffsetDateTime time = currSong.getPreviousDate(applicationContext);
-            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-                    currSong.getPreviousLocation(applicationContext).getLongitude()+":"+
-                    currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
+            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() +
+                    " O'clock  at Coordinates ( " +
+                    currSong.getPreviousLocation(applicationContext).getLongitude()+
+                    ":"+ currSong.getPreviousLocation(applicationContext).getLatitude() + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
+//        songTimeView.setSelected(true);
         currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
 
-    private boolean isNullDate(Song song,Context context) {
-        if(song.getPreviousDate(context) == null) return true;
+    private boolean isNullDate(Song song, Context context) {
+        if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
         else return false;
-    }
-    // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
     }
 }

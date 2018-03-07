@@ -6,7 +6,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +20,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +38,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 
@@ -91,16 +103,27 @@ public class NormalActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
         if (sharedPreferences.getString("current", "").equalsIgnoreCase("flashback")) {
-            Intent intent = new Intent(this, FlashBackActivity.class);
+            Intent intent = new Intent(this, VibeActivity.class);
             startActivity(intent);
         }
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("current", "normal");
         editor.apply();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
         setSupportActionBar(toolbar);
+
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout container = (LinearLayout) findViewById(R.id.appbar);
+                AnimationDrawable anim = (AnimationDrawable) container.getBackground();
+                anim.setEnterFadeDuration(6000);
+                anim.setExitFadeDuration(5000);
+                anim.start();
+            }
+        });
+        thread.start();
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -124,20 +147,31 @@ public class NormalActivity extends AppCompatActivity {
                 getLocation();
             }
         });
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
+        getData();
 
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NormalActivity.this, FlashBackActivity.class);
+                Intent intent = new Intent(NormalActivity.this, VibeActivity.class);
                 songPlayer.pause();
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
+//        createExternalStoragePublicMP3();
+//        hasExternalStoragePublicMP3();
+//        System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString());
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Intent refresh = new Intent(this, NormalActivity.class);
+            startActivity(refresh);
+            this.finish();
+        }
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -157,13 +191,13 @@ public class NormalActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    Tab1allsongs tab1 = new Tab1allsongs();
+                    TabSongs tab1 = new TabSongs();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-                    Tab2album tab2 = new Tab2album();
+                    TabAlbum tab2 = new TabAlbum();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);
@@ -211,7 +245,6 @@ public class NormalActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -275,4 +308,36 @@ public class NormalActivity extends AppCompatActivity {
         return contextOfApplication;
     }
 
+
+    public void createExternalStoragePublicMP3() {
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+        File file = new File(path, "america_religious.mp3");
+
+        try {
+            path.mkdirs();
+            InputStream is = getResources().openRawResource(R.raw.america_religious);
+            OutputStream os = new FileOutputStream(file);
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            os.write(data);
+            is.close();
+            os.close();
+            MediaScannerConnection.scanFile(this,
+                    new String[]{file.toString()}, null,
+                    new MediaScannerConnection.OnScanCompletedListener() {
+                        public void onScanCompleted(String path, Uri uri) {
+                            Log.i("ExternalStorage", "Scanned " + path + ":");
+                            Log.i("ExternalStorage", "-> uri=" + uri);
+                        }
+                    });
+        } catch (IOException e) {
+            Log.w("ExternalStorage", "Error writing " + file, e);
+        }
+    }
+    boolean hasExternalStoragePublicMP3() {
+        File path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_MUSIC);
+        File file = new File(path, "america_religious.mp3");
+        return file.exists();
+    }
 }

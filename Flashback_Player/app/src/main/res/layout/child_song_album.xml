@@ -33,21 +33,6 @@
                 android:layout_height="wrap_content"
                 android:text="Artist"
                 android:textSize="13dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:text="●" />
-
-            <TextView
-                android:id="@+id/album"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Album"
-                android:textSize="13dp" />
-
-
         </LinearLayout>
 
     </LinearLayout>
@@ -56,8 +41,8 @@
 
     <Button
         android:id="@+id/like_bt"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"

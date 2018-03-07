@@ -1,17 +1,16 @@
 package cse_110.flashback_player;
 
 
-import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -19,19 +18,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,31 +28,32 @@ import java.util.Map;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Looper;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-
-import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.tasks.OnSuccessListener;
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 
 /**
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class FlashBackActivity extends AppCompatActivity {
+public class VibeActivity extends AppCompatActivity implements OnItemSelectedListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -106,6 +94,7 @@ public class FlashBackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main3);
         contextOfApplication = getApplicationContext();
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
@@ -114,9 +103,19 @@ public class FlashBackActivity extends AppCompatActivity {
         editor.apply();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
         setSupportActionBar(toolbar);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout container = (LinearLayout) findViewById(R.id.appbar);
+                AnimationDrawable anim = (AnimationDrawable) container.getBackground();
+                anim.setEnterFadeDuration(6000);
+                anim.setExitFadeDuration(5000);
+                anim.start();
+            }
+        });
+        thread.start();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -139,9 +138,6 @@ public class FlashBackActivity extends AppCompatActivity {
                 getLocation();
             }
         });
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-
-
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,11 +147,38 @@ public class FlashBackActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("current","normal");
                 editor.apply();
+                setResult(RESULT_OK,null);
                 finish();
             }
         });
-    }
 
+        ImageButton download = findViewById(R.id.download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Download", Toast.LENGTH_LONG).show();
+            }
+        });
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+        List<String> sortingOptions = new ArrayList<String>();
+        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setDropDownWidth(252);
+        spinner.setAdapter(dataAdapter);
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -171,23 +194,41 @@ public class FlashBackActivity extends AppCompatActivity {
 
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
+            switch (position) {
 
+                case 1:
                     TabFlashback tab1 = new TabFlashback();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
+                case 0:
+                    TabUpcoming tab2 = new TabUpcoming();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putParcelable("songPlayer", songPlayer);
+                    tab2.setArguments(bundle2);
+                    return tab2;
+                default:
+                    return null;
+            }
         }
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
             return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position){
-            return "Play List";
+
+            switch (position) {
+                case 0:
+                    return "UPCOMING";
+                case 1:
+                    return "DOWNLOADED";
+                default:
+                    return null;
+            }
         }
     }
 
@@ -261,7 +302,6 @@ public class FlashBackActivity extends AppCompatActivity {
 
     public interface LocationReadyCallback{
         public abstract void locationReady();
-
     }
 
     public void setLocationReadyCallback(LocationReadyCallback locationCallback){
