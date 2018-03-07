@@ -15,14 +15,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import cse_110.flashback_player.Friend;
@@ -67,8 +63,10 @@ public class FriendMoveTest {
 
         friend = new Friend("abc", location1, time1 );
         friend2 = new Friend("def", location2, time2 );
-        song = new Song("aaa",123,"asd","asdf",friend);
-        song2 = new Song("bbb", 234, "asd","asdf", friend2);
+        song = new Song("aaa","123", "asd","asdf",friend);
+        song.update();
+        song2 = new Song("bbb", "234", "asd","asdf", friend2);
+        song2.update();
     }
 
     @Test
@@ -77,11 +75,13 @@ public class FriendMoveTest {
         assertEquals(song.getLocations().get("1000"), Integer.toString((int)location1.getLongitude()));
         assertEquals(song.getDate(), time1.toString());
 
+    }
 
+    @Test
+    public void testSongConstructorDatabase(){
 
-
-
-
+        Song newSong = new Song("aaa", "234","asd","asdfgg");
+        assertEquals(newSong.getSongUrl(), "123");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class FriendMoveTest {
         song.update();
 
         DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        Query queryRef = songRef.orderByChild("title").equalTo("aaa");
+        Query queryRef = songRef.orderByChild("title").equalTo("aaaasd");
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

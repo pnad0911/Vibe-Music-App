@@ -72,7 +72,7 @@ public class SongList {
         for (Field f : raw) {
             try {
                 Map<String, String[]> da = NormalActivity.data;
-                Song so = new Song(da.get(f.getName())[0], f.getInt(null), da.get(f.getName())[1], da.get(f.getName())[2]);
+                Song so = new Song(da.get(f.getName())[0], Integer.toString(f.getInt(null)), da.get(f.getName())[1], da.get(f.getName())[2]);
                 listOfSongs.add(so);
             } catch (Exception e) {
                 e.printStackTrace();
