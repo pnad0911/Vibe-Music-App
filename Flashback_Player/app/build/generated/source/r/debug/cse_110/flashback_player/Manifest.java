@@ -9,7 +9,6 @@ package cse_110.flashback_player;
 
 public final class Manifest {
   public static final class permission {
-    public static final String C2D_MESSAGE="cse_110.flashback_player.permission.C2D_MESSAGE";
     /**
      * Min/target SDK versions (<uses-sdk>) managed by build.gradle
      */
