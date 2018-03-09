@@ -140,6 +140,13 @@ public class TabFlashback extends Fragment {
 
         return rootView;
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
 
     public int getNextSongIdx(List<Song> songs){
         int idx = 0;
