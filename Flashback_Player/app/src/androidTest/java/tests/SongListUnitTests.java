@@ -28,9 +28,9 @@ import static org.junit.Assert.assertEquals;
         }
         @Test
         public void testGenerateAll(){
-            assertEquals(10,songList.getAllsong().size());
+            assertEquals(3,songList.getAllsong().size());
             String albumName = songList.getListOfAlbum().get(0);
-            assertEquals("Take Yourself Too Seriously", albumName);
+            assertEquals("I Will Not Be Afraid (A Sampler)", albumName);
             assertEquals(2, songList.getListOfSong(albumName).size());
         }
 
@@ -39,7 +39,7 @@ import static org.junit.Assert.assertEquals;
             String albumName = songList.getListOfAlbum().get(0);
             assertEquals(true, songList.isAlbumExist(albumName));
             assertEquals(false, songList.isAlbumExist("123"));
-            albumName = songList.getListOfAlbum().get(4);
+            albumName = songList.getListOfAlbum().get(1);
             assertEquals(true, songList.isAlbumExist(albumName));
         }
 

@@ -22,6 +22,6 @@ public class SongListRefresher implements SongObserver {
     }
 
     public void update(){
-        songList.refresh();
+//        songList.refresh();
     }
 }
