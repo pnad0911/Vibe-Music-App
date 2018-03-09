@@ -17,16 +17,11 @@ import java.util.Set;
  */
 
 public class SongList {
-<<<<<<< HEAD
     private final String RAWPATH = "app/src/main/res/raw/";
     private Map<String, List<Song>> AlbumSongList;
     private Map<String,String[]> data;
     private Activity activity;
     private MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-=======
-    private static final String RAWPATH = "app/src/main/res/raw/";
-    public Map<String, List<Song>> AlbumSongList;
->>>>>>> master
 
     /* Constructor  */
     public SongList(Activity a) {

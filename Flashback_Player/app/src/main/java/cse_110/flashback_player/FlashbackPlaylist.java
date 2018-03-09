@@ -136,8 +136,9 @@ public class FlashbackPlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
-        return song.getSongStatus(FlashBackActivity.getContextOfApplication()) != -1;
+       // return song.getSongStatus(FlashBackActivity.getContextOfApplication()) != -1;
 //                && song.getPreviousLocation(context) != null
 //                && song.getPreviousDate(context) != null;
+        return false;
     }
 }

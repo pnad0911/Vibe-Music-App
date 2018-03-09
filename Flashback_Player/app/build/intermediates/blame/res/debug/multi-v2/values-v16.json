@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/res/values-v16/values-v16.xml",
+                    "source": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Yutong/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9a045e0170afcee558ff5046efac64fb/res/values-v16/values-v16.xml",
+                    "source": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\c56d1b6a0fa1c114d30bc74483afe933\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -35,10 +35,44 @@
             ]
         },
         {
-            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9a045e0170afcee558ff5046efac64fb\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -57,7 +91,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\c56d1b6a0fa1c114d30bc74483afe933\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -69,10 +103,10 @@
             ]
         },
         {
-            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -91,7 +125,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9a045e0170afcee558ff5046efac64fb\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9a045e0170afcee558ff5046efac64fb\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
