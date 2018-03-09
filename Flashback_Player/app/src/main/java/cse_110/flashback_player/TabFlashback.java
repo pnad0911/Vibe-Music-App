@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class TabFlashback extends Fragment {
     private SongPlayer songPlayer;
     public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;
+    private ListView sListView;
+    private SongAdapterFlashback adapter;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -64,8 +67,8 @@ public class TabFlashback extends Fragment {
         }
 
         // configure listview
-        SongAdapterFlashback adapter = new SongAdapterFlashback(this.getActivity(), songList);
-        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
+        adapter = new SongAdapterFlashback(this.getActivity(), songList);
+        sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
         sListView.setClickable(true);
@@ -109,7 +112,9 @@ public class TabFlashback extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
+//                songList = flashbackPlaylist.getFlashbackSong();
+                update();
+                adapter.notifyDataSetChanged();
                 songIdx = getNextSongIdx(songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -137,7 +142,13 @@ public class TabFlashback extends Fragment {
         });
 
         getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-
+//        ((VibeActivity)getActivity()).setFragmentRefreshListener(new VibeActivity.FragmentRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                SongList songListGen = new SongList();
+//                songList = songListGen.getAllsong();
+//            }
+//        });
         return rootView;
     }
     @Override
@@ -147,7 +158,11 @@ public class TabFlashback extends Fragment {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }
-
+    public void update() {
+        SongList songListGen = new SongList();
+        songList = songListGen.getAllsong();
+//        ((BaseAdapter)sListView.getAdapter()).notifyDataSetChanged();
+    }
     public int getNextSongIdx(List<Song> songs){
         int idx = 0;
         if(songIdx == songs.size()-1){

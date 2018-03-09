@@ -88,7 +88,6 @@
             android:background="#E8EAF6"
             android:elevation="20dp"
             android:src="@drawable/ic_playlist_add_black_24dp" />
-
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
