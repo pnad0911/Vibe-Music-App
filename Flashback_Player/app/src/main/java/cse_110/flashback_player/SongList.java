@@ -17,11 +17,16 @@ import java.util.Set;
  */
 
 public class SongList {
+<<<<<<< HEAD
     private final String RAWPATH = "app/src/main/res/raw/";
     private Map<String, List<Song>> AlbumSongList;
     private Map<String,String[]> data;
     private Activity activity;
     private MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+=======
+    private static final String RAWPATH = "app/src/main/res/raw/";
+    public Map<String, List<Song>> AlbumSongList;
+>>>>>>> master
 
     /* Constructor  */
     public SongList(Activity a) {
@@ -43,7 +48,9 @@ public class SongList {
         }
         return AlbumList;
     }
-
+    public Map<String, List<Song>> getB() {
+        return AlbumSongList;
+    }
     /*
      * getListOfSong : get the list of the song name file
      * Parameter: String AlbumName
@@ -76,7 +83,6 @@ public class SongList {
     private void generateAll() {
         AlbumSongList = new HashMap<String, List<Song>>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        //String s;
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
@@ -109,9 +115,7 @@ public class SongList {
 
     private boolean isAlbumExistFolder(String AlbumName) {
         if (AlbumName.isEmpty() || AlbumName.contains(" ")) return false;
-
         String path = RAWPATH + AlbumName;
-        System.out.println(path);
         File file = new File(path);
         if (file.exists()) {
             return true;

@@ -193,8 +193,4 @@ public class SongPlayer implements Parcelable{
 //        nextSong = (Song) in.readValue(null);
 //        paused = in.readInt();
     }
-
-    /* ENDS ---------------------------------------------------*/
-
-
 }

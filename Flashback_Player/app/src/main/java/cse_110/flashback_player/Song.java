@@ -73,7 +73,6 @@ public class Song implements SongSubject{
 
     public Song(){ }
 
-
     /* If created from local file, the song will not have user, location or date info */
     public Song (String title, String artist, String url, String album){
         this.title = title;
@@ -288,12 +287,11 @@ public class Song implements SongSubject{
 
     /* To update database */
     interface dataBaseCallback {
-        public abstract void callback(HashMap<String,String> user,
-                                      HashMap<String,String> locations,
+        public abstract void callback(HashMap<String, String> user,
+                                      HashMap<String, String> locations,
                                       String date,
                                       String url);
     }
-
 
 //    public Location getCurrentLocation(){ return this.currentLocation; }
 
