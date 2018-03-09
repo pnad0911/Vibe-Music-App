@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  * Created by Yutong on 3/1/18.
  */
 
-public class FriendMoveTest {
+public class SongUnitTest {
 
     Song song;
     Song song2;
@@ -80,8 +80,9 @@ public class FriendMoveTest {
     @Test
     public void testSongConstructorDatabase(){
 
-        Song newSong = new Song("aaa", "234","asd","asdfgg");
-        assertEquals(newSong.getSongUrl(), "123");
+        Song newSong = new Song("aaa", "asd","234","asdfgg");
+        Log.println(Log.ERROR, "TESING", "New date: " + newSong.getDate());
+        assertEquals("1000", newSong.getLocations().get("1000"));
     }
 
     @Test
@@ -90,18 +91,18 @@ public class FriendMoveTest {
         song.addUser("def");
         song.update();
 
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        Query queryRef = songRef.orderByChild("title").equalTo("aaaasd");
+        Query queryRef = databaseRef.child("SONGS").orderByChild("databaseKey").equalTo("aaaasd");
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot == null || snapshot.getValue() == null){
                     Log.println(Log.DEBUG, "info", "No such song as aaa");
+                    fail("Did not find the song");
 
                 }
                 else {
-                    Log.println(Log.DEBUG, "info", snapshot.child("aaa").getValue(Song.class).toString());
-                    assertEquals(((Map<String, String> ) snapshot.child("aaa").child("userNames").getValue()).get("def").toString(), "def");
+                    Log.println(Log.ERROR, "info", "Found Song: " + snapshot.child(song.getDatabaseKey()).getValue(Song.class).toString());
+                    assertEquals(((Map<String, String> ) snapshot.child(song.getDatabaseKey()).child("userNames").getValue()).get("def").toString(), "def");
                 }
             }
 

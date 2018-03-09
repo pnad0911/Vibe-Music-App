@@ -8,5 +8,5 @@ import java.time.OffsetDateTime;
  */
 
 public interface SongObserver {
-    void update(Location location, OffsetDateTime time);
+    void update();
 }

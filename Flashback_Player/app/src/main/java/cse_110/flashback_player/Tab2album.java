@@ -55,7 +55,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.timeAl);
 
         // get items from song list
-        final SongList songListGen = new SongList();
+        final SongList songListGen = new SongList(this.getActivity());
         List<String> albumNames = songListGen.getListOfAlbum();
 
         sListView = (ListView) rootView.findViewById(R.id.album_list);
@@ -127,7 +127,7 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
             }
         });
 
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+//        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
         return rootView;
     }
@@ -192,24 +192,24 @@ public class Tab2album extends Fragment { //TODO: to be changed to album list an
         else return false;
     }
     // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
+//    public void getData() {
+//        data = new HashMap<>();
+//        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
+//        for (Field f : raw) {
+//            try {
+//                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
+//                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+//                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+//                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+//                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+//                String[] list = new String[3];
+//                list[0] = ti;list[1] = ar;list[2] = al;
+//                data.put(f.getName(),list);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
 }

@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 
         @Before
         public void setUp(){
-            songList = new SongList();
+            songList = new SongList(main2Activity.getActivity());
         }
         @Test
         public void testGenerateAll(){

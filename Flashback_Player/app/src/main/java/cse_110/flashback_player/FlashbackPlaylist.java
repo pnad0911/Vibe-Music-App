@@ -1,6 +1,7 @@
 
 package cse_110.flashback_player;
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.time.OffsetDateTime;
@@ -30,8 +31,8 @@ public class FlashbackPlaylist {
     private OffsetDateTime currentTime;
 
     /* Constructor */
-    public FlashbackPlaylist() {
-        entireSongList = new SongList();
+    public FlashbackPlaylist(Activity a) {
+        entireSongList = new SongList(a);
 
         // initialize set of viable songs
         viableSongs = new HashSet<>();

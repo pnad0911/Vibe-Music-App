@@ -1,5 +1,9 @@
 package cse_110.flashback_player;
 
+import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaMetadataRetriever;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -13,11 +17,16 @@ import java.util.Set;
  */
 
 public class SongList {
-    private static final String RAWPATH = "app/src/main/res/raw/";
+    private final String RAWPATH = "app/src/main/res/raw/";
     private Map<String, List<Song>> AlbumSongList;
+    private Map<String,String[]> data;
+    private Activity activity;
+    private MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
     /* Constructor  */
-    public SongList() {
+    public SongList(Activity a) {
+        activity = a;
+        getData();
         generateAll();
     }
 
@@ -71,8 +80,7 @@ public class SongList {
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
-                Map<String, String[]> da = NormalActivity.data;
-                Song so = new Song(da.get(f.getName())[0], Integer.toString(f.getInt(null)), da.get(f.getName())[1], da.get(f.getName())[2]);
+                Song so = new Song(data.get(f.getName())[0], f.getInt(null), data.get(f.getName())[1], data.get(f.getName())[2]);
                 listOfSongs.add(so);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -112,12 +120,30 @@ public class SongList {
         }
     }
 
-
     private boolean isMp3File(String songName) {
         if (songName.endsWith(".mp3")) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void getData() {
+        data = new HashMap<>();
+        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
+        for (Field f : raw) {
+            try {
+                AssetFileDescriptor afd = activity.getResources().openRawResourceFd(f.getInt(null));
+                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+                String[] list = new String[3];
+                list[0] = ti;list[1] = ar;list[2] = al;
+                data.put(f.getName(),list);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -9,11 +9,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -23,10 +26,12 @@ import static android.content.Context.MODE_PRIVATE;
  * Added new constructor (Mp3 file name)-------- Duy
  */
 
-public class Song {
+public class Song implements SongSubject{
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseRef = database.getReference();
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static DatabaseReference databaseRef = database.getReference();
+
+    private GenericTypeIndicator<HashMap<String,String>> t = new GenericTypeIndicator<HashMap<String,String>>() {};
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -35,14 +40,22 @@ public class Song {
     private String songUrl;
     private String artist;
     private String album;
+    private String databaseKey;
+
+    private int id;
+
+    private ArrayList<SongObserver> observers = new ArrayList<>();
+    public void reg(SongObserver ob){
+        observers.add(ob);
+    }
 
     // song history information
 //    private Location previousLocation = null;
 //    private Location currentLocation;
-
+    private String date;
     private HashMap<String, String> locations = new HashMap<>();
     private HashMap<String, String> userNames = new HashMap<>();
-    private String date;
+
 
 //    private OffsetDateTime previousDate = null;
 //    private OffsetDateTime currentDate;
@@ -59,33 +72,26 @@ public class Song {
     // ----- CONSTRUCTORS ------------------------------------------
 
     public Song(){ }
-    public Song(String title, String songUrl, String artist, String album){
 
-        final String databaseKey = title+artist;
-        setTitle(title);
-        setArtist(artist);
-        setSongUrl(songUrl);
-        setAlbum(album);
 
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        Query queryRef = songRef.orderByChild("title").equalTo(databaseKey);
-        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    /* If created from local file, the song will not have user, location or date info */
+    public Song (String title, String artist, String url, String album){
+        this.title = title;
+        this.songUrl = url;
+        this.artist = artist;
+        this.album = album;
+        this.databaseKey = title+artist;
+        loadFromDatabase(new dataBaseCallback() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot == null || snapshot.getValue() == null) {
-                    Log.println(Log.DEBUG, "info", "No such song as aaa");
-
-                } else {
-                    createSong(snapshot.child(databaseKey).getValue(Song.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Faile to read value
-                Log.w("TAG1", "Failed to read value.", error.toException());
+            public void callback(HashMap<String,String> u, HashMap<String,String> l, String d, String url) {
+                locations = l;
+                userNames = u;
+                date = d;
+                songUrl = url;
             }
         });
+        try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
+        Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
     }
 
     public Song(String title, String songUrl, String artist, String album, Friend user){
@@ -96,36 +102,52 @@ public class Song {
         this.date = user.getTime();
         addLocation(user.getLocation());
         addUser(user.getID());
+        this.databaseKey = this.title+this.artist;
     }
 
-//    public Song(String title, String artist, String album){
-//        setTitle(title);
-//        setSongUrl(0);
-//        setArtist(artist);
-//        setAlbum(album);
-//    }
+    /* Local song creation */
+    public Song(String title, int id, String artist, String album){
+        this.title = title;
+        this.id = id;
+        this.artist = artist;
+        this.album = album;
+    }
 
-
-    public Song createSong(Song song){
-        return song;
+    private void setSong (Song song){
+        Log.println(Log.ERROR, "SETSONG", song.getSongUrl());
+        this.title = song.title;
+        this.songUrl = song.songUrl;
+        this.artist = song.artist;
+        this.album = song.album;
+        this.date = song.date;
+        this.locations = song.locations;
+        this.userNames = song.userNames;
+        this.databaseKey = song.title+song.artist;
     }
     // --- END CONSTRUCTORS --------------------------------------
 
     //----- SETTERS -------------------------------------------
-    private void setTitle(String title){
+    public void setTitle(String title){
         this.title = title;
     }
-
-    private void setSongUrl(String songUrl){
+    public void setSongUrl(String songUrl){
         this.songUrl = songUrl;
     }
-
-    private void setArtist(String artist) {
+    public void setArtist(String artist) {
         this.artist = artist;
     }
-
-    private void setAlbum(String album){
+    public void setAlbum(String album){
         this.album = album;
+    }
+    public void setDatabaseKey(String artist, String title) { this.databaseKey = title+artist;}
+    public void setDate(Object time){
+        this.date = time.toString();
+    }
+    public void setLocations(HashMap<String,String> l){
+        this.locations = l;
+    }
+    public void setUserNames(HashMap<String,String> u) {
+        this.userNames = u;
     }
 
     /* Favorite status is stored locally.*/
@@ -139,6 +161,7 @@ public class Song {
         this.like = like;
     }
 
+    public void addID (int id){ this.id = id; }
 
     public void addUser(String uid){
         userNames.put(uid,uid);
@@ -146,10 +169,6 @@ public class Song {
 
     public void addLocation(Location location){
         locations.put(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
-    }
-
-    public void setDate(Object time){
-        this.date = time.toString();
     }
 
     public void like(Context context) { like = 1; setPreviousLike(like, context);}
@@ -214,20 +233,67 @@ public class Song {
         return this.date;
     }
 
+    public String getDatabaseKey(){ return this.title+this.artist;}
+
     // END GETTER -------------------------------------------------
 
     /* Method called as long as this object is modified. */
     public void update(){
         Log.println(Log.INFO, "Database", "Updating song " + this.title + " in Firebase.");
         DatabaseReference songDataRef = databaseRef.child("SONGS");
-        songDataRef.child(this.title+this.artist).setValue(this);
-        songDataRef.child(this.title+this.artist).child("userNames").setValue(userNames);
+        songDataRef.child(this.databaseKey).setValue(this);
+//        songDataRef.child(this.title+this.artist).child("userNames").setValue(userNames);
+        for (SongObserver ob : observers){
+            ob.update();
+        }
     }
 
     @Override
     public String toString(){
         return this.title;
     }
+
+    /* Load song from database*/
+    private void loadFromDatabase(final dataBaseCallback c){
+        Log.println(Log.ERROR, "GETINSTANCE", "WEEEEEEE");
+        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
+        Query queryRef = songRef.orderByChild("databaseKey").equalTo(databaseKey);
+        queryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot == null || snapshot.getValue() == null) {
+                    Log.println(Log.ERROR, "GETINSTANCE", "No such song as "+databaseKey);
+
+                } else {
+                    Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
+
+                    // update current song object
+                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(t),
+                            snapshot.child(databaseKey).child("locations").getValue(t),
+                            snapshot.child(databaseKey).child("date").getValue(String.class),
+                            snapshot.child(databaseKey).child("songUrl").getValue(String.class));
+
+                    // update song observers (refresh Song List)
+                    for (SongObserver ob : observers) { ob.update();}
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Fail to read value
+                Log.w("TAG1", "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    /* To update database */
+    interface dataBaseCallback {
+        public abstract void callback(HashMap<String,String> user,
+                                      HashMap<String,String> locations,
+                                      String date,
+                                      String url);
+    }
+
 
 //    public Location getCurrentLocation(){ return this.currentLocation; }
 
@@ -376,3 +442,4 @@ public class Song {
 //    }
 
 }
+

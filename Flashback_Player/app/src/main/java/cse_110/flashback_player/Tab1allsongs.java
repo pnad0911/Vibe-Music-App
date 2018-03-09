@@ -60,7 +60,7 @@ public class Tab1allsongs extends Fragment {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        SongList songListGen = new SongList();
+        SongList songListGen = new SongList(this.getActivity());
         songList = songListGen.getAllsong();
 //        Location targetLocation = new Location("");//provider name is unnecessary
 //        targetLocation.setLatitude(0.0d);//your coords of course
@@ -145,7 +145,7 @@ public class Tab1allsongs extends Fragment {
              }
         });
 
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
+        //getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
 
         return rootView;
     }
@@ -205,24 +205,24 @@ public class Tab1allsongs extends Fragment {
     }
 
     // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
+//    public void getData() {
+//        data = new HashMap<>();
+//        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
+//        for (Field f : raw) {
+//            try {
+//                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
+//                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+//                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+//                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+//                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+//                String[] list = new String[3];
+//                list[0] = ti;list[1] = ar;list[2] = al;
+//                data.put(f.getName(),list);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
 }
