@@ -179,12 +179,11 @@ public class logIn extends AppCompatActivity{
 
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d("nothing", "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
             // Signed in successfolly, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             code = acct.getServerAuthCode();
-            System.out.println("codeeeeee" + code);
-            System.out.println("name" + acct.getDisplayName());
+            System.out.println("codeeeeee -----------------------------" + code);
+            System.out.println("name------------------------" + acct.getDisplayName());
 
             updateUI(acct);
         }

@@ -69,7 +69,7 @@ public class Song implements SongObserver{
         setArtist(artist);
         setAlbum(album);
         //user.register(this);
-        userName = user.getID();
+        //userName = user.getID();
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference();
     }
