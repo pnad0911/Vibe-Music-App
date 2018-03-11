@@ -20,12 +20,14 @@ package cse_110.flashback_player;
 public class Song {
 
     private boolean downloaded = false;
+
     public void setDownloaded() {
         downloaded = true;
     }
     public boolean getDownloadStatus() {
         return downloaded;
     }
+
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
        /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
