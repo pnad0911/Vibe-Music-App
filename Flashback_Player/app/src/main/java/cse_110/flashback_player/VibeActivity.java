@@ -158,7 +158,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(this);
-        edittext.setHint("AM I OUTTA MY HEAD!! AM I OUTTA MY MIND!!");
+        edittext.setHint("AM I OUTTA MY HEAD \nAM I OUTTA MY MIND");
         alert.setTitle("DOWNLOADS");
         alert.setMessage("Enter Your URL here").setCancelable(false);
         alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
