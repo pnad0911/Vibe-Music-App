@@ -74,7 +74,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
+    private TabFlashback tab1;
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
@@ -165,19 +165,18 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setDropDownWidth(252);
+        spinner.setDropDownWidth(552);
         spinner.setAdapter(dataAdapter);
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
-
-        // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+
+//        tab1.updateDisplay(l.getAllsong());
     }
     public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+
     }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -197,7 +196,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             switch (position) {
 
                 case 1:
-                    TabFlashback tab1 = new TabFlashback();
+                    tab1 = new TabFlashback();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
