@@ -23,8 +23,9 @@ public final class R {
     public static final int design_bottom_sheet_slide_out=0x7f01000b;
     public static final int design_snackbar_in=0x7f01000c;
     public static final int design_snackbar_out=0x7f01000d;
-    public static final int tooltip_enter=0x7f01000e;
-    public static final int tooltip_exit=0x7f01000f;
+    public static final int rotate=0x7f01000e;
+    public static final int tooltip_enter=0x7f01000f;
+    public static final int tooltip_exit=0x7f010010;
   }
   public static final class animator {
     public static final int design_appbar_state_list_animator=0x7f020000;
@@ -3566,38 +3567,42 @@ public final class R {
     public static final int heart=0x7f07007c;
     public static final int ic_add_black_24dp=0x7f07007d;
     public static final int ic_audiotrack_black_24dp=0x7f07007e;
-    public static final int ic_clear_black_24dp=0x7f07007f;
-    public static final int ic_dashboard_black_24dp=0x7f070080;
-    public static final int ic_format_bold_black_24dp=0x7f070081;
-    public static final int ic_home_black_24dp=0x7f070082;
-    public static final int ic_launcher_background=0x7f070083;
-    public static final int ic_launcher_foreground=0x7f070084;
-    public static final int ic_mood_bad_black_24dp=0x7f070085;
-    public static final int ic_notifications_black_24dp=0x7f070086;
-    public static final int ic_pause_black_24dp=0x7f070087;
-    public static final int ic_place_black_24dp=0x7f070088;
-    public static final int ic_play_arrow_black_24dp=0x7f070089;
-    public static final int ic_playlist_add_black_24dp=0x7f07008a;
-    public static final int ic_replay_black_24dp=0x7f07008b;
-    public static final int ic_skip_next_black_24dp=0x7f07008c;
-    public static final int ic_skip_previous_black_24dp=0x7f07008d;
-    public static final int ic_star_black_24dp=0x7f07008e;
-    public static final int navigation_empty_icon=0x7f07008f;
-    public static final int notification_action_background=0x7f070090;
-    public static final int notification_bg=0x7f070091;
-    public static final int notification_bg_low=0x7f070092;
-    public static final int notification_bg_low_normal=0x7f070093;
-    public static final int notification_bg_low_pressed=0x7f070094;
-    public static final int notification_bg_normal=0x7f070095;
-    public static final int notification_bg_normal_pressed=0x7f070096;
-    public static final int notification_icon_background=0x7f070097;
-    public static final int notification_template_icon_bg=0x7f070098;
-    public static final int notification_template_icon_low_bg=0x7f070099;
-    public static final int notification_tile_bg=0x7f07009a;
-    public static final int notify_panel_notification_icon_bg=0x7f07009b;
-    public static final int tooltip_frame_dark=0x7f07009c;
-    public static final int tooltip_frame_light=0x7f07009d;
-    public static final int topbar=0x7f07009e;
+    public static final int ic_autorenew_black_24dp=0x7f07007f;
+    public static final int ic_cached_black_24dp=0x7f070080;
+    public static final int ic_check_black_24dp=0x7f070081;
+    public static final int ic_clear_black_24dp=0x7f070082;
+    public static final int ic_dashboard_black_24dp=0x7f070083;
+    public static final int ic_file_download_black_24dp=0x7f070084;
+    public static final int ic_format_bold_black_24dp=0x7f070085;
+    public static final int ic_home_black_24dp=0x7f070086;
+    public static final int ic_launcher_background=0x7f070087;
+    public static final int ic_launcher_foreground=0x7f070088;
+    public static final int ic_mood_bad_black_24dp=0x7f070089;
+    public static final int ic_notifications_black_24dp=0x7f07008a;
+    public static final int ic_pause_black_24dp=0x7f07008b;
+    public static final int ic_place_black_24dp=0x7f07008c;
+    public static final int ic_play_arrow_black_24dp=0x7f07008d;
+    public static final int ic_playlist_add_black_24dp=0x7f07008e;
+    public static final int ic_replay_black_24dp=0x7f07008f;
+    public static final int ic_skip_next_black_24dp=0x7f070090;
+    public static final int ic_skip_previous_black_24dp=0x7f070091;
+    public static final int ic_star_black_24dp=0x7f070092;
+    public static final int navigation_empty_icon=0x7f070093;
+    public static final int notification_action_background=0x7f070094;
+    public static final int notification_bg=0x7f070095;
+    public static final int notification_bg_low=0x7f070096;
+    public static final int notification_bg_low_normal=0x7f070097;
+    public static final int notification_bg_low_pressed=0x7f070098;
+    public static final int notification_bg_normal=0x7f070099;
+    public static final int notification_bg_normal_pressed=0x7f07009a;
+    public static final int notification_icon_background=0x7f07009b;
+    public static final int notification_template_icon_bg=0x7f07009c;
+    public static final int notification_template_icon_low_bg=0x7f07009d;
+    public static final int notification_tile_bg=0x7f07009e;
+    public static final int notify_panel_notification_icon_bg=0x7f07009f;
+    public static final int tooltip_frame_dark=0x7f0700a0;
+    public static final int tooltip_frame_light=0x7f0700a1;
+    public static final int topbar=0x7f0700a2;
   }
   public static final class id {
     public static final int ALT=0x7f080000;
@@ -3810,10 +3815,11 @@ public final class R {
     public static final int useLogo=0x7f0800cf;
     public static final int view_offset_helper=0x7f0800d0;
     public static final int visible=0x7f0800d1;
-    public static final int wide=0x7f0800d2;
-    public static final int withText=0x7f0800d3;
-    public static final int wrap=0x7f0800d4;
-    public static final int wrap_content=0x7f0800d5;
+    public static final int waiting=0x7f0800d2;
+    public static final int wide=0x7f0800d3;
+    public static final int withText=0x7f0800d4;
+    public static final int wrap=0x7f0800d5;
+    public static final int wrap_content=0x7f0800d6;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f090000;
@@ -3900,10 +3906,12 @@ public final class R {
     public static final int select_dialog_singlechoice_material=0x7f0a0044;
     public static final int song_list_row=0x7f0a0045;
     public static final int song_list_row_flashback=0x7f0a0046;
-    public static final int support_simple_spinner_dropdown_item=0x7f0a0047;
-    public static final int tab1allsongs=0x7f0a0048;
-    public static final int tab2album=0x7f0a0049;
-    public static final int tooltip=0x7f0a004a;
+    public static final int song_list_row_upcoming=0x7f0a0047;
+    public static final int support_simple_spinner_dropdown_item=0x7f0a0048;
+    public static final int tab1allsongs=0x7f0a0049;
+    public static final int tab2album=0x7f0a004a;
+    public static final int tabupcoming=0x7f0a004b;
+    public static final int tooltip=0x7f0a004c;
   }
   public static final class menu {
     public static final int menu_main2=0x7f0b0000;
@@ -3914,14 +3922,9 @@ public final class R {
     public static final int ic_launcher_round=0x7f0c0001;
   }
   public static final class raw {
-    public static final int america_religious=0x7f0d0000;
-    public static final int at_midnight=0x7f0d0001;
-    public static final int back_east=0x7f0d0002;
-    public static final int blood_on_your_bootheels=0x7f0d0003;
-    public static final int cant_find_love=0x7f0d0004;
-    public static final int i_will_not_be_afraid=0x7f0d0005;
-    public static final int tightrope_walker=0x7f0d0006;
-    public static final int when_you_go=0x7f0d0007;
+    public static final int bad_things=0x7f0d0000;
+    public static final int one_call_away=0x7f0d0001;
+    public static final int see_you_again_absence_remix=0x7f0d0002;
   }
   public static final class string {
     public static final int abc_action_bar_home_description=0x7f0e0000;

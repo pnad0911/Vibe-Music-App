@@ -5,12 +5,9 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +29,7 @@ public class TabSongs extends Fragment {
     private SongPlayer songPlayer;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    private SongAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +60,7 @@ public class TabSongs extends Fragment {
             currSong = songList.get(songIdx);
 
             // configure listview
-            SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+            adapter = new SongAdapter(this.getActivity(), songList);
             final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
             sListView.setAdapter(adapter);
             // Handle on click event
@@ -85,7 +81,7 @@ public class TabSongs extends Fragment {
             @Override
             public void onClick(View view){
                 if(songPlayer.isPlaying()) {
-                    NormalActivity.getLocation();
+                    LibraryActivity.getLocation();
                     songPlayer.pause();
                     playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                 }
@@ -175,7 +171,7 @@ public class TabSongs extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
-        Context applicationContext =  NormalActivity.getContextOfApplication();
+        Context applicationContext =  LibraryActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -189,7 +185,7 @@ public class TabSongs extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-        currSong.addLocation(NormalActivity.getLocation());
+        currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
     }
 
@@ -197,5 +193,9 @@ public class TabSongs extends Fragment {
         if(song.getDate() == null || song.getLocations() == null) return true;
         else return false;
     }
-
+    public void updateDisplay(List<Song> list) {
+        songList.clear();
+        songList.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
 }

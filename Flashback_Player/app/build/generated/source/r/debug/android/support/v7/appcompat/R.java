@@ -18,8 +18,8 @@ public final class R {
         public static final int abc_slide_in_top = 0x7f010007;
         public static final int abc_slide_out_bottom = 0x7f010008;
         public static final int abc_slide_out_top = 0x7f010009;
-        public static final int tooltip_enter = 0x7f01000e;
-        public static final int tooltip_exit = 0x7f01000f;
+        public static final int tooltip_enter = 0x7f01000f;
+        public static final int tooltip_exit = 0x7f010010;
     }
     public static final class attr {
         public static final int actionBarDivider = 0x7f030000;
@@ -568,20 +568,20 @@ public final class R {
         public static final int abc_textfield_search_default_mtrl_alpha = 0x7f070057;
         public static final int abc_textfield_search_material = 0x7f070058;
         public static final int abc_vector_test = 0x7f070059;
-        public static final int notification_action_background = 0x7f070090;
-        public static final int notification_bg = 0x7f070091;
-        public static final int notification_bg_low = 0x7f070092;
-        public static final int notification_bg_low_normal = 0x7f070093;
-        public static final int notification_bg_low_pressed = 0x7f070094;
-        public static final int notification_bg_normal = 0x7f070095;
-        public static final int notification_bg_normal_pressed = 0x7f070096;
-        public static final int notification_icon_background = 0x7f070097;
-        public static final int notification_template_icon_bg = 0x7f070098;
-        public static final int notification_template_icon_low_bg = 0x7f070099;
-        public static final int notification_tile_bg = 0x7f07009a;
-        public static final int notify_panel_notification_icon_bg = 0x7f07009b;
-        public static final int tooltip_frame_dark = 0x7f07009c;
-        public static final int tooltip_frame_light = 0x7f07009d;
+        public static final int notification_action_background = 0x7f070094;
+        public static final int notification_bg = 0x7f070095;
+        public static final int notification_bg_low = 0x7f070096;
+        public static final int notification_bg_low_normal = 0x7f070097;
+        public static final int notification_bg_low_pressed = 0x7f070098;
+        public static final int notification_bg_normal = 0x7f070099;
+        public static final int notification_bg_normal_pressed = 0x7f07009a;
+        public static final int notification_icon_background = 0x7f07009b;
+        public static final int notification_template_icon_bg = 0x7f07009c;
+        public static final int notification_template_icon_low_bg = 0x7f07009d;
+        public static final int notification_tile_bg = 0x7f07009e;
+        public static final int notify_panel_notification_icon_bg = 0x7f07009f;
+        public static final int tooltip_frame_dark = 0x7f0700a0;
+        public static final int tooltip_frame_light = 0x7f0700a1;
     }
     public static final class id {
         public static final int action0 = 0x7f080006;
@@ -682,7 +682,7 @@ public final class R {
         public static final int topPanel = 0x7f0800c6;
         public static final int uniform = 0x7f0800cd;
         public static final int up = 0x7f0800ce;
-        public static final int wrap_content = 0x7f0800d5;
+        public static final int wrap_content = 0x7f0800d6;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f090000;
@@ -737,8 +737,8 @@ public final class R {
         public static final int select_dialog_item_material = 0x7f0a0042;
         public static final int select_dialog_multichoice_material = 0x7f0a0043;
         public static final int select_dialog_singlechoice_material = 0x7f0a0044;
-        public static final int support_simple_spinner_dropdown_item = 0x7f0a0047;
-        public static final int tooltip = 0x7f0a004a;
+        public static final int support_simple_spinner_dropdown_item = 0x7f0a0048;
+        public static final int tooltip = 0x7f0a004c;
     }
     public static final class string {
         public static final int abc_action_bar_home_description = 0x7f0e0000;

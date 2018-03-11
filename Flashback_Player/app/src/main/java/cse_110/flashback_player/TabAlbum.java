@@ -16,6 +16,8 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,10 +25,11 @@ public class TabAlbum extends Fragment {
 
     private int songIdx = 0;
     private ExpandableListView sListView;
-    private List<Song> songList;
+    private List<Song> songList = new ArrayList<>();
     private SongPlayer songPlayer;
     private Song currSong;
-
+    private AlbumAdapterExpandable adapter;
+    private Map<String, List<Song>> map;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
@@ -53,23 +56,14 @@ public class TabAlbum extends Fragment {
         // get items from song list
         final SongList songListGen = new SongList(this.getActivity());
         List<String> albumNames = songListGen.getListOfAlbum();
-
+        map = songListGen.getB();
         sListView = rootView.findViewById(R.id.album_list);
-        final AlbumAdapterExpandable adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames,songListGen.getB());
+        adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames, map);
         sListView.setAdapter(adapter);
 
         // Handle on click event
         sListView.setClickable(true);
-//        sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-//                String aName = (String) sListView.getItemAtPosition(position);
-//                songList = songListGen.getListOfSong(aName);
-//                songIdx = 0;
-//                play(songTitleView, songArtistView, songAlbumView,songTimeView);
-//            }
-//        });
+
         sListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -119,8 +113,13 @@ public class TabAlbum extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getNextSongIdx();
-                play(songTitleView, songArtistView, songAlbumView,songTimeView);
+                Map<String, List<Song>> a = new HashMap<String, List<Song>>();
+                ArrayList<Song> array = new ArrayList<>();
+                array.add(new Song("aaa",12,"aa","aaa"));
+                a.put("aaa",array);
+                updateDisplay(a);
+//                songIdx = getNextSongIdx();
+//                play(songTitleView, songArtistView, songAlbumView,songTimeView);
             }
 
         });
@@ -128,8 +127,10 @@ public class TabAlbum extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getPreviousSongIdx();
-                play(songTitleView, songArtistView, songAlbumView ,songTimeView);
+                if(!songList.isEmpty()) {
+                    songIdx = getPreviousSongIdx();
+                    play(songTitleView, songArtistView, songAlbumView, songTimeView);
+                }
             }
         });
         return rootView;
@@ -163,17 +164,17 @@ public class TabAlbum extends Fragment {
 
     public int getPreviousSongIdx(){
         int idx = 0;
-        if(songIdx == 0){
-            idx = songList.size()-1;
-        } else{
-            idx=songIdx - 1;
+        if (songIdx == 0) {
+            idx = songList.size() - 1;
+        } else {
+            idx = songIdx - 1;
         }
         return idx;
     }
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView,TextView songTimeView){
-        Context applicationContext =  NormalActivity.getContextOfApplication();
+        Context applicationContext =  LibraryActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -186,11 +187,9 @@ public class TabAlbum extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-
 //        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
-        currSong.addLocation(NormalActivity.getLocation());
+        currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
-
     }
 
 
@@ -198,5 +197,9 @@ public class TabAlbum extends Fragment {
         if(song.getDate() == null) return true;
         else return false;
     }
-
+    public void updateDisplay(Map<String, List<Song>> map) {
+        map.clear();
+        map.putAll(map);
+        adapter.notifyDataSetChanged();
+    }
 }

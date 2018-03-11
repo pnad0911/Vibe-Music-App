@@ -39,7 +39,7 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="cse_110.flashback_player.NormalActivity"
+            android:name="cse_110.flashback_player.LibraryActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>

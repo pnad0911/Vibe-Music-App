@@ -27,9 +27,17 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class Song implements SongSubject{
-
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static DatabaseReference databaseRef = database.getReference();
+
+    private boolean downloaded = false;
+
+    public void setDownloaded() {
+        downloaded = true;
+    }
+    public boolean getDownloadStatus() {
+        return downloaded;
+    }
 
     private GenericTypeIndicator<HashMap<String,String>> t = new GenericTypeIndicator<HashMap<String,String>>() {};
 
