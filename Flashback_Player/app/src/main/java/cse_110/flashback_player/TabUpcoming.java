@@ -27,9 +27,6 @@ import java.util.Map;
 
 public class TabUpcoming extends Fragment {
 
-    private int songIdx=0;
-    private Context context;
-    private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
     private SongList songListGen;
@@ -64,6 +61,7 @@ public class TabUpcoming extends Fragment {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }
+
 
     public void updateDisplay(List<Song> list) {
         songList.clear();

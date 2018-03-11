@@ -48,10 +48,7 @@ public class SongUpcomingAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //get view for row item
         View rowView = mInflater.inflate(R.layout.song_list_row_upcoming, parent, false);
-
-        //get view elements in list row
         TextView songNameView = (TextView) rowView.findViewById((R.id.name));
         TextView artistView = (TextView) rowView.findViewById((R.id.artist));
         TextView albumView = (TextView) rowView.findViewById((R.id.album));
