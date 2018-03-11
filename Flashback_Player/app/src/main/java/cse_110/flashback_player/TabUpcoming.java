@@ -4,33 +4,22 @@ package cse_110.flashback_player;
  * Created by Yutong on 2/10/18.
  */
 
-import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.location.Location;
-import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.lang.reflect.Field;
-import java.time.OffsetDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TabUpcoming extends Fragment {
 
     private List<Song> songList;
     private SongPlayer songPlayer;
     private SongList songListGen;
-    public SongUpcomingAdapter adapter;
+    public SongAdapterUpcoming adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +29,7 @@ public class TabUpcoming extends Fragment {
 
         songListGen = new SongList();
         songList = songListGen.getAllsong();
-        adapter = new SongUpcomingAdapter(this.getActivity(), songList);
+        adapter = new SongAdapterUpcoming(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event

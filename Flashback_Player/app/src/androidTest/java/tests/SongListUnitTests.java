@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import cse_110.flashback_player.NormalActivity;
+import cse_110.flashback_player.LibraryActivity;
 import cse_110.flashback_player.SongList;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
         private SongList songList;
 
         @Rule
-        public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
+        public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
 
         @Before
         public void setUp(){

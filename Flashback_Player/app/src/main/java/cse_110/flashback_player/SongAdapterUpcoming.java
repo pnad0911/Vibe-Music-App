@@ -19,12 +19,12 @@ import java.util.List;
  */
 
 //tutorial from https://www.raywenderlich.com/124438/android-listview-tutorial
-public class SongUpcomingAdapter extends BaseAdapter {
+public class SongAdapterUpcoming extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Song> mDataSource;
-    public SongUpcomingAdapter(Context context, List<Song> items){
+    public SongAdapterUpcoming(Context context, List<Song> items){
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

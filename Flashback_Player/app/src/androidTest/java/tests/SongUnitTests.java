@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.time.OffsetDateTime;
 
-import cse_110.flashback_player.NormalActivity;
+import cse_110.flashback_player.LibraryActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;
 
@@ -20,7 +20,7 @@ public class SongUnitTests {
     Song song;
 
     @Rule
-    public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
+    public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
 
 
     @Before

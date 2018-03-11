@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
  * Created by Daniel on 2/17/2018.
  */
 
-public class FlashbackPlaylist {
+public class VibePlaylist {
 
     /* Entire list of songs */
     private SongList entireSongList;
@@ -24,20 +24,20 @@ public class FlashbackPlaylist {
     /* Priority queue used to build the playlist */
     private PriorityQueue<Song> playlist;
 
-    /* Context provided by NormalActivity */
+    /* Context provided by LibraryActivity */
     private Context context;
 
     private OffsetDateTime currentTime;
 
     /* Constructor */
-    public FlashbackPlaylist() {
+    public VibePlaylist() {
         entireSongList = new SongList();
 
         // initialize set of viable songs
         viableSongs = new HashSet<>();
 
         // initialize context
-        context =  NormalActivity.getContextOfApplication();
+        context =  LibraryActivity.getContextOfApplication();
 
         // populate viable song set
         for (Song song : entireSongList.getAllsong()) {

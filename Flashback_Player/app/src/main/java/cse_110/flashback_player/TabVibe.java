@@ -23,23 +23,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabFlashback extends Fragment {
+public class TabVibe extends Fragment {
 
     public static int songIdx=0;
     private Song currSong;
     private SongPlayer songPlayer;
-    public static FlashbackPlaylist flashbackPlaylist;
+    public static VibePlaylist flashbackPlaylist;
     private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-    public SongAdapterFlashback adapter;
+    public SongAdapterVibe adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
-        flashbackPlaylist = new FlashbackPlaylist();
+        flashbackPlaylist = new VibePlaylist();
 
         /*
         * Get Buttons and TextViews*/
@@ -65,7 +65,7 @@ public class TabFlashback extends Fragment {
         }
 
         // configure listview
-        adapter = new SongAdapterFlashback(this.getActivity(), songList);
+        adapter = new SongAdapterVibe(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
@@ -179,7 +179,7 @@ public class TabFlashback extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
-        Context applicationContext =  NormalActivity.getContextOfApplication();
+        Context applicationContext =  LibraryActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -192,7 +192,7 @@ public class TabFlashback extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
+        currSong.setPreviousLocation(LibraryActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
     }
 

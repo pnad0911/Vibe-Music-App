@@ -25,11 +25,11 @@ import static org.junit.Assert.*;
 public class TestFlashbackPlaylist {
 
     @Rule
-    public ActivityTestRule<NormalActivity> mainActivity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
+    public ActivityTestRule<LibraryActivity> mainActivity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
 
-    private FlashbackPlaylist playlist;
+    private VibePlaylist playlist;
 
-    /* Context provided by NormalActivity */
+    /* Context provided by LibraryActivity */
     private Context context;
 
     Song song1;
@@ -48,14 +48,14 @@ public class TestFlashbackPlaylist {
 
     @Before
     public void setUp(){
-        playlist = new FlashbackPlaylist();
+        playlist = new VibePlaylist();
 
         song1 = new Song("cant_find_love", R.raw.cant_find_love, "artist", "album");
         song2 = new Song("america_religious", R.raw.america_religious, "artist", "album");
         song3 = new Song("at_midnight", R.raw.at_midnight, "artist", "album");
 
         // initialize context
-        context =  NormalActivity.getContextOfApplication();
+        context =  LibraryActivity.getContextOfApplication();
 
         dummyT1 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
         dummyT2 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");

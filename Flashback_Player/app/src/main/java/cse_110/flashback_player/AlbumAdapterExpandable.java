@@ -55,7 +55,7 @@ public class AlbumAdapterExpandable extends BaseExpandableListAdapter {
         Child.setText(songName.getTitle());
         a.setText(songName.getArtist());
         final Button likeBt = (Button) convertView.findViewById(R.id.like_bt);
-        int like = songName.getSongStatus(NormalActivity.getContextOfApplication());
+        int like = songName.getSongStatus(LibraryActivity.getContextOfApplication());
         if(like == 0) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         } else if(like == 1) {
@@ -105,16 +105,16 @@ public class AlbumAdapterExpandable extends BaseExpandableListAdapter {
         return convertView;
     }
     private void toggle(Button button, Song song) {
-        int songLiked = song.getSongStatus(NormalActivity.getContextOfApplication());
+        int songLiked = song.getSongStatus(LibraryActivity.getContextOfApplication());
         if(songLiked == 0) {
-            song.like(NormalActivity.getContextOfApplication());
+            song.like(LibraryActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
         } else if(songLiked == 1){
-            song.dislike(NormalActivity.getContextOfApplication());
-            TabFlashback.songIdx = 0;
+            song.dislike(LibraryActivity.getContextOfApplication());
+            TabVibe.songIdx = 0;
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
-            song.neutral(NormalActivity.getContextOfApplication());
+            song.neutral(LibraryActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
     }

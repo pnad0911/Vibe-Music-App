@@ -72,7 +72,7 @@ public class SongList {
         List<Song> listOfSongs = new ArrayList<>();
         for (Field f : raw) {
             try {
-                Map<String, String[]> da = NormalActivity.data;
+                Map<String, String[]> da = LibraryActivity.data;
                 Song so = new Song(da.get(f.getName())[0], f.getInt(null), da.get(f.getName())[1], da.get(f.getName())[2]);
                 listOfSongs.add(so);
             } catch (Exception e) {

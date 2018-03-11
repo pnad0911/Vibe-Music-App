@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,7 +174,7 @@ public class TabAlbum extends Fragment {
 
     /* change display on media player to current playing song*/
     public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView,TextView songTimeView){
-        Context applicationContext =  NormalActivity.getContextOfApplication();
+        Context applicationContext =  LibraryActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
@@ -188,7 +187,7 @@ public class TabAlbum extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setPreviousLocation(NormalActivity.getLocation(),applicationContext);
+        currSong.setPreviousLocation(LibraryActivity.getLocation(),applicationContext);
         currSong.setPreviousDate(applicationContext);
 
     }

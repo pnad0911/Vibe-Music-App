@@ -23,7 +23,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
 
     @Override
     public int compare(T t1, T t2) {
-        Context applicationContext =  NormalActivity.getContextOfApplication();
+        Context applicationContext =  LibraryActivity.getContextOfApplication();
         if (location == null || time == null) {
             return 0;
         }
