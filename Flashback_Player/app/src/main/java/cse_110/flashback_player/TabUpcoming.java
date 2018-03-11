@@ -28,8 +28,8 @@ public class TabUpcoming extends Fragment {
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
-        songListGen = new SongList(new VibeActivity());
-        songList = songListGen.getAllsong();
+        songListGen = new SongList(this.getActivity());
+        songList = songListGen.getAllsong();//System.out.println(songList.get(0).getTitle());
         adapter = new SongAdapterUpcoming(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);

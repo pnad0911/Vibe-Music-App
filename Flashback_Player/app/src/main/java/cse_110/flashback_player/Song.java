@@ -31,13 +31,13 @@ public class Song implements SongSubject{
     static DatabaseReference databaseRef = database.getReference();
 
     private boolean downloaded = false;
-
     public void setDownloaded() {
         downloaded = true;
     }
     public boolean getDownloadStatus() {
         return downloaded;
     }
+    public int getId() {return id;}
 
     private GenericTypeIndicator<HashMap<String,String>> t = new GenericTypeIndicator<HashMap<String,String>>() {};
 

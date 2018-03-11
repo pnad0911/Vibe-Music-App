@@ -111,7 +111,8 @@ public class SongPlayer implements Parcelable{
         paused = 0;
         mediaPlayer.reset();
 //        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getUrl());
-        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(123);
+//        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(123);
+        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getId());
 
         try{
             mediaPlayer.setDataSource(assetFileDescriptor);
