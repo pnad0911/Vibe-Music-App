@@ -307,37 +307,37 @@ public class NormalActivity extends AppCompatActivity {
     public static Context getContextOfApplication() {
         return contextOfApplication;
     }
-
-
-    public void createExternalStoragePublicMP3() {
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
-        File file = new File(path, "america_religious.mp3");
-
-        try {
-            path.mkdirs();
-            InputStream is = getResources().openRawResource(R.raw.america_religious);
-            OutputStream os = new FileOutputStream(file);
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            os.write(data);
-            is.close();
-            os.close();
-            MediaScannerConnection.scanFile(this,
-                    new String[]{file.toString()}, null,
-                    new MediaScannerConnection.OnScanCompletedListener() {
-                        public void onScanCompleted(String path, Uri uri) {
-                            Log.i("ExternalStorage", "Scanned " + path + ":");
-                            Log.i("ExternalStorage", "-> uri=" + uri);
-                        }
-                    });
-        } catch (IOException e) {
-            Log.w("ExternalStorage", "Error writing " + file, e);
-        }
-    }
-    boolean hasExternalStoragePublicMP3() {
-        File path = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_MUSIC);
-        File file = new File(path, "america_religious.mp3");
-        return file.exists();
-    }
+//
+//
+//    public void createExternalStoragePublicMP3() {
+//        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+//        File file = new File(path, "america_religious.mp3");
+//
+//        try {
+//            path.mkdirs();
+//            InputStream is = getResources().openRawResource(R.raw.america_religious);
+//            OutputStream os = new FileOutputStream(file);
+//            byte[] data = new byte[is.available()];
+//            is.read(data);
+//            os.write(data);
+//            is.close();
+//            os.close();
+//            MediaScannerConnection.scanFile(this,
+//                    new String[]{file.toString()}, null,
+//                    new MediaScannerConnection.OnScanCompletedListener() {
+//                        public void onScanCompleted(String path, Uri uri) {
+//                            Log.i("ExternalStorage", "Scanned " + path + ":");
+//                            Log.i("ExternalStorage", "-> uri=" + uri);
+//                        }
+//                    });
+//        } catch (IOException e) {
+//            Log.w("ExternalStorage", "Error writing " + file, e);
+//        }
+//    }
+//    boolean hasExternalStoragePublicMP3() {
+//        File path = Environment.getExternalStoragePublicDirectory(
+//                Environment.DIRECTORY_MUSIC);
+//        File file = new File(path, "america_religious.mp3");
+//        return file.exists();
+//    }
 }

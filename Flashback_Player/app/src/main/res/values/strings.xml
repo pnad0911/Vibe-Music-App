@@ -93,11 +93,11 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
-    <string name="tab_text_1">SONGS</string>
+    <string name="tab_text_1">TRACKS</string>
     <string name="tab_text_2">ALBUMS</string>
-    <string name="tab_text_d">DOWNLOADED</string>
+    <string name="tab_text_d">MY PLAYLIST</string>
     <string name="tab_text_u">UPCOMING</string>
-    <string name="mode_normal">NORMAL MODE</string>
+    <string name="mode_normal">LIBRARY</string>
     <string name="mode_flash">VIBE MODE</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
