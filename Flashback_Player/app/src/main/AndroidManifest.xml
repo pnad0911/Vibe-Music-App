@@ -25,11 +25,6 @@
             android:name=".NormalActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!--
@@ -48,6 +43,15 @@
             android:name=".VibeActivity"
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".logIn"
+            android:label="@string/title_activity_log_in"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

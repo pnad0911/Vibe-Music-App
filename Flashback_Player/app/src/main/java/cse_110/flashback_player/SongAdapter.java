@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
-
 /**
  * Created by Yutong on 2/7/18.
  * Adaptor that populates songs into the list view.

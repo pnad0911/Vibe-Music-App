@@ -91,7 +91,7 @@ public class FlashbackPlaylist {
 
         viableSongs.add(song);
 
-        // reinsert song to update its priority
+        // reinsert song to SongFriendMediator its priority
         if (isPlayable(song)) {
             playlist.remove(song);
             playlist.add(song);

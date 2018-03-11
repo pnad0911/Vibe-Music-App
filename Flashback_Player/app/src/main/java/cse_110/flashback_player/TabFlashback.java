@@ -113,7 +113,8 @@ public class TabFlashback extends Fragment {
             @Override
             public void onClick(View view){
 //                songList = flashbackPlaylist.getFlashbackSong();
-                update();
+//                update();
+                songList.clear();
                 adapter.notifyDataSetChanged();
                 songIdx = getNextSongIdx(songList);
                 play();

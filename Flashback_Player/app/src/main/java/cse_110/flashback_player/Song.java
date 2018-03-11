@@ -3,12 +3,13 @@ package cse_110.flashback_player;
         import android.content.Context;
         import android.content.SharedPreferences;
         import android.location.Location;
+        import android.util.Log;
 
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
         import com.google.gson.Gson;
 
         import java.time.OffsetDateTime;
-        import java.time.ZoneOffset;
-        import java.util.Date;
 
         import static android.content.Context.MODE_PRIVATE;
 
@@ -17,7 +18,10 @@ package cse_110.flashback_player;
  * Added new constructor (Mp3 file name)-------- Duy
  */
 
-public class Song {
+public class Song implements SongObserver{
+
+    FirebaseDatabase database;
+    DatabaseReference databaseRef;
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
        /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
@@ -28,15 +32,16 @@ public class Song {
     public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
     public int getSongStatus(Context context) { return getPreviousLike(context); }
 
-
     private String title;
     private int id;
     private String artist;
     private String album;
 
+    // song history information
     private OffsetDateTime timestamp;
     private Location previousLocation = null;
     private Location currentLocation;
+    private String userName;
 
     private Boolean isLiked;
 
@@ -50,6 +55,7 @@ public class Song {
     private final double latToFeet = 365228;
     private final double longToFeet = 305775;
 
+    // ----- CONSTRUCTORS ------------------------------------------
     public Song(String title, int id, String artist, String album){
         setTitle(title);
         setID(id);
@@ -57,13 +63,15 @@ public class Song {
         setAlbum(album);
     }
 
-    public Song(String title, int id, String artist, String album, Location loc, OffsetDateTime time){
+    public Song(String title, int id, String artist, String album, Friend user){
         setTitle(title);
         setID(id);
         setArtist(artist);
         setAlbum(album);
-        this.previousDate = time;
-        this.previousLocation = loc;
+        //user.register(this);
+        //userName = user.getID();
+        database = FirebaseDatabase.getInstance();
+        databaseRef = database.getReference();
     }
 
     public Song(String title, String artist, String album){
@@ -74,31 +82,25 @@ public class Song {
     }
 
     public Song(Song song){
-        setTitle(new String(song.getTitle()));
+        setTitle(song.getTitle());
         setID(song.getID());
-        setArtist(new String(song.getArtist()));
-        setAlbum(new String(song.getAlbum()));
+        setArtist(song.getArtist());
+        setAlbum(song.getAlbum());
+        setUser(song.getUser());
     }
+    // --- END CONSTRUCTORS --------------------------------------
 
+    //----- SETTERS -------------------------------------------
     private void setTitle(String title){
         this.title = title;
     }
 
-    private void setID(int id){
-        this.id = id;
-    }
+    private void setID(int id){ this.id = id;}
 
-    private void setArtist(String artist){
-        this.artist = artist;
-    }
+    private void setArtist(String artist) { this.artist = artist; }
 
     private void setAlbum(String album){
         this.album = album;
-    }
-
-    public void setPreviousDate() {
-        timestamp = OffsetDateTime.now().minusHours(8);
-        this.previousDate = timestamp;
     }
 
     public void setPreviousDate(Context context) {
@@ -115,6 +117,11 @@ public class Song {
     public void setPreviousLocationShared(Location location) {
         this.previousLocation = location;
     }
+
+    public void setUser(String uid){ userName = uid; }
+
+    // END SETTER -----------------------------------------------
+
     /**
      * for testing, delete later
      * @param time
@@ -137,6 +144,8 @@ public class Song {
     public String getAlbum(){
         return this.album;
     }
+
+    public String getUser(){ return this.userName; }
 
     public Location getPreviousLocation(Context context){
         SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
@@ -305,5 +314,14 @@ public class Song {
             return "evening";
         }
     }
+
+    public void update(Location location, OffsetDateTime time){
+        this.currentLocation = location;
+        this.currentDate = time;
+        Log.println(Log.INFO, "update","time and location updated: " + currentLocation.toString() + " " + time.toString());
+        databaseRef.child(this.getTitle()).setValue(this);
+    }
+
 }
+
 
