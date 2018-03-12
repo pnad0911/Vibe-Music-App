@@ -23,6 +23,16 @@ public class Song implements SongObserver{
     FirebaseDatabase database;
     DatabaseReference databaseRef;
 
+    private boolean downloaded = false;
+
+    public void setDownloaded() {
+        downloaded = true;
+    }
+    public boolean getDownloadStatus() {
+        return downloaded;
+    }
+
+
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
        /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like;

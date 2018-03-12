@@ -109,6 +109,8 @@ public class logIn extends AppCompatActivity{
         user.setLastName(account.getFamilyName());
         try {
             setUp();
+            Intent refresh = new Intent(this, NormalActivity.class);
+            startActivity(refresh);
         }catch(IOException e) {
             System.exit(1);
         }
@@ -185,7 +187,6 @@ public class logIn extends AppCompatActivity{
             code = acct.getServerAuthCode();
             System.out.println("codeeeeee -----------------------------" + code);
             System.out.println("name------------------------" + acct.getDisplayName());
-
             updateUI(acct);
         }
 

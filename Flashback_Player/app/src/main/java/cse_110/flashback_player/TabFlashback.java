@@ -32,9 +32,9 @@ public class TabFlashback extends Fragment {
     public static FlashbackPlaylist flashbackPlaylist;
     private List<Song> songList;
     private ListView sListView;
-    private SongAdapterFlashback adapter;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    public SongAdapterFlashback adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +68,8 @@ public class TabFlashback extends Fragment {
 
         // configure listview
         adapter = new SongAdapterFlashback(this.getActivity(), songList);
-        sListView = (ListView) rootView.findViewById(R.id.song_list);
+
+        final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
         sListView.setClickable(true);
@@ -88,37 +89,38 @@ public class TabFlashback extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(songPlayer.isPlaying()) {
-                    songPlayer.pause();
-                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-                }
-                else if (songPlayer.isPaused()) {
-                    songPlayer.resume();
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
-                }
-                else{
-                    play();
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                if(!songList.isEmpty()) {
+                    if (songPlayer.isPlaying()) {
+                        songPlayer.pause();
+                        playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    } else if (songPlayer.isPaused()) {
+                        songPlayer.resume();
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    } else {
+                        play();
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    }
                 }
             }
         });
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                songPlayer.stop();
+                if(!songList.isEmpty()) {
+                    songPlayer.stop();
+                }
             }
         });
 
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-//                songList = flashbackPlaylist.getFlashbackSong();
-//                update();
-                songList.clear();
-                adapter.notifyDataSetChanged();
-                songIdx = getNextSongIdx(songList);
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                updateDisplay(flashbackPlaylist.getFlashbackSong());
+                if(!songList.isEmpty()) {
+                    songIdx = getNextSongIdx(songList);
+                    play();
+                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                }
             }
 
         });
@@ -126,10 +128,12 @@ public class TabFlashback extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songList = flashbackPlaylist.getFlashbackSong();
-                songIdx = getPreviousSongIdx(songList);
-                play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                updateDisplay(flashbackPlaylist.getFlashbackSong());
+                if(!songList.isEmpty()) {
+                    songIdx = getPreviousSongIdx(songList);
+                    play();
+                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+                }
             }
         });
 
@@ -142,14 +146,7 @@ public class TabFlashback extends Fragment {
             }
         });
 
-        getData(); // ------------------------- Just Don't Delete This Line :) -----------------------
-//        ((VibeActivity)getActivity()).setFragmentRefreshListener(new VibeActivity.FragmentRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                SongList songListGen = new SongList();
-//                songList = songListGen.getAllsong();
-//            }
-//        });
+        getData();
         return rootView;
     }
     @Override
@@ -216,7 +213,7 @@ public class TabFlashback extends Fragment {
         if(song.getPreviousDate(context) == null) return true;
         else return false;
     }
-    // --------------------------------- Here Is The Reason ------------------------------
+
     public void getData() {
         data = new HashMap<>();
         Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
@@ -235,5 +232,11 @@ public class TabFlashback extends Fragment {
             }
 
         }
+    }
+
+    public void updateDisplay(List<Song> list) {
+        songList.clear();
+        songList.addAll(list);
+        adapter.notifyDataSetChanged();
     }
 }

@@ -34,6 +34,7 @@ public class TabSongs extends Fragment {
     private SongPlayer songPlayer;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    private SongAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +65,7 @@ public class TabSongs extends Fragment {
             currSong = songList.get(songIdx);
 
             // configure listview
-            SongAdapter adapter = new SongAdapter(this.getActivity(), songList);
+            adapter = new SongAdapter(this.getActivity(), songList);
             final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
             sListView.setAdapter(adapter);
             // Handle on click event
@@ -196,5 +197,10 @@ public class TabSongs extends Fragment {
     private boolean isNullDate(Song song, Context context) {
         if(song.getPreviousDate(context) == null || song.getPreviousLocation(context) == null) return true;
         else return false;
+    }
+    public void updateDisplay(List<Song> list) {
+        songList.clear();
+        songList.addAll(list);
+        adapter.notifyDataSetChanged();
     }
 }

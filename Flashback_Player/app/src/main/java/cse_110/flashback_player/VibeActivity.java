@@ -2,6 +2,7 @@ package cse_110.flashback_player;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -11,7 +12,7 @@ import android.media.MediaMetadataRetriever;
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.view.Gravity;
 import android.view.View;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -34,8 +37,10 @@ import android.support.v4.app.ActivityCompat;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -70,12 +75,11 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String,String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
+    private TabFlashback tab1;
     private String mProviderName;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
@@ -95,7 +99,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main3);
         contextOfApplication = getApplicationContext();
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
@@ -153,14 +156,40 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final EditText edittext = new EditText(this);
+        edittext.setHint("AM I OUTTA MY HEAD \nAM I OUTTA MY MIND");
+        alert.setTitle("DOWNLOADS");
+        alert.setMessage("Enter Your URL here").setCancelable(false);
+        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Editable YouEditTextValue = edittext.getText();
+                dialog.cancel();
+                dialog.dismiss();
+                alert.create();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+                dialog.dismiss();
+                alert.create();
+            }
+        });
+        alert.setView(edittext);
+
+
         ImageButton download = findViewById(R.id.download);
+        final AlertDialog alertd = alert.create();
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Download", Toast.LENGTH_LONG).show();
-                mSectionsPagerAdapter.notifyDataSetChanged();
+                alertd.show();
             }
         });
+
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         List<String> sortingOptions = new ArrayList<String>();
@@ -172,13 +201,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-//        if(getFragmentRefreshListener()!=null){
-//            getFragmentRefreshListener().onRefresh();
-//        }
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+//        tab1.updateDisplay(l.getAllsong());
     }
     public void onNothingSelected(AdapterView<?> arg0) {
 
@@ -200,14 +223,15 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             // getItem is called to instantiate the fragment for the given page.
             // At the same time it passes songPlayer to each tab so they share one reference
             switch (position) {
-                case 1:
-                    TabFlashback tab1 = new TabFlashback();
+
+                case 0:
+                    tab1 = new TabFlashback();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     tab1.update();
                     return tab1;
-                case 0:
+                case 1:
                     TabUpcoming tab2 = new TabUpcoming();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
@@ -227,9 +251,9 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         public CharSequence getPageTitle(int position){
 
             switch (position) {
-                case 0:
-                    return "UPCOMING";
                 case 1:
+                    return "UPCOMING";
+                case 0:
                     return "DOWNLOADED";
                 default:
                     return null;
