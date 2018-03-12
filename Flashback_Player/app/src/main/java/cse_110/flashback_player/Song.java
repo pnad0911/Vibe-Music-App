@@ -215,26 +215,26 @@ public class Song implements SongSubject{
 //    }
 
 
-    // END SETTER -----------------------------------------------
-
     //    public void setPreviousDate(OffsetDateTime time) {
 //        this.previousDate = time;
 //    }
-    public String getTitle(){
-        return title;
-    }
 
-    public String getSongUrl(){ return songUrl; }
+    // FIREBASE PURPOSE GETTERS --------------
+
+    public String getTitle(){ return title; }
     public String getArtist(){ return artist; }
     public String getAlbum(){ return this.album;}
+    public String getSongUrl(){ return songUrl; }
+    public String getDate(){ return this.date; }
+    public String getDatabaseKey(){ return this.title+this.artist;}
     public ArrayList<Pair<String,String>> getLocations(){ return this.locations;}
     public ArrayList<String> getUserNames(){ return this.userNames; }
 
+    // LOCAL PURPOSE GETTERS ----------------
+
     public int getSongStatus (Context context) { return getPreviousLike(context); }
 
-    public Pair<String,String> getPreviousLocation () {
-        return locations.get(locations.size()-1);
-    }
+    public Pair<String,String> getPreviousLocation () { return locations.get(locations.size()-1); }
 
     public int getPreviousLike(Context context){
         try {
@@ -262,13 +262,6 @@ public class Song implements SongSubject{
         return this.songUrl;
     }
 
-    public String getDate(){
-        return this.date;
-    }
-
-    public String getDatabaseKey(){ return this.title+this.artist;}
-
-    // END GETTER -------------------------------------------------
 
     /* Method called as long as this object is modified. */
     public void updateDatabase(){

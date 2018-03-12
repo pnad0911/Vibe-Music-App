@@ -83,7 +83,7 @@ public class SongList {
     }
 
     /*
-    * Refresh the song list, get the newly downloaded song and assign url to that song
+    * Refresh the song list, find the newly downloaded song and assign url to that song
     * Parameter: new url */
     public void refresh(String url){
         generateAll();
@@ -97,7 +97,7 @@ public class SongList {
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH)
+        File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         List<Song> listOfSongs = new ArrayList<>();
         for (File f : path.listFiles()) {
             try {
