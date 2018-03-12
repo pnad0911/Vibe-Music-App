@@ -88,7 +88,7 @@ public class SongList {
     public void refresh(String url){
         generateAll();
         for (Song s : songs){
-            if (s.getSongUrl() == ""){
+            if (s.getSongUrl().equals("")){
                 s.setSongUrl(url, activity.getApplicationContext());
             }
         }

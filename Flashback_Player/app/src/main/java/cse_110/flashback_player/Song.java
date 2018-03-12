@@ -109,14 +109,6 @@ public class Song implements SongSubject{
         Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
     }
 
-//    public Song(String title, String songUrl, String artist, String album){
-//        this.title = title;
-//        this.songUrl = songUrl;
-//        this.artist = artist;
-//        this.album = album;
-//        this.databaseKey = this.title+this.artist;
-//    }
-
     /* Local song creation */
     public Song(String title, String artist, String album, String path, Boolean local){
         this.title = title;
