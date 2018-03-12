@@ -1,4 +1,5 @@
 #Internal package file, do not edit.
+<<<<<<< HEAD
 #Sun Mar 11 23:04:55 PDT 2018
 2.base=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/90
 5.set=DEX
@@ -12,6 +13,21 @@ count=6
 5.baseType=DIRECTORY
 2.path=classes.dex
 5.base=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/93
+=======
+#Mon Mar 12 13:04:32 PDT 2018
+2.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/35
+5.set=DEX
+0.path=classes.dex
+2.baseType=DIRECTORY
+3.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/32
+2.set=DEX
+1.path=classes.dex
+4.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/33
+count=6
+5.baseType=DIRECTORY
+2.path=classes.dex
+5.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/31
+>>>>>>> 243a93fcabcb7509365c06f8056a00c9b610d053
 4.set=DEX
 3.path=classes.dex
 3.baseType=DIRECTORY
@@ -19,9 +35,16 @@ count=6
 4.path=classes.dex
 1.baseType=DIRECTORY
 5.path=classes.dex
+<<<<<<< HEAD
 0.base=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/91
 0.baseType=DIRECTORY
 3.set=DEX
 1.base=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/92
+=======
+0.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/36
+0.baseType=DIRECTORY
+3.set=DEX
+1.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/34
+>>>>>>> 243a93fcabcb7509365c06f8056a00c9b610d053
 4.baseType=DIRECTORY
 0.set=DEX

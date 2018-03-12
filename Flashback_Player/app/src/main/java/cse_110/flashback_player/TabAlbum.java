@@ -113,16 +113,14 @@ public class TabAlbum extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Map<String, List<Song>> a = new HashMap<String, List<Song>>();
-                ArrayList<Song> array = new ArrayList<>();
-                array.add(new Song("aaa",12,"aa","aaa"));
-                a.put("aaa",array);
-                updateDisplay(a);
-//                songIdx = getNextSongIdx();
-//                play(songTitleView, songArtistView, songAlbumView,songTimeView);
+                if (!songList.isEmpty()) {
+                    songIdx = getNextSongIdx();
+                    play(songTitleView, songArtistView, songAlbumView, songTimeView);
+                }
             }
 
         });
+
 
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
