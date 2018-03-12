@@ -27,12 +27,6 @@ import com.google.api.services.people.v1.PeopleService;
 import com.google.api.services.people.v1.model.ListConnectionsResponse;
 import com.google.api.services.people.v1.model.Person;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +36,8 @@ public class logIn extends AppCompatActivity{
     int RC_SIGN_IN = 13;
     GoogleApiClient mGoogleApiClient;
 
-    String clientId = "789042053023-098npoep4ib14lfpn2cjpqb05e178k22.apps.googleusercontent.com";
-    String clientSecret = "2tpuJLowjoQgp2m6N0IbD4m5";
+    String clientId = "381331143314-o3f86fnls6l787276v9rghph4eat6p8v.apps.googleusercontent.com";
+    String clientSecret = "_BAEhqmE5xmcGVtqNljvgWCB";
     String code;
     HttpTransport httpTransport;
     JacksonFactory jsonFactory;
