@@ -42,7 +42,6 @@ public class Song implements SongSubject{
     public int getId() {return id;}
 
     private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
-    private GenericTypeIndicator<HashMap<String,String>> n = new GenericTypeIndicator<HashMap<String,String>>() {};
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -65,7 +64,7 @@ public class Song implements SongSubject{
 //    private Location currentLocation;
     private String date;
     private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
-    private HashMap<String,String> userNames = new HashMap<>();
+    private ArrayList<HashMap<String,String>> userNames = new ArrayList<>();
 
 
 //    private OffsetDateTime previousDate = null;
@@ -93,7 +92,7 @@ public class Song implements SongSubject{
         this.databaseKey = title+artist;
         loadFromDatabase(new dataBaseCallback() {
             @Override
-            public void callback(HashMap<String,String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
+            public void callback(ArrayList<HashMap<String,String>> u, ArrayList<HashMap<String,String>> l, String d, String url) {
                 locations = l;
                 userNames = u;
                 date = d;
@@ -153,7 +152,7 @@ public class Song implements SongSubject{
     public void setLocations(ArrayList<HashMap<String,String>> l){
         this.locations = l;
     }
-    public void setUserNames(HashMap<String,String> u) {
+    public void setUserNames(ArrayList<HashMap<String,String>> u) {
         this.userNames = u;
     }
 
@@ -171,7 +170,9 @@ public class Song implements SongSubject{
     public void addID (int id){ this.id = id; }
 
     public void addUser(String first, String last){
-        userNames.put(first+last, first+last);
+        HashMap<String,String> hm = new HashMap<>();
+        hm.put(first+last, first+last);
+        userNames.add(hm);
     }
 
     public void addLocation(Location location){
@@ -212,16 +213,14 @@ public class Song implements SongSubject{
     }
 
     public String getSongUrl(){ return songUrl; }
-
     public String getArtist(){ return artist; }
-
     public String getAlbum(){
         return this.album;
     }
+    public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
+    public ArrayList<HashMap<String,String>> getUserNames(){ return this.userNames; }
 
-    public HashMap<String,String> getUserNames(){ return this.userNames; }
-
-    public ArrayList<Pair<String,String>> getLocations(){
+    public ArrayList<Pair<String,String>> getAllLocations(){
         ArrayList<Pair<String,String>> toReturn = new ArrayList<>();
         for (HashMap<String,String> hm : this.locations){
             ArrayList<String> latArr = new ArrayList<>(hm.keySet());
@@ -292,7 +291,7 @@ public class Song implements SongSubject{
                     Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
 
                     // update current song object
-                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),
+                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(t),
                             snapshot.child(databaseKey).child("locations").getValue(t),
                             snapshot.child(databaseKey).child("date").getValue(String.class),
                             snapshot.child(databaseKey).child("songUrl").getValue(String.class));
@@ -312,7 +311,7 @@ public class Song implements SongSubject{
 
     /* To update database */
     interface dataBaseCallback {
-        public abstract void callback(HashMap<String,String> user,
+        public abstract void callback(ArrayList<HashMap<String,String>> user,
                                       ArrayList<HashMap<String,String>> locations,
                                       String date,
                                       String url);
