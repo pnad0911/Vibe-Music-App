@@ -76,6 +76,21 @@
             ]
         },
         {
+            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "/Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/res/values-v18/values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v18/values-v18.xml",
             "map": [
                 {

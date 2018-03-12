@@ -22,7 +22,7 @@ import java.time.ZoneOffset;
 import java.util.Map;
 
 import cse_110.flashback_player.Friend;
-import cse_110.flashback_player.NormalActivity;
+import cse_110.flashback_player.LibraryActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;
 
@@ -45,7 +45,7 @@ public class SongUnitTest {
     DatabaseReference databaseRef = database.getReference();
 
     @Rule
-    public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
+    public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
 
 
     @Before
@@ -61,12 +61,12 @@ public class SongUnitTest {
         time1 = OffsetDateTime.of(2000,10,10,10,10,10,10, ZoneOffset.UTC);
         time2 = OffsetDateTime.of(2010,11,12,10,10,10,10, ZoneOffset.UTC);
 
-        friend = new Friend("abc", location1, time1 );
-        friend2 = new Friend("def", location2, time2 );
-        song = new Song("aaa","123", "asd","asdf",friend);
-        song.update();
-        song2 = new Song("bbb", "234", "asd","asdf", friend2);
-        song2.update();
+//        friend = new Friend("abc", location1, time1 );
+//        friend2 = new Friend("def", location2, time2 );
+//        song = new Song("aaa","123", "asd","asdf",friend);
+//        song.update();
+//        song2 = new Song("bbb", "234", "asd","asdf", friend2);
+//        song2.update();
     }
 
     @Test
