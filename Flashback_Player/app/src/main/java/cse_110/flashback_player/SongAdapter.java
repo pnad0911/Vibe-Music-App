@@ -60,7 +60,7 @@ public class SongAdapter extends BaseAdapter {
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
         final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
-        int like = song.getSongStatus(NormalActivity.getContextOfApplication());
+        int like = song.getSongStatus(LibraryActivity.getContextOfApplication());
         if(like == 0) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         } else if(like == 1) {
@@ -78,20 +78,20 @@ public class SongAdapter extends BaseAdapter {
         return rowView;
     }
     private void toggle(Button button, Song song) {
-        int songLiked = song.getSongStatus(NormalActivity.getContextOfApplication());
+        int songLiked = song.getSongStatus(LibraryActivity.getContextOfApplication());
         if(songLiked == 0) {
-            song.like(NormalActivity.getContextOfApplication());
-//            TabFlashback.flashbackPlaylist.likeSong(song);
+            song.like(LibraryActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
         } else if(songLiked == 1){
-            song.dislike(NormalActivity.getContextOfApplication());
-//            TabFlashback.flashbackPlaylist.dislikeSong(song);
-            TabFlashback.songIdx = 0;
+            song.dislike(LibraryActivity.getContextOfApplication());
+            TabVibe.songIdx = 0;
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
-            song.neutral(NormalActivity.getContextOfApplication());
-//            TabFlashback.flashbackPlaylist.neutralSong(song);
+            song.neutral(LibraryActivity.getContextOfApplication());
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
     }
 }
+
+
+

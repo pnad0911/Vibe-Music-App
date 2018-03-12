@@ -3,7 +3,6 @@ package cse_110.flashback_player;
 import android.content.Context;
 
 import android.location.Location;
-import android.util.Log;
 
 import java.time.OffsetDateTime;
 import java.util.Comparator;
@@ -24,7 +23,7 @@ public class SongCompare<T extends Song> implements Comparator<T> {
 
     @Override
     public int compare(T t1, T t2) {
-        Context applicationContext =  NormalActivity.getContextOfApplication();
+        Context applicationContext =  LibraryActivity.getContextOfApplication();
         if (location == null || time == null) {
             return 0;
         }
@@ -38,26 +37,19 @@ public class SongCompare<T extends Song> implements Comparator<T> {
             }
         }
 
-        Log.i("SongCompare", "" + t1.getSongStatus(FlashBackActivity.getContextOfApplication()));
-        Log.i("SongCompare", "" + t2.getSongStatus(FlashBackActivity.getContextOfApplication()));
-
-        if(t1.getSongStatus(FlashBackActivity.getContextOfApplication()) != t2.getSongStatus(FlashBackActivity.getContextOfApplication())){
-            if(t1.getSongStatus(FlashBackActivity.getContextOfApplication()) == 1){
+        if(t1.getSongStatus(VibeActivity.getContextOfApplication()) != t2.getSongStatus(VibeActivity.getContextOfApplication())){
+            if(t1.getSongStatus(VibeActivity.getContextOfApplication()) == 1){
                 return -1;
             }
             else{
                 return 1;
             }
         }
-        if(t1.getPreviousDate(applicationContext).isAfter(t2.getPreviousDate(applicationContext))){
-            return -1;
-        }
+//        if(t1.getPreviousDate(applicationContext).isAfter(t2.getPreviousDate(applicationContext))){
+//            return -1;
+//        }
 
         return 1;
     }
     Boolean a = null;
 }
-
-
-
-

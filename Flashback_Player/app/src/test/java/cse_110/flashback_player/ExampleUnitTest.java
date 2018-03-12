@@ -5,7 +5,6 @@ import android.location.LocationManager;
 
 import org.junit.Test;
 
-import java.time.OffsetDateTime;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -19,10 +18,6 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void getScore_isCorrect() throws Exception {
-        Song song = new Song("My Song", "Beverly", "My Album");
-        song.setPreviousDate(OffsetDateTime.now());
-        song.setCurrentDate(OffsetDateTime.of(2018, 2, 16, 16, 3, 30, 100, ZoneOffset(-08:00));
     public void getTimeOfDay_isCorrect() throws Exception {
         Song song = new Song("My Song", "Beverly", "My Album");
 
@@ -63,13 +58,10 @@ public class ExampleUnitTest {
     @Test
     public void getLocationScoreCorrect() {
         Song song = new Song("My Song", "Beverly", "My Album");
-        String locationProvider = LocationManager.GPS_PROVIDER;
-        Location myLoc = new Location(locationProvider);
+        Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
         myLoc.setLatitude(100);
-        myLoc.setLongitude(100);
-
         System.out.println(myLoc.getLatitude());
-
+        myLoc.setLongitude(100);
         System.out.println(myLoc.getLongitude());
 
         song.setPreviousLocation(myLoc);
