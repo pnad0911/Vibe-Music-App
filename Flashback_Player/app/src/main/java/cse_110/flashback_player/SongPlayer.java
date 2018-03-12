@@ -20,6 +20,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -112,10 +114,11 @@ public class SongPlayer implements Parcelable{
         mediaPlayer.reset();
 //        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getUrl());
 //        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(123);
-        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getId());
-
+//        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getId());
         try{
-            mediaPlayer.setDataSource(assetFileDescriptor);
+            FileInputStream f = new FileInputStream(song.localPath);
+            FileDescriptor fd = f.getFD();
+            mediaPlayer.setDataSource(fd);
             mediaPlayer.prepare();
 
         }
