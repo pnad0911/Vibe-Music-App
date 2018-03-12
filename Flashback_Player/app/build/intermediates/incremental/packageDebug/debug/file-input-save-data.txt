@@ -1,23 +1,17 @@
 #Internal package file, do not edit.
-<<<<<<< HEAD
-#Sun Mar 11 22:46:56 PDT 2018
-0.baseType=DIRECTORY
-0.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/50
-0.path=classes.dex
-=======
-#Sun Mar 11 22:31:00 PDT 2018
-2.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/82
+#Mon Mar 12 13:04:32 PDT 2018
+2.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/35
 5.set=DEX
 0.path=classes.dex
 2.baseType=DIRECTORY
-3.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/85
+3.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/32
 2.set=DEX
 1.path=classes.dex
-4.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/86
+4.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/33
 count=6
 5.baseType=DIRECTORY
 2.path=classes.dex
-5.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/83
+5.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/31
 4.set=DEX
 3.path=classes.dex
 3.baseType=DIRECTORY
@@ -25,11 +19,9 @@ count=6
 4.path=classes.dex
 1.baseType=DIRECTORY
 5.path=classes.dex
-0.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/84
+0.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/36
 0.baseType=DIRECTORY
 3.set=DEX
-1.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/81
+1.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/34
 4.baseType=DIRECTORY
->>>>>>> master
 0.set=DEX
-count=1

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -21,7 +22,7 @@ import java.util.Set;
 
 public class SongList {
     private final String RAWPATH = "app/src/main/res/raw/";
-    private final String DOWNLOADPATH = Environment.DIRECTORY_DOWNLOADS; //TODO see if it really returns download folder
+    private final String DOWNLOADPATH = Environment.DIRECTORY_DOWNLOADS;
     private Map<String, List<Song>> AlbumSongList = new HashMap<>();
     private ArrayList<Song> songs = new ArrayList<>();
     private Map<String,String[]> data;
@@ -99,26 +100,29 @@ public class SongList {
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         List<Song> listOfSongs = new ArrayList<>();
-        for (File f : path.listFiles()) {
-            try {
-                if (isMp3File(f)) {
-                    String filePath = f.getAbsolutePath();
-                    Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
-                    so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
-                    songs.add(so);
+        File[] files = path.listFiles();
+        if (files!=null) {
+            for (File f : files) {
+                try {
+                    if (isMp3File(f)) {
+                        String filePath = f.getAbsolutePath();
+                        Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
+                        so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
+                        songs.add(so);
 
-                    // maintain album list
-                    String album = so.getAlbum();
-                    if (AlbumSongList.isEmpty() || !AlbumSongList.containsKey(album)) {
-                        ArrayList<Song> array = new ArrayList<>();
-                        array.add(so);
-                        AlbumSongList.put(album, array);
-                    } else {
-                        AlbumSongList.get(album).add(so);
+                        // maintain album list
+                        String album = so.getAlbum();
+                        if (AlbumSongList.isEmpty() || !AlbumSongList.containsKey(album)) {
+                            ArrayList<Song> array = new ArrayList<>();
+                            array.add(so);
+                            AlbumSongList.put(album, array);
+                        } else {
+                            AlbumSongList.get(album).add(so);
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -151,28 +155,35 @@ public class SongList {
         data = new HashMap<>();
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
-        for (File f : path.listFiles()) {
-            try {
+        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.toString());
+        File[] fileArray = path.listFiles();
+        if (fileArray != null) {
+            for (File f : fileArray) {
+                try {
 //                AssetFileDescriptor afd = activity.getResources().openRawResourceFd(f.getInt(null));
 //                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                if (isMp3File(f)) {
-                    FileInputStream fileInputStream = new FileInputStream(f);
-                    FileDescriptor fd = fileInputStream.getFD();
-                    mmr.setDataSource(fd);
-                    String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                    String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                    String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                    String[] list = new String[3];
-                    list[0] = ti;
-                    list[1] = ar;
-                    list[2] = al;
-                    data.put(f.getAbsolutePath(), list);
+                    if (isMp3File(f)) {
+                        FileInputStream fileInputStream = new FileInputStream(f);
+                        FileDescriptor fd = fileInputStream.getFD();
+                        mmr.setDataSource(fd);
+                        String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+                        String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+                        String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+                        String[] list = new String[3];
+                        list[0] = ti;
+                        list[1] = ar;
+                        list[2] = al;
+                        data.put(f.getAbsolutePath(), list);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
+
 }
+
+
 
 

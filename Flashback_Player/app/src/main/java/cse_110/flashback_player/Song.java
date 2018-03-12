@@ -36,7 +36,7 @@ public class Song implements SongSubject{
     public void setDownloaded() {
         downloaded = true;
     }
-    public boolean getDownloadStatus(Context context) {
+    public boolean getDownloadStatus() {
         return downloaded;
     }
 //    public int getId() {return id;}
