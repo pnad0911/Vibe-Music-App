@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -19,6 +20,8 @@ import org.junit.Test;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import cse_110.flashback_player.Friend;
@@ -44,9 +47,11 @@ public class SongUnitTest {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference();
 
+    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
+    private GenericTypeIndicator<HashMap<String,String>> n = new GenericTypeIndicator<HashMap<String,String>>() {};
+
     @Rule
     public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
-
 
     @Before
     public void setUp(){
@@ -63,16 +68,22 @@ public class SongUnitTest {
 
 //        friend = new Friend("abc", location1, time1 );
 //        friend2 = new Friend("def", location2, time2 );
-//        song = new Song("aaa","123", "asd","asdf",friend);
-//        song.update();
-//        song2 = new Song("bbb", "234", "asd","asdf", friend2);
-//        song2.update();
+        song = new Song("aaa", "asd","123","asdf",false);
+        song.addUser("abc","abc");
+        song.addLocation(location1);
+        song.setDate(time1);
+        song.updateDatabase();
+        song2 = new Song("bbb", "asd", "234","asdf",false);
+        song2.addUser("def","def");
+        song2.addLocation(location2);
+        song2.setDate(time2);
+        song2.updateDatabase();
     }
 
     @Test
     public void testSongConstructor(){
 
-        assertEquals(song.getLocations().get("1000"), Integer.toString((int)location1.getLongitude()));
+        assertEquals(song.getLocations().get(0).first, Integer.toString((int)location1.getLongitude()));
         assertEquals(song.getDate(), time1.toString());
 
     }
@@ -80,16 +91,16 @@ public class SongUnitTest {
     @Test
     public void testSongConstructorDatabase(){
 
-        Song newSong = new Song("aaa", "asd","234","asdfgg");
+        Song newSong = new Song("aaa", "asd","234","asdfgg",false);
         Log.println(Log.ERROR, "TESING", "New date: " + newSong.getDate());
-        assertEquals("1000", newSong.getLocations().get("1000"));
+        assertEquals("1000", newSong.getLocations().get(0).first);
     }
 
     @Test
     public void testUpdate(){
 
-        song.addUser("def");
-        song.update();
+        song.addUser("def","def");
+        song.updateDatabase();
 
         Query queryRef = databaseRef.child("SONGS").orderByChild("databaseKey").equalTo("aaaasd");
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,7 +113,7 @@ public class SongUnitTest {
                 }
                 else {
                     Log.println(Log.ERROR, "info", "Found Song: " + snapshot.child(song.getDatabaseKey()).getValue(Song.class).toString());
-                    assertEquals(((Map<String, String> ) snapshot.child(song.getDatabaseKey()).child("userNames").getValue()).get("def").toString(), "def");
+                    assertEquals(snapshot.child(song.getDatabaseKey()).child("userNames").getValue(t).get(0), "defdef");
                 }
             }
 
