@@ -36,12 +36,13 @@ public class Song implements SongSubject{
     public void setDownloaded() {
         downloaded = true;
     }
-    public boolean getDownloadStatus() {
+    public boolean getDownloadStatus(Context context) {
         return downloaded;
     }
-    public int getId() {return id;}
+//    public int getId() {return id;}
 
-    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
+    private GenericTypeIndicator<ArrayList<Pair<String,String>>> t = new GenericTypeIndicator<ArrayList<Pair<String,String>>>() {};
+    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -52,7 +53,7 @@ public class Song implements SongSubject{
     private String album;
     private String databaseKey;
 
-    private int id;
+    public String localPath; //This can be set directly without calling setters
 
     private ArrayList<SongObserver> observers = new ArrayList<>();
     public void reg(SongObserver ob){
@@ -63,8 +64,8 @@ public class Song implements SongSubject{
 //    private Location previousLocation = null;
 //    private Location currentLocation;
     private String date;
-    private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
-    private ArrayList<HashMap<String,String>> userNames = new ArrayList<>();
+    private ArrayList<Pair<String,String>> locations = new ArrayList<>();
+    private ArrayList<String> userNames = new ArrayList<>();
 
 
 //    private OffsetDateTime previousDate = null;
@@ -84,15 +85,20 @@ public class Song implements SongSubject{
     public Song(){ }
 
     /* If created from local file, the song will not have user, location or date info */
-    public Song (String title, String artist, String url, String album){
+    public Song (String title, String artist, String url, String album, boolean local){
         this.title = title;
-        this.songUrl = url;
+        if (local){
+            this.localPath = url;
+        }
+        else {
+            this.songUrl = url;
+        }
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
         loadFromDatabase(new dataBaseCallback() {
             @Override
-            public void callback(ArrayList<HashMap<String,String>> u, ArrayList<HashMap<String,String>> l, String d, String url) {
+            public void callback(ArrayList<String> u, ArrayList<Pair<String,String>> l, String d, String url) {
                 locations = l;
                 userNames = u;
                 date = d;
@@ -112,9 +118,9 @@ public class Song implements SongSubject{
 //    }
 
     /* Local song creation */
-    public Song(String title, int id, String artist, String album){
+    public Song(String title, String artist, String album, String path, Boolean local){
         this.title = title;
-        this.id = id;
+        this.localPath = path;
         this.artist = artist;
         this.album = album;
     }
@@ -136,9 +142,18 @@ public class Song implements SongSubject{
     public void setTitle(String title){
         this.title = title;
     }
-    public void setSongUrl(String songUrl){
+    public void setSongUrl(String songUrl, Context context){
+        SharedPreferences sharedLocation = context.getSharedPreferences("songUrl", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedLocation.edit();
+        Gson gson2 = new Gson();
+        String json2 = gson2.toJson(songUrl);
+        editor2.putString(getTitle(),json2);
+        editor2.commit();
         this.songUrl = songUrl;
     }
+
+    public void setSongUrl(String url){ this.songUrl = url;}
+
     public void setArtist(String artist) {
         this.artist = artist;
     }
@@ -149,10 +164,10 @@ public class Song implements SongSubject{
     public void setDate(Object time){
         this.date = time.toString();
     }
-    public void setLocations(ArrayList<HashMap<String,String>> l){
+    public void setLocations(ArrayList<Pair<String,String>> l){
         this.locations = l;
     }
-    public void setUserNames(ArrayList<HashMap<String,String>> u) {
+    public void setUserNames(ArrayList<String> u) {
         this.userNames = u;
     }
 
@@ -167,17 +182,14 @@ public class Song implements SongSubject{
         this.like = like;
     }
 
-    public void addID (int id){ this.id = id; }
+    public void addLocalPath (String path){ this.localPath = path; }
 
     public void addUser(String first, String last){
-        HashMap<String,String> hm = new HashMap<>();
-        hm.put(first+last, first+last);
-        userNames.add(hm);
+        userNames.add(first+last);
     }
 
     public void addLocation(Location location){
-        HashMap<String,String> hm = new HashMap<>();
-        hm.put(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
+        Pair<String,String> hm = new Pair<>(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
         locations.add(hm);
     }
 
@@ -214,29 +226,14 @@ public class Song implements SongSubject{
 
     public String getSongUrl(){ return songUrl; }
     public String getArtist(){ return artist; }
-    public String getAlbum(){
-        return this.album;
-    }
-    public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
-    public ArrayList<HashMap<String,String>> getUserNames(){ return this.userNames; }
-
-    public ArrayList<Pair<String,String>> getAllLocations(){
-        ArrayList<Pair<String,String>> toReturn = new ArrayList<>();
-        for (HashMap<String,String> hm : this.locations){
-            ArrayList<String> latArr = new ArrayList<>(hm.keySet());
-            ArrayList<String> longArr = new ArrayList<>(hm.values());
-            toReturn.add(new Pair<>(latArr.get(0), longArr.get(0)));
-        }
-        return toReturn;
-    }
+    public String getAlbum(){ return this.album;}
+    public ArrayList<Pair<String,String>> getLocations(){ return this.locations;}
+    public ArrayList<String> getUserNames(){ return this.userNames; }
 
     public int getSongStatus (Context context) { return getPreviousLike(context); }
 
     public Pair<String,String> getPreviousLocation () {
-        HashMap<String,String> loc = locations.get(locations.size()-1);
-        ArrayList<String> latArr = new ArrayList<>(loc.keySet());
-        ArrayList<String> longArr = new ArrayList<>(loc.values());
-        return new Pair<>(latArr.get(0),longArr.get(0));
+        return locations.get(locations.size()-1);
     }
 
     public int getPreviousLike(Context context){
@@ -250,6 +247,19 @@ public class Song implements SongSubject{
             this.like = 0;
         }
         return this.like;
+    }
+
+    public String getSongUrl(Context context){
+        try {
+            SharedPreferences sharedTime = context.getSharedPreferences("songUrl", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            String url = gson.fromJson(json, String.class);
+            this.songUrl = url;
+        } catch (Exception e) {
+            this.songUrl = "";
+        }
+        return this.songUrl;
     }
 
     public String getDate(){
@@ -291,7 +301,7 @@ public class Song implements SongSubject{
                     Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
 
                     // update current song object
-                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(t),
+                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),
                             snapshot.child(databaseKey).child("locations").getValue(t),
                             snapshot.child(databaseKey).child("date").getValue(String.class),
                             snapshot.child(databaseKey).child("songUrl").getValue(String.class));
@@ -311,8 +321,8 @@ public class Song implements SongSubject{
 
     /* To update database */
     interface dataBaseCallback {
-        public abstract void callback(ArrayList<HashMap<String,String>> user,
-                                      ArrayList<HashMap<String,String>> locations,
+        public abstract void callback(ArrayList<String> user,
+                                      ArrayList<Pair<String,String>> locations,
                                       String date,
                                       String url);
     }

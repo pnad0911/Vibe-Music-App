@@ -68,12 +68,12 @@ public class SongUnitTest {
 
 //        friend = new Friend("abc", location1, time1 );
 //        friend2 = new Friend("def", location2, time2 );
-        song = new Song("aaa", "asd","123","asdf");
+        song = new Song("aaa", "asd","123","asdf",false);
         song.addUser("abc","abc");
         song.addLocation(location1);
         song.setDate(time1);
         song.updateDatabase();
-        song2 = new Song("bbb", "asd", "234","asdf");
+        song2 = new Song("bbb", "asd", "234","asdf",false);
         song2.addUser("def","def");
         song2.addLocation(location2);
         song2.setDate(time2);
@@ -91,7 +91,7 @@ public class SongUnitTest {
     @Test
     public void testSongConstructorDatabase(){
 
-        Song newSong = new Song("aaa", "asd","234","asdfgg");
+        Song newSong = new Song("aaa", "asd","234","asdfgg",false);
         Log.println(Log.ERROR, "TESING", "New date: " + newSong.getDate());
         assertEquals("1000", newSong.getLocations().get(0).first);
     }
@@ -113,7 +113,7 @@ public class SongUnitTest {
                 }
                 else {
                     Log.println(Log.ERROR, "info", "Found Song: " + snapshot.child(song.getDatabaseKey()).getValue(Song.class).toString());
-                    assertEquals(snapshot.child(song.getDatabaseKey()).child("userNames").getValue(n).get("defdef"), "defdef");
+                    assertEquals(snapshot.child(song.getDatabaseKey()).child("userNames").getValue(t).get(0), "defdef");
                 }
             }
 
