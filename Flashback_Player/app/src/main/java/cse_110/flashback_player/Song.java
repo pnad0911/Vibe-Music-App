@@ -101,16 +101,16 @@ public class Song implements SongSubject{
         Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
     }
 
-    public Song(String title, String songUrl, String artist, String album, Friend user){
-        this.title = title;
-        this.songUrl = songUrl;
-        this.artist = artist;
-        this.album = album;
-        this.date = user.getTime();
-        addLocation(user.getLocation());
-        addUser(user.getID());
-        this.databaseKey = this.title+this.artist;
-    }
+//    public Song(String title, String songUrl, String artist, String album, Friend user){
+//        this.title = title;
+//        this.songUrl = songUrl;
+//        this.artist = artist;
+//        this.album = album;
+//        this.date = user.getTime();
+//        addLocation(user.getLocation());
+//        addUser(user.getID());
+//        this.databaseKey = this.title+this.artist;
+//    }
 
     /* Local song creation */
     public Song(String title, int id, String artist, String album){

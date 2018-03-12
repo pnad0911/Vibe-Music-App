@@ -1,17 +1,17 @@
 #Internal package file, do not edit.
-#Sun Mar 11 01:17:52 PST 2018
-2.base=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/42
+#Sun Mar 11 21:33:06 PDT 2018
+2.base=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/44
 5.set=DEX
 0.path=classes.dex
 2.baseType=DIRECTORY
-3.base=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/37
+3.base=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/49
 2.set=DEX
 1.path=classes.dex
-4.base=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/38
+4.base=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/46
 count=6
 5.baseType=DIRECTORY
 2.path=classes.dex
-5.base=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/39
+5.base=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/48
 4.set=DEX
 3.path=classes.dex
 3.baseType=DIRECTORY
@@ -19,9 +19,9 @@ count=6
 4.path=classes.dex
 1.baseType=DIRECTORY
 5.path=classes.dex
-0.base=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/40
+0.base=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/45
 0.baseType=DIRECTORY
 3.set=DEX
-1.base=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/41
+1.base=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/47
 4.baseType=DIRECTORY
 0.set=DEX

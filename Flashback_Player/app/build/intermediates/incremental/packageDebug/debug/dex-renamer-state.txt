@@ -1,4 +1,4 @@
-#Sun Mar 11 01:17:52 PST 2018
+#Sun Mar 11 21:33:05 PDT 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -7,12 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/37
-base.4=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/40
-base.3=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/38
-base.2=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/41
-base.1=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/39
-base.0=/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/42
+base.5=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/48
+base.4=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/45
+base.3=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/47
+base.2=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/44
+base.1=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/49
+base.0=/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/46
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex

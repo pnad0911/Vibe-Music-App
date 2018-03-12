@@ -20,7 +20,7 @@
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
     <permission android:name="android" />
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
@@ -65,6 +65,23 @@
             android:name="cse_110.flashback_player.VibeActivity"
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="cse_110.flashback_player.logIn"
+            android:label="@string/title_activity_log_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--
+            Service handling Google Sign-In user revocation. For apps that do not integrate with
+            Google Sign-In, this service will never be started.
+        -->
+        <service
+            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+            android:exported="true"
+            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
 
         <meta-data
             android:name="android.support.VERSION"
@@ -111,14 +128,7 @@
             </intent-filter>
         </receiver>
         <!--
- Internal (not exported) receiver used by the app to start its own exported services
-             without risk of being spoofed.
-        -->
-        <receiver
-            android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver"
-            android:exported="false" />
-        <!--
- FirebaseInstanceIdService performs security checks at runtime,
+             FirebaseInstanceIdService performs security checks at runtime,
              no need for explicit permissions despite exported="true"
         -->
         <service

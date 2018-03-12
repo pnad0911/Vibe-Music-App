@@ -1,6 +1,36 @@
 {
     "logs": [
         {
+            "outputFile": "/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
@@ -31,10 +61,10 @@
             ]
         },
         {
-            "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-port\\values-port.xml",
+                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -50,21 +80,6 @@
             "map": [
                 {
                     "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\values-port\\values-port.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "55",
-                        "endOffsets": "106"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
-            "map": [
-                {
-                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

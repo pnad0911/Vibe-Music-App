@@ -11,30 +11,20 @@ import java.util.ArrayList;
 
 public class Friend{
 
-    private String userId;
-    private Location currLocation;
-    private OffsetDateTime currTime;
-    ArrayList<SongObserver> soArray = new ArrayList<SongObserver>();
-
-    public Friend(String uid, Location location, OffsetDateTime time){
-        userId = uid;
-        currLocation = location;
-        currTime = time;
-    }
+    private String lastName;
+    private String firstName;
 
     /* GETTER */
-    public String getID(){ return userId; }
-    public Location getLocation(){ return currLocation; }
-    public String getTime() { return currTime.toString(); }
+    public String getLastName(){ return lastName; }
 
-    /* SETTER */
-    public void setLocation(Location location){
-        currLocation = location;
+    public String getFirstName(){ return firstName; }
+
+    public void setLastName(String name){
+        this.lastName = name;
     }
 
-    public void setTime(OffsetDateTime time){
-        this.currTime = time;
+    public void setFirstName(String name){
+        this.firstName = name;
     }
-
 
 }
