@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,7 @@ import java.lang.reflect.Array;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -39,7 +41,8 @@ public class Song implements SongSubject{
     }
     public int getId() {return id;}
 
-    private GenericTypeIndicator<HashMap<String,String>> t = new GenericTypeIndicator<HashMap<String,String>>() {};
+    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
+    private GenericTypeIndicator<HashMap<String,String>> n = new GenericTypeIndicator<HashMap<String,String>>() {};
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -61,8 +64,8 @@ public class Song implements SongSubject{
 //    private Location previousLocation = null;
 //    private Location currentLocation;
     private String date;
-    private HashMap<String, String> locations = new HashMap<>();
-    private HashMap<String, String> userNames = new HashMap<>();
+    private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
+    private HashMap<String,String> userNames = new HashMap<>();
 
 
 //    private OffsetDateTime previousDate = null;
@@ -90,7 +93,7 @@ public class Song implements SongSubject{
         this.databaseKey = title+artist;
         loadFromDatabase(new dataBaseCallback() {
             @Override
-            public void callback(HashMap<String,String> u, HashMap<String,String> l, String d, String url) {
+            public void callback(HashMap<String,String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
                 locations = l;
                 userNames = u;
                 date = d;
@@ -101,16 +104,13 @@ public class Song implements SongSubject{
         Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
     }
 
-    public Song(String title, String songUrl, String artist, String album, Friend user){
-        this.title = title;
-        this.songUrl = songUrl;
-        this.artist = artist;
-        this.album = album;
-        this.date = user.getTime();
-        addLocation(user.getLocation());
-        addUser(user.getID());
-        this.databaseKey = this.title+this.artist;
-    }
+//    public Song(String title, String songUrl, String artist, String album){
+//        this.title = title;
+//        this.songUrl = songUrl;
+//        this.artist = artist;
+//        this.album = album;
+//        this.databaseKey = this.title+this.artist;
+//    }
 
     /* Local song creation */
     public Song(String title, int id, String artist, String album){
@@ -150,7 +150,7 @@ public class Song implements SongSubject{
     public void setDate(Object time){
         this.date = time.toString();
     }
-    public void setLocations(HashMap<String,String> l){
+    public void setLocations(ArrayList<HashMap<String,String>> l){
         this.locations = l;
     }
     public void setUserNames(HashMap<String,String> u) {
@@ -170,12 +170,14 @@ public class Song implements SongSubject{
 
     public void addID (int id){ this.id = id; }
 
-    public void addUser(String uid){
-        userNames.put(uid,uid);
+    public void addUser(String first, String last){
+        userNames.put(first+last, first+last);
     }
 
     public void addLocation(Location location){
-        locations.put(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
+        HashMap<String,String> hm = new HashMap<>();
+        hm.put(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
+        locations.add(hm);
     }
 
     public void like(Context context) { like = 1; setPreviousLike(like, context);}
@@ -219,9 +221,24 @@ public class Song implements SongSubject{
 
     public HashMap<String,String> getUserNames(){ return this.userNames; }
 
-    public HashMap<String, String> getLocations(){ return locations; }
+    public ArrayList<Pair<String,String>> getLocations(){
+        ArrayList<Pair<String,String>> toReturn = new ArrayList<>();
+        for (HashMap<String,String> hm : this.locations){
+            ArrayList<String> latArr = new ArrayList<>(hm.keySet());
+            ArrayList<String> longArr = new ArrayList<>(hm.values());
+            toReturn.add(new Pair<>(latArr.get(0), longArr.get(0)));
+        }
+        return toReturn;
+    }
 
     public int getSongStatus (Context context) { return getPreviousLike(context); }
+
+    public Pair<String,String> getPreviousLocation () {
+        HashMap<String,String> loc = locations.get(locations.size()-1);
+        ArrayList<String> latArr = new ArrayList<>(loc.keySet());
+        ArrayList<String> longArr = new ArrayList<>(loc.values());
+        return new Pair<>(latArr.get(0),longArr.get(0));
+    }
 
     public int getPreviousLike(Context context){
         try {
@@ -245,8 +262,8 @@ public class Song implements SongSubject{
     // END GETTER -------------------------------------------------
 
     /* Method called as long as this object is modified. */
-    public void update(){
-        Log.println(Log.INFO, "Database", "Updating song " + this.title + " in Firebase.");
+    public void updateDatabase(){
+        Log.println(Log.ERROR, "Database", "Updating song " + this.title + " in Firebase.");
         DatabaseReference songDataRef = databaseRef.child("SONGS");
         songDataRef.child(this.databaseKey).setValue(this);
 //        songDataRef.child(this.title+this.artist).child("userNames").setValue(userNames);
@@ -275,7 +292,7 @@ public class Song implements SongSubject{
                     Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
 
                     // update current song object
-                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(t),
+                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),
                             snapshot.child(databaseKey).child("locations").getValue(t),
                             snapshot.child(databaseKey).child("date").getValue(String.class),
                             snapshot.child(databaseKey).child("songUrl").getValue(String.class));
@@ -295,8 +312,8 @@ public class Song implements SongSubject{
 
     /* To update database */
     interface dataBaseCallback {
-        public abstract void callback(HashMap<String, String> user,
-                                      HashMap<String, String> locations,
+        public abstract void callback(HashMap<String,String> user,
+                                      ArrayList<HashMap<String,String>> locations,
                                       String date,
                                       String url);
     }

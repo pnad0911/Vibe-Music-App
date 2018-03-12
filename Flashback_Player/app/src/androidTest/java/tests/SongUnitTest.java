@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -19,10 +20,12 @@ import org.junit.Test;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import cse_110.flashback_player.Friend;
-import cse_110.flashback_player.NormalActivity;
+import cse_110.flashback_player.LibraryActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;
 
@@ -44,9 +47,11 @@ public class SongUnitTest {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference();
 
-    @Rule
-    public ActivityTestRule<NormalActivity> main2Activity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
+    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
+    private GenericTypeIndicator<HashMap<String,String>> n = new GenericTypeIndicator<HashMap<String,String>>() {};
 
+    @Rule
+    public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
 
     @Before
     public void setUp(){
@@ -61,18 +66,24 @@ public class SongUnitTest {
         time1 = OffsetDateTime.of(2000,10,10,10,10,10,10, ZoneOffset.UTC);
         time2 = OffsetDateTime.of(2010,11,12,10,10,10,10, ZoneOffset.UTC);
 
-        friend = new Friend("abc", location1, time1 );
-        friend2 = new Friend("def", location2, time2 );
-        song = new Song("aaa","123", "asd","asdf",friend);
-        song.update();
-        song2 = new Song("bbb", "234", "asd","asdf", friend2);
-        song2.update();
+//        friend = new Friend("abc", location1, time1 );
+//        friend2 = new Friend("def", location2, time2 );
+        song = new Song("aaa", "asd","123","asdf");
+        song.addUser("abc","abc");
+        song.addLocation(location1);
+        song.setDate(time1);
+        song.updateDatabase();
+        song2 = new Song("bbb", "asd", "234","asdf");
+        song2.addUser("def","def");
+        song2.addLocation(location2);
+        song2.setDate(time2);
+        song2.updateDatabase();
     }
 
     @Test
     public void testSongConstructor(){
 
-        assertEquals(song.getLocations().get("1000"), Integer.toString((int)location1.getLongitude()));
+        assertEquals(song.getLocations().get(0).first, Integer.toString((int)location1.getLongitude()));
         assertEquals(song.getDate(), time1.toString());
 
     }
@@ -82,14 +93,14 @@ public class SongUnitTest {
 
         Song newSong = new Song("aaa", "asd","234","asdfgg");
         Log.println(Log.ERROR, "TESING", "New date: " + newSong.getDate());
-        assertEquals("1000", newSong.getLocations().get("1000"));
+        assertEquals("1000", newSong.getLocations().get(0).first);
     }
 
     @Test
     public void testUpdate(){
 
-        song.addUser("def");
-        song.update();
+        song.addUser("def","def");
+        song.updateDatabase();
 
         Query queryRef = databaseRef.child("SONGS").orderByChild("databaseKey").equalTo("aaaasd");
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,7 +113,7 @@ public class SongUnitTest {
                 }
                 else {
                     Log.println(Log.ERROR, "info", "Found Song: " + snapshot.child(song.getDatabaseKey()).getValue(Song.class).toString());
-                    assertEquals(((Map<String, String> ) snapshot.child(song.getDatabaseKey()).child("userNames").getValue()).get("def").toString(), "def");
+                    assertEquals(snapshot.child(song.getDatabaseKey()).child("userNames").getValue(n).get("defdef"), "defdef");
                 }
             }
 

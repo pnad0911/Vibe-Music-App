@@ -27,7 +27,7 @@ public class TabSongs extends Fragment {
     private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
-    public static Map<String,String[]> data;
+//    public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     private SongAdapter adapter;
 
@@ -58,6 +58,7 @@ public class TabSongs extends Fragment {
         songList = songListGen.getAllsong();
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
+            changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
             // configure listview
             adapter = new SongAdapter(this.getActivity(), songList);
@@ -68,7 +69,6 @@ public class TabSongs extends Fragment {
             sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-//                    System.out.println("clicked");
                     songIdx = position;
                     play();
                     changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -177,16 +177,17 @@ public class TabSongs extends Fragment {
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong, applicationContext)) {
 
-            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().+
-//                    ":"+currSong.getLocations().get(0).second + " )");
+//            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
+            songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
+                    currSong.getPreviousLocation().first+ ", " +
+                    currSong.getPreviousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-        currSong.addLocation(LibraryActivity.getLocation());
-        currSong.setDate(OffsetDateTime.now());
+//        currSong.addLocation(LibraryActivity.getLocation());
+//        currSong.setDate(OffsetDateTime.now());
+        //TODO currSong.addUser(userid);
     }
 
     private boolean isNullDate(Song song, Context context) {
