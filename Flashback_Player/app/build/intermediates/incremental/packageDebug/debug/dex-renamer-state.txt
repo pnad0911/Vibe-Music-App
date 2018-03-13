@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Sun Mar 11 23:04:55 PDT 2018
-=======
-#Mon Mar 12 13:04:29 PDT 2018
->>>>>>> 243a93fcabcb7509365c06f8056a00c9b610d053
-=======
-#Mon Mar 12 16:59:03 PDT 2018
->>>>>>> 5b90f0eeae1697dc721f563862348a2655e642d7
+#Mon Mar 12 23:50:48 PDT 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -15,30 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-<<<<<<< HEAD
-<<<<<<< HEAD
-base.5=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/88
-base.4=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/91
-base.3=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/89
-base.2=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/92
-base.1=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/90
-base.0=/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/93
-=======
-base.5=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/34
-base.4=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/35
-base.3=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/32
-base.2=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/33
-base.1=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/31
-base.0=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/36
->>>>>>> 243a93fcabcb7509365c06f8056a00c9b610d053
-=======
-base.5=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/13
-base.4=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/15
-base.3=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/12
-base.2=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/14
-base.1=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/11
-base.0=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/16
->>>>>>> 5b90f0eeae1697dc721f563862348a2655e642d7
+base.5=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/98
+base.4=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/95
+base.3=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/97
+base.2=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/94
+base.1=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/99
+base.0=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/96
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex

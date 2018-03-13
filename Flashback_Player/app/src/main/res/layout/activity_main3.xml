@@ -78,6 +78,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:dropDownWidth="fill_parent"
             android:layout_weight="0.2"/>
         <ImageButton
             android:id="@+id/download"

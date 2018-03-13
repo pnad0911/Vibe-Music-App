@@ -187,7 +187,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setDropDownWidth(552);
+        //spinner.setDropDownWidth(552);
         spinner.setAdapter(dataAdapter);
     }
     @Override
