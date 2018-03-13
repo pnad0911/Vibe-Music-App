@@ -98,7 +98,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
             for (File f : files) {
                 try {
                     if (isMp3File(f)) {
-                        String filePath = f.getAbsolutePath(); System.out.println(f.getAbsolutePath() + "-----------------");
+                        String filePath = f.getAbsolutePath();
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
                         songs.add(so);

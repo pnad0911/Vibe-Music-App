@@ -184,7 +184,6 @@ public class TabAlbum extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-//        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
     }

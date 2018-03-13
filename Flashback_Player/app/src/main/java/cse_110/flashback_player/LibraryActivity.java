@@ -137,9 +137,6 @@ public class LibraryActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-//        createExternalStoragePublicMP3();
-//        hasExternalStoragePublicMP3();
-//        System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString());
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
