@@ -250,7 +250,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         }
     }
 
-//   ---------------------------------- Get Location method here  ---------------------------------
+    //   ---------------------------------- Get Location method here  ---------------------------------
     /* Get current Location */
     public static Location getLocation(){
         return loc;
@@ -308,4 +308,3 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         return contextOfApplication;
     }
 }
-

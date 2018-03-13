@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import java.io.File;
@@ -28,6 +29,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
     private Map<String,String[]> data;
     private Activity activity;
     private MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    private ArrayList<SongListListener> listeners = new ArrayList<>();
 
     /* Constructor  */
     public SongList(Activity a) {
@@ -76,6 +78,10 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         return songs;
     }
 
+    public void reg(SongListListener ls){
+        listeners.add(ls);
+    }
+
     /*
     * Refresh the song list, find the newly downloaded song and assign url to that song
     * Parameter: new url */
@@ -86,10 +92,14 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                 s.setSongUrl(url, activity.getApplicationContext());
             }
         }
+        for (SongListListener ls : listeners){
+            ls.updateDisplay(songs);
+        }
     }
 
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
+
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         List<Song> listOfSongs = new ArrayList<>();
@@ -148,10 +158,12 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         data = new HashMap<>();
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
-        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.toString());
+        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.list());
         File[] fileArray = path.listFiles();
+//        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.toString());
         if (fileArray != null) {
             for (File f : fileArray) {
+
                 try {
 //                AssetFileDescriptor afd = activity.getResources().openRawResourceFd(f.getInt(null));
 //                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());

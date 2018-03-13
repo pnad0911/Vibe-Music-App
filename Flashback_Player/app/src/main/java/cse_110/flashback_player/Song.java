@@ -54,14 +54,14 @@ public class Song implements SongSubject{
     }
 //    public int getId() {return id;}
 
-    private GenericTypeIndicator<ArrayList<Pair<String,String>>> t = new GenericTypeIndicator<ArrayList<Pair<String,String>>>() {};
+    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
     private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
 
     private String title;
-    private String songUrl;
+    private String songUrl = "";
     private String artist;
     private String album;
     private String databaseKey;
@@ -77,7 +77,7 @@ public class Song implements SongSubject{
 //    private Location previousLocation = null;
 //    private Location currentLocation;
     private String date;
-    private ArrayList<Pair<String,String>> locations = new ArrayList<>();
+    private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
     private ArrayList<String> userNames = new ArrayList<>();
 
 
@@ -98,7 +98,7 @@ public class Song implements SongSubject{
     public Song(){ }
 
     /* If created from local file, the song will not have user, location or date info */
-    public Song (String title, String artist, String url, String album, boolean local){
+    public Song (String title, String artist, String album, String url, boolean local){
         this.title = title;
         if (local){
             this.localPath = url;
@@ -111,7 +111,7 @@ public class Song implements SongSubject{
         this.databaseKey = title+artist;
         loadFromDatabase(new dataBaseCallback() {
             @Override
-            public void callback(ArrayList<String> u, ArrayList<Pair<String,String>> l, String d, String url) {
+            public void callback(ArrayList<String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
                 locations = l;
                 userNames = u;
                 date = d;
@@ -169,7 +169,7 @@ public class Song implements SongSubject{
     public void setDate(Object time){
         this.date = time.toString();
     }
-    public void setLocations(ArrayList<Pair<String,String>> l){
+    public void setLocations(ArrayList<HashMap<String,String>> l){
         this.locations = l;
     }
     public void setUserNames(ArrayList<String> u) {
@@ -194,7 +194,8 @@ public class Song implements SongSubject{
     }
 
     public void addLocation(Location location){
-        Pair<String,String> hm = new Pair<>(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
+        HashMap<String,String> hm = new HashMap<>();
+        hm.put(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
         locations.add(hm);
     }
 
@@ -232,14 +233,29 @@ public class Song implements SongSubject{
     public String getSongUrl(){ return songUrl; }
     public String getDate(){ return this.date; }
     public String getDatabaseKey(){ return this.title+this.artist;}
-    public ArrayList<Pair<String,String>> getLocations(){ return this.locations;}
+    public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
     public ArrayList<String> getUserNames(){ return this.userNames; }
 
     // LOCAL PURPOSE GETTERS ----------------
 
     public int getSongStatus (Context context) { return getPreviousLike(context); }
 
-    public Pair<String,String> getPreviousLocation () { return locations.get(locations.size()-1); }
+    public Pair<String,String> previousLocation () {
+        HashMap<String,String> hm =  locations.get(locations.size()-1);
+        ArrayList<String> lat = new ArrayList<>(hm.keySet());
+        ArrayList<String> lon = new ArrayList<>(hm.values());
+        return new Pair<String,String>(lat.get(0),lon.get(0));
+    }
+
+    public ArrayList<Pair<String,String>> allLocations(){
+        ArrayList<Pair<String,String>> returnV = new ArrayList<>();
+        for (HashMap<String,String>hm : locations){
+            ArrayList<String> lat = new ArrayList<>(hm.keySet());
+            ArrayList<String> lon = new ArrayList<>(hm.values());
+            returnV.add(new Pair<>(lat.get(0),lon.get(0)));
+        }
+        return returnV;
+    }
 
     public int getPreviousLike(Context context){
         try {
@@ -320,7 +336,7 @@ public class Song implements SongSubject{
     /* To update database */
     interface dataBaseCallback {
         public abstract void callback(ArrayList<String> user,
-                                      ArrayList<Pair<String,String>> locations,
+                                      ArrayList<HashMap<String,String>> locations,
                                       String date,
                                       String url);
     }

@@ -1,6 +1,11 @@
 #Internal package file, do not edit.
+<<<<<<< HEAD
+#Mon Mar 12 23:11:12 PDT 2018
+2.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/35
+=======
 #Mon Mar 12 23:50:49 PDT 2018
 2.base=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/94
+>>>>>>> master
 5.set=DEX
 0.path=classes.dex
 2.baseType=DIRECTORY
