@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -66,7 +67,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SongPlayer songPlayer = new SongPlayer(this);
 
-    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String,String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
     /**
@@ -74,14 +74,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
      */
     private ViewPager mViewPager;
     private TabVibe tab1;
-    private String mProviderName;
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
     private static Location loc;
-    private Context mContext;
-
-    private LocationManager locationManager;
-    private String locationProvider;
 
     private LocationReadyCallback locationCallback;
     private LocationRequest mLocationRequest;
@@ -89,7 +82,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
-
+    private SongDownloadHelper songDownloadHelper; public SongList songList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,14 +143,18 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
+        songList = new SongList(this);
+        songDownloadHelper = new SongDownloadHelper(songList,this);
+
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(this);
-        edittext.setHint("AM I OUTTA MY HEAD \nAM I OUTTA MY MIND");
+        edittext.setHint("Enter URL here");
         alert.setTitle("DOWNLOADS");
         alert.setMessage("Enter Your URL here").setCancelable(false);
         alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                Editable YouEditTextValue = edittext.getText();
+                String url = edittext.getText().toString();
+                songDownloadHelper.startDownload(url);
                 dialog.cancel();
                 dialog.dismiss();
                 alert.create();
@@ -253,29 +250,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         }
     }
 
-    // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-
-//   ---------------------------------- Get Location method here  ---------------------------------
+    //   ---------------------------------- Get Location method here  ---------------------------------
     /* Get current Location */
     public static Location getLocation(){
         return loc;
@@ -333,4 +308,3 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         return contextOfApplication;
     }
 }
-

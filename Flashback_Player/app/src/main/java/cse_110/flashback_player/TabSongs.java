@@ -5,6 +5,7 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -168,6 +169,9 @@ public class TabSongs extends Fragment implements SongListListener {
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
+        currSong.addLocation(LibraryActivity.getLocation());
+        currSong.setDate(OffsetDateTime.now());
+        currSong.updateDatabase();
     }
 
     /* change display on media player to current playing song*/
@@ -180,14 +184,13 @@ public class TabSongs extends Fragment implements SongListListener {
 
 //            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
             songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
-                    currSong.getPreviousLocation().first+ ", " +
-                    currSong.getPreviousLocation().second + " )");
+                    currSong.previousLocation().first+ ", " +
+                    currSong.previousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-//        currSong.addLocation(LibraryActivity.getLocation());
-//        currSong.setDate(OffsetDateTime.now());
+
         //TODO currSong.addUser(userid);
     }
 
@@ -200,4 +203,5 @@ public class TabSongs extends Fragment implements SongListListener {
         songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
+
 }

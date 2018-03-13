@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import java.io.File;
@@ -105,6 +106,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
 
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
+
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         List<Song> listOfSongs = new ArrayList<>();
@@ -163,10 +165,12 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         data = new HashMap<>();
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
-        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.toString());
+        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.list());
         File[] fileArray = path.listFiles();
+//        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.toString());
         if (fileArray != null) {
             for (File f : fileArray) {
+
                 try {
 //                AssetFileDescriptor afd = activity.getResources().openRawResourceFd(f.getInt(null));
 //                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
