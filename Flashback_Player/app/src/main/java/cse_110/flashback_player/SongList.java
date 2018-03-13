@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by Duy on 2/9/2018.
  */
 
-public class SongList {
+public class SongList implements SongDownloadHelper.DownloadCompleteListener{
     private final String RAWPATH = "app/src/main/res/raw/";
     private final String DOWNLOADPATH = Environment.DIRECTORY_DOWNLOADS;
     private Map<String, List<Song>> AlbumSongList = new HashMap<>();
@@ -86,7 +86,7 @@ public class SongList {
     /*
     * Refresh the song list, find the newly downloaded song and assign url to that song
     * Parameter: new url */
-    public void refresh(String url){
+    public void downloadCompleted(String url){
         generateAll();
         for (Song s : songs){
             if (s.getSongUrl().equals("")){
