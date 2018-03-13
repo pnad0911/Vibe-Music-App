@@ -32,12 +32,25 @@ public class Song implements SongSubject{
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static DatabaseReference databaseRef = database.getReference();
 
-    private boolean downloaded = false;
+    private Boolean downloaded = false;
     public void setDownloaded() {
-        downloaded = true;
+        SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedTime.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(true);
+        editor.putString(getTitle(),json);
+        editor.commit();
     }
-    public boolean getDownloadStatus() {
-        return downloaded;
+    public Boolean getDownloadStatus() {
+        try {
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            Boolean down = gson.fromJson(json, Boolean.class);
+            return down;
+        } catch (Exception e) {
+            return null;
+        }
     }
 //    public int getId() {return id;}
 
@@ -190,7 +203,7 @@ public class Song implements SongSubject{
     public void dislike(Context context) { like = -1; setPreviousLike(like, context);}
     public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
 
-    //    public void setPreviousDate(Context context) {
+//        public void setPreviousDate(Context context) {
 //        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedTime.edit();
 //        Gson gson = new Gson();

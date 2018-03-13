@@ -52,7 +52,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         return AlbumList;
     }
 
-    public Map<String, List<Song>> getB() {
+    public Map<String, List<Song>> getMap() {
         return AlbumSongList;
     }
 
@@ -75,13 +75,6 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
      * Return List<Song>
      */
     public List<Song> getAllsong() {
-//        List<Song> l = new ArrayList<>();
-//        for (Map.Entry<String, List<Song>> entry : AlbumSongList.entrySet()) {
-//            for (Song a : entry.getValue()) {
-//                l.add(a);
-//            }
-//        }
-//        return l;
         return songs;
     }
 

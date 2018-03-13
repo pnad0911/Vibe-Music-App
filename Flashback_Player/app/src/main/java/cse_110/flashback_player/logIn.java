@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import com.google.android.gms.auth.api.Auth;
@@ -103,8 +104,6 @@ public class logIn extends AppCompatActivity{
     }
 
     public void updateUI(GoogleSignInAccount account){
-        System.out.println("email "+ account.getEmail());
-
         user.setFirstName(account.getGivenName());
         user.setLastName(account.getFamilyName());
         try {
@@ -122,9 +121,6 @@ public class logIn extends AppCompatActivity{
         //JacksonFactory jsonFactory = new JacksonFactory();
 
         redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
-
-        System.out.println("yolo " + code);
-
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -152,13 +148,13 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
-                    ArrayList<Friend> friends = new ArrayList<Friend>();
+                    ArrayList<Pair<String,String>> friends = new ArrayList<>();
                     for(int i = 0;i<connections.size();i++){
-                        Friend friend = new Friend();
-                        friend.setFirstName(connections.get(i).getNames().get(0).getGivenName());
-                        friend.setLastName(connections.get(i).getNames().get(0).getFamilyName());
-                        friends.add(friend);
+                        String firstName = (connections.get(i).getNames().get(0).getGivenName());
+                        String lastName = (connections.get(i).getNames().get(0).getFamilyName());
+                        friends.add(new Pair<String, String>(lastName,firstName));
                     }
+                    user.setFriendsList(friends);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -185,8 +181,6 @@ public class logIn extends AppCompatActivity{
         // Signed in successfolly, show authenticated UI.
         GoogleSignInAccount acct = result.getSignInAccount();
         code = acct.getServerAuthCode();
-        System.out.println("codeeeeee -----------------------------" + code);
-        System.out.println("name------------------------" + acct.getDisplayName());
         updateUI(acct);
     }
 

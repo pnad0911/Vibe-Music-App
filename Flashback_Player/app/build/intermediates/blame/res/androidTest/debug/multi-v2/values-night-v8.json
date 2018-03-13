@@ -1,0 +1,94 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/winnieli/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d0da1b2b16c831fe5d4f5d1a48f02bde/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        }
+    ]
+}
