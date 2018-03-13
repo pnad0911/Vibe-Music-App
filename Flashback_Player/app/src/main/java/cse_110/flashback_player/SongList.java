@@ -73,13 +73,6 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
      * Return List<Song>
      */
     public List<Song> getAllsong() {
-//        List<Song> l = new ArrayList<>();
-//        for (Map.Entry<String, List<Song>> entry : AlbumSongList.entrySet()) {
-//            for (Song a : entry.getValue()) {
-//                l.add(a);
-//            }
-//        }
-//        return l;
         return songs;
     }
 
@@ -105,7 +98,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
             for (File f : files) {
                 try {
                     if (isMp3File(f)) {
-                        String filePath = f.getAbsolutePath();
+                        String filePath = f.getAbsolutePath(); System.out.println(f.getAbsolutePath() + "-----------------");
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
                         songs.add(so);

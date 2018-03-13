@@ -58,8 +58,6 @@ public class LibraryActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SongPlayer songPlayer = new SongPlayer(this);
-
-    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String, String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -68,15 +66,7 @@ public class LibraryActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    private String mProviderName;
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
     private static Location loc;
-    private Context mContext;
-
-    private LocationManager locationManager;
-    private String locationProvider;
-
     private LocationReadyCallback locationCallback;
     private LocationRequest mLocationRequest;
 
@@ -137,8 +127,6 @@ public class LibraryActivity extends AppCompatActivity {
                 getLocation();
             }
         });
-
-        getData();
 
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
@@ -215,30 +203,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
         }
     }
-
-    // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;
-                list[1] = ar;
-                list[2] = al;
-                data.put(f.getName(), list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
 //   ---------------------------------- Get Location method here  ---------------------------------
 
     /* Get current Location */
@@ -297,37 +261,4 @@ public class LibraryActivity extends AppCompatActivity {
     public static Context getContextOfApplication() {
         return contextOfApplication;
     }
-//
-//
-//    public void createExternalStoragePublicMP3() {
-//        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
-//        File file = new File(path, "america_religious.mp3");
-//
-//        try {
-//            path.mkdirs();
-//            InputStream is = getResources().openRawResource(R.raw.america_religious);
-//            OutputStream os = new FileOutputStream(file);
-//            byte[] data = new byte[is.available()];
-//            is.read(data);
-//            os.write(data);
-//            is.close();
-//            os.close();
-//            MediaScannerConnection.scanFile(this,
-//                    new String[]{file.toString()}, null,
-//                    new MediaScannerConnection.OnScanCompletedListener() {
-//                        public void onScanCompleted(String path, Uri uri) {
-//                            Log.i("ExternalStorage", "Scanned " + path + ":");
-//                            Log.i("ExternalStorage", "-> uri=" + uri);
-//                        }
-//                    });
-//        } catch (IOException e) {
-//            Log.w("ExternalStorage", "Error writing " + file, e);
-//        }
-//    }
-//    boolean hasExternalStoragePublicMP3() {
-//        File path = Environment.getExternalStoragePublicDirectory(
-//                Environment.DIRECTORY_MUSIC);
-//        File file = new File(path, "america_religious.mp3");
-//        return file.exists();
-//    }
 }
