@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class TabSongs extends Fragment {
+public class TabSongs extends Fragment implements SongListListener {
 
     private int songIdx=0;
     private Context context;
@@ -55,6 +55,7 @@ public class TabSongs extends Fragment {
 
         // get items from song list
         SongList songListGen = new SongList(this.getActivity());
+        songListGen.reg(this);
         songList = songListGen.getAllsong();
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);

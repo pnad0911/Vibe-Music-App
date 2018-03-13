@@ -28,6 +28,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
     private Map<String,String[]> data;
     private Activity activity;
     private MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    private ArrayList<SongListListener> listeners = new ArrayList<>();
 
     /* Constructor  */
     public SongList(Activity a) {
@@ -83,6 +84,10 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         return songs;
     }
 
+    public void reg(SongListListener ls){
+        listeners.add(ls);
+    }
+
     /*
     * Refresh the song list, find the newly downloaded song and assign url to that song
     * Parameter: new url */
@@ -92,6 +97,9 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
             if (s.getSongUrl().equals("")){
                 s.setSongUrl(url, activity.getApplicationContext());
             }
+        }
+        for (SongListListener ls : listeners){
+            ls.updateDisplay(songs);
         }
     }
 
