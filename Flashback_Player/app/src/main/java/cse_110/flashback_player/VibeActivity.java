@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -150,9 +151,12 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
+//        SongDownloadHelper songDownloadHelper = new SongDownloadHelper("https://www.youtube.com/watch?v=hQklJKoEmjs",
+//                                                Environment.DIRECTORY_DOWNLOADS,Song.class,this.getApplicationContext());
+
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(this);
-        edittext.setHint("AM I OUTTA MY HEAD \nAM I OUTTA MY MIND");
+        edittext.setHint("Enter URL here");
         alert.setTitle("DOWNLOADS");
         alert.setMessage("Enter Your URL here").setCancelable(false);
         alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {

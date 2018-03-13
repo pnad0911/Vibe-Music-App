@@ -50,7 +50,7 @@ public class SongList {
         return AlbumList;
     }
 
-    public Map<String, List<Song>> getB() {
+    public Map<String, List<Song>> getMap() {
         return AlbumSongList;
     }
 

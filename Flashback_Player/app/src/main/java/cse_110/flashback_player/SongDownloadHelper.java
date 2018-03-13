@@ -39,7 +39,6 @@ public class SongDownloadHelper {
         this.context = context;
         listeners.add(listener);
         downloadManager = (DownloadManager) this.context.getSystemService(Context.DOWNLOAD_SERVICE);
-
     }
 
     private void startDownload() {
