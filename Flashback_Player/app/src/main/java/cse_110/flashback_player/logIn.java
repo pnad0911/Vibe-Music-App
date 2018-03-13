@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import com.google.android.gms.auth.api.Auth;
@@ -147,13 +148,13 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
-                    ArrayList<Friend> friends = new ArrayList<Friend>();
+                    ArrayList<Pair<String,String>> friends = new ArrayList<>();
                     for(int i = 0;i<connections.size();i++){
-                        Friend friend = new Friend();
-                        friend.setFirstName(connections.get(i).getNames().get(0).getGivenName());
-                        friend.setLastName(connections.get(i).getNames().get(0).getFamilyName());
-                        friends.add(friend);
+                        String firstName = (connections.get(i).getNames().get(0).getGivenName());
+                        String lastName = (connections.get(i).getNames().get(0).getFamilyName());
+                        friends.add(new Pair<String, String>(lastName,firstName));
                     }
+                    user.setFriendsList(friends);
 
                 } catch (Exception e) {
                     e.printStackTrace();
