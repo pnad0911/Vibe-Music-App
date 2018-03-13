@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by Duy on 2/9/2018.
  */
 
-public class SongList {
+public class SongList implements SongDownloadHelper.DownloadCompleteListener{
     private final String RAWPATH = "app/src/main/res/raw/";
     private final String DOWNLOADPATH = Environment.DIRECTORY_DOWNLOADS;
     private Map<String, List<Song>> AlbumSongList = new HashMap<>();
@@ -50,7 +50,7 @@ public class SongList {
         return AlbumList;
     }
 
-    public Map<String, List<Song>> getB() {
+    public Map<String, List<Song>> getMap() {
         return AlbumSongList;
     }
 
@@ -73,20 +73,13 @@ public class SongList {
      * Return List<Song>
      */
     public List<Song> getAllsong() {
-//        List<Song> l = new ArrayList<>();
-//        for (Map.Entry<String, List<Song>> entry : AlbumSongList.entrySet()) {
-//            for (Song a : entry.getValue()) {
-//                l.add(a);
-//            }
-//        }
-//        return l;
         return songs;
     }
 
     /*
     * Refresh the song list, find the newly downloaded song and assign url to that song
     * Parameter: new url */
-    public void refresh(String url){
+    public void downloadCompleted(String url){
         generateAll();
         for (Song s : songs){
             if (s.getSongUrl().equals("")){

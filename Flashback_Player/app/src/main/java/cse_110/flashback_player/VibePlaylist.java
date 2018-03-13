@@ -41,11 +41,6 @@ public class VibePlaylist {
 
         // populate viable song set
         for (Song song : entireSongList.getAllsong()) {
-//            song.getPreviousDate(context);
-//            song.getPreviousLocation(context);
-//
-//            System.out.println(song.getPreviousLocation(context));
-
             // song must be:
             // 1. not disliked
             // 2. having valid previous and current locations
@@ -78,10 +73,6 @@ public class VibePlaylist {
         while (!returnPQ.isEmpty()) {
             returnList.add(returnPQ.poll());
         }
-
-        System.out.println("------------");
-        System.out.println(returnList.size());
-
         return returnList;
     }
 
@@ -135,9 +126,6 @@ public class VibePlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
-       // return song.getSongStatus(FlashBackActivity.getContextOfApplication()) != -1;
-//                && song.getPreviousLocation(context) != null
-//                && song.getPreviousDate(context) != null;
         return false;
     }
 }

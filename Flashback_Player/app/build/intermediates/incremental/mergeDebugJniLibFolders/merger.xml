@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/src/debug/jniLibs"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/debug/jniLibs"/></dataSet></merger>
+>>>>>>> 5b90f0eeae1697dc721f563862348a2655e642d7

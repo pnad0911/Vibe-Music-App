@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +55,7 @@ public class TabAlbum extends Fragment {
         // get items from song list
         final SongList songListGen = new SongList(this.getActivity());
         List<String> albumNames = songListGen.getListOfAlbum();
-        map = songListGen.getB();
+        map = songListGen.getMap();
         sListView = rootView.findViewById(R.id.album_list);
         adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames, map);
         sListView.setAdapter(adapter);
@@ -185,7 +184,6 @@ public class TabAlbum extends Fragment {
         else {
             songTimeView.setText("N/A");
         }
-//        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
     }

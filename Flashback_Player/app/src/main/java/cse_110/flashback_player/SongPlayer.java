@@ -173,12 +173,7 @@ public class SongPlayer implements Parcelable{
         return 0;
     }
 
-    public void writeToParcel(Parcel out, int flags) {
-//        out.writeValue(mediaPlayer);
-//        out.writeValue(activity);
-//        out.writeValue(nextSong);
-//        out.writeInt(paused);
-    }
+    public void writeToParcel(Parcel out, int flags) { }
 
     public static final Parcelable.Creator<SongPlayer> CREATOR
             = new Parcelable.Creator<SongPlayer>() {
@@ -191,10 +186,5 @@ public class SongPlayer implements Parcelable{
         }
     };
 
-    private SongPlayer(Parcel in) {
-//        mediaPlayer = (MediaPlayer) in.readValue(null);
-//        activity = (Activity) in.readValue(null);
-//        nextSong = (Song) in.readValue(null);
-//        paused = in.readInt();
-    }
+    private SongPlayer(Parcel in) { }
 }
