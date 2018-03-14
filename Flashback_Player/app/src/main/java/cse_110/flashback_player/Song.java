@@ -33,25 +33,7 @@ public class Song implements SongSubject{
     static DatabaseReference databaseRef = database.getReference();
 
 //    private Boolean downloaded = false;
-    public void setDownloaded() {
-        SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedTime.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(true);
-        editor.putString(getTitle(),json);
-        editor.commit();
-    }
-    public Boolean getDownloadStatus() {
-        try {
-            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
-            Gson gson = new Gson();
-            String json = sharedTime.getString(getTitle(), "");
-            Boolean down = gson.fromJson(json, Boolean.class);
-            return down;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+
 //    public int getId() {return id;}
 
     private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
@@ -115,11 +97,13 @@ public class Song implements SongSubject{
                 locations = l;
                 userNames = u;
                 date = d;
+                if (songUrl == null){songUrl = "";}
                 songUrl = url;
             }
         });
         try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
         Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+        Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
     }
 
     /* Local song creation */
@@ -147,6 +131,7 @@ public class Song implements SongSubject{
     public void setTitle(String title){
         this.title = title;
     }
+
     public void setSongUrl(String songUrl, Context context){
         SharedPreferences sharedLocation = context.getSharedPreferences("songUrl", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = sharedLocation.edit();
@@ -155,6 +140,7 @@ public class Song implements SongSubject{
         editor2.putString(getTitle(),json2);
         editor2.commit();
         this.songUrl = songUrl;
+
     }
 
     public void setSongUrl(String url){ this.songUrl = url;}
@@ -257,6 +243,26 @@ public class Song implements SongSubject{
         return returnV;
     }
 
+    public void setDownloaded(Context context) {
+        SharedPreferences sharedTime = context.getSharedPreferences("download", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedTime.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(true);
+        editor.putString(getTitle(),json);
+        editor.commit();
+    }
+    public Boolean getDownloadStatus(Context context) {
+        try {
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            Boolean down = gson.fromJson(json, Boolean.class);
+            return down;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public int getPreviousLike(Context context){
         try {
             SharedPreferences sharedTime = context.getSharedPreferences("like", MODE_PRIVATE);
@@ -276,20 +282,54 @@ public class Song implements SongSubject{
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             String url = gson.fromJson(json, String.class);
+            if (url == null){
+                url = "";
+            }
             this.songUrl = url;
         } catch (Exception e) {
             this.songUrl = "";
         }
+        Log.println(Log.ERROR, "getSongURL", "Songurl is: "+songUrl);
         return this.songUrl;
     }
 
+    public String getUser(ArrayList<String> friends, String me){
+        String returnVal = "";
+        for (String a : userNames){
+            if (friends.contains(a)){
+                returnVal = a;
+            }
+        }
+        if (userNames.contains(me)){
+            returnVal = me;
+        }
+        else{
+            returnVal = anonymous(userNames.get(userNames.size()-1));
+        }
+        return returnVal;
+    }
+
+    private String anonymous(String name){
+        int half = name.length()/2;
+        return name.substring(half, half+1)+name.substring(0,half-1)+name.substring(half+2, name.length()-1);
+    }
 
     /* Method called as long as this object is modified. */
     public void updateDatabase(){
+        if (songUrl == null){songUrl = "";}
         Log.println(Log.ERROR, "Database", "Updating song " + this.title + " in Firebase.");
         DatabaseReference songDataRef = databaseRef.child("SONGS");
-        songDataRef.child(this.databaseKey).setValue(this);
-//        songDataRef.child(this.title+this.artist).child("userNames").setValue(userNames);
+
+        songDataRef.child(this.databaseKey).child("title").setValue(this.title);
+        songDataRef.child(this.databaseKey).child("artist").setValue(this.artist);
+        songDataRef.child(this.databaseKey).child("databaseKey").setValue(this.databaseKey);
+        songDataRef.child(this.databaseKey).child("album").setValue(this.album);
+        songDataRef.child(this.databaseKey).child("songUrl").setValue(this.songUrl);
+        Log.println(Log.ERROR, "songURL", "Songurl is: "+songUrl);
+        songDataRef.child(this.databaseKey).child("userNames").setValue(this.userNames);
+        songDataRef.child(this.databaseKey).child("locations").setValue(this.locations);
+        songDataRef.child(this.databaseKey).child("date").setValue(this.date);
+
         for (SongObserver ob : observers){
             ob.update();
         }
@@ -400,13 +440,7 @@ public class Song implements SongSubject{
      * Gets weighted score of song (max 300)
      * @return
      */
-    public double getScore(Location userLocation, OffsetDateTime presentTime) {
-//        double locScore = getLocationScore(userLocation);
-//        double dateScore = getDateScore(presentTime);
-//        double timeScore = getTimeScore(presentTime);
-//        return locScore + dateScore + timeScore;
-        return 1;
-    }
+    public double getScore(Location userLocation, OffsetDateTime presentTime) { return 1; }
 //
 //    /**
 //     * helper for getScore

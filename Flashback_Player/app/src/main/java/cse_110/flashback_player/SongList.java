@@ -108,11 +108,12 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         if (files!=null) {
             for (File f : files) {
                 try {
-                    if (isMp3File(f)) {
+//                    if (isMp3File(f)) {
                         String filePath = f.getAbsolutePath();
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
-                        so.setDownloaded();
+                        Log.println(Log.ERROR, "SongList", "SongTitle is: "+so.getTitle());
+                        so.setDownloaded(LibraryActivity.getContextOfApplication());
                         songs.add(so);
 
                         // maintain album list
@@ -124,7 +125,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                         } else {
                             AlbumSongList.get(album).add(so);
                         }
-                    }
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -160,16 +161,16 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         data = new HashMap<>();
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
-        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.list());
+        Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.getAbsolutePath());
         File[] fileArray = path.listFiles();
-//        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.toString());
+        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.length);
         if (fileArray != null) {
             for (File f : fileArray) {
 
                 try {
 //                AssetFileDescriptor afd = activity.getResources().openRawResourceFd(f.getInt(null));
 //                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                    if (isMp3File(f)) {
+//                    if (isMp3File(f)) {
                         FileInputStream fileInputStream = new FileInputStream(f);
                         FileDescriptor fd = fileInputStream.getFD();
                         mmr.setDataSource(fd);
@@ -180,8 +181,10 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                         list[0] = ti;
                         list[1] = ar;
                         list[2] = al;
+                        Log.println(Log.ERROR, "GetData", "SongTitle is: "+ ti);
+
                         data.put(f.getAbsolutePath(), list);
-                    }
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
