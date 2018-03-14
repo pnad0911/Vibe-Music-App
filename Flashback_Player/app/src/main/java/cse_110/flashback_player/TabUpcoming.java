@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TabUpcoming extends Fragment {
@@ -20,6 +21,7 @@ public class TabUpcoming extends Fragment {
     private SongPlayer songPlayer;
     private SongList songListGen;
     public SongAdapterUpcoming adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,8 +30,9 @@ public class TabUpcoming extends Fragment {
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
-        songListGen = new SongList(this.getActivity());
-        songList = songListGen.getAllsong();//System.out.println(songList.get(0).getTitle());
+//        songListGen = new SongList(this.getActivity());
+//        songList = songListGen.getAllsong();
+        songList = new ArrayList<>();
         adapter = new SongAdapterUpcoming(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
@@ -46,11 +49,10 @@ public class TabUpcoming extends Fragment {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        /*
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
-        }*/
+        }
     }
     public void updateDisplay(List<Song> list) {
         songList.clear();

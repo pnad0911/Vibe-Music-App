@@ -73,7 +73,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private TabVibe tab1;
+    private TabVibe tab1; private TabUpcoming tab2;
     private static Location loc;
 
     private LocationReadyCallback locationCallback;
@@ -82,7 +82,9 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
-    private SongDownloadHelper songDownloadHelper; public SongList songList;
+    private SongDownloadHelper songDownloadHelper;
+    public SongList songList;
+    public static List<Song> upcomingList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,7 +156,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String url = edittext.getText().toString();
-//                songDownloadHelper.startDownload(url);
+                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
+                tab2.updateDisplay(upcomingList);
                 SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songList,VibeActivity.this);
                 songDownloadHelper2.startDownload();
                 dialog.cancel();
@@ -189,7 +192,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spinner.setDropDownWidth(552);
         spinner.setAdapter(dataAdapter);
     }
     @Override
@@ -223,7 +225,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-                    TabUpcoming tab2 = new TabUpcoming();
+                    tab2 = new TabUpcoming();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);

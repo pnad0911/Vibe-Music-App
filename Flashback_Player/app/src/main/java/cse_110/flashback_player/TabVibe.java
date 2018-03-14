@@ -202,4 +202,11 @@ public class TabVibe extends Fragment {
         songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
 }

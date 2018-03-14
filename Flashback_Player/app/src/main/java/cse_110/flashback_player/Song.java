@@ -32,7 +32,7 @@ public class Song implements SongSubject{
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static DatabaseReference databaseRef = database.getReference();
 
-    private Boolean downloaded = false;
+//    private Boolean downloaded = false;
     public void setDownloaded() {
         SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedTime.edit();

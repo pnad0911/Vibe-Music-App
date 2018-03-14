@@ -88,10 +88,9 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
     public void downloadCompleted(String url){
         generateAll();
         for (Song s : songs){
-            System.out.println("---------------bbb---------------" + s.getTitle());
-            if (s.getSongUrl().equals("")){
-                s.setSongUrl(url, activity.getApplicationContext());
-            }
+//            if (s.getSongUrl().equals("")){
+//                s.setSongUrl(url, activity.getApplicationContext());
+//            }
         }
         for (SongListListener ls : listeners){
             ls.updateDisplay(songs);
