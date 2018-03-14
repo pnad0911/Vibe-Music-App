@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
-INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
-INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
-INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
 MERGED from [com.google.android.gms:play-services-location:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.8.0.aar/0b14644270272a42a07db6036da862a1/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.8.0.aar/f9bf173e1da5b327079c0df972f50b09/AndroidManifest.xml:17:1-39:12
 MERGED from [com.google.firebase:firebase-core:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-core-11.8.0.aar/a34763350930e703b3e1e6cbe76c3781/AndroidManifest.xml:2:1-6:12
@@ -44,20 +44,20 @@ MERGED from [com.google.firebase:firebase-common-license:11.8.0] /Users/Yutong/.
 MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.8.0.aar/7b25a717807910be206e8e3cde8e3468/AndroidManifest.xml:2:1-6:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/4d916cfb9cd8c77f70472ba4836e82ca/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.firebase:firebase-iid-license:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/firebase-iid-license-11.8.0.aar/d5d1bc652bf3570b44590ab160cbf73e/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
-INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
-INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
 	package
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
 		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-60:12
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:1-61:12
 		INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:2:11-69
@@ -110,7 +110,7 @@ ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17
 	android:name
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:16:17-39
 application
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:18:5-58:19
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:18:5-59:19
 MERGED from [com.google.android.gms:play-services-location:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.8.0.aar/0b14644270272a42a07db6036da862a1/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-location-11.8.0.aar/0b14644270272a42a07db6036da862a1/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-auth:11.8.0] /Users/Yutong/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.8.0.aar/f9bf173e1da5b327079c0df972f50b09/AndroidManifest.xml:22:5-37:19
@@ -196,45 +196,45 @@ MERGED from [com.google.firebase:firebase-iid-license:11.8.0] /Users/Yutong/.gra
 	android:theme
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:24:9-40
 activity#cse_110.flashback_player.LibraryActivity
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:25:9-30:20
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:25:9-35:20
 	android:label
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:27:13-57
 	android:theme
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:28:13-56
 	android:name
 		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:26:13-44
-meta-data#com.google.android.geo.API_KEY
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:40:9-42:55
-	android:value
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:42:13-52
-	android:name
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:41:13-58
-activity#cse_110.flashback_player.VibeActivity
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:44:9-47:59
-	android:label
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:46:13-57
-	android:theme
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:47:13-56
-	android:name
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:45:13-41
-activity#cse_110.flashback_player.logIn
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:48:9-57:20
-	android:label
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:50:13-58
-	android:theme
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:51:13-56
-	android:name
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:49:13-34
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:52:13-56:29
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:29:13-33:29
 action#android.intent.action.MAIN
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:53:17-69
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:30:17-69
 	android:name
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:53:25-66
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:30:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:55:17-77
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:32:17-77
 	android:name
-		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:55:27-74
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:32:27-74
+meta-data#com.google.android.geo.API_KEY
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:45:9-47:55
+	android:value
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:47:13-52
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:46:13-58
+activity#cse_110.flashback_player.VibeActivity
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:49:9-52:59
+	android:label
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:51:13-57
+	android:theme
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:52:13-56
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:50:13-41
+activity#cse_110.flashback_player.logIn
+ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:53:9-58:20
+	android:label
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:55:13-58
+	android:theme
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:56:13-56
+	android:name
+		ADDED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml:54:13-34
 uses-sdk
 INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/AndroidManifest.xml

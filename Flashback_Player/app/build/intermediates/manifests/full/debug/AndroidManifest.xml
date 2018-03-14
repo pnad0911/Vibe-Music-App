@@ -43,6 +43,11 @@
             android:name="cse_110.flashback_player.LibraryActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!--
@@ -65,11 +70,6 @@
             android:name="cse_110.flashback_player.logIn"
             android:label="@string/title_activity_log_in"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"

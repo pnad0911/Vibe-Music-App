@@ -99,6 +99,7 @@ public class Song implements SongSubject{
                 date = d;
                 if (songUrl == null){songUrl = "";}
                 songUrl = url;
+                Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
             }
         });
         try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
@@ -304,7 +305,9 @@ public class Song implements SongSubject{
             returnVal = me;
         }
         else{
-            returnVal = anonymous(userNames.get(userNames.size()-1));
+            if (returnVal == "") {
+                returnVal = anonymous(userNames.get(userNames.size() - 1));
+            }
         }
         return returnVal;
     }
@@ -316,6 +319,7 @@ public class Song implements SongSubject{
 
     /* Method called as long as this object is modified. */
     public void updateDatabase(){
+        Log.println(Log.ERROR, "songURL", "Songurl is: "+songUrl);
         if (songUrl == null){songUrl = "";}
         Log.println(Log.ERROR, "Database", "Updating song " + this.title + " in Firebase.");
         DatabaseReference songDataRef = databaseRef.child("SONGS");
@@ -325,7 +329,7 @@ public class Song implements SongSubject{
         songDataRef.child(this.databaseKey).child("databaseKey").setValue(this.databaseKey);
         songDataRef.child(this.databaseKey).child("album").setValue(this.album);
         songDataRef.child(this.databaseKey).child("songUrl").setValue(this.songUrl);
-        Log.println(Log.ERROR, "songURL", "Songurl is: "+songUrl);
+
         songDataRef.child(this.databaseKey).child("userNames").setValue(this.userNames);
         songDataRef.child(this.databaseKey).child("locations").setValue(this.locations);
         songDataRef.child(this.databaseKey).child("date").setValue(this.date);
