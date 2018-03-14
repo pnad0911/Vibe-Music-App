@@ -32,14 +32,15 @@ public class SongDownloadHelper {
      * @param listener    Class that listens for when download is complete
      * @param context     AppCompatActivity to be downloaded in(typically pass the activity)
      */
-    public SongDownloadHelper(DownloadCompleteListener listener, AppCompatActivity context) {
+    public SongDownloadHelper(String url, DownloadCompleteListener listener, AppCompatActivity context) {
+        this.url = url;
         this.context = context;
         listeners.add(listener);
         downloadManager = (DownloadManager) this.context.getSystemService(Context.DOWNLOAD_SERVICE);
     }
 
-    public void startDownload(String address) {
-        this.url = address;
+    public void startDownload() {
+//        this.url = address;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         BroadcastReceiver onComplete = new BroadcastReceiver() {
             @Override

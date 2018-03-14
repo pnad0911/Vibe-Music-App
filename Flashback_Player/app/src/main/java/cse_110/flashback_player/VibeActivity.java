@@ -144,7 +144,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         });
 
         songList = new SongList(this);
-        songDownloadHelper = new SongDownloadHelper(songList,this);
+//        songDownloadHelper = new SongDownloadHelper(songList,this);
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(this);
@@ -154,7 +154,9 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String url = edittext.getText().toString();
-                songDownloadHelper.startDownload(url);
+//                songDownloadHelper.startDownload(url);
+                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songList,VibeActivity.this);
+                songDownloadHelper2.startDownload();
                 dialog.cancel();
                 dialog.dismiss();
                 alert.create();
@@ -250,7 +252,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         }
     }
 
-//   ---------------------------------- Get Location method here  ---------------------------------
+    //   ---------------------------------- Get Location method here  ---------------------------------
     /* Get current Location */
     public static Location getLocation(){
         return loc;
@@ -308,4 +310,3 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         return contextOfApplication;
     }
 }
-

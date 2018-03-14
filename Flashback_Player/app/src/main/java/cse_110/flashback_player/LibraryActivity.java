@@ -1,6 +1,8 @@
 package cse_110.flashback_player;
 
 
+import android.*;
+import android.Manifest;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -244,6 +246,10 @@ public class LibraryActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     100);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},1);
         }
     }
 

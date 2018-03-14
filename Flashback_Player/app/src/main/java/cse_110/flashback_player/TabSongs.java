@@ -5,6 +5,7 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class TabSongs extends Fragment {
+public class TabSongs extends Fragment implements SongListListener {
 
     private int songIdx=0;
     private Context context;
@@ -55,6 +56,7 @@ public class TabSongs extends Fragment {
 
         // get items from song list
         SongList songListGen = new SongList(this.getActivity());
+        songListGen.reg(this);
         songList = songListGen.getAllsong();
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
@@ -167,6 +169,9 @@ public class TabSongs extends Fragment {
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
+        currSong.addLocation(LibraryActivity.getLocation());
+        currSong.setDate(OffsetDateTime.now());
+        currSong.updateDatabase();
     }
 
     /* change display on media player to current playing song*/
@@ -179,14 +184,13 @@ public class TabSongs extends Fragment {
 
 //            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
             songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
-                    currSong.getPreviousLocation().first+ ", " +
-                    currSong.getPreviousLocation().second + " )");
+                    currSong.previousLocation().first+ ", " +
+                    currSong.previousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-//        currSong.addLocation(LibraryActivity.getLocation());
-//        currSong.setDate(OffsetDateTime.now());
+
         //TODO currSong.addUser(userid);
     }
 
@@ -199,4 +203,5 @@ public class TabSongs extends Fragment {
         songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
+
 }
