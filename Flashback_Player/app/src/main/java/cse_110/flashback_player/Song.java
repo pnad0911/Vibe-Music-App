@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static cse_110.flashback_player.logIn.user;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -31,6 +32,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class Song implements SongSubject{
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static DatabaseReference databaseRef = database.getReference();
+
+    private final double locRange = 1000; //feet
+    private final double latToFeet = 365228;
+    private final double longToFeet = 305775;
 
 //    private Boolean downloaded = false;
     public void setDownloaded() {
@@ -73,24 +78,9 @@ public class Song implements SongSubject{
         observers.add(ob);
     }
 
-    // song history information
-//    private Location previousLocation = null;
-//    private Location currentLocation;
     private String date;
     private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
     private ArrayList<String> userNames = new ArrayList<>();
-
-
-//    private OffsetDateTime previousDate = null;
-//    private OffsetDateTime currentDate;
-//
-//    private final double fiveam = 300; // times are in minutes
-//    private final double elevenam = 660;
-//    private final double fivepm = 1020;
-//    private final double locRange = 1000; // feet
-//    private final double latToFeet = 365228;
-//    private final double longToFeet = 305775;
-
 
 
     // ----- CONSTRUCTORS ------------------------------------------
@@ -129,7 +119,9 @@ public class Song implements SongSubject{
         this.artist = artist;
         this.album = album;
     }
+    // --- END CONSTRUCTORS --------------------------------------
 
+    //----- SETTERS -------------------------------------------
     private void setSong (Song song){
         Log.println(Log.ERROR, "SETSONG", song.getSongUrl());
         this.title = song.title;
@@ -141,9 +133,7 @@ public class Song implements SongSubject{
         this.userNames = song.userNames;
         this.databaseKey = song.title+song.artist;
     }
-    // --- END CONSTRUCTORS --------------------------------------
 
-    //----- SETTERS -------------------------------------------
     public void setTitle(String title){
         this.title = title;
     }
@@ -203,28 +193,6 @@ public class Song implements SongSubject{
     public void dislike(Context context) { like = -1; setPreviousLike(like, context);}
     public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
 
-//        public void setPreviousDate(Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(OffsetDateTime.now().minusHours(8));
-//        editor.putString(getTitle(),json);
-//        editor.commit();
-//        System.out.println(sharedTime.contains(getTitle()));
-//        this.previousDate = OffsetDateTime.now().minusHours(8);
-//        this.update();
-//    }
-
-//    public void setPreviousLocationShared(Location location) {
-////        this.previousLocation = location;
-//        this.update();
-//    }
-
-
-    //    public void setPreviousDate(OffsetDateTime time) {
-//        this.previousDate = time;
-//    }
-
     // FIREBASE PURPOSE GETTERS --------------
 
     public String getTitle(){ return title; }
@@ -283,7 +251,6 @@ public class Song implements SongSubject{
         return this.songUrl;
     }
 
-
     /* Method called as long as this object is modified. */
     public void updateDatabase(){
         Log.println(Log.ERROR, "Database", "Updating song " + this.title + " in Firebase.");
@@ -341,151 +308,105 @@ public class Song implements SongSubject{
                                       String url);
     }
 
-//    public Location getCurrentLocation(){ return this.currentLocation; }
+    /*--------------------------WEIGHTSYSTEM-------------------------------------------*/
 
-//    public OffsetDateTime getPreviousDate(Context context){
-//        try {
-//            SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//            Gson gson = new Gson();
-//            String json = sharedTime.getString(getTitle(), "");
-//            OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//            this.previousDate = OffsetDateTime.now().minusHours(8);
-//        } catch (Exception e) {
-//            this.previousDate = null;
-//        }
-//        return this.previousDate;
-//    }
-//
-
-    //    public Location getPreviousLocation(Context context){
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        setPreviousLocationShared(location);
-//        return location;
-//    }
-
-//    public OffsetDateTime getCurrentDate(){ return this.currentDate; }
-
-//    public void setPreviousLocation(Location loc, Context context){
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(loc);
-//        editor2.putString(getTitle(),json2);
-//        editor2.commit();
-////        this.previousLocation = loc;
-//    }
-//
-
-//    public void setPreviousLocation(Location loc){
-////        this.previousLocation = loc;
-//    }
-//    public void setPreviousTime(OffsetDateTime time){
-//        this.previousDate = time;
-//    }
-//
-//    public void setCurrentLocation(Location loc,Context context){
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(loc);
-//        editor2.putString(getTitle(),json2);
-//        editor2.commit();
-//        this.currentLocation = loc;
-//    }
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
 
     /**
-     * Gets weighted score of song (max 300)
-     * @return
+     * helper for getScore
+     * @return location score
      */
-    public double getScore(Location userLocation, OffsetDateTime presentTime) {
-//        double locScore = getLocationScore(userLocation);
-//        double dateScore = getDateScore(presentTime);
-//        double timeScore = getTimeScore(presentTime);
-//        return locScore + dateScore + timeScore;
-        return 1;
-    }
-//
-//    /**
-//     * helper for getScore
-//     * @return location score
-//     */
-//    public double getLocationScore(Location userLocation) {
-//        /*try {
-//            previousLocation.getLatitude();
-//            previousLocation.getLongitude();
-//            userLocation.getLatitude();
-//            userLocation.getLongitude();
-//        } catch (RuntimeException e) {
-//            System.out.println("failed to get location in getLocationScore");
-//            return 0;
-//        }*/
-////        if (userLocation == null) {
-////            return 0;
-////        }
-////        double prevFeetLat = previousLocation.getLatitude() * latToFeet;
-////        System.out.println(previousLocation.getLatitude());
-////        double prevFeetLong = previousLocation.getLongitude() * longToFeet;
-////        double currFeetLat = userLocation.getLatitude() * latToFeet;
-////        System.out.println(userLocation.getLatitude());
-////        double currFeetLong = userLocation.getLongitude() * longToFeet;
-////        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
-////                Math.pow(currFeetLong - prevFeetLong, 2));
-////        if (distance > locRange) {
-////            return 0;
-////        }
-//        return 100; // - (distance / 10);
-//    }
-//
-//    /**
-//     * helper for getScore
-//     * @return date score
-//     */
-//    public double getDateScore(OffsetDateTime presentTime) {
-//
-////        if (presentTime == null) {
-////            return 0;
-////        }
-////        if (presentTime.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
-////            return 100;
-////        }
-//        return 0;
-//    }
-//
-//    /**
-//     * helper for getDateScore
-//     * @return time score
-//     */
-//    public int getTimeScore(OffsetDateTime presentTime) {
-//        if (presentTime == null || previousDate == null){
-//            return 0;
-//        }
-//        double currentTime = presentTime.getHour()*60 + presentTime.getMinute();
-//        double previousTime = previousDate.getHour()*60 + previousDate.getMinute();
-//        String currentTimeOfDay = getTimeofDay(currentTime);
-//        String previousTimeOfDay = getTimeofDay(previousTime);
-//        if (currentTimeOfDay.equals(previousTimeOfDay)) {
-//            return 100;
-//        }
-//        return 0;
-//    }
-//
-//    /**
-//     * helper for getTimeScore
-//     * @param time
-//     * @return String time of day
-//     */
-//    public String getTimeofDay(double time) {
-//        if (time >= fiveam && time <= elevenam) {
-//            return "morning";
-//        } else if (time > elevenam && time <= fivepm) {
-//            return "afternoon";
-//        } else {
-//            return "evening";
-//        }
-//    }
+    // @Override
+    public double getLocationScore(Location userLocation) {
 
+        if (userLocation == null) {
+            return 0;
+        }
+
+        double prevFeetLat = Double.parseDouble(previousLocation().first) * latToFeet;
+        double prevFeetLong = Double.parseDouble(previousLocation().second) * longToFeet;
+        double currFeetLat = userLocation.getLatitude() * latToFeet;
+        double currFeetLong = userLocation.getLongitude() * longToFeet;
+        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
+                Math.pow(currFeetLong - prevFeetLong, 2));
+        // check if song was played within 1000 ft
+        if (distance > locRange) {
+            return 0;
+        }
+        return 102;
+    }
+
+    /**
+     * helper for getScore
+     * @param presentTime
+     * @return week score
+     */
+    //@Override
+    public double getWeekScore(OffsetDateTime presentTime) {
+        OffsetDateTime playedTime = OffsetDateTime.parse(getDate());
+        if (playedTime == null) {
+            return 0;
+        }
+        OffsetDateTime lastWeekBegin = presentTime.minusDays(7);
+        // Monday (value 1) to Sunday (value 7) is a week
+        while (lastWeekBegin.getDayOfWeek().getValue() != 1) {
+            lastWeekBegin = lastWeekBegin.minusDays(1);
+        }
+        for (int i = 0; i < 7; i++) {
+            if (lastWeekBegin.getYear() == playedTime.getYear() &&
+                    lastWeekBegin.getDayOfYear() == playedTime.getDayOfYear()) {
+                return 101;
+            }
+            lastWeekBegin = lastWeekBegin.plusDays(1);
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getScore
+     * @return friend score
+     */
+    // @Override
+    public double getFriendScore() {
+        if (isPlayedByFriend()) {
+            return 100;
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getFriendScore
+     * @return true if song was played by friend, false otherwise
+     */
+    //   @Override
+    public boolean isPlayedByFriend() {
+        ArrayList<String> usersPlayedSong = getUserNames();
+        ArrayList<Pair<String,String>> friends = user.getFriendlist();
+        for (String username : usersPlayedSong) {
+            for (Pair<String,String> friend : friends) {
+                if (username.equals(friend.second + friend.first)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {return 0;}
+    public double getLocationScore(Location userLocation) {return 0;}
+    public double getWeekScore(OffsetDateTime presentTime) {return 0;}
+    public double getFriendScore() {return 0;}
+    public boolean isPlayedByFriend() {return false;}
+    public double getScore(Location userLocation, OffsetDateTime presentTime){return 0;}*/
+    /*public static void main(String[] args) {
+        Song s = new WeightSystem();
+        System.out.println(s.getScore());
+    }*/
 }
 

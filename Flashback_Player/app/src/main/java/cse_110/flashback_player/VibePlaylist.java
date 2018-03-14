@@ -62,6 +62,7 @@ public class VibePlaylist {
         for (Song song : viableSongs) {
             if (isPlayable(song)) {
                 playlist.add(song);
+
             }
         }
 
