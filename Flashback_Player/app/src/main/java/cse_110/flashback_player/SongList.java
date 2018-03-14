@@ -108,7 +108,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         if (files!=null) {
             for (File f : files) {
                 try {
-                    if (isMp3File(f)) {
+//                    if (isMp3File(f)) {
                         String filePath = f.getAbsolutePath();
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
@@ -124,7 +124,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                         } else {
                             AlbumSongList.get(album).add(so);
                         }
-                    }
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -169,7 +169,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                 try {
 //                AssetFileDescriptor afd = activity.getResources().openRawResourceFd(f.getInt(null));
 //                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                    if (isMp3File(f)) {
+//                    if (isMp3File(f)) {
                         FileInputStream fileInputStream = new FileInputStream(f);
                         FileDescriptor fd = fileInputStream.getFD();
                         mmr.setDataSource(fd);
@@ -181,7 +181,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                         list[1] = ar;
                         list[2] = al;
                         data.put(f.getAbsolutePath(), list);
-                    }
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
