@@ -282,15 +282,10 @@ public class Song implements SongSubject{
         }
         else{
             if (returnVal == "") {
-                returnVal = anonymous(userNames.get(userNames.size() - 1));
+                returnVal = Integer.toString(userNames.get(userNames.size() - 1).hashCode());
             }
         }
         return returnVal;
-    }
-
-    private String anonymous(String name){
-        int half = name.length()/2;
-        return name.substring(half, half+1)+name.substring(0,half-1)+name.substring(half+2, name.length()-1);
     }
 
     /** Method called as long as this object is modified.
