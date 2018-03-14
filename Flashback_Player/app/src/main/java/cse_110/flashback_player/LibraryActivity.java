@@ -19,6 +19,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Field;
@@ -48,7 +49,7 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class LibraryActivity extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -75,7 +76,15 @@ public class LibraryActivity extends AppCompatActivity {
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
-
+    private final static String TAG = "LibraryActivity";
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

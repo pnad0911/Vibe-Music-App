@@ -107,6 +107,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         File[] files = path.listFiles();
         if (files!=null) {
             for (File f : files) {
+                Log.d("WUTFACE", f.getAbsolutePath());
                 try {
                     if (isMp3File(f)) {
                         String filePath = f.getAbsolutePath();

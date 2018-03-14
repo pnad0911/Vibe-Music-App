@@ -3925,9 +3925,14 @@ public final class R {
     public static final int ic_launcher_round=0x7f0c0001;
   }
   public static final class raw {
-    public static final int bad_things=0x7f0d0000;
-    public static final int one_call_away=0x7f0d0001;
-    public static final int see_you_again_absence_remix=0x7f0d0002;
+    public static final int back_east=0x7f0d0000;
+    public static final int bad_things=0x7f0d0001;
+    public static final int blood_on_your_bootheels=0x7f0d0002;
+    public static final int i_will_not_be_afraid=0x7f0d0003;
+    public static final int one_call_away=0x7f0d0004;
+    public static final int see_you_again_absence_remix=0x7f0d0005;
+    public static final int tightrope_walker=0x7f0d0006;
+    public static final int when_you_go=0x7f0d0007;
   }
   public static final class string {
     public static final int abc_action_bar_home_description=0x7f0e0000;

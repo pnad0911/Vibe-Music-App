@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "source": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\pnad0911\\AndroidStudioProjects\\master\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/winnieli/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d0da1b2b16c831fe5d4f5d1a48f02bde/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -31,10 +31,10 @@
             ]
         },
         {
-            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\pnad0911\\AndroidStudioProjects\\newMaster\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -46,10 +46,10 @@
             ]
         },
         {
-            "outputFile": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -61,10 +61,10 @@
             ]
         },
         {
-            "outputFile": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\winnieli\\Desktop\\cse110project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "C:\\Users\\winnieli\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\d0da1b2b16c831fe5d4f5d1a48f02bde\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -76,10 +76,25 @@
             ]
         },
         {
-            "outputFile": "/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
