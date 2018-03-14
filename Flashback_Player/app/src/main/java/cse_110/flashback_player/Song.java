@@ -99,7 +99,7 @@ public class Song implements SongSubject{
                 date = d;
                 if (songUrl == null){songUrl = "";}
                 songUrl = url;
-                Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+//                Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
             }
         });
         try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
@@ -356,7 +356,7 @@ public class Song implements SongSubject{
                     Log.println(Log.ERROR, "GETINSTANCE", "No such song as "+databaseKey);
 
                 } else {
-                    Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
+//                    Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
 
                     // update current song object
                     c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),

@@ -34,7 +34,6 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
     /* Constructor  */
     public SongList(Activity a) {
         activity = a;
-        getData();
         generateAll();
     }
 
@@ -90,6 +89,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         for (Song s : songs){
             if (s.getSongUrl().equals("")){
                 s.setSongUrl(url, activity.getApplicationContext());
+                Log.println(Log.ERROR, "DownLoadComplete", "SongTitle is: "+s.getSongUrl());
             }
         }
         for (SongListListener ls : listeners){
@@ -99,9 +99,10 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
 
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
+        getData();
 
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        songs.clear();
+        songs = new ArrayList<>();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         List<Song> listOfSongs = new ArrayList<>();
         File[] files = path.listFiles();
@@ -112,7 +113,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                         String filePath = f.getAbsolutePath();
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
-                        Log.println(Log.ERROR, "SongList", "SongTitle is: "+so.getTitle());
+                        Log.println(Log.ERROR, "SongList", "SongTitle is: "+so.getSongUrl());
                         so.setDownloaded(LibraryActivity.getContextOfApplication());
                         songs.add(so);
 
