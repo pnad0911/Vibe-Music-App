@@ -1,9 +1,5 @@
 #Internal package file, do not edit.
-<<<<<<< HEAD
-#Sun Mar 11 22:47:10 PDT 2018
-=======
-#Sun Mar 11 22:30:02 PDT 2018
->>>>>>> master
+#Tue Mar 13 23:23:15 PDT 2018
 0.baseType=DIRECTORY
 0.base=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/androidTest/debug/0
 0.path=classes.dex
