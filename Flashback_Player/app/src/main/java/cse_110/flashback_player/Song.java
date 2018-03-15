@@ -126,24 +126,12 @@ public class Song implements SongSubject{
     }
     // --- END CONSTRUCTORS --------------------------------------
 
-    //----- SETTERS -------------------------------------------
+    /* ----------------------------- Default Setters ------------------------------------------ */
+
     public void setTitle(String title){
         this.title = title;
     }
-
-    public void setSongUrl(String songUrl, Context context){
-        SharedPreferences sharedLocation = context.getSharedPreferences("songUrl", MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = sharedLocation.edit();
-        Gson gson2 = new Gson();
-        String json2 = gson2.toJson(songUrl);
-        editor2.putString(getTitle(),json2);
-        editor2.commit();
-        this.songUrl = songUrl;
-
-    }
-
     public void setSongUrl(String url){ this.songUrl = url;}
-
     public void setArtist(String artist) {
         this.artist = artist;
     }
@@ -161,7 +149,23 @@ public class Song implements SongSubject{
         this.userNames = u;
     }
 
-    /* Favorite status is stored locally.*/
+//    public void addLocalPath (String path){ this.localPath = path; }
+
+
+    /* ------------------------  SharedPreference Setters  ------------------------------------ */
+
+    public void setSongUrl(String songUrl, Context context){
+        SharedPreferences sharedLocation = context.getSharedPreferences("songUrl", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedLocation.edit();
+        Gson gson2 = new Gson();
+        String json2 = gson2.toJson(songUrl);
+        editor2.putString(getTitle(),json2);
+        editor2.commit();
+        this.songUrl = songUrl;
+
+    }
+
+    /* Favorite Status*/
     public void setPreviousLike(int like, Context context){
         SharedPreferences sharedLocation = context.getSharedPreferences("like", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = sharedLocation.edit();
@@ -172,7 +176,16 @@ public class Song implements SongSubject{
         this.like = like;
     }
 
-    public void addLocalPath (String path){ this.localPath = path; }
+    public void setDownloaded(Context context) {
+        SharedPreferences sharedTime = context.getSharedPreferences("download", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedTime.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(true);
+        editor.putString(getTitle(),json);
+        editor.commit();
+    }
+
+    /* -----------------------------  Database Add  -------------------------------------------- */
 
     public void addUser(String first, String last){
         userNames.add(first+last);
@@ -190,7 +203,7 @@ public class Song implements SongSubject{
     public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
 
 
-    // FIREBASE PURPOSE GETTERS --------------
+    /* -----------------------------  Default Getters ----------------------------------------- */
 
     public String getTitle(){ return title; }
     public String getArtist(){ return artist; }
@@ -201,9 +214,7 @@ public class Song implements SongSubject{
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
     public ArrayList<String> getUserNames(){ return this.userNames; }
 
-    // LOCAL PURPOSE GETTERS ----------------
-
-    public int getSongStatus (Context context) { return getPreviousLike(context); }
+    /* ----------------------------- Helper Getters ------------------------------------------- */
 
     public Pair<String,String> previousLocation () {
         HashMap<String,String> hm =  locations.get(locations.size()-1);
@@ -220,14 +231,28 @@ public class Song implements SongSubject{
         return returnV;
     }
 
-    public void setDownloaded(Context context) {
-        SharedPreferences sharedTime = context.getSharedPreferences("download", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedTime.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(true);
-        editor.putString(getTitle(),json);
-        editor.commit();
+    public String getUser(ArrayList<String> friends, String me){
+        String returnVal = "";
+        for (String a : userNames){
+            if (friends.contains(a)){
+                returnVal = a;
+            }
+        }
+        if (userNames.contains(me)){
+            returnVal = me;
+        }
+        else{
+            if (returnVal == "") {
+                returnVal = Integer.toString(userNames.get(userNames.size() - 1).hashCode());
+            }
+        }
+        return returnVal;
     }
+
+    /* ----------------------------- SharePreference Getters ---------------------------------- */
+
+    public int getSongStatus (Context context) { return getPreviousLike(context); }
+
     public Boolean getDownloadStatus(Context context) {
         try {
             SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
@@ -270,27 +295,12 @@ public class Song implements SongSubject{
         return this.songUrl;
     }
 
-    public String getUser(ArrayList<String> friends, String me){
-        String returnVal = "";
-        for (String a : userNames){
-            if (friends.contains(a)){
-                returnVal = a;
-            }
-        }
-        if (userNames.contains(me)){
-            returnVal = me;
-        }
-        else{
-            if (returnVal == "") {
-                returnVal = Integer.toString(userNames.get(userNames.size() - 1).hashCode());
-            }
-        }
-        return returnVal;
-    }
+
+    /* ----------------------------  Database Methods  ---------------------------------------- */
 
     /** Method called as long as this object is modified.
-     * The display is responsible to call this method when location/date/user is set.
-     * */
+     *  The display is responsible to call this method when location/date/user is set.
+     */
     public void updateDatabase(){
         Log.println(Log.ERROR, "songURL", "Songurl is: "+songUrl);
         if (songUrl == null){songUrl = "";}
@@ -354,12 +364,8 @@ public class Song implements SongSubject{
      * Database listener
      */
     interface dataBaseListener {
-        public abstract void callback(ArrayList<String> user,
-                                      ArrayList<HashMap<String,String>> locations,
-                                      String date,
-                                      String url);
+        void callback(ArrayList<String> user, ArrayList<HashMap<String,String>> locations, String date, String url);
     }
-
 
     /**
      * Gets weighted score of song (max 300)
