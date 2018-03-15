@@ -93,8 +93,8 @@ public class Song implements SongSubject{
             @Override
             public void callback(ArrayList<String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
 
-                if (l.size() >= 100){ l = new ArrayList<>(l.subList(l.size()-101, l.size()-1)); }
-                if (u.size() >= 100){ u = new ArrayList<>(u.subList(u.size()-101, l.size()-1)); }
+                if (l!=null && l.size() >= 100){ l = new ArrayList<>(l.subList(l.size()-101, l.size()-1)); }
+                if (u!=null && u.size() >= 100){ u = new ArrayList<>(u.subList(u.size()-101, l.size()-1)); }
 
                 locations = l;
                 userNames = u;

@@ -1,4 +1,19 @@
-#Wed Mar 14 10:36:17 PDT 2018
-base.0=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/182
+#Wed Mar 14 21:41:19 PDT 2018
+path.1=classes.dex
 path.0=classes.dex
+renamed.5=classes6.dex
+renamed.4=classes5.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
 renamed.0=classes.dex
+base.5=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/197
+base.4=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/198
+base.3=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/195
+base.2=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/196
+base.1=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/194
+base.0=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/199
+path.5=classes.dex
+path.4=classes.dex
+path.3=classes.dex
+path.2=classes.dex
