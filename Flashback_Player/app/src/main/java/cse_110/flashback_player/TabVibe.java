@@ -9,6 +9,7 @@ import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class TabVibe extends Fragment {
     public static int songIdx=0;
     private Song currSong;
     private SongPlayer songPlayer;
-    public static VibePlaylist flashbackPlaylist;
+    public static VibePlaylist vibePlaylist;
     private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -39,7 +40,7 @@ public class TabVibe extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
-        flashbackPlaylist = new VibePlaylist(this.getActivity());
+        VibeActivity.vibePlaylist = new VibePlaylist((AppCompatActivity) getActivity());
         /*
         * Get Buttons and TextViews*/
         final Button playButton = (Button) rootView.findViewById(R.id.play);
@@ -57,7 +58,7 @@ public class TabVibe extends Fragment {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        songList = flashbackPlaylist.getFlashbackSong();
+        songList = VibeActivity.vibePlaylist.getVibeSong();
 
         if (songList.size() == 0){
             return rootView;
@@ -111,7 +112,7 @@ public class TabVibe extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                updateDisplay(flashbackPlaylist.getFlashbackSong());
+                updateDisplay(VibeActivity.vibePlaylist.getVibeSong());
                 if(!songList.isEmpty()) {
                     songIdx = getNextSongIdx(songList);
                     play();
@@ -124,7 +125,7 @@ public class TabVibe extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                updateDisplay(flashbackPlaylist.getFlashbackSong());
+                updateDisplay(VibeActivity.vibePlaylist.getVibeSong());
                 if(!songList.isEmpty()) {
                     songIdx = getPreviousSongIdx(songList);
                     play();

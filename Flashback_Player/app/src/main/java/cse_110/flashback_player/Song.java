@@ -380,5 +380,7 @@ public class Song implements SongSubject{
     @Override
     public String toString(){ return this.title; }
 
+    public int getStatus(){return like;}
+
 }
 
