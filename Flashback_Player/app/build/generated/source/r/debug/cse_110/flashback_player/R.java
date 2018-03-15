@@ -3911,8 +3911,8 @@ public final class R {
     public static final int song_list_row_flashback=0x7f0a0048;
     public static final int song_list_row_upcoming=0x7f0a0049;
     public static final int support_simple_spinner_dropdown_item=0x7f0a004a;
-    public static final int tab1allsongs=0x7f0a004b;
-    public static final int tab2album=0x7f0a004c;
+    public static final int tabsongs =0x7f0a004b;
+    public static final int tabalbum =0x7f0a004c;
     public static final int tabupcoming=0x7f0a004d;
     public static final int tooltip=0x7f0a004e;
   }
