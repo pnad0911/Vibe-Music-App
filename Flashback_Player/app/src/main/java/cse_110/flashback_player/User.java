@@ -24,7 +24,6 @@ public class User {
         this.lastName = name;
     }
 
-
     public ArrayList<Pair<String, String>> getFriendlist(){
         return friendsList;
     }
