@@ -111,9 +111,10 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                 try {
                     if (isMp3File(f)) {
                         String filePath = f.getAbsolutePath();
+                        Log.println(Log.ERROR, "generateAll", "Current Path is: "+f.getAbsolutePath());
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl());
-                        Log.println(Log.ERROR, "SongList", "SongTitle is: "+so.getSongUrl());
+                        Log.println(Log.ERROR, "generateAll", "SongURL is: "+so.getSongUrl());
                         so.setDownloaded();
                         songs.add(so);
 

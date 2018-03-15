@@ -15,8 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import static cse_110.flashback_player.Song.databaseRef;
-
 /**
  * Created by Daniel on 3/4/2018.
  */
@@ -27,7 +25,7 @@ public class VibePlaylist {
     private List<Song> entireSongList;
 
     /* List of viable songs to be placed in the playlist (played b4, not disliked) */
-    private HashSet<Song> viableSongs;
+    private HashSet<Song> viableSongs = new HashSet<>();
 
     /* Priority queue used to build the playlist */
     private PriorityQueue<Song> playlist;
@@ -42,58 +40,69 @@ public class VibePlaylist {
     /* Constructor */
     public VibePlaylist(AppCompatActivity activity) {
         this.activity = activity;
+        entireSongList = new ArrayList<>();
 
-        extractFirebase();
-        try{
-            Thread.sleep(1000);
-        }catch(Exception e){
-        }
-
-        // initialize set of viable songs
-        viableSongs = new HashSet<>();
-
-        // populate viable song set
-        for (Song song : entireSongList) {
-            // 1. not disliked
-            // 2. having valid locations
-            // 3. having a valid date
-            if (isPlayable(song)) {
-                viableSongs.add(song);
-            }
-        }
+//        extractFirebase(new dataBaseListener() {
+//            @Override
+//            public void callback(Song song) {
+//
+//                Log.println(Log.ERROR, "Constructor", "Song is:" + song.toString());
+//
+//                entireSongList.add(song);
+//                downloadSong(song);
+//
+//                // populate viable song set
+//                for (Song s : entireSongList) {
+//                    // 1. not disliked
+//                    // 2. having valid locations
+//                    // 3. having a valid date
+//                    if (isPlayable(s)) {
+//                        viableSongs.add(s);
+//                    }
+//                }
+//            }
+//        });
     }
 
-    /* Retrieve all songs from firebase */
-    private void extractFirebase() {
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        songRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                entireSongList = new ArrayList<Song>();
+//    /* Retrieve all songs from firebase */
+//    private void extractFirebase(final dataBaseListener c) {
+//        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
+//        songRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//
+//                for (DataSnapshot dsp : snapshot.getChildren()) {
+//
+//                    Song song = new Song(dsp.child("title").getValue(String.class),
+//                            dsp.child("artist").getValue(String.class),
+//                            dsp.child("album").getValue(String.class),
+//                            dsp.child("songUrl").getValue(String.class),
+//                            false);
+//                    song.setLocations(dsp.child("locations").getValue(t));
+//                    song.setUserNames(dsp.child("userNames").getValue(n));
+//                    song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
+//
+//                    Log.println(Log.ERROR, "extractFirebase", "Song is:" + song.toString());
+//
+//                    // update current song object
+//                    c.callback(song);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w("TAG1", "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
 
-                for (DataSnapshot dsp : snapshot.getChildren()) {
-
-                    Song song = new Song(dsp.child("title").getValue(String.class),
-                            dsp.child("artist").getValue(String.class),
-                            dsp.child("album").getValue(String.class),
-                            dsp.child("songUrl").getValue(String.class),
-                            false);
-                    song.setLocations(dsp.child("locations").getValue(t));
-                    song.setUserNames(dsp.child("userNames").getValue(n));
-                    song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
-
-                    entireSongList.add(song);
-
-                    downloadSong(song);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG1", "Failed to read value.", error.toException());
-            }
-        });
+    /**
+     * Database listener
+     */
+    interface dataBaseListener {
+        void callback(Song song);
     }
 
     /* Update and return a list of songs in the priority queue based on a location/time */
@@ -178,6 +187,7 @@ public class VibePlaylist {
     /* Determines whether a song can be downloaded or not and downloads; false if failed to download
      */
     private boolean downloadSong(Song song) {
+
         if (!song.getDownloadStatus()) {
             SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songList, activity);
             downloadHelper.startDownload();

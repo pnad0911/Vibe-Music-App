@@ -27,7 +27,7 @@ public class TabSongs extends Fragment implements SongListListener {
     private int songIdx=0;
     private Context context;
     private Song currSong;
-    private List<Song> songList;
+//    private List<Song> songList;
     private SongPlayer songPlayer;
 //    public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -56,12 +56,11 @@ public class TabSongs extends Fragment implements SongListListener {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        SongList songListGen = new SongList(this.getActivity());
-        songListGen.reg(this);
-        songList = songListGen.getAllsong();
-        adapter = new SongAdapter(this.getActivity(), songList);
-        if(!songList.isEmpty()) {
-            currSong = songList.get(songIdx);
+        LibraryActivity.songListGen.reg(this);
+//        LibraryActivity.songList = LibraryActivity.songListGen.getAllsong();
+        adapter = new SongAdapter(this.getActivity(), LibraryActivity.songList);
+        if(!LibraryActivity.songList.isEmpty()) {
+            currSong = LibraryActivity.songList.get(songIdx);
             changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
             // configure listview
@@ -83,7 +82,7 @@ public class TabSongs extends Fragment implements SongListListener {
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if (!songList.isEmpty()) {
+                if (!LibraryActivity.songList.isEmpty()) {
                     if (songPlayer.isPlaying()) {
                         LibraryActivity.getLocation();
                         songPlayer.pause();
@@ -109,7 +108,7 @@ public class TabSongs extends Fragment implements SongListListener {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getNextSongIdx(songList);
+                songIdx = getNextSongIdx(LibraryActivity.songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
@@ -119,7 +118,7 @@ public class TabSongs extends Fragment implements SongListListener {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getPreviousSongIdx(songList);
+                songIdx = getPreviousSongIdx(LibraryActivity.songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
@@ -128,7 +127,7 @@ public class TabSongs extends Fragment implements SongListListener {
         songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
              @Override
              public void callback() {
-                 songIdx = getNextSongIdx(songList);
+                 songIdx = getNextSongIdx(LibraryActivity.songList);
                  play();
                  changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
              }
@@ -166,16 +165,16 @@ public class TabSongs extends Fragment implements SongListListener {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-        currSong = songList.get(songIdx);
+        currSong = LibraryActivity.songList.get(songIdx);
         songPlayer.play(currSong);
-        int idx = getNextSongIdx(songList);
-        songPlayer.playNext(songList.get(idx));
+        int idx = getNextSongIdx(LibraryActivity.songList);
+        songPlayer.playNext(LibraryActivity.songList.get(idx));
 
         Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
 
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
-        currSong.updateDatabase();
+        Database.updateDatabase(currSong);
     }
 
     /* change display on media player to current playing song*/
@@ -203,8 +202,8 @@ public class TabSongs extends Fragment implements SongListListener {
         else return false;
     }
     public void updateDisplay(List<Song> list) {
-        songList.clear();
-        songList.addAll(list);
+        LibraryActivity.songList.clear();
+        LibraryActivity.songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
 
