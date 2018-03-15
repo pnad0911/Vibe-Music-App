@@ -33,8 +33,7 @@ public class VibePlaylist implements DatabaseListener{
     /* Context provided by NormalActivity */
     private AppCompatActivity activity;
 
-    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
-    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
+    private List<SongListListener> listeners = new ArrayList<>();
 
     /* Constructor */
     public VibePlaylist(AppCompatActivity activity) {
@@ -55,6 +54,10 @@ public class VibePlaylist implements DatabaseListener{
             if (isPlayable(s)) {
                 viableSongs.add(s);
             }
+        }
+
+        for (SongListListener l : listeners){
+            l.updateDisplay(getVibeSong());
         }
     }
 
@@ -143,7 +146,7 @@ public class VibePlaylist implements DatabaseListener{
     private boolean downloadSong(Song song) {
 
         if (!song.getDownloadStatus()) {
-            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songList, activity);
+            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songListGen, activity);
             downloadHelper.startDownload();
             return true;
         }

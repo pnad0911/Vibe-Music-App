@@ -54,8 +54,6 @@ public class TabAlbum extends Fragment implements SongListListener{
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.timeAl);
 
         // get items from song list
-//        final SongList songListGen = new SongList(this.getActivity());
-        LibraryActivity.songListGen.reg(this);
         albumNames = LibraryActivity.songListGen.getListOfAlbum();
         map = LibraryActivity.songListGen.getMap();
         sListView = rootView.findViewById(R.id.album_list);

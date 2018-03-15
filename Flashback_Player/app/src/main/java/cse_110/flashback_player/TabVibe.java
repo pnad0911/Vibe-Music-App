@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabVibe extends Fragment {
+public class TabVibe extends Fragment implements SongListListener {
 
     public static int songIdx=0;
     private Song currSong;
@@ -59,10 +59,10 @@ public class TabVibe extends Fragment {
 
         // get items from song list
         songList = VibeActivity.vibePlaylist.getVibeSong();
-
-        if (songList.size() == 0){
-            return rootView;
-        }
+//
+//        if (songList.size() == 0){
+//            return rootView;
+//        }
 
         // configure listview
         adapter = new SongAdapterVibe(this.getActivity(), songList);
@@ -79,8 +79,10 @@ public class TabVibe extends Fragment {
             }
         });
 
-        play();
-        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+        if (!songList.isEmpty()) {
+            play();
+            changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+        }
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -203,6 +205,9 @@ public class TabVibe extends Fragment {
         songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
+
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames){}
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

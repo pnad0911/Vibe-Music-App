@@ -56,8 +56,6 @@ public class TabSongs extends Fragment implements SongListListener {
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
         // get items from song list
-        LibraryActivity.songListGen.reg(this);
-//        LibraryActivity.songList = LibraryActivity.songListGen.getAllsong();
         adapter = new SongAdapter(this.getActivity(), LibraryActivity.songList);
         if(!LibraryActivity.songList.isEmpty()) {
             currSong = LibraryActivity.songList.get(songIdx);
