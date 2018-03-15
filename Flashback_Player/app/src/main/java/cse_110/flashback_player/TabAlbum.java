@@ -17,10 +17,11 @@ import android.widget.TextView;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabAlbum extends Fragment {
+public class TabAlbum extends Fragment implements SongListListener{
 
     private int songIdx = 0;
     private ExpandableListView sListView;
@@ -29,7 +30,7 @@ public class TabAlbum extends Fragment {
     private Song currSong;
     private AlbumAdapterExpandable adapter;
     private Map<String, List<Song>> map;
-    public static Map<String,String[]> data;
+    public Map<String,String[]> data; public List<String> albumNames;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
     @Override
@@ -54,7 +55,7 @@ public class TabAlbum extends Fragment {
 
         // get items from song list
         final SongList songListGen = new SongList(this.getActivity());
-        List<String> albumNames = songListGen.getListOfAlbum();
+        albumNames = songListGen.getListOfAlbum();
         map = songListGen.getMap();
         sListView = rootView.findViewById(R.id.album_list);
         adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames, map);
@@ -177,15 +178,16 @@ public class TabAlbum extends Fragment {
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
             OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().get(0).first+
-//                    ":"+currSong.getLocations().get(0).second + " )");
+            songTimeView.setText(currSong.getDate()+ " AT ( " +
+                    currSong.allLocations().get(0).first+
+                    ":"+currSong.allLocations().get(0).second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
+        currSong.updateDatabase();
     }
 
 
@@ -193,9 +195,11 @@ public class TabAlbum extends Fragment {
         if(song.getDate() == null) return true;
         else return false;
     }
-    public void updateDisplay(Map<String, List<Song>> map) {
-        map.clear();
-        map.putAll(map);
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) {
+        this.map.clear(); this.albumNames.clear();
+        this.map.putAll(map); this.albumNames.addAll(albumNames);
         adapter.notifyDataSetChanged();
     }
+
+    public void updateDisplay(List<Song> list) { }
 }

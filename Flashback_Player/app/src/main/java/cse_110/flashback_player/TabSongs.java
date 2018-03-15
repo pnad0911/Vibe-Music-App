@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,12 +59,12 @@ public class TabSongs extends Fragment implements SongListListener {
         SongList songListGen = new SongList(this.getActivity());
         songListGen.reg(this);
         songList = songListGen.getAllsong();
+        adapter = new SongAdapter(this.getActivity(), songList);
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
             changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
             // configure listview
-            adapter = new SongAdapter(this.getActivity(), songList);
             final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
             sListView.setAdapter(adapter);
             // Handle on click event
@@ -165,10 +166,13 @@ public class TabSongs extends Fragment implements SongListListener {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
+        Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
+        Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
+
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
         currSong.updateDatabase();
@@ -204,4 +208,5 @@ public class TabSongs extends Fragment implements SongListListener {
         adapter.notifyDataSetChanged();
     }
 
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) { }
 }
