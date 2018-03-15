@@ -84,7 +84,6 @@ public class TabSongs extends Fragment implements SongListListener {
             public void onClick(View view){
                 if (!LibraryActivity.songList.isEmpty()) {
                     if (songPlayer.isPlaying()) {
-                        LibraryActivity.getLocation();
                         songPlayer.pause();
                         playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                     } else if (songPlayer.isPaused()) {

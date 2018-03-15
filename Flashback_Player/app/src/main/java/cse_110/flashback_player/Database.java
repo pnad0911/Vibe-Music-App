@@ -101,7 +101,9 @@ public class Database {
     }
 
     /* Retrieve all songs from firebase */
-    public static void loadAllSongs(final VibePlaylist.dataBaseListener c) {
+    public static void loadAllSongs(final DatabaseListener d) {
+
+        listeners.add(d);
 
         DatabaseReference songRef = databaseRef.child("SONGS").getRef();
         songRef.addValueEventListener(new ValueEventListener() {
@@ -121,7 +123,7 @@ public class Database {
                     Log.println(Log.ERROR, "extractFirebase", "Song is:" + song.toString());
 
                     // update current song object
-                    c.callback(song);
+                    d.update(song);
                 }
             }
 
