@@ -94,6 +94,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         }
         for (SongListListener ls : listeners){
             ls.updateDisplay(songs);
+            ls.updateDisplay(AlbumSongList,getListOfAlbum());
         }
     }
 
@@ -102,7 +103,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         getData();
 
 //        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        songs = new ArrayList<>();
+        songs = new ArrayList<>(); AlbumSongList = new HashMap<>();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         List<Song> listOfSongs = new ArrayList<>();
         File[] files = path.listFiles();
@@ -164,7 +165,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         Log.println(Log.ERROR, "File Path", "FILE PATH is: "+ path.getAbsolutePath());
         File[] fileArray = path.listFiles();
-        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.length);
+//        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.length);
         if (fileArray != null) {
             for (File f : fileArray) {
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 import static cse_110.flashback_player.logIn.user;
 
@@ -36,6 +37,8 @@ public class Song implements SongSubject{
     private final double locRange = 1000; //feet
     private final double latToFeet = 365228;
     private final double longToFeet = 305775;
+
+
 
 //    private Boolean downloaded = false;
 
@@ -353,7 +356,7 @@ public class Song implements SongSubject{
                                       String url);
     }
 
-    /*--------------------------WEIGHTSYSTEM-------------------------------------------*/
+    /*-------------------------- WEIGHTSYSTEM --------------------------------------*/
 
     /**
      * Score for each song, max score 303
@@ -362,6 +365,23 @@ public class Song implements SongSubject{
      * @return song score
      */
     public double getScore(Location userLocation, OffsetDateTime presentTime) {
+
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
+
+    /**
+     * Songs not downloaded yet are pushed to the bottom of the queue
+     * @param userLocation
+     * @param presentTime
+     * @return new score
+     */
+    public double getScore2(Location userLocation, OffsetDateTime presentTime) {
+        if (!getDownloadStatus(LibraryActivity.getContextOfApplication())) {
+            return -5;
+        }
         double locScore = getLocationScore(userLocation);
         double weekScore = getWeekScore(presentTime);
         double friendScore = getFriendScore();
@@ -403,10 +423,13 @@ public class Song implements SongSubject{
         }
         OffsetDateTime lastWeekBegin = presentTime.minusDays(7);
         // Monday (value 1) to Sunday (value 7) is a week
-        while (lastWeekBegin.getDayOfWeek().getValue() != 1) {
+        while (lastWeekBegin.getDayOfWeek().getValue() > 1) {
             lastWeekBegin = lastWeekBegin.minusDays(1);
         }
+
         for (int i = 0; i < 7; i++) {
+            Log.e(TAG,"lastWeekBegin" + lastWeekBegin.getDayOfYear());
+            Log.e(TAG,"playedTime" + playedTime.getDayOfYear());
             if (lastWeekBegin.getYear() == playedTime.getYear() &&
                     lastWeekBegin.getDayOfYear() == playedTime.getDayOfYear()) {
                 return 101;
@@ -444,16 +467,12 @@ public class Song implements SongSubject{
         return false;
     }
 
-    /*
-    public double getScore(Location userLocation, OffsetDateTime presentTime) {return 0;}
-    public double getLocationScore(Location userLocation) {return 0;}
-    public double getWeekScore(OffsetDateTime presentTime) {return 0;}
-    public double getFriendScore() {return 0;}
-    public boolean isPlayedByFriend() {return false;}
-    public double getScore(Location userLocation, OffsetDateTime presentTime){return 0;}*/
-    /*public static void main(String[] args) {
-        Song s = new WeightSystem();
-        System.out.println(s.getScore());
-    }*/
+    /**
+     * method for testing
+     */
+    private Location loc;
+    public void setLocation(Location loc) {
+        this.loc = loc;
+    }
 }
 

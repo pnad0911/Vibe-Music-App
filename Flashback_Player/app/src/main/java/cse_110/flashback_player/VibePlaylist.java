@@ -24,6 +24,7 @@ public class VibePlaylist {
 
     /* Priority queue used to build the playlist */
     private PriorityQueue<Song> playlist;
+    private PriorityQueue<Song> playlist2;
 
     /* Context provided by LibraryActivity */
     private Context context;
@@ -57,12 +58,12 @@ public class VibePlaylist {
 
         // build priority queue
         playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
+        playlist2 = new PriorityQueue<>(1, new SongCompare2<>(VibeActivity.getLocation(),currentTime));
 
         // populate playlist based on new data
         for (Song song : viableSongs) {
             if (isPlayable(song)) {
                 playlist.add(song);
-
             }
         }
 
@@ -74,7 +75,13 @@ public class VibePlaylist {
         while (!returnPQ.isEmpty()) {
             returnList.add(returnPQ.poll());
         }
-        return returnList;
+        PriorityQueue<Song> returnPQ2 = new PriorityQueue<>(returnList);
+        ArrayList<Song> returnList2 = new ArrayList<>();
+
+        while (!returnPQ2.isEmpty()) {
+            returnList2.add(returnPQ2.poll());
+        }
+        return returnList2;
     }
 
     /* Updates the status of a song if it is favorited */
