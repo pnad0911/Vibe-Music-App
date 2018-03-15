@@ -177,15 +177,16 @@ public class TabAlbum extends Fragment {
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
             OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().get(0).first+
-//                    ":"+currSong.getLocations().get(0).second + " )");
+            songTimeView.setText(currSong.getDate()+ " AT ( " +
+                    currSong.allLocations().get(0).first+
+                    ":"+currSong.allLocations().get(0).second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
+        currSong.updateDatabase();
     }
 
 

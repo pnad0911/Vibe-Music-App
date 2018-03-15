@@ -1,7 +1,24 @@
+<<<<<<< HEAD
 #Wed Mar 14 00:00:47 PDT 2018
 base.0=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+=======
+#Tue Mar 13 23:42:29 PDT 2018
+>>>>>>> 7ffee377c8ed538ed034154b539ec5f304e09f5e
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
+<<<<<<< HEAD
 base.1=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+=======
+base.5=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/178
+base.4=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/175
+base.3=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/176
+base.2=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/179
+base.1=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/177
+base.0=/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/180
+path.5=classes.dex
+path.4=classes.dex
+path.3=classes.dex
+path.2=classes.dex
+>>>>>>> 7ffee377c8ed538ed034154b539ec5f304e09f5e
