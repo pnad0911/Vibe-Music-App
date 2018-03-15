@@ -125,7 +125,7 @@ public class VibePlaylist {
 
     /* Updates the status of a song if it is favorited */
     public void likeSong(Song song) {
-        song.like(VibeActivity.getContextOfApplication());
+        song.like();
 
         viableSongs.add(song);
 
@@ -138,14 +138,14 @@ public class VibePlaylist {
 
     /* Updates the status of a song if it is disliked */
     public void dislikeSong(Song song) {
-        song.dislike(VibeActivity.getContextOfApplication());
+        song.dislike();
         viableSongs.remove(song);
         playlist.remove(song);
     }
 
     /* Updates the status of a song if it is neutral */
     public void neutralSong(Song song) {
-        song.neutral(VibeActivity.getContextOfApplication());
+        song.neutral();
         viableSongs.add(song);
         if (isPlayable(song) && !playlist.contains(song)) {
             playlist.add(song);
@@ -162,7 +162,7 @@ public class VibePlaylist {
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     public int getSongStatus(Song song) {
-        return song.getSongStatus(VibeActivity.getContextOfApplication());
+        return song.getSongStatus();
     }
 
     /* Determines whether a song is viable for playability; song must be:
@@ -170,7 +170,7 @@ public class VibePlaylist {
         2. Have a current and previous location/date
      */
     private boolean isPlayable(Song song) {
-        return song.getSongStatus(VibeActivity.getContextOfApplication()) != -1
+        return song.getSongStatus() != -1
                 && song.getDate() != null
                 && song.getLocations() != null;
     }

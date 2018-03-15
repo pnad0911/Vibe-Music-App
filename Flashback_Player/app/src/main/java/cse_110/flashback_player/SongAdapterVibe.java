@@ -78,7 +78,7 @@ public class SongAdapterVibe extends BaseAdapter {
         return rowView;
     }
     private void toggle(Button button, Song song) {
-        int songLiked = song.getSongStatus(VibeActivity.getContextOfApplication());
+        int songLiked = song.getSongStatus();
         if(songLiked == 0) {
             TabVibe.vibePlaylist.likeSong(song);
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);

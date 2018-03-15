@@ -83,18 +83,18 @@ public class TabSongs extends Fragment implements SongListListener {
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(songPlayer.isPlaying()) {
-                    LibraryActivity.getLocation();
-                    songPlayer.pause();
-                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-                }
-                else if (songPlayer.isPaused()) {
-                    songPlayer.resume();
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
-                }
-                else{
-                    play();
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                if (!songList.isEmpty()) {
+                    if (songPlayer.isPlaying()) {
+                        LibraryActivity.getLocation();
+                        songPlayer.pause();
+                        playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    } else if (songPlayer.isPaused()) {
+                        songPlayer.resume();
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    } else {
+                        play();
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    }
                 }
             }
         });
@@ -166,11 +166,11 @@ public class TabSongs extends Fragment implements SongListListener {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-        Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);
         songPlayer.playNext(songList.get(idx));
+
         Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
 
         currSong.addLocation(LibraryActivity.getLocation());

@@ -1,4 +1,0 @@
-#Wed Mar 14 23:03:28 PDT 2018
-base.0=C\:\\Users\\Adris\\Documents\\UCSD\\Homework\\CSE 110\\Project\\project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\androidTest\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex

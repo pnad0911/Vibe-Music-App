@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Adris\Documents\UCSD\Homework\CSE 110\Project\project\cse-110-team-project-team-17\Flashback_Player\app\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\Adris\Documents\UCSD\Homework\CSE 110\Project\project\cse-110-team-project-team-17\Flashback_Player\app\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/src/debug/shaders"/></dataSet></merger>

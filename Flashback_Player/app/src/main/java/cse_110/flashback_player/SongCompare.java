@@ -37,8 +37,8 @@ public class SongCompare<T extends Song> implements Comparator<T> {
             }
         }
 
-        if(t1.getSongStatus(VibeActivity.getContextOfApplication()) != t2.getSongStatus(VibeActivity.getContextOfApplication())){
-            if(t1.getSongStatus(VibeActivity.getContextOfApplication()) == 1){
+        if(t1.getSongStatus() != t2.getSongStatus()){
+            if(t1.getSongStatus() == 1){
                 return -1;
             }
             else{
