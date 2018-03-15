@@ -9,6 +9,7 @@ import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,8 @@ public class TabVibe extends Fragment {
     public static int songIdx=0;
     private Song currSong;
     private SongPlayer songPlayer;
-    public static VibePlaylist flashbackPlaylist;
-    private List<Song> songList;
+//    public static VibePlaylist flashbackPlaylist;
+//    private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public SongAdapterVibe adapter;
@@ -39,7 +40,7 @@ public class TabVibe extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
-        flashbackPlaylist = new VibePlaylist(this.getActivity());
+        VibeActivity.vibePlaylist = new VibePlaylist((AppCompatActivity) getActivity());
         /*
         * Get Buttons and TextViews*/
         final Button playButton = (Button) rootView.findViewById(R.id.play);

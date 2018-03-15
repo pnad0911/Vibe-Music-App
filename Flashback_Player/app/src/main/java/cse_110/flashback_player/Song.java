@@ -244,15 +244,15 @@ public class Song implements SongSubject{
         return returnV;
     }
 
-    public void setDownloaded(Context context) {
-        SharedPreferences sharedTime = context.getSharedPreferences("download", MODE_PRIVATE);
+    public void setDownloaded() {
+        SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedTime.edit();
         Gson gson = new Gson();
         String json = gson.toJson(true);
         editor.putString(getTitle(),json);
         editor.commit();
     }
-    public Boolean getDownloadStatus(Context context) {
+    public Boolean getDownloadStatus() {
         try {
             SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
             Gson gson = new Gson();

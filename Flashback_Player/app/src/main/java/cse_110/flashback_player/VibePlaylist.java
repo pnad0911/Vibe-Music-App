@@ -1,17 +1,18 @@
 package cse_110.flashback_player;
 
-import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import static cse_110.flashback_player.Song.databaseRef;
@@ -31,28 +32,21 @@ public class VibePlaylist {
     /* Priority queue used to build the playlist */
     private PriorityQueue<Song> playlist;
 
-    /* Songs in the priority queue stored as a list for sorting */
-    private List<Song> playlistSorted;
-
     /* Context provided by NormalActivity */
-    private Context context;
+    private AppCompatActivity activity;
 
-    private DatabaseReference databaseReference;
+    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
 
-    private FirebaseDatabase firebaseDatabase;
+    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
 
     /* Constructor */
-    public VibePlaylist(DatabaseReference databaseReference, FirebaseDatabase firebaseDatabase) {
-        this.databaseReference = databaseReference;
-        this.firebaseDatabase = firebaseDatabase;
+    public VibePlaylist(AppCompatActivity activity) {
+        this.activity = activity;
 
         extractFirebase();
 
         // initialize set of viable songs
         viableSongs = new HashSet<>();
-
-        // initialize context
-        context = LibraryActivity.getContextOfApplication();
 
         // populate viable song set
         for (Song song : entireSongList) {
@@ -74,7 +68,19 @@ public class VibePlaylist {
                 entireSongList = new ArrayList<Song>();
 
                 for (DataSnapshot dsp : snapshot.getChildren()) {
-                    entireSongList.add(dsp.getValue(Song.class));
+
+                    Song song = new Song(dsp.child("title").getValue(String.class),
+                            dsp.child("artist").getValue(String.class),
+                            dsp.child("album").getValue(String.class),
+                            dsp.child("songUrl").getValue(String.class),
+                            false);
+                    song.setLocations(dsp.child("locations").getValue(t));
+                    song.setUserNames(dsp.child("userNames").getValue(n));
+                    song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
+
+                    entireSongList.add(song);
+
+                    downloadSong(song);
                 }
             }
 
@@ -96,10 +102,8 @@ public class VibePlaylist {
         // populate playlist based on new data
         for (Song song : viableSongs) {
             if (isPlayable(song)) {
-                if (!song.getDownloadStatus()) {
-                }
+                downloadSong(song);
                 playlist.add(song);
-                playlistSorted.add(song);
             }
         }
 
@@ -165,5 +169,16 @@ public class VibePlaylist {
         return song.getSongStatus(VibeActivity.getContextOfApplication()) != -1
                 && song.getDate() != null
                 && song.getLocations() != null;
+    }
+
+    /* Determines whether a song can be downloaded or not and downloads; false if failed to download
+     */
+    private boolean downloadSong(Song song) {
+        if (!song.getDownloadStatus()) {
+            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songList, activity);
+            downloadHelper.startDownload();
+            return true;
+        }
+        return false;
     }
 }
