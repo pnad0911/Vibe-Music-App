@@ -166,7 +166,7 @@ public class TabSongs extends Fragment implements SongListListener {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-        Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
+//        Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
         currSong = songList.get(songIdx);
         songPlayer.play(currSong);
         int idx = getNextSongIdx(songList);

@@ -89,6 +89,21 @@
                     }
                 }
             ]
+        },
+        {
+            "outputFile": "/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "/Users/winnieli/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d0da1b2b16c831fe5d4f5d1a48f02bde/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
         }
     ]
 }
