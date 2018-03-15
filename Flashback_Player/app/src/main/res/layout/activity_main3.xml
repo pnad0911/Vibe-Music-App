@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="145dp" />
+        android:layout_marginTop="110dp" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mode"
         android:layout_gravity="right"
@@ -67,29 +67,29 @@
         app:fabSize="normal"
         app:pressedTranslationZ="12dp"
         app:rippleColor="@android:color/black" />
-    <LinearLayout android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:weightSum="1"
-        android:orientation="horizontal"
-        android:layout_marginTop="110dp">
+    <!--<LinearLayout android:layout_width="fill_parent"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:weightSum="1"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="110dp">-->
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:dropDownWidth="fill_parent"
-            android:layout_weight="0.2"/>
-        <ImageButton
-            android:id="@+id/download"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="0.8"
-            android:background="#E8EAF6"
-            android:elevation="20dp"
-            android:src="@drawable/ic_file_download_black_24dp" />
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:dropDownWidth="fill_parent"-->
+            <!--android:layout_weight="0.2"/>-->
+        <!--<ImageButton-->
+            <!--android:id="@+id/download"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="0.8"-->
+            <!--android:background="#E8EAF6"-->
+            <!--android:elevation="20dp"-->
+            <!--android:src="@drawable/ic_file_download_black_24dp" />-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 </android.support.design.widget.CoordinatorLayout>

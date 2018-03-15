@@ -71,7 +71,6 @@ public class SongDownloadHelper {
         downloadManager.enqueue(request);
         Log.d(TAG, "Started download from " + url);
     }
-
     private void updateListeners(String url) {
         Cursor c = downloadManager.query(new DownloadManager.Query());
         if (c.moveToFirst()) {

@@ -148,51 +148,51 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         songList = new SongList(this);
 //        songDownloadHelper = new SongDownloadHelper(songList,this);
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        final EditText edittext = new EditText(this);
-        edittext.setHint("Enter URL here");
-        alert.setTitle("DOWNLOADS");
-        alert.setMessage("Enter Your URL here").setCancelable(false);
-        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String url = edittext.getText().toString();
-                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
-                tab2.updateDisplay(upcomingList);
-                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songList,VibeActivity.this);
-                songDownloadHelper2.startDownload();
-                dialog.cancel();
-                dialog.dismiss();
-                alert.create();
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.cancel();
-                dialog.dismiss();
-                alert.create();
-            }
-        });
-        alert.setView(edittext);
-
-
-        ImageButton download = findViewById(R.id.download);
-        final AlertDialog alertd = alert.create();
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertd.show();
-            }
-        });
-
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-        List<String> sortingOptions = new ArrayList<String>();
-        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+//        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//        final EditText edittext = new EditText(this);
+//        edittext.setHint("Enter URL here");
+//        alert.setTitle("DOWNLOADS");
+//        alert.setMessage("Enter Your URL here").setCancelable(false);
+//        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                String url = edittext.getText().toString();
+//                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
+//                tab2.updateDisplay(upcomingList);
+//                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songList,VibeActivity.this);
+//                songDownloadHelper2.startDownload();
+//                dialog.cancel();
+//                dialog.dismiss();
+//                alert.create();
+//            }
+//        });
+//
+//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                dialog.cancel();
+//                dialog.dismiss();
+//                alert.create();
+//            }
+//        });
+//        alert.setView(edittext);
+//
+//
+//        ImageButton download = findViewById(R.id.download);
+//        final AlertDialog alertd = alert.create();
+//        download.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                alertd.show();
+//            }
+//        });
+//
+//
+//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//        spinner.setOnItemSelectedListener(this);
+//        List<String> sortingOptions = new ArrayList<String>();
+//        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(dataAdapter);
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
