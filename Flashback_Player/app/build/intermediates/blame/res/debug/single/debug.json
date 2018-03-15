@@ -25,7 +25,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-watch-v20_common_google_signin_btn_text_dark_normal.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.8.0.aar/a3b9f1f23ede3d667da7811043c13e00/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.6.0.aar/e0f27bfd564d5d715908dbc1b56d0788/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
     },
     {
         "merged": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
@@ -865,7 +865,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-mdpi-v4/googleg_disabled_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-mdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
@@ -905,7 +905,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_full_open_on_phone.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/common_full_open_on_phone.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/common_full_open_on_phone.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
@@ -1284,10 +1284,6 @@
         "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\drawable\\abc_tab_indicator_material.xml"
     },
     {
-        "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_tab2album.xml.flat",
-        "source": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/main/res/layout/tab2album.xml"
-    },
-    {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
         "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e0aa547239683e832c8324245f9093ea\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
@@ -1297,7 +1293,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_full_open_on_phone.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/common_full_open_on_phone.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/common_full_open_on_phone.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_snackbar_out.xml.flat",
@@ -1949,7 +1945,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_scrolling.xml.flat",
@@ -2061,7 +2057,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
@@ -2769,7 +2765,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
@@ -2789,7 +2785,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_light.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_light.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
@@ -3364,6 +3360,10 @@
         "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
+        "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_tabsongs.xml.flat",
+        "source": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/main/res/layout/tabsongs.xml"
+    },
+    {
         "merged": "/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
@@ -3461,7 +3461,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_normal.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_light_normal.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_light_normal.xml"
     },
     {
         "merged": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
@@ -4241,7 +4241,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_tint.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/color/common_google_signin_btn_tint.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/color/common_google_signin_btn_tint.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_list_menu_item_layout.xml.flat",
@@ -4433,7 +4433,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_place_black_24dp.xml.flat",
@@ -4441,7 +4441,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_light.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_light.xml"
     },
     {
         "merged": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout-v21_notification_action_tombstone.xml.flat",
@@ -4521,7 +4521,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
@@ -4733,7 +4733,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark_normal.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_dark_normal.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_dark_normal.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_star_black_16dp.png.flat",
@@ -4797,7 +4797,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xxhdpi-v4/googleg_standard_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xxhdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
@@ -5049,7 +5049,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light_normal.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_light_normal.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_light_normal.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_layout_tab_text.xml.flat",
@@ -5849,7 +5849,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_focused.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\color-v23_abc_tint_spinner.xml.flat",
@@ -5945,7 +5945,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_dark.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
@@ -6257,7 +6257,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/googleg_standard_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_design_navigation_item_header.xml.flat",
@@ -6477,7 +6477,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_disabled.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_disabled.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_disabled.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
@@ -6629,7 +6629,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_text_dark.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/color/common_google_signin_btn_text_dark.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/color/common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -7317,7 +7317,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-mdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-mdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_fade_in.xml.flat",
@@ -7449,7 +7449,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_expanded_menu_layout.xml.flat",
@@ -7873,7 +7873,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_media.xml.flat",
@@ -8133,7 +8133,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
@@ -8341,7 +8341,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-mdpi-v4/googleg_standard_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-mdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
@@ -8541,7 +8541,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_focused.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_light_focused.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_light_focused.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
@@ -8905,7 +8905,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light_focused.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_light_focused.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_light_focused.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
@@ -10025,7 +10025,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-watch-v20_common_google_signin_btn_text_disabled.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.8.0.aar/a3b9f1f23ede3d667da7811043c13e00/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.6.0.aar/e0f27bfd564d5d715908dbc1b56d0788/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
@@ -10109,7 +10109,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/googleg_disabled_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_slide_out_bottom.xml.flat",
@@ -10165,7 +10165,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_disabled.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_disabled.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_disabled.xml"
     },
     {
         "merged": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/anim_abc_slide_in_bottom.xml.flat",
@@ -10349,7 +10349,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -10869,7 +10869,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main3.xml.flat",
@@ -11001,7 +11001,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_text_light.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/color/common_google_signin_btn_text_light.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/color/common_google_signin_btn_text_light.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -11233,7 +11233,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
@@ -11637,7 +11637,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_icon_dark.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_icon_dark.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/newMaster/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_abc_ic_clear_material.xml.flat",
@@ -12636,6 +12636,10 @@
         "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png"
     },
     {
+        "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_tabalbum.xml.flat",
+        "source": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/main/res/layout/tabalbum.xml"
+    },
+    {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_middle_mtrl_dark.png.flat",
         "source": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\63a4334643edcc0712670717000cf282\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
     },
@@ -13105,7 +13109,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_tile_bg.xml.flat",
@@ -13497,7 +13501,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark_focused.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable/common_google_signin_btn_text_dark_focused.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
@@ -13993,7 +13997,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-mdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-mdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
@@ -14177,7 +14181,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/googleg_standard_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
@@ -14621,7 +14625,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "/Users/winnieli/Desktop/cse110project/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -15285,7 +15289,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_design_navigation_item_separator.xml.flat",
@@ -15329,7 +15333,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
@@ -16197,7 +16201,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\raw_i_will_not_be_afraid.mp3.flat",
@@ -16262,10 +16266,6 @@
     {
         "merged": "/Users/Yutong/OneDrive-UCSanDiego/CSE110/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_abc_action_menu_item_layout.xml.flat",
         "source": "/Users/Yutong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/63a4334643edcc0712670717000cf282/res/layout/abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_tab1allsongs.xml.flat",
-        "source": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/main/res/layout/tab1allsongs.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -17613,7 +17613,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/6dad36138cff070d2e51ecebb4a3f233/res/drawable-hdpi-v4/googleg_disabled_color_18.png"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.0.aar/f617f106930f641902661e36ff4e0ead/res/drawable-hdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_googleg_disabled_color_18.png.flat",
@@ -17761,7 +17761,7 @@
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-watch-v20_common_google_signin_btn_text_light_normal.xml.flat",
-        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.8.0.aar/a3b9f1f23ede3d667da7811043c13e00/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
+        "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/play-services-auth-11.6.0.aar/e0f27bfd564d5d715908dbc1b56d0788/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_ic_arrow_drop_right_black_24dp.xml.flat",
@@ -18434,6 +18434,10 @@
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
         "source": "/Users/pnad0911/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/59020041b97eb344083896e10d8a56ac/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/res/merged/debug/layout_tabvibe.xml.flat",
+        "source": "/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/src/main/res/layout/tabvibe.xml"
     },
     {
         "merged": "/Users/pnad0911/AndroidStudioProjects/master/Flashback_Player/C:\\Users\\Yutong\\OneDrive-UCSanDiego\\CSE110\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_design_ic_visibility_off.png.flat",

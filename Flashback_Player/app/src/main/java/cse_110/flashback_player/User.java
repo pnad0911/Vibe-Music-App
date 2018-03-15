@@ -32,5 +32,4 @@ public class User {
     public void setFriendsList(ArrayList<Pair<String,String>> friends){
         friendsList = friends;
     }
-
 }

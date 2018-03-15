@@ -1,35 +1,33 @@
 {
   "project_info": {
-    "project_number": "831078368581",
-    "firebase_url": "https://flashbackplayer-a4481.firebaseio.com",
-    "project_id": "flashbackplayer-a4481",
-    "storage_bucket": "flashbackplayer-a4481.appspot.com"
+    "project_number": "789042053023",
+    "project_id": "vibemodeplaylist-1520574083598"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:831078368581:android:cb2d582aa1ce863b",
+        "mobilesdk_app_id": "1:789042053023:android:cb2d582aa1ce863b",
         "android_client_info": {
           "package_name": "cse_110.flashback_player"
         }
       },
       "oauth_client": [
         {
-          "client_id": "831078368581-lstjc90fmp6qtnp9acnv73dgmiknu1t1.apps.googleusercontent.com",
+          "client_id": "789042053023-ucfftfj5ts026th8dgkmtekgb1edqpr8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "cse_110.flashback_player",
-            "certificate_hash": "93e86bdc1f5cdd711fdc73cfd502b16af22b9cbf"
+            "certificate_hash": "9889b2457d27c206890bd7511e241132a9e2f305"
           }
         },
         {
-          "client_id": "831078368581-7qljuvkgcco5ggdmmd45nio9omkrpkd8.apps.googleusercontent.com",
+          "client_id": "789042053023-098npoep4ib14lfpn2cjpqb05e178k22.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCTxhn1WKKDylRpkjk4e2XjF_LmJUQNDIg"
+          "current_key": "AIzaSyBOt3AozPyrTb7K0IavZ4cBKZe3_FjOEPM"
         }
       ],
       "services": {
@@ -37,16 +35,11 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "831078368581-7qljuvkgcco5ggdmmd45nio9omkrpkd8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }
