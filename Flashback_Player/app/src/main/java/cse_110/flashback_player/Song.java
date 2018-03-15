@@ -134,31 +134,33 @@ public class Song implements SongSubject{
     public void setTitle(String title){
         this.title = title;
     }
-    public void setSongUrl(String url){ this.songUrl = url;}
+
     public void setArtist(String artist) {
         this.artist = artist;
     }
+
     public void setAlbum(String album){
         this.album = album;
     }
+
     public void setDatabaseKey(String artist, String title) { this.databaseKey = title+artist;}
+
     public void setDate(Object time){
         this.date = time.toString();
     }
+
     public void setLocations(ArrayList<HashMap<String,String>> l){
         this.locations = l;
     }
+
     public void setUserNames(ArrayList<String> u) {
         this.userNames = u;
     }
 
-//    public void addLocalPath (String path){ this.localPath = path; }
-
-
     /* ------------------------  SharedPreference Setters  ------------------------------------ */
 
-    public void setSongUrl(String songUrl, Context context){
-        SharedPreferences sharedLocation = context.getSharedPreferences("songUrl", MODE_PRIVATE);
+    public void setSongUrl(String songUrl){
+        SharedPreferences sharedLocation = LibraryActivity.getContextOfApplication().getSharedPreferences("songUrl", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = sharedLocation.edit();
         Gson gson2 = new Gson();
         String json2 = gson2.toJson(songUrl);
@@ -169,8 +171,8 @@ public class Song implements SongSubject{
     }
 
     /* Favorite Status*/
-    public void setPreviousLike(int like, Context context){
-        SharedPreferences sharedLocation = context.getSharedPreferences("like", MODE_PRIVATE);
+    public void setPreviousLike(int like){
+        SharedPreferences sharedLocation = LibraryActivity.getContextOfApplication().getSharedPreferences("like", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = sharedLocation.edit();
         Gson gson2 = new Gson();
         String json2 = gson2.toJson(like);
@@ -179,8 +181,8 @@ public class Song implements SongSubject{
         this.like = like;
     }
 
-    public void setDownloaded(Context context) {
-        SharedPreferences sharedTime = context.getSharedPreferences("download", MODE_PRIVATE);
+    public void setDownloaded() {
+        SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedTime.edit();
         Gson gson = new Gson();
         String json = gson.toJson(true);
@@ -201,9 +203,9 @@ public class Song implements SongSubject{
         locations.add(hm);
     }
 
-    public void like(Context context) { like = 1; setPreviousLike(like, context);}
-    public void dislike(Context context) { like = -1; setPreviousLike(like, context);}
-    public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
+    public void like() { like = 1; setPreviousLike(like);}
+    public void dislike() { like = -1; setPreviousLike(like);}
+    public void neutral() { like = 0; setPreviousLike(like); }
 
 
     /* -----------------------------  Default Getters ----------------------------------------- */
@@ -211,7 +213,6 @@ public class Song implements SongSubject{
     public String getTitle(){ return title; }
     public String getArtist(){ return artist; }
     public String getAlbum(){ return this.album;}
-    public String getSongUrl(){ return songUrl; }
     public String getDate(){ return this.date; }
     public String getDatabaseKey(){ return this.title+this.artist;}
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
@@ -254,9 +255,9 @@ public class Song implements SongSubject{
 
     /* ----------------------------- SharePreference Getters ---------------------------------- */
 
-    public int getSongStatus (Context context) { return getPreviousLike(context); }
+    public int getSongStatus () { return getPreviousLike(); }
 
-    public Boolean getDownloadStatus(Context context) {
+    public Boolean getDownloadStatus() {
         try {
             SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
             Gson gson = new Gson();
@@ -268,9 +269,9 @@ public class Song implements SongSubject{
         }
     }
 
-    public int getPreviousLike(Context context){
+    public int getPreviousLike(){
         try {
-            SharedPreferences sharedTime = context.getSharedPreferences("like", MODE_PRIVATE);
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("like", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             Integer liked = gson.fromJson(json, Integer.class);
@@ -281,9 +282,9 @@ public class Song implements SongSubject{
         return this.like;
     }
 
-    public String getSongUrl(Context context){
+    public String getSongUrl(){
         try {
-            SharedPreferences sharedTime = context.getSharedPreferences("songUrl", MODE_PRIVATE);
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("songUrl", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             String url = gson.fromJson(json, String.class);
@@ -297,7 +298,6 @@ public class Song implements SongSubject{
         Log.println(Log.ERROR, "getSongURL", "Songurl is: "+songUrl);
         return this.songUrl;
     }
-
 
     /* ----------------------------  Database Methods  ---------------------------------------- */
 
