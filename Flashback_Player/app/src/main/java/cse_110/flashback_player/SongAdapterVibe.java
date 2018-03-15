@@ -60,7 +60,7 @@ public class SongAdapterVibe extends BaseAdapter {
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
         final Button likeBt = (Button) rowView.findViewById(R.id.like_bt);
-        int like = TabVibe.flashbackPlaylist.getSongStatus(song);
+        int like = TabVibe.vibePlaylist.getSongStatus(song);
         if(like == 0) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         } else if(like == 1) {
@@ -78,16 +78,16 @@ public class SongAdapterVibe extends BaseAdapter {
         return rowView;
     }
     private void toggle(Button button, Song song) {
-        int songLiked = song.getSongStatus(VibeActivity.getContextOfApplication());
+        int songLiked = song.getSongStatus();
         if(songLiked == 0) {
-            TabVibe.flashbackPlaylist.likeSong(song);
+            TabVibe.vibePlaylist.likeSong(song);
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
         } else if(songLiked == 1){
-            TabVibe.flashbackPlaylist.dislikeSong(song);
+            TabVibe.vibePlaylist.dislikeSong(song);
             TabVibe.songIdx = 0;
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
-            TabVibe.flashbackPlaylist.neutralSong(song);
+            TabVibe.vibePlaylist.neutralSong(song);
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
     }
