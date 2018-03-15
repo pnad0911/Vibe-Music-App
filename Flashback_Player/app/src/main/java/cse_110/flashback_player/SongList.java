@@ -95,14 +95,15 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         }
         for (SongListListener ls : listeners){
             ls.updateDisplay(songs);
+            ls.updateDisplay(AlbumSongList,getListOfAlbum());
         }
     }
 
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
         getData();
-
-        songs = new ArrayList<>();
+//        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
+        songs = new ArrayList<>(); AlbumSongList = new HashMap<>();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         File[] files = path.listFiles();
         if (files!=null) {
@@ -161,7 +162,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
         data = new HashMap<>();
         File path = Environment.getExternalStoragePublicDirectory(DOWNLOADPATH);
         File[] fileArray = path.listFiles();
-        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.length);
+//        Log.println(Log.ERROR, "Downloaded File", "Files in file directory: " + fileArray.length);
         if (fileArray != null) {
             for (File f : fileArray) {
 

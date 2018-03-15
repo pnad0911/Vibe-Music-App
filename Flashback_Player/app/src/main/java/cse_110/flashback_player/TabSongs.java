@@ -59,12 +59,12 @@ public class TabSongs extends Fragment implements SongListListener {
         SongList songListGen = new SongList(this.getActivity());
         songListGen.reg(this);
         songList = songListGen.getAllsong();
+        adapter = new SongAdapter(this.getActivity(), songList);
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
             changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
             // configure listview
-            adapter = new SongAdapter(this.getActivity(), songList);
             final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
             sListView.setAdapter(adapter);
             // Handle on click event
@@ -208,4 +208,5 @@ public class TabSongs extends Fragment implements SongListListener {
         adapter.notifyDataSetChanged();
     }
 
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) { }
 }

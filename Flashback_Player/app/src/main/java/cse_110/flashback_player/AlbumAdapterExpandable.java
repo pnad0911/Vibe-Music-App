@@ -55,7 +55,7 @@ public class AlbumAdapterExpandable extends BaseExpandableListAdapter {
         Child.setText(songName.getTitle());
         a.setText(songName.getArtist());
         final Button likeBt = (Button) convertView.findViewById(R.id.like_bt);
-        int like = songName.getSongStatus(LibraryActivity.getContextOfApplication());
+        int like = songName.getSongStatus();
         if(like == 0) {
             likeBt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         } else if(like == 1) {
@@ -105,16 +105,16 @@ public class AlbumAdapterExpandable extends BaseExpandableListAdapter {
         return convertView;
     }
     private void toggle(Button button, Song song) {
-        int songLiked = song.getSongStatus(LibraryActivity.getContextOfApplication());
+        int songLiked = song.getSongStatus();
         if(songLiked == 0) {
-            song.like(LibraryActivity.getContextOfApplication());
+            song.like();
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart, 0);
         } else if(songLiked == 1){
-            song.dislike(LibraryActivity.getContextOfApplication());
+            song.dislike();
             TabVibe.songIdx = 0;
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_clear_black_24dp, 0);
         } else {
-            song.neutral(LibraryActivity.getContextOfApplication());
+            song.neutral();
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
     }
