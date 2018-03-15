@@ -98,7 +98,11 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         editor.putString("current","flashback");
         editor.apply();
 
+
+//        tab1 = new TabVibe(); tab2 = new TabUpcoming();
+
         vibePlaylist = new VibePlaylist(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -224,13 +228,13 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             switch (position) {
 
                 case 0:
-                    tab1 = new TabVibe();
+//                    tab1 = new TabVibe();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-                    tab2 = new TabUpcoming();
+//                    tab2 = new TabUpcoming();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);

@@ -1,7 +1,19 @@
-#Wed Mar 14 23:41:55 PDT 2018
-base.0=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+#Wed Mar 14 23:50:26 PDT 2018
 path.1=classes.dex
-renamed.1=classes2.dex
 path.0=classes.dex
+renamed.5=classes6.dex
+renamed.4=classes5.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
 renamed.0=classes.dex
-base.1=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+base.5=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/13
+base.4=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/15
+base.3=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/12
+base.2=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/14
+base.1=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/11
+base.0=/Users/pnad0911/AndroidStudioProjects/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/16
+path.5=classes.dex
+path.4=classes.dex
+path.3=classes.dex
+path.2=classes.dex

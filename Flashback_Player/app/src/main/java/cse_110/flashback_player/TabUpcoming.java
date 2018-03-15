@@ -14,8 +14,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class TabUpcoming extends Fragment {
+public class TabUpcoming extends Fragment implements SongListListener{
 
     private List<Song> songList;
     private SongPlayer songPlayer;
@@ -58,4 +59,5 @@ public class TabUpcoming extends Fragment {
         songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) { }
 }

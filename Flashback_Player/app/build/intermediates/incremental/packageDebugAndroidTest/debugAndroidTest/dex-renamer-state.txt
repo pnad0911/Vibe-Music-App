@@ -1,7 +1,0 @@
-#Wed Mar 14 23:43:20 PDT 2018
-base.0=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\androidTest\\debug\\1
-path.1=classes.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\androidTest\\debug\\0

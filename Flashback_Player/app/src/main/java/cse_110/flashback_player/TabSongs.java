@@ -5,7 +5,6 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class TabSongs extends Fragment implements SongListListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
+        View rootView = inflater.inflate(R.layout.tabsongs, container, false);
 
         /*
         * Get Buttons and TextViews*/
@@ -185,11 +184,10 @@ public class TabSongs extends Fragment implements SongListListener {
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong, applicationContext)) {
-
 //            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-            songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
-                    currSong.previousLocation().first+ ", " +
-                    currSong.previousLocation().second + " )");
+            songTimeView.setText(currSong.getDate()+ " AT ( " +
+                    currSong.allLocations().get(0).first+
+                    ":"+currSong.allLocations().get(0).second + " )");
         }
         else {
             songTimeView.setText("N/A");
