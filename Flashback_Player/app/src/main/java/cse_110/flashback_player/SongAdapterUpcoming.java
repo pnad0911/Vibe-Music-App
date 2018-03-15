@@ -68,7 +68,7 @@ public class SongAdapterUpcoming extends BaseAdapter {
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
 
-        Boolean downloaded = song.getDownloadStatus(LibraryActivity.getContextOfApplication());
+        Boolean downloaded = song.getDownloadStatus();
         if(downloaded == null) {
             Animation rotation = AnimationUtils.loadAnimation(VibeActivity.getContextOfApplication(), R.anim.rotate);
             rotation.setRepeatCount(Animation.INFINITE);

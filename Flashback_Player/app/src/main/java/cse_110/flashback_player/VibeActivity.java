@@ -98,6 +98,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         editor.putString("current","flashback");
         editor.apply();
 
+        vibePlaylist = new VibePlaylist(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -115,7 +115,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
                         Song so = new Song(data.get(filePath)[0], data.get(filePath)[1], data.get(filePath)[2], filePath, true);
                         so.setSongUrl(so.getSongUrl(activity.getApplicationContext()));
                         Log.println(Log.ERROR, "SongList", "SongTitle is: "+so.getSongUrl());
-                        so.setDownloaded(LibraryActivity.getContextOfApplication());
+                        so.setDownloaded();
                         songs.add(so);
 
                         // maintain album list

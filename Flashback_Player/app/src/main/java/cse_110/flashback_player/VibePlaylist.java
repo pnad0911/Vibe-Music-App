@@ -44,6 +44,10 @@ public class VibePlaylist {
         this.activity = activity;
 
         extractFirebase();
+        try{
+            Thread.sleep(1000);
+        }catch(Exception e){
+        }
 
         // initialize set of viable songs
         viableSongs = new HashSet<>();
@@ -62,7 +66,7 @@ public class VibePlaylist {
     /* Retrieve all songs from firebase */
     private void extractFirebase() {
         DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        songRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        songRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 entireSongList = new ArrayList<Song>();

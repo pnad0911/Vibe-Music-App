@@ -525,5 +525,7 @@ public class Song implements SongSubject{
 //        }
 //    }
 
+    public int getStatus(){return like;}
+
 }
 

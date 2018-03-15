@@ -1,4 +1,4 @@
-package tests;
+package cse_110.flashback_player;
 
 import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
@@ -10,10 +10,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
-import cse_110.flashback_player.LibraryActivity;
-import cse_110.flashback_player.Song;
-import cse_110.flashback_player.SongListSorter;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -21,16 +22,16 @@ import static junit.framework.Assert.assertTrue;
  * Created by Daniel on 3/13/2018.
  */
 
-public class SongListSorterUnitTests {
+public class TestSongListSorter {
     protected List<Song> songList;
     protected SongListSorter songListSorter;
 
-    @Rule
-    public ActivityTestRule<LibraryActivity> mainActivity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
+//    @Rule
+//    public ActivityTestRule<VibeActivity> mainActivity = new ActivityTestRule<VibeActivity>(VibeActivity.class);
 
     @Before
     // assign values
-    protected void setUp() {
+    public void setUp() {
         songList = new ArrayList<>();
         songListSorter = new SongListSorter();
 
@@ -102,13 +103,13 @@ public class SongListSorterUnitTests {
         Iterator<Song> songIterator = songList.listIterator();
 
         try {
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Album"));
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Album"));
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Album"));
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Single"));
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Single"));
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Single"));
-            assertTrue(songIterator.next().getTitle().equals("My Greatest Single"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Album"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Album"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Album"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Single"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Single"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Single"));
+            assertTrue(songIterator.next().getAlbum().equals("My Greatest Single"));
         } catch (NullPointerException e) {
             Log.println(Log.ERROR, "DUY MADE ME DO THIS", "Null pointer exception");
         }
@@ -118,15 +119,16 @@ public class SongListSorterUnitTests {
     @Test
     public void testSortByArtist() {
         songListSorter.sortByArtist(songList);
-        Iterator<Song> songIterator = songList.listIterator();
+        ListIterator<Song> songIterator = songList.listIterator();
 
         try {
-            assertTrue(songIterator.next().getTitle().equals("AAA"));
-            assertTrue(songIterator.next().getTitle().equals("beverley"));
-            assertTrue(songIterator.next().getTitle().equals("Big bully"));
-            assertTrue(songIterator.next().getTitle().equals("bill_killer"));
-            assertTrue(songIterator.next().getTitle().equals("D Bawss"));
-            assertTrue(songIterator.next().getTitle().equals("汤圆"));
+            assertTrue(songIterator.next().getArtist().equals("AAA"));
+            assertTrue(songIterator.next().getArtist().equals("Big bully"));
+            assertTrue(songIterator.next().getArtist().equals("D Bawss"));
+            assertTrue(songIterator.next().getArtist().equals("D Bawss"));
+            assertTrue(songIterator.next().getArtist().equals("beverley"));
+            assertTrue(songIterator.next().getArtist().equals("bill_killer"));
+            assertTrue(songIterator.next().getArtist().equals("汤圆"));
         } catch (NullPointerException e) {
             Log.println(Log.ERROR, "DUY MADE ME DO THIS", "Null pointer exception");
         }
@@ -135,17 +137,17 @@ public class SongListSorterUnitTests {
     // test method to sort songList by status
     @Test
     public void testSortByStatus() {
-        songListSorter.sortByStatus(songList, LibraryActivity.getContextOfApplication());
+        songListSorter.sortByStatus(songList);
         Iterator<Song> songIterator = songList.listIterator();
 
         try {
-            assertTrue(songIterator.next().getTitle().equals("Berry"));
-            assertTrue(songIterator.next().getTitle().equals("Strawberry"));
-            assertTrue(songIterator.next().getTitle().equals("Iron Man"));
-            assertTrue(songIterator.next().getTitle().equals("Legion"));
-            assertTrue(songIterator.next().getTitle().equals("Single Ready To Mingle"));
-            assertTrue(songIterator.next().getTitle().equals("Good Song"));
-            assertTrue(songIterator.next().getTitle().equals("Best Song"));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
         } catch (NullPointerException e) {
             Log.println(Log.ERROR, "DUY MADE ME DO THIS", "Null pointer exception");
         }
