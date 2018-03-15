@@ -85,7 +85,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private SongDownloadHelper songDownloadHelper;
 
     public static VibePlaylist vibePlaylist;
-
     public static SongList songListGen;
     public static List<Song> localSongList;
     public static List<Song> upcomingList = new ArrayList<>();
@@ -100,6 +99,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         editor.apply();
 
         vibePlaylist = new VibePlaylist(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

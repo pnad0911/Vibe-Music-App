@@ -29,7 +29,6 @@ public class TabVibe extends Fragment implements SongListListener {
     public static int songIdx=0;
     private Song currSong;
     private SongPlayer songPlayer;
-    public static VibePlaylist vibePlaylist;
     private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -56,6 +55,8 @@ public class TabVibe extends Fragment implements SongListListener {
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
+
+        VibeActivity.vibePlaylist.reg(this);
 
         // get items from song list
         songList = VibeActivity.vibePlaylist.getVibeSong();
@@ -183,10 +184,9 @@ public class TabVibe extends Fragment implements SongListListener {
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
-            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().get(0).first+
-//                    ":"+currSong.getLocations().get(0).second + " )");
+            songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
+                    currSong.previousLocation().first+ ", " +
+                    currSong.previousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");

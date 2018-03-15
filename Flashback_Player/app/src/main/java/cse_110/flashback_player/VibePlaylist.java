@@ -34,6 +34,9 @@ public class VibePlaylist implements DatabaseListener{
     private AppCompatActivity activity;
 
     private List<SongListListener> listeners = new ArrayList<>();
+    public void reg(SongListListener ls){
+        listeners.add(ls);
+    }
 
     /* Constructor */
     public VibePlaylist(AppCompatActivity activity) {
@@ -45,21 +48,17 @@ public class VibePlaylist implements DatabaseListener{
     public void update(Song song){
 
         Log.println(Log.ERROR, "VibePlaylist callback from database", "Song is:" + song.toString());
+        Log.println(Log.ERROR, "VibePlaylist callback from database", "Song is playable? " + isPlayable(song));
 
         entireSongList.add(song);
         downloadSong(song);
-
-        // populate viable song set
-        for (Song s : entireSongList) {
-            if (isPlayable(s)) {
-                viableSongs.add(s);
-            }
-        }
 
         for (SongListListener l : listeners){
             l.updateDisplay(getVibeSong());
         }
     }
+
+
 
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getVibeSong() {
@@ -67,6 +66,13 @@ public class VibePlaylist implements DatabaseListener{
 
         // build priority queue
         playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
+
+        // populate viable song set
+        for (Song s : entireSongList) {
+            if (isPlayable(s)) {
+                viableSongs.add(s);
+            }
+        }
 
         // populate playlist based on new data
         for (Song song : viableSongs) {
