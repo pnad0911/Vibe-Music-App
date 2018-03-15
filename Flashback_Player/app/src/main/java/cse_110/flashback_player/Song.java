@@ -73,7 +73,7 @@ public class Song implements SongSubject{
 
 
 
-    // ----- CONSTRUCTORS ------------------------------------------
+    /* -------------------------------  CONSTRUCTORS  ------------------------------------------*/
 
     public Song(){ }
 
@@ -92,6 +92,10 @@ public class Song implements SongSubject{
         loadFromDatabase(new dataBaseListener() {
             @Override
             public void callback(ArrayList<String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
+
+                if (l.size() >= 100){ l = new ArrayList<>(l.subList(l.size()-101, l.size()-1)); }
+                if (u.size() >= 100){ u = new ArrayList<>(u.subList(u.size()-101, l.size()-1)); }
+
                 locations = l;
                 userNames = u;
                 date = d;
@@ -124,7 +128,6 @@ public class Song implements SongSubject{
         this.userNames = song.userNames;
         this.databaseKey = song.title+song.artist;
     }
-    // --- END CONSTRUCTORS --------------------------------------
 
     /* ----------------------------- Default Setters ------------------------------------------ */
 
@@ -336,10 +339,10 @@ public class Song implements SongSubject{
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot == null || snapshot.getValue() == null) {
-                    Log.println(Log.ERROR, "GETINSTANCE", "No such song as "+databaseKey);
+                    Log.println(Log.ERROR, "LoadFromDatabase", "No such song as "+databaseKey);
 
                 } else {
-//                    Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
+                    Log.println(Log.ERROR, "LoadFromDatabase", "Found song " + databaseKey);
 
                     // update current song object
                     c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),
@@ -367,12 +370,12 @@ public class Song implements SongSubject{
         void callback(ArrayList<String> user, ArrayList<HashMap<String,String>> locations, String date, String url);
     }
 
+    /* -------------------------  Weighting System  ------------------------------------------- */
     /**
      * Gets weighted score of song (max 300)
      * @return
      */
     public double getScore(Location userLocation, OffsetDateTime presentTime) { return 1; }
-
 
     @Override
     public String toString(){ return this.title; }
