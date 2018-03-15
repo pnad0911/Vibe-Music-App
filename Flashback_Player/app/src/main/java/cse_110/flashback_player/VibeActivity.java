@@ -83,7 +83,10 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
     private SongDownloadHelper songDownloadHelper;
-    public SongList songList;
+
+    public static VibePlaylist vibePlaylist;
+
+    public static SongList songList;
     public static List<Song> upcomingList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("current","flashback");
         editor.apply();
+
+        vibePlaylist = new VibePlaylist(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
