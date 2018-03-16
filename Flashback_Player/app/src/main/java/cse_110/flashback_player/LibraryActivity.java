@@ -161,7 +161,6 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
         alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String url = edittext.getText().toString();
-//                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
                 SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,LibraryActivity.this);
                 songDownloadHelper2.startDownload();
                 dialog.cancel();
@@ -178,7 +177,6 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
             }
         });
         alert.setView(edittext);
-
 
         ImageButton download = findViewById(R.id.download);
         final AlertDialog alertd = alert.create();
@@ -206,12 +204,6 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
         if(position == 1) tab1.updateDisplay(songListSorter.sortByArtist(sort));
         if(position == 2) tab1.updateDisplay(songListSorter.sortByAlbum(sort));
         if(position == 3) tab1.updateDisplay(songListSorter.sortByStatus(sort));
-//        switch (position) {
-//            case 0: tab1.updateDisplay(songListSorter.sortByTitle(sort));
-//            case 1: tab1.updateDisplay(songListSorter.sortByArtist(sort));
-//            case 2: tab1.updateDisplay(songListSorter.sortByAlbum(sort));
-//            case 3: tab1.updateDisplay(songListSorter.sortByStatus(sort));
-//        }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
 

@@ -44,7 +44,6 @@ public class SongListSorter {
 
         return songList;
     }
-
     /*
     /* Sort songs in the playlist by lexicographic order according to favorite status
     public List<Song> sortByStatus(List<Song> songList, final Context context) {
@@ -76,7 +75,6 @@ public class SongListSorter {
                 }
             }
         });
-
         return songList;
     }
 }
