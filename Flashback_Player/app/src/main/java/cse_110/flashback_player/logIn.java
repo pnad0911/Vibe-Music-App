@@ -36,8 +36,8 @@ import java.util.List;
 public class logIn extends AppCompatActivity{
     int RC_SIGN_IN = 13;
     GoogleApiClient mGoogleApiClient;
-    String clientId = "789042053023-098npoep4ib14lfpn2cjpqb05e178k22.apps.googleusercontent.com";
-    String clientSecret = "2tpuJLowjoQgp2m6N0IbD4m5";
+    String clientId = "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com";
+    String clientSecret = "1F3QJvVDkx7wTxeY38G68cEf";
     String code;
     HttpTransport httpTransport;
     JacksonFactory jsonFactory;
@@ -93,6 +93,7 @@ public class logIn extends AppCompatActivity{
     public void updateUI(GoogleSignInAccount account){
         user.setFirstName(account.getGivenName());
         user.setLastName(account.getFamilyName());
+        System.out.println("user + " + user.getFirstName());
         try {
             setUp();
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -131,7 +132,7 @@ public class logIn extends AppCompatActivity{
                     Gson gson = new Gson();
                     String json = shared.getString("current", "");
                     System.out.println("json------- "+json);
-                    GoogleTokenResponse checktoken = gson.fromJson(json,GoogleTokenResponse.class);
+                    //GoogleTokenResponse checktoken = gson.fromJson(json,GoogleTokenResponse.class);
                     GoogleCredential credential;
                     if(json.equals("")) {
                         tokenResponse =
@@ -144,7 +145,7 @@ public class logIn extends AppCompatActivity{
                         String json2 = tokenResponse.getRefreshToken();
                         editor2.putString("current", json2);
                         editor2.commit();
-                        checktoken =tokenResponse;
+                        GoogleTokenResponse checktoken =tokenResponse;
                         credential = new GoogleCredential.Builder()
                                 .setTransport(httpTransport)
                                 .setJsonFactory(jsonFactory)
@@ -170,11 +171,13 @@ public class logIn extends AppCompatActivity{
                             .execute();
                     List<Person> connections = response.getConnections();
                     ArrayList<Pair<String,String>> friends = new ArrayList<>();
-                    for(int i = 0;i<connections.size();i++){
-                        String firstName = (connections.get(i).getNames().get(0).getGivenName());
-                        String lastName = (connections.get(i).getNames().get(0).getFamilyName());
-                        System.out.println("friends --------- " + firstName);
-                        friends.add(new Pair<String, String>(lastName,firstName));
+                    if(connections != null) {
+                        for (int i = 0; i < connections.size(); i++) {
+                            String firstName = (connections.get(i).getNames().get(0).getGivenName());
+                            String lastName = (connections.get(i).getNames().get(0).getFamilyName());
+                            System.out.println("friends --------- " + firstName);
+                            friends.add(new Pair<String, String>(lastName, firstName));
+                        }
                     }
                     user.setFriendsList(friends);
                 } catch (Exception e) {

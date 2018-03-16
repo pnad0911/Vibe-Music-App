@@ -2,6 +2,7 @@ package cse_110.flashback_player;
 
 import android.location.Location;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Pair;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,6 +21,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
@@ -39,11 +41,24 @@ public class TestGetScore {
     OffsetDateTime time1 = OffsetDateTime.parse("2018-03-14T10:15:30-08:00");
     OffsetDateTime time2 = time1.minusDays(2);
     OffsetDateTime time3 = time1.minusDays(9);
+    OffsetDateTime time4 = time1.minusDays(3);
+    User user = new User();
+    ArrayList<String> usersPlayed = new ArrayList<>();
+    ArrayList<Pair<String,String>> friendsList = new ArrayList<>();
+    String str1 = new String("Beverly");
+    String str2 = new String("Li");
+    String str3 = new String("Duy");
+    String str4 = new String("Pham");
+    String str5 = new String("Yutong");
+    String str6 = new String("Qiu");
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Before
     public void setUp() {
+
+        user.setFirstName(str1);
+        user.setLastName(str2);
 
         loc2.setLatitude(100);
         loc2.setLongitude(100);
@@ -54,6 +69,7 @@ public class TestGetScore {
         song1.setLocation(loc1);
         song1.setDate(time1);
         song1.addLocation(loc1);
+        song1.addUser(str1, str2);
 
         song2.setLocation(loc2);
         song2.setDate(time2);
@@ -79,7 +95,14 @@ public class TestGetScore {
         assertEquals(0.0, song1.getWeekScore(time3));
         assertEquals(0.0, song1.getWeekScore(time1));
         assertEquals(101.0, song3.getWeekScore(time1));
+        song3.setDate(time4);
+        assertEquals(0.0, song2.getWeekScore(time1));
+        assertEquals(101.0, song3.getWeekScore(time1));
+    }
 
+    @Test
+    public void testIsPlayedByFriend() {
 
     }
+
 }
