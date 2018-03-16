@@ -111,16 +111,16 @@ public class Database {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dsp : snapshot.getChildren()) {
 
-                    Song song = new Song(dsp.child("title").getValue(String.class),
-                            dsp.child("artist").getValue(String.class),
-                            dsp.child("album").getValue(String.class),
-                            dsp.child("songUrl").getValue(String.class),
-                            false);
+                    Song song = new Song();
+                    song.setTitle(dsp.child("title").getValue(String.class));
+                    song.setArtist(dsp.child("artist").getValue(String.class));
+                    song.setAlbum(dsp.child("album").getValue(String.class));
+                    song.setSongUrl(dsp.child("songUrl").getValue(String.class));
                     song.setLocations(dsp.child("locations").getValue(t));
                     song.setUserNames(dsp.child("userNames").getValue(n));
                     song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
 
-                    Log.println(Log.ERROR, "extractFirebase", "Song is:" + song.toString());
+                    Log.println(Log.ERROR, "extractFirebase", "Song is:" + song.getSongUrl());
 
                     // update current song object
                     d.update(song);

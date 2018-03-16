@@ -39,7 +39,7 @@ public class TabVibe extends Fragment implements SongListListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
-        VibeActivity.vibePlaylist = new VibePlaylist((AppCompatActivity) getActivity());
+//        VibeActivity.vibePlaylist = new VibePlaylist((AppCompatActivity) getActivity());
         /*
         * Get Buttons and TextViews*/
         final Button playButton = (Button) rootView.findViewById(R.id.play);
@@ -60,10 +60,6 @@ public class TabVibe extends Fragment implements SongListListener {
 
         // get items from song list
         songList = VibeActivity.vibePlaylist.getVibeSong();
-//
-//        if (songList.size() == 0){
-//            return rootView;
-//        }
 
         // configure listview
         adapter = new SongAdapterVibe(this.getActivity(), songList);

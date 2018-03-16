@@ -151,6 +151,7 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
         });
 
         songListGen = new SongList(this);
+        songListGen.reg(tab1); songListGen.reg(tab2);
         songList = songListGen.getAllsong();
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(this);
@@ -162,7 +163,6 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
                 String url = edittext.getText().toString();
 //                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
                 SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,LibraryActivity.this);
-                songListGen.reg(tab1); songListGen.reg(tab2);
                 songDownloadHelper2.startDownload();
                 dialog.cancel();
                 dialog.dismiss();

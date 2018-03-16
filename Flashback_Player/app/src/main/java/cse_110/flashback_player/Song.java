@@ -81,6 +81,7 @@ public class Song implements SongSubject, DatabaseListener{
     public Song (String title, String artist, String album, String url, boolean local){
 
         this.title = title;
+
         if (local){
             this.localPath = url;
             Log.println(Log.ERROR, "SongLocal: ", title);
@@ -90,19 +91,20 @@ public class Song implements SongSubject, DatabaseListener{
         else {
             this.songUrl = url;
         }
+        Log.println(Log.ERROR, "SongFirebase: ", songUrl);
 
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
     }
 
-    /* Local song creation */
-    public Song(String title, String artist, String album, String path, Boolean local){
-        this.title = title;
-        this.localPath = path;
-        this.artist = artist;
-        this.album = album;
-    }
+//    /* Local song creation */
+//    public Song(String title, String artist, String album, String path, Boolean local){
+//        this.title = title;
+//        this.localPath = path;
+//        this.artist = artist;
+//        this.album = album;
+//    }
 
     private void setSong (Song song){
         Log.println(Log.ERROR, "SETSONG", song.getSongUrl());

@@ -85,7 +85,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private SongDownloadHelper songDownloadHelper;
 
     public static VibePlaylist vibePlaylist;
-    public static SongList songListGen;
+//    public static SongList songListGen;
     public static List<Song> localSongList;
     public static List<Song> upcomingList = new ArrayList<>();
     @Override
@@ -151,8 +151,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
-        songListGen = new SongList(this);
-        localSongList = songListGen.getAllsong();
+//        songListGen = new SongList(this);
+        localSongList = LibraryActivity.songListGen.getAllsong();
 //        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 //        final EditText edittext = new EditText(this);
 //        edittext.setHint("Enter URL here");

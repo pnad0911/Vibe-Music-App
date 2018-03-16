@@ -77,7 +77,7 @@ public class VibePlaylist implements DatabaseListener{
         // populate playlist based on new data
         for (Song song : viableSongs) {
             if (isPlayable(song)) {
-                downloadSong(song);
+//                downloadSong(song);
                 playlist.add(song);
             }
         }
@@ -152,7 +152,7 @@ public class VibePlaylist implements DatabaseListener{
     private boolean downloadSong(Song song) {
 
         if (!song.getDownloadStatus()) {
-            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songListGen, activity);
+            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), LibraryActivity.songListGen, activity);
             downloadHelper.startDownload();
             return true;
         }
