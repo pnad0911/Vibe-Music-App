@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Toast;
+
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -200,6 +202,9 @@ public class logIn extends AppCompatActivity{
             GoogleSignInAccount acct = result.getSignInAccount();
             code = acct.getServerAuthCode();
             updateUI(acct);
+        }
+        else{
+            Toast.makeText(this, "login failed", Toast.LENGTH_LONG).show();
         }
     }
     public User getUser(){
