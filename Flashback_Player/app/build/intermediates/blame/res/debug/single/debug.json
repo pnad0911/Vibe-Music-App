@@ -24,20 +24,20 @@
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9c35a6031092b1ff35780c380c8463d7\\res\\drawable\\notification_bg_low.xml"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_navigation_item.xml.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\af2aa706471c16bf8629b245037eb241\\res\\layout\\design_navigation_item.xml"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_48dp.png.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-hdpi-v4\\abc_ic_star_black_48dp.png"
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_navigation_item.xml.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\af2aa706471c16bf8629b245037eb241\\res\\layout\\design_navigation_item.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_cached_black_24dp.xml.flat",
         "source": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\src\\main\\res\\drawable\\ic_cached_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_48dp.png.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-hdpi-v4\\abc_ic_star_black_48dp.png"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_pressed_holo_light.9.png.flat",
@@ -108,12 +108,12 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\color-v23\\abc_btn_colored_text_material.xml"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_hint_foreground_material_dark.xml.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\color\\abc_hint_foreground_material_dark.xml"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_select_dialog_item_material.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_hint_foreground_material_dark.xml.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\color\\abc_hint_foreground_material_dark.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
@@ -220,12 +220,12 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_dark.xml.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable\\tooltip_frame_dark.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_dark.xml.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable\\tooltip_frame_dark.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
@@ -320,12 +320,12 @@
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_bg_low.xml.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\drawable\\notification_bg_low.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main3.xml.flat",
         "source": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\src\\main\\res\\layout\\activity_main3.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_bg_low.xml.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\drawable\\notification_bg_low.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
@@ -376,12 +376,12 @@
         "source": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_skip_previous_black_24dp.xml.flat",
         "source": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\src\\main\\res\\drawable\\ic_skip_previous_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -468,24 +468,24 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\8f8e00ac24c7b675aa5a6186cbf51582\\res\\color-v23\\design_tint_password_toggle.xml"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_design_ic_visibility.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\af2aa706471c16bf8629b245037eb241\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_text_dark_normal.xml.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\18d4beeb9e15d39b3d770226c2961507\\res\\drawable\\common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
@@ -496,12 +496,12 @@
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_icon_light_focused.xml.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable\\common_google_signin_btn_icon_light_focused.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\anim_tooltip_enter.xml.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\anim\\tooltip_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_icon_light_focused.xml.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable\\common_google_signin_btn_icon_light_focused.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_primary_text_disable_only_material_light.xml.flat",
@@ -516,12 +516,12 @@
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
@@ -580,12 +580,12 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\anim\\abc_popup_enter.xml"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_album_list_row.xml.flat",
-        "source": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\src\\main\\res\\layout\\album_list_row.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_abc_btn_colored_material.xml.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_album_list_row.xml.flat",
+        "source": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\src\\main\\res\\layout\\album_list_row.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_list_selector_background_transition_holo_dark.xml.flat",
@@ -688,32 +688,32 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_main2.xml.flat",
         "source": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\src\\main\\res\\menu\\menu_main2.xml"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_radio_material.xml.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable\\abc_btn_radio_material.xml"
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_list_menu_item_layout.xml.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_radio_material.xml.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_shrink_fade_out_from_bottom.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_bg4.xml.flat",
-        "source": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\src\\main\\res\\drawable\\bg4.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_list_selector_holo_dark.xml.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_bg4.xml.flat",
+        "source": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\src\\main\\res\\drawable\\bg4.xml"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -736,24 +736,24 @@
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\af2aa706471c16bf8629b245037eb241\\res\\drawable-xxxhdpi-v4\\design_ic_visibility_off.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_lines_media.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\e2d0b77ec3d54a1f31cad89a4d01ee31\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_ic_ab_back_material.xml.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable\\abc_ic_ab_back_material.xml"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-hdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_ic_ab_back_material.xml.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable\\abc_ic_ab_back_material.xml"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -828,20 +828,20 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_vector_test.xml.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable\\abc_vector_test.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\18d4beeb9e15d39b3d770226c2961507\\res\\drawable-xhdpi-v4\\common_google_signin_btn_icon_light_normal_background.9.png"
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_vector_test.xml.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable\\abc_vector_test.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_text_dark.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable\\common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\18d4beeb9e15d39b3d770226c2961507\\res\\drawable-xhdpi-v4\\common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_menu_item_action_area.xml.flat",
@@ -852,20 +852,20 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_tabsongs.xml.flat",
-        "source": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\src\\main\\res\\layout\\tabsongs.xml"
-    },
-    {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_support_simple_spinner_dropdown_item.xml.flat",
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\color_common_google_signin_btn_text_dark.xml.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\color\\common_google_signin_btn_text_dark.xml"
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_tabsongs.xml.flat",
+        "source": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\src\\main\\res\\layout\\tabsongs.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main3.xml.flat",
         "source": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\src\\main\\res\\layout\\activity_main3.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\color_common_google_signin_btn_text_dark.xml.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\color\\common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -876,12 +876,12 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_mode_bar.xml.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9c35a6031092b1ff35780c380c8463d7\\res\\drawable-mdpi-v4\\notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_mode_bar.xml.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
@@ -904,12 +904,12 @@
         "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e87999c9264357ebfc648b5192491a67\\res\\drawable-ldrtl-hdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_part_time.xml.flat",
-        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\layout\\notification_template_part_time.xml"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21_notification_template_custom_big.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9c35a6031092b1ff35780c380c8463d7\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_part_time.xml.flat",
+        "source": "C:\\Users\\Patrick\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\52fc86db470ec67cf8b595b2fa75c182\\res\\layout\\notification_template_part_time.xml"
     },
     {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_test_switch.xml.flat",
@@ -948,12 +948,12 @@
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59020041b97eb344083896e10d8a56ac\\res\\drawable-mdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
-        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
-        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable-xhdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
-    },
-    {
         "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
         "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable\\common_google_signin_btn_icon_dark_normal.xml"
+    },
+    {
+        "merged": "C:\\Users\\pnad0911\\AndroidStudioProjects\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
+        "source": "C:\\Users\\pnad0911\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.0.aar\\f617f106930f641902661e36ff4e0ead\\res\\drawable-xhdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "C:\\Users\\Patrick\\CSE_110\\Flashback_Player\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",

@@ -99,7 +99,11 @@ public class VibePlaylist {
 
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getVibeSong() {
+
         OffsetDateTime currentTime = OffsetDateTime.now().minusHours(8);
+        if(!LibraryActivity.usingCurrentTime){
+            currentTime = LibraryActivity.setTime;
+        }
 
         // build priority queue
         playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
