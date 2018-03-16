@@ -141,13 +141,13 @@ public class TestSongListSorter {
         Iterator<Song> songIterator = songList.listIterator();
 
         try {
-            assertTrue(songIterator.next().getSongStatus() == (0));
-            assertTrue(songIterator.next().getSongStatus() == (0));
-            assertTrue(songIterator.next().getSongStatus() == (0));
-            assertTrue(songIterator.next().getSongStatus() == (0));
-            assertTrue(songIterator.next().getSongStatus() == (0));
-            assertTrue(songIterator.next().getSongStatus() == (0));
-            assertTrue(songIterator.next().getSongStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
+            assertTrue(songIterator.next().getStatus() == (0));
         } catch (NullPointerException e) {
             Log.println(Log.ERROR, "DUY MADE ME DO THIS", "Null pointer exception");
         }

@@ -151,6 +151,7 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
         });
 
         songListGen = new SongList(this);
+        songListGen.reg(tab1); songListGen.reg(tab2);
         songList = songListGen.getAllsong();
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(this);
@@ -162,7 +163,6 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
                 String url = edittext.getText().toString();
 //                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
                 SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,LibraryActivity.this);
-                songListGen.reg(tab1); songListGen.reg(tab2);
                 songDownloadHelper2.startDownload();
                 dialog.cancel();
                 dialog.dismiss();
@@ -200,7 +200,18 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        tab1.updateDisplay(l.getAllsong());
+        SongListSorter songListSorter = new SongListSorter();
+        List<Song> sort = new ArrayList<>(songList);
+        if(position == 0) tab1.updateDisplay(songListSorter.sortByTitle(sort));
+        if(position == 1) tab1.updateDisplay(songListSorter.sortByArtist(sort));
+        if(position == 2) tab1.updateDisplay(songListSorter.sortByAlbum(sort));
+        if(position == 3) tab1.updateDisplay(songListSorter.sortByStatus(sort));
+//        switch (position) {
+//            case 0: tab1.updateDisplay(songListSorter.sortByTitle(sort));
+//            case 1: tab1.updateDisplay(songListSorter.sortByArtist(sort));
+//            case 2: tab1.updateDisplay(songListSorter.sortByAlbum(sort));
+//            case 3: tab1.updateDisplay(songListSorter.sortByStatus(sort));
+//        }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
 

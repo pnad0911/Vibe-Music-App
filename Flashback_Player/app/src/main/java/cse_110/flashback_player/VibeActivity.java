@@ -85,7 +85,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private SongDownloadHelper songDownloadHelper;
 
     public static VibePlaylist vibePlaylist;
-    public static SongList songListGen;
+//    public static SongList songListGen;
     public static List<Song> localSongList;
     public static List<Song> upcomingList = new ArrayList<>();
     @Override
@@ -97,9 +97,6 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("current","flashback");
         editor.apply();
-
-
-//        tab1 = new TabVibe(); tab2 = new TabUpcoming();
 
         vibePlaylist = new VibePlaylist(this);
 
@@ -154,8 +151,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
-        songListGen = new SongList(this);
-        localSongList = songListGen.getAllsong();
+//        songListGen = new SongList(this);
+        localSongList = LibraryActivity.songListGen.getAllsong();
 //        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 //        final EditText edittext = new EditText(this);
 //        edittext.setHint("Enter URL here");
@@ -227,13 +224,13 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             switch (position) {
 
                 case 0:
-//                    tab1 = new TabVibe();
+                    tab1 = new TabVibe();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-//                    tab2 = new TabUpcoming();
+                    tab2 = new TabUpcoming();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);

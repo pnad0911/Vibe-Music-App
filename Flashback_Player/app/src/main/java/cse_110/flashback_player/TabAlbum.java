@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class TabAlbum extends Fragment implements SongListListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.tabalbum, container, false);
+        final View rootView = inflater.inflate(R.layout.tab2album, container, false);
 
         // Actions with song Player
         Bundle bundle1 = getArguments();

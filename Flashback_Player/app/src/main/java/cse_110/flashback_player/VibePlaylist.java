@@ -65,8 +65,7 @@ public class VibePlaylist implements DatabaseListener{
         OffsetDateTime currentTime = OffsetDateTime.now().minusHours(8);
 
         // build priority queue
-//        playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
-        playlist = new PriorityQueue<>(1, new SongCompare2<>(VibeActivity.getLocation(),currentTime));
+        playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
 
         // populate viable song set
         for (Song s : entireSongList) {
@@ -78,7 +77,7 @@ public class VibePlaylist implements DatabaseListener{
         // populate playlist based on new data
         for (Song song : viableSongs) {
             if (isPlayable(song)) {
-                downloadSong(song);
+//                downloadSong(song);
                 playlist.add(song);
             }
         }
@@ -92,14 +91,7 @@ public class VibePlaylist implements DatabaseListener{
             returnList.add(returnPQ.poll());
         }
 
-        PriorityQueue<Song> returnPQ2 = new PriorityQueue<>(returnList);
-        ArrayList<Song> returnList2 = new ArrayList<>();
-
-        while (!returnPQ2.isEmpty()) {
-            returnList2.add(returnPQ2.poll());
-        }
-        return returnList2;
-
+        return returnList;
     }
 
     /* Updates the status of a song if it is favorited */
@@ -160,7 +152,7 @@ public class VibePlaylist implements DatabaseListener{
     private boolean downloadSong(Song song) {
 
         if (!song.getDownloadStatus()) {
-            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songListGen, activity);
+            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), LibraryActivity.songListGen, activity);
             downloadHelper.startDownload();
             return true;
         }
