@@ -21,12 +21,11 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class TabVibe extends Fragment implements SongListListener{
+public class TabVibe extends Fragment implements SongListListener {
 
     public static int songIdx=0;
     private Song currSong;
     private SongPlayer songPlayer;
-    public static VibePlaylist vibePlaylist;
     private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -55,12 +54,14 @@ public class TabVibe extends Fragment implements SongListListener{
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
+        VibeActivity.vibePlaylist.reg(this);
+
         // get items from song list
         songList = VibeActivity.vibePlaylist.getVibeSong();
-
-        if (songList.size() == 0){
-            return rootView;
-        }
+//
+//        if (songList.size() == 0){
+//            return rootView;
+//        }
 
         // configure listview
         adapter = new SongAdapterVibe(this.getActivity(), songList);
@@ -77,8 +78,10 @@ public class TabVibe extends Fragment implements SongListListener{
             }
         });
 
-        play();
-        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView, songUserView);
+        if (!songList.isEmpty()) {
+            play();
+            changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView,songUserView);
+        }
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -180,11 +183,9 @@ public class TabVibe extends Fragment implements SongListListener{
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
-            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().get(0).first+
-//                    ":"+currSong.getLocations().get(0).second + " )");
-//            songUserView.setText(currSong.getUser());
+            songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
+                    currSong.previousLocation().first+ ", " +
+                    currSong.previousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");

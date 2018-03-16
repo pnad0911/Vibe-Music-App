@@ -85,8 +85,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private SongDownloadHelper songDownloadHelper;
 
     public static VibePlaylist vibePlaylist;
-
-    public static SongList songList;
+    public static SongList songListGen;
+    public static List<Song> localSongList;
     public static List<Song> upcomingList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,9 +154,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
-        songList = new SongList(this);
-//        songDownloadHelper = new SongDownloadHelper(songList,this);
-
+        songListGen = new SongList(this);
+        localSongList = songListGen.getAllsong();
 //        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 //        final EditText edittext = new EditText(this);
 //        edittext.setHint("Enter URL here");
@@ -165,9 +164,9 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
 //        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
 //            public void onClick(DialogInterface dialog, int whichButton) {
 //                String url = edittext.getText().toString();
-//                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
-//                tab2.updateDisplay(upcomingList);
-//                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songList,VibeActivity.this);
+////                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
+//                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,VibeActivity.this);
+//                songListGen.reg(tab2);
 //                songDownloadHelper2.startDownload();
 //                dialog.cancel();
 //                dialog.dismiss();
