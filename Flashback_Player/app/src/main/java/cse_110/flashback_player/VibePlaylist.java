@@ -15,95 +15,65 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import static cse_110.flashback_player.Song.databaseRef;
-
 /**
  * Created by Daniel on 3/4/2018.
  */
 
-public class VibePlaylist {
+public class VibePlaylist implements DatabaseListener{
 
     /* Entire list of songs */
     private List<Song> entireSongList;
 
     /* List of viable songs to be placed in the playlist (played b4, not disliked) */
-    private HashSet<Song> viableSongs;
+    private HashSet<Song> viableSongs = new HashSet<>();
 
     /* Priority queue used to build the playlist */
     private PriorityQueue<Song> playlist;
-    private PriorityQueue<Song> playlist2;
 
     /* Context provided by NormalActivity */
     private AppCompatActivity activity;
 
-    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
-
-    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
+    private List<SongListListener> listeners = new ArrayList<>();
+    public void reg(SongListListener ls){
+        listeners.add(ls);
+    }
 
     /* Constructor */
     public VibePlaylist(AppCompatActivity activity) {
         this.activity = activity;
+        entireSongList = new ArrayList<>();
+        Database.loadAllSongs(this);
+    }
 
-        extractFirebase();
-        try{
-            Thread.sleep(1000);
-        }catch(Exception e){
-        }
+    public void update(Song song){
 
-        // initialize set of viable songs
-        viableSongs = new HashSet<>();
+        Log.println(Log.ERROR, "VibePlaylist callback from database", "Song is:" + song.toString());
+        Log.println(Log.ERROR, "VibePlaylist callback from database", "Song is playable? " + isPlayable(song));
 
-        // populate viable song set
-        for (Song song : entireSongList) {
-            // 1. not disliked
-            // 2. having valid locations
-            // 3. having a valid date
-            if (isPlayable(song)) {
-                viableSongs.add(song);
-            }
+        entireSongList.add(song);
+        downloadSong(song);
+
+        for (SongListListener l : listeners){
+            l.updateDisplay(getVibeSong());
         }
     }
 
-    /* Retrieve all songs from firebase */
-    private void extractFirebase() {
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        songRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                entireSongList = new ArrayList<Song>();
 
-                for (DataSnapshot dsp : snapshot.getChildren()) {
-
-                    Song song = new Song(dsp.child("title").getValue(String.class),
-                            dsp.child("artist").getValue(String.class),
-                            dsp.child("album").getValue(String.class),
-                            dsp.child("songUrl").getValue(String.class),
-                            false);
-                    song.setLocations(dsp.child("locations").getValue(t));
-                    song.setUserNames(dsp.child("userNames").getValue(n));
-                    song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
-
-                    entireSongList.add(song);
-
-                    downloadSong(song);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG1", "Failed to read value.", error.toException());
-            }
-        });
-    }
 
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getVibeSong() {
         OffsetDateTime currentTime = OffsetDateTime.now().minusHours(8);
 
         // build priority queue
-        playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
-        playlist2 = new PriorityQueue<>(1, new SongCompare2<>(VibeActivity.getLocation(),currentTime));
+//        playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
+        playlist = new PriorityQueue<>(1, new SongCompare2<>(VibeActivity.getLocation(),currentTime));
+
+        // populate viable song set
+        for (Song s : entireSongList) {
+            if (isPlayable(s)) {
+                viableSongs.add(s);
+            }
+        }
 
         // populate playlist based on new data
         for (Song song : viableSongs) {
@@ -175,8 +145,9 @@ public class VibePlaylist {
     }
 
     /* Determines whether a song is viable for playability; song must be:
-        1. Not disliked
-        2. Have a current and previous location/date
+     *  1. not disliked
+     *  2. having valid locations
+     *  3. having a valid date
      */
     private boolean isPlayable(Song song) {
         return song.getSongStatus() != -1
@@ -187,8 +158,9 @@ public class VibePlaylist {
     /* Determines whether a song can be downloaded or not and downloads; false if failed to download
      */
     private boolean downloadSong(Song song) {
+
         if (!song.getDownloadStatus()) {
-            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songList, activity);
+            SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), VibeActivity.songListGen, activity);
             downloadHelper.startDownload();
             return true;
         }
