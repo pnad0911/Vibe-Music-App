@@ -120,17 +120,5 @@ public class SongUnitTest {
         assertEquals(song.getUserNames().get(1), "defdef");
     }
 
-//    @Test
-//    public void testFriendMove(){
-//        friend.setLocation(location2);
-//        assertEquals(song.getCurrentLocation().getLatitude(), location2.getLatitude(),0);
-//    }
-//
-//    @Test
-//    public void testFriendChangeTime(){
-//        friend.setTime(time2);
-//        assertEquals(song.getCurrentDate().toString(), time2.toString());
-//    }
-
 
 }

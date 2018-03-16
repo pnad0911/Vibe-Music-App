@@ -59,5 +59,5 @@ public class TabUpcoming extends Fragment implements SongListListener{
         adapter.notifyDataSetChanged();
     }
 
-    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames){}
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) { }
 }

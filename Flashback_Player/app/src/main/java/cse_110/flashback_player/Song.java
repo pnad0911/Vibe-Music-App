@@ -19,7 +19,9 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
+import static cse_110.flashback_player.logIn.user;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -29,6 +31,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class Song implements SongSubject, DatabaseListener{
 //    static FirebaseDatabase database = FirebaseDatabase.getInstance();
 //    static DatabaseReference databaseRef = database.getReference();
+
+    private final double locRange = 1000; //feet
+    private final double latToFeet = 365228;
+    private final double longToFeet = 305775;
 
 //    private Boolean downloaded = false;
 
@@ -53,25 +59,9 @@ public class Song implements SongSubject, DatabaseListener{
         observers.add(ob);
     }
 
-    // song history information
-//    private Location previousLocation = null;
-//    private Location currentLocation;
     private String date;
     private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
     private ArrayList<String> userNames = new ArrayList<>();
-
-
-//    private OffsetDateTime previousDate = null;
-//    private OffsetDateTime currentDate;
-//
-//    private final double fiveam = 300; // times are in minutes
-//    private final double elevenam = 660;
-//    private final double fivepm = 1020;
-//    private final double locRange = 1000; // feet
-//    private final double latToFeet = 365228;
-//    private final double longToFeet = 305775;
-
-
 
     /* -------------------------------  CONSTRUCTORS  ------------------------------------------*/
 
@@ -103,7 +93,9 @@ public class Song implements SongSubject, DatabaseListener{
         this.artist = artist;
         this.album = album;
     }
+    // --- END CONSTRUCTORS --------------------------------------
 
+    //----- SETTERS -------------------------------------------
     private void setSong (Song song){
         Log.println(Log.ERROR, "SETSONG", song.getSongUrl());
         this.title = song.title;
@@ -115,8 +107,6 @@ public class Song implements SongSubject, DatabaseListener{
         this.userNames = song.userNames;
         this.databaseKey = song.title+song.artist;
     }
-
-    /* ----------------------------- Default Setters ------------------------------------------ */
 
     public void setTitle(String title){
         this.title = title;
@@ -190,12 +180,16 @@ public class Song implements SongSubject, DatabaseListener{
         locations.add(hm);
     }
 
+
+
+    // FIREBASE PURPOSE GETTERS ------------
     public void like() { like = 1; setPreviousLike(like);}
     public void dislike() { like = -1; setPreviousLike(like);}
     public void neutral() { like = 0; setPreviousLike(like); }
 
 
     /* -----------------------------  Default Getters ----------------------------------------- */
+
 
     public String getTitle(){ return title; }
     public String getArtist(){ return artist; }
@@ -322,15 +316,119 @@ public class Song implements SongSubject, DatabaseListener{
 
     /* -------------------------  Weighting System  ------------------------------------------- */
     /**
-     * Gets weighted score of song (max 300)
-     * @return
+     * Score for each song, max score 303
+     * @param userLocation
+     * @param presentTime
+     * @return song score
      */
-    public double getScore(Location userLocation, OffsetDateTime presentTime) { return 1; }
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
 
-    @Override
-    public String toString(){ return this.title; }
+    /**
+     * Songs not downloaded yet are pushed to the bottom of the queue
+     * @param userLocation
+     * @param presentTime
+     * @return new score
+     */
+    public double getScore2(Location userLocation, OffsetDateTime presentTime) {
+        if (!getDownloadStatus()) {
+            return -5;
+        }
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
 
-    public int getStatus(){return like;}
+    /**
+     * helper for getScore
+     * @return location score
+     */
+    public double getLocationScore(Location userLocation) {
 
+        if (userLocation == null) {
+            return 0;
+        }
+
+        double prevFeetLat = Double.parseDouble(previousLocation().first) * latToFeet;
+        double prevFeetLong = Double.parseDouble(previousLocation().second) * longToFeet;
+        double currFeetLat = userLocation.getLatitude() * latToFeet;
+        double currFeetLong = userLocation.getLongitude() * longToFeet;
+        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
+                Math.pow(currFeetLong - prevFeetLong, 2));
+        // check if song was played within 1000 ft
+        if (distance > locRange) {
+            return 0;
+        }
+        return 102;
+    }
+
+    /**
+     * helper for getScore
+     * @param presentTime
+     * @return week score
+     */
+    public double getWeekScore(OffsetDateTime presentTime) {
+        OffsetDateTime playedTime = OffsetDateTime.parse(getDate());
+        if (playedTime == null) {
+            return 0;
+        }
+        OffsetDateTime lastWeekBegin = presentTime.minusDays(7);
+        // Monday (value 1) to Sunday (value 7) is a week
+        while (lastWeekBegin.getDayOfWeek().getValue() > 1) {
+            lastWeekBegin = lastWeekBegin.minusDays(1);
+        }
+
+        for (int i = 0; i < 7; i++) {
+            Log.e(TAG,"lastWeekBegin" + lastWeekBegin.getDayOfYear());
+            Log.e(TAG,"playedTime" + playedTime.getDayOfYear());
+            if (lastWeekBegin.getYear() == playedTime.getYear() &&
+                    lastWeekBegin.getDayOfYear() == playedTime.getDayOfYear()) {
+                return 101;
+            }
+            lastWeekBegin = lastWeekBegin.plusDays(1);
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getScore
+     * @return friend score
+     */
+    public double getFriendScore() {
+        if (isPlayedByFriend()) {
+            return 100;
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getFriendScore
+     * @return true if song was played by friend, false otherwise
+     */
+    public boolean isPlayedByFriend() {
+        ArrayList<String> usersPlayedSong = getUserNames();
+        ArrayList<Pair<String,String>> friends = user.getFriendlist();
+        for (String username : usersPlayedSong) {
+            for (Pair<String,String> friend : friends) {
+                if (username.equals(friend.second + friend.first)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * method for testing
+     */
+    private Location loc;
+    public void setLocation(Location loc) {
+        this.loc = loc;
+    }
 }
 
