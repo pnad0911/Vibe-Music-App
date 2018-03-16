@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +28,8 @@ public class TabSongs extends Fragment implements SongListListener {
     private int songIdx=0;
     private Context context;
     private Song currSong;
-//    private List<Song> songList;
+    private List<Song> songList;
     private SongPlayer songPlayer;
-//    public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     private SongAdapter adapter;
 
@@ -54,11 +54,11 @@ public class TabSongs extends Fragment implements SongListListener {
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
-
+        songList = LibraryActivity.songList;
         // get items from song list
         adapter = new SongAdapter(this.getActivity(), LibraryActivity.songList);
-        if(!LibraryActivity.songList.isEmpty()) {
-            currSong = LibraryActivity.songList.get(songIdx);
+        if(!songList.isEmpty()) {
+            currSong = songList.get(songIdx);
             changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
 
             // configure listview
@@ -80,7 +80,7 @@ public class TabSongs extends Fragment implements SongListListener {
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if (!LibraryActivity.songList.isEmpty()) {
+                if (!songList.isEmpty()) {
                     if (songPlayer.isPlaying()) {
                         songPlayer.pause();
                         playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
@@ -199,8 +199,8 @@ public class TabSongs extends Fragment implements SongListListener {
         else return false;
     }
     public void updateDisplay(List<Song> list) {
-        LibraryActivity.songList.clear();
-        LibraryActivity.songList.addAll(list);
+        songList.clear();
+        songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
 
