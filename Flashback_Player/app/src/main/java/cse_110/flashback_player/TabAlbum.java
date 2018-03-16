@@ -188,8 +188,6 @@ public class TabAlbum extends Fragment implements SongListListener{
         currSong.setDate(OffsetDateTime.now());
         Database.updateDatabase(currSong);
     }
-
-
     public boolean isNullDate(Song song,Context context) {
         if(song.getDate() == null) return true;
         else return false;

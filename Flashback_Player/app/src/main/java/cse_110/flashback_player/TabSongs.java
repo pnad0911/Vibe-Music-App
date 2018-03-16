@@ -26,11 +26,9 @@ import java.util.Map;
 public class TabSongs extends Fragment implements SongListListener {
 
     private int songIdx=0;
-    private Context context;
     private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
-    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     private SongAdapter adapter;
 
     @Override
