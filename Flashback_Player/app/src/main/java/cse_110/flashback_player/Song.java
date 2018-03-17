@@ -29,13 +29,14 @@ import static java.sql.DriverManager.println;
  * Added new constructor (Mp3 file name)-------- Duy
  */
 
-public class Song implements SongSubject, DatabaseListener{
-//    static FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    static DatabaseReference databaseRef = database.getReference();
+public class Song implements SongSubject{
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static DatabaseReference databaseRef = database.getReference();
 
 //    private Boolean downloaded = false;
 
 //    public int getId() {return id;}
+
 
     private final double locRange = 1000; //feet
     private final double latToFeet = 365228;
@@ -49,8 +50,6 @@ public class Song implements SongSubject, DatabaseListener{
     private String artist;
     private String album;
     private String databaseKey;
-
-    private Database database = new Database();
 
     public String localPath; //This can be set directly without calling setters
 
@@ -73,14 +72,13 @@ public class Song implements SongSubject, DatabaseListener{
 
     /* If created from local file, the song will not have user, location or date info */
     public Song (String title, String artist, String album, String url, boolean local){
-
         this.title = title;
 
         if (local){
             this.localPath = url;
-            Log.println(Log.ERROR, "SongLocal: ", title);
             Database.loadSong(this);
             try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
+
         }
         else {
             this.songUrl = url;
@@ -90,6 +88,9 @@ public class Song implements SongSubject, DatabaseListener{
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
+        
+        //Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+        //Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
     }
 
 //    /* Local song creation */
@@ -126,7 +127,7 @@ public class Song implements SongSubject, DatabaseListener{
         this.album = album;
     }
 
-    public void setDatabaseKey(String key) { this.databaseKey = key;}
+    public void setDatabaseKey(String artist, String title) { this.databaseKey = title+artist;}
 
     public void setDate(Object time){
         this.date = time.toString();
@@ -197,7 +198,7 @@ public class Song implements SongSubject, DatabaseListener{
     public String getArtist(){ if (artist == null) {return "null";} else {return artist;} }
     public String getAlbum(){  if (album == null) {return "null";} else {return album;} }
     public String getDate(){ return this.date; }
-    public String getDatabaseKey(){ return databaseKey;}
+    public String getDatabaseKey(){ return this.title+this.artist;}
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
     public ArrayList<String> getUserNames(){ return this.userNames; }
 
@@ -240,16 +241,13 @@ public class Song implements SongSubject, DatabaseListener{
 
     public Boolean getDownloadStatus() {
         try {
-            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             Boolean down = gson.fromJson(json, Boolean.class);
-            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
             return down;
         } catch (Exception e) {
-            Boolean down = false;
-            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
-            return down;
+            return null;
         }
     }
 
@@ -275,13 +273,17 @@ public class Song implements SongSubject, DatabaseListener{
             if (url == null){
                 url = "";
             }
-            return url;
+            this.songUrl = url;
         } catch (Exception e) {
-            return this.songUrl;
+            this.songUrl = "";
         }
+        Log.println(Log.ERROR, "getSongURL", "Songurl is: "+songUrl);
+        return this.songUrl;
     }
 
     /* ----------------------------  Database Methods  ---------------------------------------- */
+
+   
 
     /**
      * Implementing DatabaseListener
