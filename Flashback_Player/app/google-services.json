@@ -15,6 +15,7 @@
       },
       "oauth_client": [
         {
+/*-----------HEAD------------*/
           "client_id": "831078368581-sbspmauop1cia2vuphcd7lqj8hde19vo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -35,6 +36,16 @@
           }
         },
         {
+/*----------------*/
+//          "client_id": "831078368581-lstjc90fmp6qtnp9acnv73dgmiknu1t1.apps.googleusercontent.com",
+//          "client_type": 1,
+//          "android_info": {
+//            "package_name": "cse_110.flashback_player",
+//            "certificate_hash": "93e86bdc1f5cdd711fdc73cfd502b16af22b9cbf"
+//          }
+//        },
+//        {
+//>>>>>>> eb3cfa290f9b9a70dcda461ad3b89e6053b170e0
           "client_id": "831078368581-7qljuvkgcco5ggdmmd45nio9omkrpkd8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -52,7 +63,11 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+
               "client_id": "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com",
+
+//              "client_id": "831078368581-7qljuvkgcco5ggdmmd45nio9omkrpkd8.apps.googleusercontent.com",
+
               "client_type": 3
             }
           ]

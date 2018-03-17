@@ -5,6 +5,7 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -18,24 +19,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class TabSongs extends Fragment implements SongListListener {
 
     private int songIdx=0;
-    private Context context;
     private Song currSong;
     private List<Song> songList;
     private SongPlayer songPlayer;
-//    public static Map<String,String[]> data;
-    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     private SongAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tabsongs, container, false);
+        View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
         /*
         * Get Buttons and TextViews*/
@@ -53,12 +52,9 @@ public class TabSongs extends Fragment implements SongListListener {
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
-
+        songList = LibraryActivity.songList;
         // get items from song list
-        SongList songListGen = new SongList(this.getActivity());
-        songListGen.reg(this);
-        songList = songListGen.getAllsong();
-        adapter = new SongAdapter(this.getActivity(), songList);
+        adapter = new SongAdapter(this.getActivity(), LibraryActivity.songList);
         if(!songList.isEmpty()) {
             currSong = songList.get(songIdx);
             changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
@@ -84,7 +80,6 @@ public class TabSongs extends Fragment implements SongListListener {
             public void onClick(View view){
                 if (!songList.isEmpty()) {
                     if (songPlayer.isPlaying()) {
-                        LibraryActivity.getLocation();
                         songPlayer.pause();
                         playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
                     } else if (songPlayer.isPaused()) {
@@ -108,7 +103,7 @@ public class TabSongs extends Fragment implements SongListListener {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getNextSongIdx(songList);
+                songIdx = getNextSongIdx(LibraryActivity.songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
@@ -118,7 +113,7 @@ public class TabSongs extends Fragment implements SongListListener {
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                songIdx = getPreviousSongIdx(songList);
+                songIdx = getPreviousSongIdx(LibraryActivity.songList);
                 play();
                 changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
@@ -127,7 +122,7 @@ public class TabSongs extends Fragment implements SongListListener {
         songPlayer.setEndListener(new SongPlayer.SongPlayerCallback() {
              @Override
              public void callback() {
-                 songIdx = getNextSongIdx(songList);
+                 songIdx = getNextSongIdx(LibraryActivity.songList);
                  play();
                  changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
              }
@@ -165,16 +160,16 @@ public class TabSongs extends Fragment implements SongListListener {
 
     /* Calls play and nextPlay function in songPlayer*/
     public void play(){
-        currSong = songList.get(songIdx);
+        currSong = LibraryActivity.songList.get(songIdx);
         songPlayer.play(currSong);
-        int idx = getNextSongIdx(songList);
-        songPlayer.playNext(songList.get(idx));
+        int idx = getNextSongIdx(LibraryActivity.songList);
+        songPlayer.playNext(LibraryActivity.songList.get(idx));
 
         Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
 
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
-        currSong.updateDatabase();
+        Database.updateDatabase(currSong);
     }
 
     /* change display on media player to current playing song*/
@@ -184,10 +179,11 @@ public class TabSongs extends Fragment implements SongListListener {
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong, applicationContext)) {
+
 //            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-            songTimeView.setText(currSong.getDate()+ " AT ( " +
-                    currSong.allLocations().get(0).first+
-                    ":"+currSong.allLocations().get(0).second + " )");
+            songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
+                    currSong.previousLocation().first+ ", " +
+                    currSong.previousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");

@@ -2,14 +2,17 @@ package cse_110.flashback_player;
 
 import android.location.Location;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 import android.util.Pair;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.content.ContentValues.TAG;
 import static android.location.LocationManager.GPS_PROVIDER;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 import org.mockito.InjectMocks;
 import org.junit.runner.RunWith;
@@ -42,23 +45,23 @@ public class TestGetScore {
     OffsetDateTime time2 = time1.minusDays(2);
     OffsetDateTime time3 = time1.minusDays(9);
     OffsetDateTime time4 = time1.minusDays(3);
-    User user = new User();
-    ArrayList<String> usersPlayed = new ArrayList<>();
-    ArrayList<Pair<String,String>> friendsList = new ArrayList<>();
-    String str1 = new String("Beverly");
-    String str2 = new String("Li");
-    String str3 = new String("Duy");
-    String str4 = new String("Pham");
-    String str5 = new String("Yutong");
-    String str6 = new String("Qiu");
+    static User user = new User();
+
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Before
     public void setUp() {
 
-        user.setFirstName(str1);
-        user.setLastName(str2);
+        ArrayList<String> usersPlayed = new ArrayList<>();
+        ArrayList<String> friendsList = new ArrayList<>();
+
+        String str1 = "Beverly";
+        String str2 = "Li";
+        String str3 = "Duy";
+        String str4 = "Pham";
+        String str5 = "Yutong";
+        String str6 = "Qiu";
 
         loc2.setLatitude(100);
         loc2.setLongitude(100);
@@ -69,7 +72,6 @@ public class TestGetScore {
         song1.setLocation(loc1);
         song1.setDate(time1);
         song1.addLocation(loc1);
-        song1.addUser(str1, str2);
 
         song2.setLocation(loc2);
         song2.setDate(time2);
@@ -79,15 +81,27 @@ public class TestGetScore {
         song3.setDate(time3);
         song3.addLocation(loc3);
 
+        //    Log.e(TAG,"userList----------" + usersPlayed.size());
+        song1.setUserNames(usersPlayed);
+        song1.setUser("BeverlyLi");
+        song1.setUser(str3 + str4);
+        //   song1.addUser(str5, str6);
+        //song2.addUser("222","22");
+
+
+//        System.out.println("user-----------" + song1.getUserNames().get(0));
+        friendsList.add(str1 + str2);
+        user.setFriendsList(friendsList);
+
     }
 
-    @Test
-    public void testGetLocationScore() {
-        assertEquals(0.0,song1.getLocationScore(null));
-        assertEquals(102.0,song2.getLocationScore(loc2));
-        assertEquals(102.0, song3.getLocationScore(loc2));
-        assertEquals(0.0, song3.getLocationScore(loc1));
-    }
+    //   @Test
+//    public void testGetLocationScore() {
+//        assertEquals(0.0,song1.getLocationScore(null));
+//        assertEquals(102.0,song2.getLocationScore(loc2));
+//        assertEquals(102.0, song3.getLocationScore(loc2));
+//        assertEquals(0.0, song3.getLocationScore(loc1));
+//    }
 
     @Test
     public void testGetWeekScore() {
@@ -100,9 +114,12 @@ public class TestGetScore {
         assertEquals(101.0, song3.getWeekScore(time1));
     }
 
-    @Test
-    public void testIsPlayedByFriend() {
-
-    }
+//    @Test
+//    public void testIsPlayedByFriend() {
+//
+//        Log.e(TAG,"friendslist1 " + user.getFriendlist().get(0));
+//        Log.e(TAG,"usersplayed1 " + song1.getUserNames().get(0));
+//        assertEquals(true,song1.isPlayedByFriend());
+//    }
 
 }

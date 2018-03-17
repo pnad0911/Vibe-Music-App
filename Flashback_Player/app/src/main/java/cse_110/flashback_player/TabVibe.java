@@ -5,6 +5,7 @@ package cse_110.flashback_player;
  */
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaMetadataRetriever;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -17,16 +18,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabVibe extends Fragment implements SongListListener{
+public class TabVibe extends Fragment implements SongListListener {
 
     public static int songIdx=0;
     private Song currSong;
     private SongPlayer songPlayer;
-    public static VibePlaylist vibePlaylist;
     private List<Song> songList;
     public static Map<String,String[]> data;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -35,9 +37,9 @@ public class TabVibe extends Fragment implements SongListListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tabvibe, container, false);
+        View rootView = inflater.inflate(R.layout.tab1allsongs, container, false);
 
-        VibeActivity.vibePlaylist = new VibePlaylist((AppCompatActivity) getActivity());
+//        VibeActivity.vibePlaylist = new VibePlaylist((AppCompatActivity) getActivity());
         /*
         * Get Buttons and TextViews*/
         final Button playButton = (Button) rootView.findViewById(R.id.play);
@@ -49,18 +51,15 @@ public class TabVibe extends Fragment implements SongListListener{
         final TextView songArtistView = (TextView) rootView.findViewById(R.id.artist);
         final TextView songAlbumView = (TextView) rootView.findViewById(R.id.album);
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.time);
-        final TextView songUserView = (TextView) rootView.findViewById(R.id.user);
 
         /* Get songPlayer from main activity*/
         Bundle bundle1 = this.getArguments();
         songPlayer = (SongPlayer) bundle1.getParcelable("songPlayer");
 
+        VibeActivity.vibePlaylist.reg(this);
+
         // get items from song list
         songList = VibeActivity.vibePlaylist.getVibeSong();
-
-        if (songList.size() == 0){
-            return rootView;
-        }
 
         // configure listview
         adapter = new SongAdapterVibe(this.getActivity(), songList);
@@ -73,12 +72,14 @@ public class TabVibe extends Fragment implements SongListListener{
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 songIdx = position;
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView, songUserView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
 
-        play();
-        changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView, songUserView);
+        if (!songList.isEmpty()) {
+            play();
+            changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
+        }
 
         // play and pause are the same button
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -114,7 +115,7 @@ public class TabVibe extends Fragment implements SongListListener{
                 if(!songList.isEmpty()) {
                     songIdx = getNextSongIdx(songList);
                     play();
-                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView, songUserView);
+                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
                 }
             }
 
@@ -127,7 +128,7 @@ public class TabVibe extends Fragment implements SongListListener{
                 if(!songList.isEmpty()) {
                     songIdx = getPreviousSongIdx(songList);
                     play();
-                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView, songUserView);
+                    changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
                 }
             }
         });
@@ -137,7 +138,7 @@ public class TabVibe extends Fragment implements SongListListener{
             public void callback() {
                 songIdx = getNextSongIdx(songList);
                 play();
-                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView, songUserView);
+                changeDisplay(songTitleView, songArtistView, songAlbumView, songTimeView);
             }
         });
         return rootView;
@@ -173,18 +174,15 @@ public class TabVibe extends Fragment implements SongListListener{
 
 
     /* change display on media player to current playing song*/
-    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView,
-                              TextView songTimeView, TextView songUserView){
+    public void changeDisplay(TextView songTitleView, TextView songArtistView, TextView songAlbumView, TextView songTimeView){
         Context applicationContext =  LibraryActivity.getContextOfApplication();
         songTitleView.setText(currSong.getTitle());
         songArtistView.setText(currSong.getArtist());
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
-            OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().get(0).first+
-//                    ":"+currSong.getLocations().get(0).second + " )");
-//            songUserView.setText(currSong.getUser());
+            songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
+                    currSong.previousLocation().first+ ", " +
+                    currSong.previousLocation().second + " )");
         }
         else {
             songTimeView.setText("N/A");
@@ -198,6 +196,14 @@ public class TabVibe extends Fragment implements SongListListener{
         else return false;
     }
 
+    public void updateDisplay(List<Song> list) {
+        songList.clear();
+        songList.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames){}
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -205,11 +211,4 @@ public class TabVibe extends Fragment implements SongListListener{
             getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
     }
-
-    public void updateDisplay(List<Song> list) {
-        songList.clear();
-        songList.addAll(list);
-        adapter.notifyDataSetChanged();
-    }
-    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) { }
 }

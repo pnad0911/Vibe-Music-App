@@ -74,7 +74,6 @@ public class SongAdapter extends BaseAdapter {
                 toggle(likeBt,song);
             }
         });
-
         return rowView;
     }
     private void toggle(Button button, Song song) {

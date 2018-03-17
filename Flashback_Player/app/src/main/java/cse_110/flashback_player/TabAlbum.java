@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,13 +30,13 @@ public class TabAlbum extends Fragment implements SongListListener{
     private Song currSong;
     private AlbumAdapterExpandable adapter;
     private Map<String, List<Song>> map;
-    public Map<String,String[]> data; public List<String> albumNames;
+    public List<String> albumNames;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.tabalbum, container, false);
+        final View rootView = inflater.inflate(R.layout.tab2album, container, false);
 
         // Actions with song Player
         Bundle bundle1 = getArguments();
@@ -53,9 +54,8 @@ public class TabAlbum extends Fragment implements SongListListener{
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.timeAl);
 
         // get items from song list
-        final SongList songListGen = new SongList(this.getActivity());
-        albumNames = songListGen.getListOfAlbum();
-        map = songListGen.getMap();
+        albumNames = LibraryActivity.songListGen.getListOfAlbum();
+        map = LibraryActivity.songListGen.getMap();
         sListView = rootView.findViewById(R.id.album_list);
         adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames, map);
         sListView.setAdapter(adapter);
@@ -68,7 +68,7 @@ public class TabAlbum extends Fragment implements SongListListener{
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 String aName = (String) adapter.getGroup(groupPosition);
                 songIdx = childPosition;
-                songList = songListGen.getListOfSong(aName);
+                songList = LibraryActivity.songListGen.getListOfSong(aName);
                 play(songTitleView, songArtistView, songAlbumView, songTimeView);
                 return false;
             }
@@ -186,10 +186,8 @@ public class TabAlbum extends Fragment implements SongListListener{
         }
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
-        currSong.updateDatabase();
+        Database.updateDatabase(currSong);
     }
-
-
     public boolean isNullDate(Song song,Context context) {
         if(song.getDate() == null) return true;
         else return false;

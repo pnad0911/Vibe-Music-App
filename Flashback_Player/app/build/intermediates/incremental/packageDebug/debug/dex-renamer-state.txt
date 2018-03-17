@@ -1,4 +1,4 @@
-#Thu Mar 15 20:50:42 PDT 2018
+#Fri Mar 16 17:19:43 PDT 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -7,12 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\22
-base.4=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
-base.3=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\21
-base.2=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\18
-base.1=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\23
-base.0=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\20
+base.5=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\33
+base.4=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\32
+base.3=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\35
+base.2=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\34
+base.1=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\36
+base.0=C\:\\Users\\Beverly Li\\CSE110Project\\cse-110-team-project-team-17\\Flashback_Player\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\31
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex

@@ -44,7 +44,6 @@ public class SongListSorter {
 
         return songList;
     }
-
     /*
     /* Sort songs in the playlist by lexicographic order according to favorite status
     public List<Song> sortByStatus(List<Song> songList, final Context context) {
@@ -67,16 +66,15 @@ public class SongListSorter {
     public List<Song> sortByStatus (List<Song> songList) {
         Collections.sort(songList, new Comparator<Song>() {
             public int compare(Song song1, Song song2) {
-                if (song1.getSongStatus() > (song2.getSongStatus())) {
+                if (song1.getStatus() > (song2.getStatus())) {
                     return 1;
-                } else if (song1.getSongStatus() < song2.getSongStatus()) {
+                } else if (song1.getStatus() < song2.getStatus()) {
                     return -1;
                 } else {
                     return 0;
                 }
             }
         });
-
         return songList;
     }
 }

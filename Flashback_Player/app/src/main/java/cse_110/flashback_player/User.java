@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class User {
     private String firstName;
     private String lastName;
-    private ArrayList<Pair<String, String>> friendsList = new ArrayList<>();
+    private ArrayList<String> friendsList = new ArrayList<>();
 
     /* GETTER */
     public String getFirstName(){ return firstName; }
@@ -24,11 +24,12 @@ public class User {
         this.lastName = name;
     }
 
-    public ArrayList<Pair<String, String>> getFriendlist(){
+    public ArrayList<String> getFriendlist(){
         return friendsList;
     }
 
-    public void setFriendsList(ArrayList<Pair<String,String>> friends){
+    public void setFriendsList(ArrayList<String> friends){
         friendsList = friends;
     }
+
 }
