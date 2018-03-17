@@ -1,261 +1,143 @@
-////package cse_110.flashback_player;
-////
-////import android.content.Context;
-////import android.location.Location;
-////import android.support.test.rule.ActivityTestRule;
-////import android.support.test.runner.AndroidJUnit4;
-////
-////import org.junit.Before;
-////import org.junit.Rule;
-////import org.junit.Test;
-////import org.junit.runner.RunWith;
-////
-////import java.time.OffsetDateTime;
-////import java.util.List;
-////
-////import static android.location.LocationManager.GPS_PROVIDER;
-////import static org.junit.Assert.*;
-////
-/////**
-//// * Tests Flashback Playlist
-//// *
-//// * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
-//// */
-////@RunWith(AndroidJUnit4.class)
-////public class TestFlashbackPlaylist {
-////
-////    @Rule
-////    public ActivityTestRule<NormalActivity> mainActivity = new ActivityTestRule<NormalActivity>(NormalActivity.class);
-////
-////    private FlashbackPlaylist playlist;
-////
-////    /* Context provided by NormalActivity */
-////    private Context context;
-////
-////    Song song1;
-////    Song song2;
-////    Song song3;
-////
-////    OffsetDateTime dummyT1;
-////    OffsetDateTime dummyT2;
-////    OffsetDateTime dummyT3;
-////
-////    Location dummyL1;
-////    Location dummyL2;
-////    Location dummyL3;
-////
-////    List<Song> list;
-////
-////    @Before
-////    public void setUp(){
-////        playlist = new FlashbackPlaylist();
-////
-////        song1 = new Song("cant_find_love", R.raw.cant_find_love, "artist", "album");
-////        song2 = new Song("america_religious", R.raw.america_religious, "artist", "album");
-////        song3 = new Song("at_midnight", R.raw.at_midnight, "artist", "album");
-////
-////        // initialize context
-////        context =  NormalActivity.getContextOfApplication();
-////
-////        dummyT1 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
-////        dummyT2 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
-////        dummyT3 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
-////
-////        dummyL1 = new Location(GPS_PROVIDER);
-////        dummyL2 = new Location(GPS_PROVIDER);
-////        dummyL3 = new Location(GPS_PROVIDER);
-////
-////        dummyL1.setLatitude(100);
-////        dummyL1.setLongitude(100);
-////
-////        dummyL2.setLatitude(100);
-////        dummyL2.setLongitude(100);
-////
-////        dummyL3.setLatitude(100);
-////        dummyL3.setLongitude(100);
-////
-////        song1.addLocation(dummyL1);
-////        song1.setDate(dummyT1);
-////
-////        song2.addLocation(dummyL2);
-////        song2.setDate(dummyT2);
-////
-////        song3.addLocation(dummyL3);
-////        song3.setDate(dummyT3);
-////
-////        playlist.neutralSong(song1);
-////        playlist.neutralSong(song2);
-////        playlist.neutralSong(song3);
-////
-////        list = playlist.getFlashbackSong();
-////        System.out.println(list.size());
-////    }
-////
-////        /* Test if only the three songs here are in the playlist */
-////
-////    @Test
-////    public void testGetPlaylist(){
-////        assertEquals(list.size(), 3);
-////        assertEquals(list.contains(song1), true);
-////        assertEquals(list.contains(song2), true);
-////        assertEquals(list.contains(song3), true);
-////    }
-////
-////    @Test
-////    /* Testing if liked songs are of high priority*/
-////    public void testLikedSong(){
-////        playlist.likeSong(song1);
-////
-////        assertEquals(song1.getSongStatus(context),1);
-////        assertEquals(playlist.getFlashbackSong().get(0).getID(), song1.getID());
-////    }
-////
-////    @Test
-////    /* Testing if disliked songs are no longer in the playlist*/
-////    public void testDislikedSong(){
-////        playlist.dislikeSong(song1);
-////
-////        assertEquals(song1.getSongStatus(context),-1);
-////        assertEquals(playlist.getFlashbackSong().contains(song1), false);
-////    }
-////
-////    @Test
-////    /* Testing if neutral songs are neutral (put back into the playlist */
-////    public void testNeutralSong(){
-////        playlist.neutralSong(song1);
-////
-////        assertEquals(song1.getSongStatus(context),0);
-////        assertEquals(list.contains(song1), true);
-////    }
-////}
-//=======
-//package cse_110.flashback_player;
-//
-//import android.content.Context;
-//import android.location.Location;
-//import android.support.test.rule.ActivityTestRule;
-//import android.support.test.runner.AndroidJUnit4;
-//
-//import org.junit.Before;
-//import org.junit.Rule;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//
-//import java.time.OffsetDateTime;
-//import java.util.List;
-//
-//import static android.location.LocationManager.GPS_PROVIDER;
-//import static org.junit.Assert.*;
-//
-///**
-// * Tests Flashback Playlist
-// *
-// * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
-// */
-//@RunWith(AndroidJUnit4.class)
-//public class TestFlashbackPlaylist {
-//
-//    @Rule
-//    public ActivityTestRule<LibraryActivity> mainActivity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
-//
-//    private VibePlaylist playlist;
-//
-//    /* Context provided by LibraryActivity */
-//    private Context context;
-//
-//    Song song1;
-//    Song song2;
-//    Song song3;
-//
-//    OffsetDateTime dummyT1;
-//    OffsetDateTime dummyT2;
-//    OffsetDateTime dummyT3;
-//
-//    Location dummyL1;
-//    Location dummyL2;
-//    Location dummyL3;
-//
-//    List<Song> list;
-//
-//    @Before
-//    public void setUp(){
-//        playlist = new VibePlaylist();
-//
-//        song1 = new Song("cant_find_love", R.raw.cant_find_love, "artist", "album");
-//        song2 = new Song("america_religious", R.raw.america_religious, "artist", "album");
-//        song3 = new Song("at_midnight", R.raw.at_midnight, "artist", "album");
-//
-//        // initialize context
-//        context =  LibraryActivity.getContextOfApplication();
-//
-//        dummyT1 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
-//        dummyT2 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
-//        dummyT3 = OffsetDateTime.parse("2007-12-03T10:15:30+01:00");
-//
-//        dummyL1 = new Location(GPS_PROVIDER);
-//        dummyL2 = new Location(GPS_PROVIDER);
-//        dummyL3 = new Location(GPS_PROVIDER);
-//
-//        dummyL1.setLatitude(100);
-//        dummyL1.setLongitude(100);
-//
-//        dummyL2.setLatitude(100);
-//        dummyL2.setLongitude(100);
-//
-//        dummyL3.setLatitude(100);
-//        dummyL3.setLongitude(100);
-//
-//        song1.setPreviousLocation(dummyL1);
-//        song1.setPreviousDate(dummyT1);
-//
-//        song2.setPreviousLocation(dummyL2);
-//        song2.setPreviousDate(dummyT2);
-//
-//        song3.setPreviousLocation(dummyL3);
-//        song3.setPreviousDate(dummyT3);
-//
-//        playlist.neutralSong(song1);
-//        playlist.neutralSong(song2);
-//        playlist.neutralSong(song3);
-//
-//        list = playlist.getFlashbackSong();
-//        System.out.println(list.size());
-//    }
-//
-//        /* Test if only the three songs here are in the playlist */
-//
-//    @Test
-//    public void testGetPlaylist(){
-//        assertEquals(list.size(), 3);
-//        assertEquals(list.contains(song1), true);
-//        assertEquals(list.contains(song2), true);
-//        assertEquals(list.contains(song3), true);
-//    }
-//
-//    @Test
-//    /* Testing if liked songs are of high priority*/
-//    public void testLikedSong(){
-//        playlist.likeSong(song1);
-//
-//        assertEquals(song1.getSongStatus(context),1);
-//        assertEquals(playlist.getFlashbackSong().get(0).getID(), song1.getID());
-//    }
-//
-//    @Test
-//    /* Testing if disliked songs are no longer in the playlist*/
-//    public void testDislikedSong(){
-//        playlist.dislikeSong(song1);
-//
-//        assertEquals(song1.getSongStatus(context),-1);
-//        assertEquals(playlist.getFlashbackSong().contains(song1), false);
-//    }
-//
-//    @Test
-//    /* Testing if neutral songs are neutral (put back into the playlist */
-//    public void testNeutralSong(){
-//        playlist.neutralSong(song1);
-//
-//        assertEquals(song1.getSongStatus(context),0);
-//        assertEquals(list.contains(song1), true);
-//    }
-//}
+package cse_110.flashback_player;
+import android.content.Intent;
+import android.location.Location;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mortbay.jetty.servlet.Context;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+import static android.location.LocationManager.GPS_PROVIDER;
+import static junit.framework.Assert.assertEquals;
+/**
+ * Created by Daniel on 3/16/2018.
+ */
+@RunWith(AndroidJUnit4.class)
+
+public class TestFlashbackPlaylist {
+    VibeActivity vibeActivity;
+    List<Song> songList;
+    List<Song> resultList;
+    @Rule
+    public ActivityTestRule<VibeActivity> mainActivity = new ActivityTestRule<VibeActivity>(VibeActivity.class);
+    @Before
+    public void setUp() {
+        Intent refresh = new Intent(InstrumentationRegistry.getContext(), VibeActivity.class);
+        mainActivity.launchActivity(refresh);
+        songList = new ArrayList<>();
+        // artists
+        String patrick = "bill_killer";
+        String duy = "D Bawss";
+        String yutong = "AAA";
+        String beverly = "beverley";
+        String winnie = "Big bully";
+        String daniel = "汤圆";
+        // albums
+        String mygreatestalbum = "My Greatest Album";
+        String mygreatestsingle = "My Greatest Single";
+        // titles
+        String berry = "Berry";
+        String strawberry = "Strawberry";
+        String ironMan = "Iron Man";
+        String legion = "Legion";
+        String singlereadytomingle = "Single Ready To Mingle";
+        String goodsong = "Good Song";
+        String bestsong = "Best Song";
+        // paths
+        String path = "THIS IS A PATH";
+        // time
+        Time dummyT1 = new Time(1);
+        // location
+        Location dummyL1 = new Location(GPS_PROVIDER);
+        // songs
+        Song berry_song = new Song(berry, patrick, mygreatestalbum, path, true);
+        Song strawberry_song = new Song(strawberry, duy, mygreatestalbum, path, true);
+        Song ironMan_song = new Song(ironMan, yutong, mygreatestsingle, path, true);
+        Song legion_song = new Song(legion, beverly, mygreatestsingle, path, true);
+        Song singlereadytomingle_song = new Song(singlereadytomingle, duy, mygreatestsingle, path, true);
+        Song goodsong_song = new Song(goodsong, winnie, mygreatestalbum, path, true);
+        Song bestsong_song = new Song(bestsong, daniel, mygreatestsingle, path, true);
+        songList.add(berry_song);
+        songList.add(strawberry_song);
+        songList.add(ironMan_song);
+        songList.add(legion_song);
+        songList.add(singlereadytomingle_song);
+        songList.add(goodsong_song);
+        songList.add(bestsong_song);
+        // counter
+        int i = 0;
+        for (Song song : songList) {
+            song.addLocation(dummyL1);
+            song.setDate(dummyT1);
+            if (i % 2 == 0) {
+                vibeActivity.vibePlaylist.neutralSong(song);
+            } else {
+                vibeActivity.vibePlaylist.likeSong(song);
+            }
+            ++i;
+        }
+        resultList = vibeActivity.vibePlaylist.getVibeSong();
+    }
+    @Test
+    public void testGetVibeSong() {
+        assertEquals(resultList.size(), 7);
+        for (Song song : songList) {
+            assertEquals(resultList.contains(song), true);
+        }
+    }
+    @Test
+    public void testLikeSong() {
+        Song song = songList.get(songList.size()-1);
+        assertEquals(vibeActivity.vibePlaylist.getSongStatus(song),0);
+        vibeActivity.vibePlaylist.likeSong(song);
+        assertEquals(vibeActivity.vibePlaylist.getSongStatus(song),1);
+        for (int i = 0; i < resultList.size() - 1; ++i) {
+            assertEquals(vibeActivity.vibePlaylist.getSongStatus(resultList.get(i)) >=
+                    vibeActivity.vibePlaylist.getSongStatus(resultList.get(i+1)),true);
+        }
+    }
+    @Test
+    public void testDislikeSong() {
+        Song song = songList.get(0);
+        assertEquals(resultList.contains(song), true);
+        VibeActivity.vibePlaylist.dislikeSong(song);
+        assertEquals(vibeActivity.vibePlaylist.getSongStatus(song), -1);
+        assertEquals(resultList.contains(song), false);
+    }
+    @Test
+    public void testNeutralSong() {
+        Song song = songList.get(0);
+        assertEquals(song.getSongStatus(), 1);
+        VibeActivity.vibePlaylist.neutralSong(song);
+        assertEquals(song.getSongStatus(),0);
+    }
+    @Test
+    public void testAddSong() {
+        // artists
+        String bill = "piazza";
+        // albums
+        String bill_album = "Best Song Of All Time";
+        // titles
+        String design = "Design Pattern";
+        // paths
+        String path = "THIS IS A PATH";
+        // time
+        Time dummyT1 = new Time(1);
+        // location
+        Location dummyL1 = new Location(GPS_PROVIDER);
+        // songs
+        Song bill_song = new Song(design, bill, bill_album, path, true);
+        assertEquals(resultList.contains(bill_song), false);
+        VibeActivity.vibePlaylist.addSong(bill_song);
+        assertEquals(resultList.contains(bill_song), true);
+    }
+    @Test
+    public void testGetSongStatus() {
+        assertEquals(VibeActivity.vibePlaylist.getSongStatus(resultList.get(0)), resultList.get(0).getSongStatus());
+    }
+}

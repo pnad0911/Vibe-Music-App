@@ -67,7 +67,7 @@ public class TabVibe extends Fragment implements SongListListener {
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
-        sListView.setClickable(true);
+        sListView.setClickable(false);
         sListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
@@ -188,14 +188,15 @@ public class TabVibe extends Fragment implements SongListListener {
             songTimeView.setText(currSong.getDate() + " at Coordinates ( " +
                     currSong.previousLocation().first+ ", " +
                     currSong.previousLocation().second + " )");
+            songUserView.setText(currSong.getUser(logIn.user.getFriendlist(),logIn.user.getFirstName()+logIn.user.getLastName()));
         }
         else {
             songTimeView.setText("N/A");
         }
         currSong.setDate(OffsetDateTime.now());
         currSong.addLocation(LibraryActivity.getLocation());
-//        currSong.addUser(logIn.user.getFirstName(),logIn.user.getLastName());
-//        VibeActivity.vibePlaylist.clearEntireSongList();
+        currSong.addUser(logIn.user.getFirstName(),logIn.user.getLastName());
+        VibeActivity.vibePlaylist.clearEntireSongList();
         Database.updateDatabase(currSong);
     }
 
