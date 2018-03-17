@@ -30,7 +30,7 @@ public class TabAlbum extends Fragment implements SongListListener{
     private Song currSong;
     private AlbumAdapterExpandable adapter;
     private Map<String, List<Song>> map;
-    public List<String> albumNames;
+    public Map<String,String[]> data; public List<String> albumNames;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
     @Override
@@ -54,8 +54,9 @@ public class TabAlbum extends Fragment implements SongListListener{
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.timeAl);
 
         // get items from song list
-        albumNames = LibraryActivity.songListGen.getListOfAlbum();
-        map = LibraryActivity.songListGen.getMap();
+        final SongList songListGen = new SongList(this.getActivity());
+        albumNames = songListGen.getListOfAlbum();
+        map = songListGen.getMap();
         sListView = rootView.findViewById(R.id.album_list);
         adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames, map);
         sListView.setAdapter(adapter);
@@ -68,7 +69,7 @@ public class TabAlbum extends Fragment implements SongListListener{
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 String aName = (String) adapter.getGroup(groupPosition);
                 songIdx = childPosition;
-                songList = LibraryActivity.songListGen.getListOfSong(aName);
+                songList = songListGen.getListOfSong(aName);
                 play(songTitleView, songArtistView, songAlbumView, songTimeView);
                 return false;
             }

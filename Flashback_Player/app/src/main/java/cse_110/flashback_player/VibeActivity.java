@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -87,6 +88,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     public static VibePlaylist vibePlaylist;
 //    public static SongList songListGen;
     public static List<Song> localSongList;
+
+ //   public static SongList songList;
     public static List<Song> upcomingList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +100,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("current","flashback");
         editor.apply();
+
 
         vibePlaylist = new VibePlaylist(this);
         tab1 = new TabVibe(); tab2 = new TabUpcoming();
@@ -153,6 +157,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
 
 //        songListGen = new SongList(this);
         localSongList = LibraryActivity.songListGen.getAllsong();
+
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

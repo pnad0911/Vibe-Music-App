@@ -4,7 +4,6 @@ import org.junit.Rule;
 
 import android.location.Location;
 import android.location.LocationManager;
-import android.provider.ContactsContract;
 import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
 
@@ -23,10 +22,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import cse_110.flashback_player.Database;
-import cse_110.flashback_player.Friend;
 import cse_110.flashback_player.LibraryActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;
@@ -52,8 +48,8 @@ public class SongUnitTest {
     private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
     private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
 
-//    @Rule
-//    public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
+    @Rule
+    public ActivityTestRule<LibraryActivity> main2Activity = new ActivityTestRule<LibraryActivity>(LibraryActivity.class);
 
     @Before
     public void setUp(){
@@ -74,50 +70,65 @@ public class SongUnitTest {
         song.addUser("abc","abc");
         song.addLocation(location1);
         song.setDate(time1);
-        Database.updateDatabase(song);
-
+        song.updateDatabase();
         song2 = new Song("bbb", "asd", "234","asdf",false);
         song2.addUser("def","def");
         song2.addLocation(location2);
         song2.setDate(time2);
-        Database.updateDatabase(song2);
+        song2.updateDatabase();
     }
 
     @Test
     public void testSongConstructor(){
 
-        assertEquals(song.allLocations().get(0).first, Float.toString((float)location1.getLongitude()));
+     //   assertEquals(song.getLocations().get(0).first, Integer.toString((int)location1.getLongitude()));
+
         assertEquals(song.getDate(), time1.toString());
 
     }
 
     @Test
     public void testSongConstructorDatabase(){
-        Log.e("testSongConstructorDatabase", "-------------------");
 
-        Song newSong = new Song("bbb", "asd","234","asdfgg",false);
-        Database.loadSong(newSong);
-        try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
-        assertEquals(time2.toString(), newSong.getDate());
+        Song newSong = new Song("aaa", "asd","234","asdfgg",false);
+        Log.println(Log.ERROR, "TESING", "New date: " + newSong.getDate());
+
+       // assertEquals("1000", newSong.getLocations().get(0).first);
+
     }
 
     @Test
     public void testUpdate(){
-        Log.e("testUpdate", "-------------------");
 
         song.addUser("def","def");
-        Database.updateDatabase(song);
+        song.updateDatabase();
 
         song.addUser("egr","egr");
-        Database.updateDatabase(song);
+        song.updateDatabase();
 
-        Song newSong = new Song();
-        newSong.setDatabaseKey(song.getDatabaseKey());
-        Log.e("testUpdate", song.getDatabaseKey());
-        Log.e("testUpdate", newSong.getDatabaseKey());
+        Query queryRef = databaseRef.child("SONGS").orderByChild("databaseKey").equalTo("aaaasd");
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot == null || snapshot.getValue() == null){
+                    Log.println(Log.DEBUG, "info", "No such song as aaa");
+                    fail("Did not find the song");
 
-        Database.loadSong(newSong);
-        assertEquals(song.getUserNames().get(1), "defdef");
+                }
+                else {
+                    Log.println(Log.ERROR, "info", "Found Song: " + snapshot.child(song.getDatabaseKey()).getValue(Song.class).toString());
+
+         //           assertEquals(snapshot.child(song.getDatabaseKey()).child("userNames").getValue(t).get(0), "defdef");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Faile to read value
+                Log.w("TAG1", "Failed to read value.", error.toException());
+            }
+        });
     }
 
 //    @Test

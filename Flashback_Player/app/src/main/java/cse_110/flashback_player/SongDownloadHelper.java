@@ -13,9 +13,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Created by Patrick on 3/4/2018.
@@ -29,6 +39,7 @@ public class SongDownloadHelper {
     DownloadManager downloadManager;
     AppCompatActivity context;
     Song song;
+    private String extension = "";
     private static final String TAG = "SongDownloadHelper";
 
     /**
@@ -54,9 +65,9 @@ public class SongDownloadHelper {
 
     public void startDownload() {
 //        this.url = address;
-        Log.println(Log.ERROR, "startDownload", "URL is: " + url);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setTitle("FIXED.mp3");
+        extension = Uri.parse(url).getLastPathSegment().substring(Uri.parse(url).getLastPathSegment().lastIndexOf('.'));
+        request.setTitle("FIXED" + extension);
         BroadcastReceiver onComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -76,7 +87,7 @@ public class SongDownloadHelper {
         }
 
         Log.d(TAG,destination);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "temp.mp3");
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "temp" + extension);
         context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         downloadManager.enqueue(request);
         Log.d(TAG, "Started download from " + url);
@@ -87,9 +98,27 @@ public class SongDownloadHelper {
             int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
             if (status == DownloadManager.STATUS_SUCCESSFUL) {
                 // process download
+                String filename = c.getString(c.getColumnIndex(DownloadManager.COLUMN_TITLE));
+                String realDest = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
+                String realPath = Uri.parse(realDest).getPath();
                 Log.d(TAG, "Title is: " + c.getString(c.getColumnIndex(DownloadManager.COLUMN_TITLE)));
                 Log.d(TAG, "destination is: "+ c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
-                // get other required data by changing the constant passed to getColumnIndex
+
+
+                Log.d("TESTING", realPath.substring(realPath.lastIndexOf('/')));
+                //unpack if zip file
+                if(extension.equals(".zip")){
+
+                    Log.d("TESTING", realPath.substring(0, realPath.lastIndexOf('/')));
+                    try{
+
+                        unzip(new File(realPath), new File(realPath.substring(0, realPath.lastIndexOf('/'))));
+                    }
+                    catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }
         for (DownloadCompleteListener listener : listeners) {
@@ -102,6 +131,40 @@ public class SongDownloadHelper {
     public interface DownloadCompleteListener {
         public abstract void downloadCompleted(String url);
         public abstract void downloadCompleted(Song song);
+    }
+
+    public static void unzip(File zipFile, File targetDirectory) throws IOException {
+        Log.d("WTF", zipFile.getAbsolutePath());
+        ZipInputStream zis = new ZipInputStream(
+                new BufferedInputStream(new FileInputStream(zipFile)));
+        try {
+            ZipEntry ze;
+            int count;
+            byte[] buffer = new byte[8192];
+            while ((ze = zis.getNextEntry()) != null) {
+                File file = new File(targetDirectory, ze.getName());
+                File dir = ze.isDirectory() ? file : file.getParentFile();
+                if (!dir.isDirectory() && !dir.mkdirs())
+                    throw new FileNotFoundException("Failed to ensure directory: " +
+                            dir.getAbsolutePath());
+                if (ze.isDirectory())
+                    continue;
+                FileOutputStream fout = new FileOutputStream(file);
+                try {
+                    while ((count = zis.read(buffer)) != -1)
+                        fout.write(buffer, 0, count);
+                } finally {
+                    fout.close();
+                }
+            /* if time should be restored as well
+            long time = ze.getTime();
+            if (time > 0)
+                file.setLastModified(time);
+            */
+            }
+        } finally {
+            zis.close();
+        }
     }
 
 

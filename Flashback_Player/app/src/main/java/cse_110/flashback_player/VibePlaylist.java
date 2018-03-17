@@ -1,5 +1,6 @@
 package cse_110.flashback_player;
 
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -9,11 +10,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Daniel on 3/4/2018.
@@ -32,6 +28,10 @@ public class VibePlaylist implements DatabaseListener, SongDownloadHelper. Downl
 
     /* Context provided by NormalActivity */
     private AppCompatActivity activity;
+
+    /* Data for the priority queue */
+    OffsetDateTime currentTime;
+    Location currentLocation;
 
     private List<SongListListener> listeners = new ArrayList<>();
     private SongList SongListGen;
@@ -73,11 +73,12 @@ public class VibePlaylist implements DatabaseListener, SongDownloadHelper. Downl
 
     /* Update and return a list of songs in the priority queue based on a location/time */
     public List<Song> getVibeSong() {
-        OffsetDateTime currentTime = OffsetDateTime.now().minusHours(8);
+        currentTime = OffsetDateTime.now().minusHours(8);
+        currentLocation = VibeActivity.getLocation();
 
         // build priority queue
-        playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
         Log.e("getVibeSong", "entireSongList size: " + entireSongList.size());
+        playlist = new PriorityQueue<>(1, new SongCompare2<>(currentLocation, currentTime));
         // populate viable song set
         for (Song s : entireSongList) {
             if (isPlayable(s)) {
@@ -157,14 +158,15 @@ public class VibePlaylist implements DatabaseListener, SongDownloadHelper. Downl
     private boolean isPlayable(Song song) {
         return song.getSongStatus() != -1
                 && song.getDate() != null
-                && song.getLocations() != null;
+                && song.getLocations() != null
+                && song.getScore(currentLocation, currentTime) > 0;
     }
 
     /* Determines whether a song can be downloaded or not and downloads; false if failed to download
      */
     private boolean downloadSong(Song song) {
 
-        if (!song.getDownloadStatus()) {
+        if (song.getDownloadStatus() == null || !song.getDownloadStatus()) {
             SongDownloadHelper downloadHelper = new SongDownloadHelper(song.getSongUrl(), this
                     , activity,song);
             downloadHelper.startDownload();

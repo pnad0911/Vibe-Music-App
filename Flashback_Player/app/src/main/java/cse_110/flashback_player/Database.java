@@ -122,7 +122,7 @@ public class Database {
                     song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
 
                     Log.println(Log.ERROR, "extractFirebase", "Song is:" + song.getSongUrl());
-                    Log.e("extractDatabase", "DatabaseKey is: " + song.getDatabaseKey());
+                    Log.e("extractDatabase", "userNames are: " + Integer.toString(dsp.child("userNames").getValue(n).size()));
 
                     // update current song object
                     d.update(song);
