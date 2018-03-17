@@ -94,6 +94,7 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("WUTFACE", "started LibraryActivity");
         setTime = OffsetDateTime.now();
         setContentView(R.layout.activity_main2);
 

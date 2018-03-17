@@ -128,10 +128,13 @@ public class logIn extends AppCompatActivity{
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             }
+            Log.d("Permissions", "started waiting");
             try{Thread.sleep(5000);}
             catch (InterruptedException e){
                 Log.e("exception", ".");
             }
+
+            Log.d("Permissions", "finished waiting");
             Intent refresh = new Intent(this, LibraryActivity.class);
             startActivity(refresh);
         }catch(IOException e) {
