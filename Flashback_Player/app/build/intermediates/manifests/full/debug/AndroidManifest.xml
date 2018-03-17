@@ -76,7 +76,7 @@
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--
-            Service handling Google Sign-In user revocation. For apps that do not integrate with
+Service handling Google Sign-In user revocation. For apps that do not integrate with
             Google Sign-In, this service will never be started.
         -->
         <service
@@ -129,7 +129,7 @@
             </intent-filter>
         </receiver>
         <!--
-             FirebaseInstanceIdService performs security checks at runtime,
+ FirebaseInstanceIdService performs security checks at runtime,
              no need for explicit permissions despite exported="true"
         -->
         <service

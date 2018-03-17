@@ -9,20 +9,13 @@ import java.util.ArrayList;
  */
 
 public class User {
-    private String firstName;
-    private String lastName;
+    private String name;
     private ArrayList<String> friendsList = new ArrayList<>();
 
     /* GETTER */
-    public String getFirstName(){ return firstName; }
-    public String getLastName(){ return lastName; }
+    public String getName(){return name;}
 
-    public void setFirstName(String name){
-        this.firstName = name;
-    }
-    public void setLastName(String name){
-        this.lastName = name;
-    }
+    public void setName(String name){this.name = name; }
 
     public ArrayList<String> getFriendlist(){
         return friendsList;

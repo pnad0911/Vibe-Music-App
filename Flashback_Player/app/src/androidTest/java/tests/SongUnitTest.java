@@ -22,9 +22,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import cse_110.flashback_player.Friend;
 import cse_110.flashback_player.LibraryActivity;
 import cse_110.flashback_player.Song;
 import static org.junit.Assert.*;

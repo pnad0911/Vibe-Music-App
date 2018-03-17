@@ -1,16 +1,18 @@
 package cse_110.flashback_player;
 
+import android.*;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -40,9 +42,8 @@ public class logIn extends AppCompatActivity{
     int RC_SIGN_IN = 13;
     GoogleApiClient mGoogleApiClient;
 
-    String clientId = "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com";
-    String clientSecret = "1F3QJvVDkx7wTxeY38G68cEf";
-
+    String clientId = "381331143314-05oag0m1g4uoevvl1bhbqd7eesn1hk7l.apps.googleusercontent.com";
+    String clientSecret = "tXJnjS2W4Q0AJQCBl8A8GS-9";
     String code;
     HttpTransport httpTransport;
     JacksonFactory jsonFactory;
@@ -108,11 +109,29 @@ public class logIn extends AppCompatActivity{
     }
 
     public void updateUI(GoogleSignInAccount account){
-        user.setFirstName(account.getGivenName());
-        user.setLastName(account.getFamilyName());
-        System.out.println("user + " + user.getFirstName());
+        user.setName(account.getGivenName()+account.getFamilyName());
         try {
             setUp();
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    ) {//Can add more as per requirement
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                        100);
+            }
+
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},1);
+            }
+
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            }
+            try{Thread.sleep(5000);}
+            catch (InterruptedException e){
+                Log.e("exception", ".");
+            }
             Intent refresh = new Intent(this, LibraryActivity.class);
             startActivity(refresh);
         }catch(IOException e) {
@@ -123,30 +142,29 @@ public class logIn extends AppCompatActivity{
     public void setUp() throws IOException {
         httpTransport = new NetHttpTransport();
         jsonFactory = JacksonFactory.getDefaultInstance();
-        //JacksonFactory jsonFactory = new JacksonFactory();
-
+        //JacksonFactory jsonFactory = new JacksonFactory()
         redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
         Thread thread = new Thread(new Runnable() {
 
             @Override
             public void run() {
                 try  {
-
                     SharedPreferences shared = getSharedPreferences("token", MODE_PRIVATE);
                     Gson gson = new Gson();
-                    String json = shared.getString("current", "");
-                    System.out.println("json------- "+json);
-                    //checktoken = gson.fromJson(json,GoogleTokenResponse.class);
+                    String json = shared.getString("current", "x");
+                    //System.out.println("json------- "+json.equals("x"));
+                    // GoogleTokenResponse checktoken = gson.fromJson(json,GoogleTokenResponse.class);
                     GoogleCredential credential;
-                    if(json.equals("")) {
+                    if(json.equals("x")) {
                         tokenResponse =
                                 new GoogleAuthorizationCodeTokenRequest(
                                         httpTransport, jsonFactory, clientId, clientSecret, code, redirectUrl)
                                         .execute();
+
                         SharedPreferences sharedLocation = getSharedPreferences("token", MODE_PRIVATE);
                         SharedPreferences.Editor editor2 = sharedLocation.edit();
                         Gson gson2 = new Gson();
-                        String json2 = tokenResponse.getRefreshToken();
+                        String json2 = tokenResponse.getAccessToken();
                         editor2.putString("current", json2);
                         editor2.commit();
                         GoogleTokenResponse checktoken =tokenResponse;
@@ -163,9 +181,13 @@ public class logIn extends AppCompatActivity{
                                 .setJsonFactory(jsonFactory)
                                 .setClientSecrets(clientId, clientSecret)
                                 .build()
-                                .setRefreshToken(json);
-                        credential.refreshToken();
+                                //.setRefreshToken(json);
+                                .setAccessToken(json);
+                        //credential.refreshToken();
                     }
+
+
+
                     PeopleService peopleService =
                             new PeopleService.Builder(httpTransport, jsonFactory, credential)
                                     .setApplicationName("FriendList")
@@ -176,12 +198,14 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
-                    ArrayList<String> friends = new ArrayList<>();
 
+                    System.out.println("--------------yolo " + connections.size());
+                    ArrayList<String> friends = new ArrayList<>();
                     for(int i = 0;i<connections.size();i++){
                         String firstName = (connections.get(i).getNames().get(0).getGivenName());
                         String lastName = (connections.get(i).getNames().get(0).getFamilyName());
-                        friends.add(firstName + lastName);
+                        System.out.println("friends --------- " + firstName);
+                        friends.add(firstName+lastName);
                     }
                     user.setFriendsList(friends);
 
@@ -212,9 +236,6 @@ public class logIn extends AppCompatActivity{
             GoogleSignInAccount acct = result.getSignInAccount();
             code = acct.getServerAuthCode();
             updateUI(acct);
-        }
-        else{
-            Toast.makeText(this, "login failed", Toast.LENGTH_LONG).show();
         }
     }
 
