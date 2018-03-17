@@ -42,8 +42,8 @@ public class logIn extends AppCompatActivity{
     int RC_SIGN_IN = 13;
     GoogleApiClient mGoogleApiClient;
 
-    String clientId = "381331143314-05oag0m1g4uoevvl1bhbqd7eesn1hk7l.apps.googleusercontent.com";
-    String clientSecret = "tXJnjS2W4Q0AJQCBl8A8GS-9";
+    String clientId = "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com";
+    String clientSecret = "1F3QJvVDkx7wTxeY38G68cEf";
     String code;
     HttpTransport httpTransport;
     JacksonFactory jsonFactory;
@@ -97,6 +97,7 @@ public class logIn extends AppCompatActivity{
         super.onStart();
         mGoogleApiClient.connect();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        Log.d("WUTFACE", "account: " + account);
         if(account != null){
             updateUI(account);
         }
@@ -156,6 +157,7 @@ public class logIn extends AppCompatActivity{
                     Gson gson = new Gson();
                     String json = shared.getString("current", "x");
                     //System.out.println("json------- "+json.equals("x"));
+
                     // GoogleTokenResponse checktoken = gson.fromJson(json,GoogleTokenResponse.class);
                     GoogleCredential credential;
                     if(json.equals("x")) {
@@ -169,6 +171,7 @@ public class logIn extends AppCompatActivity{
                         Gson gson2 = new Gson();
                         String json2 = tokenResponse.getAccessToken();
                         editor2.putString("current", json2);
+                        Log.d("WUTFACE", json2);
                         editor2.commit();
                         GoogleTokenResponse checktoken =tokenResponse;
                         credential = new GoogleCredential.Builder()
