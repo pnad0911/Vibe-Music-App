@@ -45,7 +45,6 @@ public class SongDownloadHelper {
 
     public void startDownload() {
 //        this.url = address;
-        Log.println(Log.ERROR, "startDownload", "URL is: " + url);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setTitle("FIXED.mp3");
         BroadcastReceiver onComplete = new BroadcastReceiver() {

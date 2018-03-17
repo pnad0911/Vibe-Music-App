@@ -26,14 +26,16 @@ import static android.content.Context.MODE_PRIVATE;
  * Added new constructor (Mp3 file name)-------- Duy
  */
 
-public class Song implements SongSubject, DatabaseListener{
-//    static FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    static DatabaseReference databaseRef = database.getReference();
+public class Song implements SongSubject{
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static DatabaseReference databaseRef = database.getReference();
 
 //    private Boolean downloaded = false;
 
 //    public int getId() {return id;}
 
+    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
+    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -43,8 +45,6 @@ public class Song implements SongSubject, DatabaseListener{
     private String artist;
     private String album;
     private String databaseKey;
-
-    private Database database = new Database();
 
     public String localPath; //This can be set directly without calling setters
 
@@ -79,14 +79,10 @@ public class Song implements SongSubject, DatabaseListener{
 
     /* If created from local file, the song will not have user, location or date info */
     public Song (String title, String artist, String album, String url, boolean local){
-
         this.title = title;
 
         if (local){
             this.localPath = url;
-            Log.println(Log.ERROR, "SongLocal: ", title);
-            Database.loadSong(this);
-            try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
         }
         else {
             this.songUrl = url;
@@ -96,6 +92,24 @@ public class Song implements SongSubject, DatabaseListener{
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
+        loadFromDatabase(new dataBaseListener() {
+            @Override
+            public void callback(ArrayList<String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
+
+                if (l!=null && l.size() >= 100){ l = new ArrayList<>(l.subList(l.size()-101, l.size()-1)); }
+                if (u!=null && u.size() >= 100){ u = new ArrayList<>(u.subList(u.size()-101, l.size()-1)); }
+
+                locations = l;
+                userNames = u;
+                date = d;
+                if (songUrl == null){songUrl = "";}
+                songUrl = url;
+//                Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+            }
+        });
+        try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
+        Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+        Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
     }
 
 //    /* Local song creation */
@@ -132,7 +146,7 @@ public class Song implements SongSubject, DatabaseListener{
         this.album = album;
     }
 
-    public void setDatabaseKey(String key) { this.databaseKey = key;}
+    public void setDatabaseKey(String artist, String title) { this.databaseKey = title+artist;}
 
     public void setDate(Object time){
         this.date = time.toString();
@@ -203,7 +217,7 @@ public class Song implements SongSubject, DatabaseListener{
     public String getArtist(){ return artist; }
     public String getAlbum(){ return this.album;}
     public String getDate(){ return this.date; }
-    public String getDatabaseKey(){ return databaseKey;}
+    public String getDatabaseKey(){ return this.title+this.artist;}
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
     public ArrayList<String> getUserNames(){ return this.userNames; }
 
@@ -248,16 +262,13 @@ public class Song implements SongSubject, DatabaseListener{
 
     public Boolean getDownloadStatus() {
         try {
-            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             Boolean down = gson.fromJson(json, Boolean.class);
-            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
             return down;
         } catch (Exception e) {
-            Boolean down = false;
-            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
-            return down;
+            return null;
         }
     }
 
@@ -283,13 +294,84 @@ public class Song implements SongSubject, DatabaseListener{
             if (url == null){
                 url = "";
             }
-            return url;
+            this.songUrl = url;
         } catch (Exception e) {
-            return this.songUrl;
+            this.songUrl = "";
         }
+        Log.println(Log.ERROR, "getSongURL", "Songurl is: "+songUrl);
+        return this.songUrl;
     }
 
     /* ----------------------------  Database Methods  ---------------------------------------- */
+
+    /** Method called as long as this object is modified.
+     *  The display is responsible to call this method when location/date/user is set.
+     */
+    public void updateDatabase(){
+        Log.println(Log.ERROR, "songURL", "Songurl is: "+songUrl);
+        if (songUrl == null){songUrl = "";}
+        Log.println(Log.ERROR, "Database", "Updating song " + this.title + " in Firebase.");
+        DatabaseReference songDataRef = databaseRef.child("SONGS");
+
+        songDataRef.child(this.databaseKey).child("title").setValue(this.title);
+        songDataRef.child(this.databaseKey).child("artist").setValue(this.artist);
+        songDataRef.child(this.databaseKey).child("databaseKey").setValue(this.databaseKey);
+        songDataRef.child(this.databaseKey).child("album").setValue(this.album);
+        songDataRef.child(this.databaseKey).child("songUrl").setValue(this.songUrl);
+
+        songDataRef.child(this.databaseKey).child("userNames").setValue(this.userNames);
+        songDataRef.child(this.databaseKey).child("locations").setValue(this.locations);
+        songDataRef.child(this.databaseKey).child("date").setValue(this.date);
+
+        for (SongObserver ob : observers){
+            ob.update();
+        }
+    }
+
+    /**
+     * Load from Database.
+     * Once called, will be monitoring the database constantly and will be updating the
+     *          song object once there is a change in database.
+     * @param c dataBaseListener, will be updated when the database changed
+     * */
+    private void loadFromDatabase(final dataBaseListener c){
+        Log.println(Log.ERROR, "GETINSTANCE", "WEEEEEEE");
+        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
+        Query queryRef = songRef.orderByChild("databaseKey").equalTo(databaseKey);
+        queryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot == null || snapshot.getValue() == null) {
+                    Log.println(Log.ERROR, "LoadFromDatabase", "No such song as "+databaseKey);
+
+                } else {
+                    Log.println(Log.ERROR, "LoadFromDatabase", "Found song " + databaseKey);
+
+                    // update current song object
+                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),
+                            snapshot.child(databaseKey).child("locations").getValue(t),
+                            snapshot.child(databaseKey).child("date").getValue(String.class),
+                            snapshot.child(databaseKey).child("songUrl").getValue(String.class));
+
+                    // update song observers (refresh Song List)
+                    for (SongObserver ob : observers) { ob.update();}
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Fail to read value
+                Log.w("TAG1", "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    /**
+     * Database listener
+     */
+    interface dataBaseListener {
+        void callback(ArrayList<String> user, ArrayList<HashMap<String,String>> locations, String date, String url);
+    }
 
     /**
      * Implementing DatabaseListener

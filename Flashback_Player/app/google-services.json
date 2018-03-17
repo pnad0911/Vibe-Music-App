@@ -15,6 +15,19 @@
       },
       "oauth_client": [
         {
+
+          "client_id": "831078368581-sbspmauop1cia2vuphcd7lqj8hde19vo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cse_110.flashback_player",
+            "certificate_hash": "43e17f279f1a7ebd3388d57cbe425db61ccd00da"
+          }
+        },
+        {
+          "client_id": "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
           "client_id": "831078368581-lstjc90fmp6qtnp9acnv73dgmiknu1t1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -40,7 +53,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "831078368581-7qljuvkgcco5ggdmmd45nio9omkrpkd8.apps.googleusercontent.com",
+              "client_id": "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
