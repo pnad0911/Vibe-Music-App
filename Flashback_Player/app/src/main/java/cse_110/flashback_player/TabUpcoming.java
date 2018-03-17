@@ -18,9 +18,9 @@ import java.util.Map;
 
 public class TabUpcoming extends Fragment implements SongListListener{
 
-    private List<Song> upcomingSongList = new ArrayList<>();
+    private List<Song> songList;
     private SongPlayer songPlayer;
-//    private SongList songListGen;
+    private SongList songListGen;
     public SongAdapterUpcoming adapter;
 
     @Override
@@ -33,7 +33,8 @@ public class TabUpcoming extends Fragment implements SongListListener{
 
 //        songListGen = new SongList(this.getActivity());
 //        songList = songListGen.getAllsong();
-        adapter = new SongAdapterUpcoming(this.getActivity(), upcomingSongList);
+        songList = new ArrayList<>();
+        adapter = new SongAdapterUpcoming(this.getActivity(), songList);
         final ListView sListView = (ListView) rootView.findViewById(R.id.song_list);
         sListView.setAdapter(adapter);
         // Handle on click event
@@ -54,10 +55,11 @@ public class TabUpcoming extends Fragment implements SongListListener{
         }
     }
     public void updateDisplay(List<Song> list) {
-        upcomingSongList.clear();
-        upcomingSongList.addAll(list);
+        songList.clear();
+        songList.addAll(list);
         adapter.notifyDataSetChanged();
     }
-
     public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames){}
+    public void updateDisplayUpcoming(List<Song> list) { }
+
 }

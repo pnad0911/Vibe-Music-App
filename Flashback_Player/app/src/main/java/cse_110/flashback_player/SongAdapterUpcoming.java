@@ -63,6 +63,7 @@ public class SongAdapterUpcoming extends BaseAdapter {
 //                update(waiting);
 //            }
 //        });
+
         final Song song = (Song) getItem(position);
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
@@ -79,6 +80,7 @@ public class SongAdapterUpcoming extends BaseAdapter {
         }
         return rowView;
     }
+
 //    public void update(ImageView waiting) {
 //        waiting.clearAnimation();
 //        waiting.setBackgroundResource(R.drawable.ic_check_black_24dp);

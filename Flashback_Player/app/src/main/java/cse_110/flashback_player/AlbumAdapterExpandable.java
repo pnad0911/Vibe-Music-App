@@ -104,6 +104,7 @@ public class AlbumAdapterExpandable extends BaseExpandableListAdapter {
         AlbumName.setText(headerTitle);
         return convertView;
     }
+
     private void toggle(Button button, Song song) {
         int songLiked = song.getSongStatus();
         if(songLiked == 0) {
@@ -118,6 +119,7 @@ public class AlbumAdapterExpandable extends BaseExpandableListAdapter {
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_black_24dp, 0);
         }
     }
+
     @Override
     public boolean hasStableIds() {
         return false;

@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -87,6 +88,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     public static VibePlaylist vibePlaylist;
 //    public static SongList songListGen;
     public static List<Song> localSongList;
+
+ //   public static SongList songList;
     public static List<Song> upcomingList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +101,10 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         editor.putString("current","flashback");
         editor.apply();
 
+
         vibePlaylist = new VibePlaylist(this);
-
-
+        tab1 = new TabVibe(); tab2 = new TabUpcoming();
+        vibePlaylist.reg(tab1);vibePlaylist.reg(tab2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -153,51 +157,8 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
 
 //        songListGen = new SongList(this);
         localSongList = LibraryActivity.songListGen.getAllsong();
-//        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-//        final EditText edittext = new EditText(this);
-//        edittext.setHint("Enter URL here");
-//        alert.setTitle("DOWNLOADS");
-//        alert.setMessage("Enter Your URL here").setCancelable(false);
-//        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                String url = edittext.getText().toString();
-////                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
-//                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,VibeActivity.this);
-//                songListGen.reg(tab2);
-//                songDownloadHelper2.startDownload();
-//                dialog.cancel();
-//                dialog.dismiss();
-//                alert.create();
-//            }
-//        });
-//
-//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                dialog.cancel();
-//                dialog.dismiss();
-//                alert.create();
-//            }
-//        });
-//        alert.setView(edittext);
-//
-//
-//        ImageButton download = findViewById(R.id.download);
-//        final AlertDialog alertd = alert.create();
-//        download.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertd.show();
-//            }
-//        });
-//
-//
-//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-//        spinner.setOnItemSelectedListener(this);
-//        List<String> sortingOptions = new ArrayList<String>();
-//        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
-//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(dataAdapter);
+
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -224,13 +185,13 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             switch (position) {
 
                 case 0:
-                    tab1 = new TabVibe();
+//                    tab1 = new TabVibe();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-                    tab2 = new TabUpcoming();
+//                    tab2 = new TabUpcoming();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);
