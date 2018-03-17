@@ -19,8 +19,10 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 import static cse_110.flashback_player.logIn.user;
+import static java.sql.DriverManager.println;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -407,11 +409,13 @@ public class Song implements SongSubject, DatabaseListener{
      * @return true if song was played by friend, false otherwise
      */
     public boolean isPlayedByFriend() {
+
         ArrayList<String> usersPlayedSong = this.getUserNames();
         ArrayList<String> friends = user.getFriendlist();
-        if (friends.size() == 0) {
+        if (friends.size() == 0 || usersPlayedSong.size() == 0) {
             return false;
         }
+
         for (String username : usersPlayedSong) {
             for (String friend : friends) {
                 if (username.equals(friend)) {
@@ -430,7 +434,7 @@ public class Song implements SongSubject, DatabaseListener{
         this.loc = loc;
     }
     public void setUser(String string) {
-        this.userNames.add(string);
+        this.userNames.add(new String(string));
     }
 
     @Override

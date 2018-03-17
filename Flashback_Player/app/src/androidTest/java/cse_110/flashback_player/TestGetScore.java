@@ -46,28 +46,25 @@ public class TestGetScore {
     OffsetDateTime time3 = time1.minusDays(9);
     OffsetDateTime time4 = time1.minusDays(3);
     static User user = new User();
-
+    String str1 = "Beverly";
+    String str2 = "Li";
+    String str3 = "Duy";
+    String str4 = "Pham";
+    String str5 = "Yutong";
+    String str6 = "Qiu";
+    ArrayList<String> usersPlayed = new ArrayList<>();
+    ArrayList<String> friendsList = new ArrayList<>();
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Before
     public void setUp() {
 
-        ArrayList<String> usersPlayed = new ArrayList<>();
-        ArrayList<String> friendsList = new ArrayList<>();
-
-        String str1 = "Beverly";
-        String str2 = "Li";
-        String str3 = "Duy";
-        String str4 = "Pham";
-        String str5 = "Yutong";
-        String str6 = "Qiu";
-
         loc2.setLatitude(100);
         loc2.setLongitude(100);
 
-        loc3.setLatitude(100.1);
-        loc3.setLongitude(100.1);
+        loc3.setLatitude(100.001);
+        loc3.setLongitude(100.001);
 
         song1.setLocation(loc1);
         song1.setDate(time1);
@@ -82,12 +79,15 @@ public class TestGetScore {
         song3.addLocation(loc3);
 
         //    Log.e(TAG,"userList----------" + usersPlayed.size());
+        usersPlayed.add(str1+str2);
+        usersPlayed.add(str3+str4);
+        usersPlayed.add(str5+str6);
         song1.setUserNames(usersPlayed);
-        song1.setUser("BeverlyLi");
-        song1.setUser(str3 + str4);
+        //song1.setUser("BeverlyLi");
+        //song1.setUser(str3 + str4);
         //   song1.addUser(str5, str6);
         //song2.addUser("222","22");
-
+    //    song1.getUserNames().add(str1+str2);
 
 //        System.out.println("user-----------" + song1.getUserNames().get(0));
         friendsList.add(str1 + str2);
@@ -95,13 +95,13 @@ public class TestGetScore {
 
     }
 
-    //   @Test
-//    public void testGetLocationScore() {
-//        assertEquals(0.0,song1.getLocationScore(null));
-//        assertEquals(102.0,song2.getLocationScore(loc2));
-//        assertEquals(102.0, song3.getLocationScore(loc2));
-//        assertEquals(0.0, song3.getLocationScore(loc1));
-//    }
+    @Test
+    public void testGetLocationScore() {
+        assertEquals(0.0,song1.getLocationScore(null));
+        assertEquals(102.0,song2.getLocationScore(loc2));
+        assertEquals(102.0, song3.getLocationScore(loc2));
+        assertEquals(0.0, song3.getLocationScore(loc1));
+    }
 
     @Test
     public void testGetWeekScore() {
@@ -114,12 +114,18 @@ public class TestGetScore {
         assertEquals(101.0, song3.getWeekScore(time1));
     }
 
-//    @Test
-//    public void testIsPlayedByFriend() {
-//
-//        Log.e(TAG,"friendslist1 " + user.getFriendlist().get(0));
-//        Log.e(TAG,"usersplayed1 " + song1.getUserNames().get(0));
-//        assertEquals(true,song1.isPlayedByFriend());
-//    }
-
+  //  @Test
+  /*  public void testIsPlayedByFriend() {
+        usersPlayed.add(str1+str2);
+        usersPlayed.add(str3+str4);
+        usersPlayed.add(str5+str6);
+        song1.setUserNames(usersPlayed);
+        song1.getUserNames().add(str1+str2);
+        song1.addUser("Beverly","Li");
+        Log.e(TAG,"usersplayed " + usersPlayed.get(0));
+        Log.e(TAG,"friendslist1 " + user.getFriendlist().get(0));
+        Log.e(TAG,"usersplayed1 " + song1.getUserNames().get(0));
+        assertEquals(true,song1.isPlayedByFriend());
+    }
+*/
 }
