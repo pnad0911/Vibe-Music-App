@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="default_web_client_id" translatable="false">381331143314-05oag0m1g4uoevvl1bhbqd7eesn1hk7l.apps.googleusercontent.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">381331143314</string>
-    <string name="google_api_key" translatable="false">AIzaSyC-1cDjt-lormqk5sn8pz0sNxMVF531L9U</string>
-    <string name="google_app_id" translatable="false">1:381331143314:android:cb2d582aa1ce863b</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC-1cDjt-lormqk5sn8pz0sNxMVF531L9U</string>
-    <string name="project_id" translatable="false">flashback-197022</string>
-</resources>

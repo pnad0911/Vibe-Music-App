@@ -187,7 +187,7 @@ public class TabAlbum extends Fragment implements SongListListener{
         }
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
-        currSong.updateDatabase();
+        Database.updateDatabase(currSong);
     }
     public boolean isNullDate(Song song,Context context) {
         if(song.getDate() == null) return true;

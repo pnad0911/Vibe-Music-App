@@ -183,7 +183,7 @@ public class TabSongs extends Fragment implements SongListListener {
         else{
             currSong.setDate(LibraryActivity.setTime);
         }
-        currSong.updateDatabase();
+        Database.updateDatabase(currSong);
     }
 
     /* change display on media player to current playing song*/
