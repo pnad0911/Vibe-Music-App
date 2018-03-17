@@ -21,9 +21,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Field;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +75,9 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     public static Map<String, String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
 
+    public static OffsetDateTime setTime;
+    public static boolean usingCurrentTime = true;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -89,6 +95,7 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTime = OffsetDateTime.now();
         setContentView(R.layout.activity_main2);
 
         contextOfApplication = getApplicationContext();
@@ -183,6 +190,41 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
             @Override
             public void onClick(View v) {
                 alertd.show();
+            }
+        });
+
+        final AlertDialog.Builder time_setAlert = new AlertDialog.Builder(this);
+        final EditText time_slot = new EditText(this);
+        time_setAlert.setTitle("Time Setter");
+        time_slot.setText(setTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        time_setAlert.setMessage("Enter time below, in unix milliseconds");
+        time_setAlert.setPositiveButton("Set Time", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String time = time_slot.getText().toString();
+                Log.e("WutFace", "time: " + time);
+                usingCurrentTime = false;
+                setTime = OffsetDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                dialog.cancel();
+                dialog.dismiss();
+                time_setAlert.create();
+            }
+        });
+        time_setAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+                dialog.dismiss();
+                time_setAlert.create();
+            }
+        });
+        time_setAlert.setView(time_slot);
+
+        //for setting time
+        ImageButton set_time = findViewById(R.id.set_time);
+        final AlertDialog time_alert = time_setAlert.create();
+        set_time.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                time_alert.show();
             }
         });
 

@@ -168,7 +168,13 @@ public class TabSongs extends Fragment implements SongListListener {
         Log.println(Log.ERROR, "Tab", "Songurl is: "+currSong.getSongUrl());
 
         currSong.addLocation(LibraryActivity.getLocation());
-        currSong.setDate(OffsetDateTime.now());
+        if(LibraryActivity.usingCurrentTime){
+            currSong.setDate(OffsetDateTime.now());
+
+        }
+        else{
+            currSong.setDate(LibraryActivity.setTime);
+        }
         currSong.addUser(logIn.user.getFirstName(),logIn.user.getLastName());
         Database.updateDatabase(currSong);
     }

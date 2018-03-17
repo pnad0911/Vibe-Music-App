@@ -193,7 +193,13 @@ public class TabVibe extends Fragment implements SongListListener {
         else {
             songTimeView.setText("N/A");
         }
-        currSong.setDate(OffsetDateTime.now());
+        if(LibraryActivity.usingCurrentTime){
+            currSong.setDate(OffsetDateTime.now());
+
+        }
+        else{
+            currSong.setDate(LibraryActivity.setTime);
+        }
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.addUser(logIn.user.getFirstName(),logIn.user.getLastName());
         VibeActivity.vibePlaylist.clearEntireSongList();
