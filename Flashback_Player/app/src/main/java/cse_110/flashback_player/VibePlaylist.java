@@ -1,19 +1,14 @@
 package cse_110.flashback_player;
 
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 import static cse_110.flashback_player.Song.databaseRef;
 
@@ -36,9 +31,15 @@ public class VibePlaylist {
     /* Context provided by NormalActivity */
     private AppCompatActivity activity;
 
-    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
 
-    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
+    /* Data for the priority queue */
+    OffsetDateTime currentTime;
+    Location currentLocation;
+
+    private List<SongListListener> listeners = new ArrayList<>();
+    public void reg(SongListListener ls){
+        listeners.add(ls);
+    }
 
     /* Constructor */
     public VibePlaylist(AppCompatActivity activity) {
@@ -106,7 +107,7 @@ public class VibePlaylist {
         }
 
         // build priority queue
-        playlist = new PriorityQueue<>(1, new SongCompare<>(VibeActivity.getLocation(), currentTime));
+        playlist = new PriorityQueue<>(1, new SongCompare2<>(currentLocation, currentTime));
 
         // populate viable song set
         for (Song s : entireSongList) {
@@ -185,7 +186,8 @@ public class VibePlaylist {
     private boolean isPlayable(Song song) {
         return song.getSongStatus() != -1
                 && song.getDate() != null
-                && song.getLocations() != null;
+                && song.getLocations() != null
+                && song.getScore(currentLocation, currentTime) > 0;
     }
 
     /* Determines whether a song can be downloaded or not and downloads; false if failed to download

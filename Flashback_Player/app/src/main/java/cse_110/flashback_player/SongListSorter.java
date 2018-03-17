@@ -83,9 +83,9 @@ public class SongListSorter {
     public List<Song> sortByStatus (List<Song> songList) {
         Collections.sort(songList, new Comparator<Song>() {
             public int compare(Song song1, Song song2) {
-                if (song1.getStatus() > (song2.getStatus())) {
+                if (song1.getStatus() < (song2.getStatus())) {
                     return 1;
-                } else if (song1.getStatus() < song2.getStatus()) {
+                } else if (song1.getStatus() > song2.getStatus()) {
                     return -1;
                 } else {
                     return 0;

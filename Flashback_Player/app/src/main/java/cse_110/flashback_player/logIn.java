@@ -42,6 +42,7 @@ public class logIn extends AppCompatActivity{
 
     String clientId = "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com";
     String clientSecret = "1F3QJvVDkx7wTxeY38G68cEf";
+
     String code;
     HttpTransport httpTransport;
     JacksonFactory jsonFactory;
@@ -109,6 +110,7 @@ public class logIn extends AppCompatActivity{
     public void updateUI(GoogleSignInAccount account){
         user.setFirstName(account.getGivenName());
         user.setLastName(account.getFamilyName());
+        System.out.println("user + " + user.getFirstName());
         try {
             setUp();
             Intent refresh = new Intent(this, LibraryActivity.class);
@@ -174,11 +176,12 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
-                    ArrayList<Pair<String,String>> friends = new ArrayList<>();
+                    ArrayList<String> friends = new ArrayList<>();
+
                     for(int i = 0;i<connections.size();i++){
                         String firstName = (connections.get(i).getNames().get(0).getGivenName());
                         String lastName = (connections.get(i).getNames().get(0).getFamilyName());
-                        friends.add(new Pair<String, String>(lastName,firstName));
+                        friends.add(firstName + lastName);
                     }
                     user.setFriendsList(friends);
 

@@ -19,7 +19,10 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
+import static cse_110.flashback_player.logIn.user;
+import static java.sql.DriverManager.println;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
@@ -34,8 +37,10 @@ public class Song implements SongSubject{
 
 //    public int getId() {return id;}
 
-    private GenericTypeIndicator<ArrayList<HashMap<String,String>>> t = new GenericTypeIndicator<ArrayList<HashMap<String,String>>>() {};
-    private GenericTypeIndicator<ArrayList<String>> n = new GenericTypeIndicator<ArrayList<String>>() {};
+
+    private final double locRange = 1000; //feet
+    private final double latToFeet = 365228;
+    private final double longToFeet = 305775;
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -61,18 +66,6 @@ public class Song implements SongSubject{
     private ArrayList<String> userNames = new ArrayList<>();
 
 
-//    private OffsetDateTime previousDate = null;
-//    private OffsetDateTime currentDate;
-//
-//    private final double fiveam = 300; // times are in minutes
-//    private final double elevenam = 660;
-//    private final double fivepm = 1020;
-//    private final double locRange = 1000; // feet
-//    private final double latToFeet = 365228;
-//    private final double longToFeet = 305775;
-
-
-
     /* -------------------------------  CONSTRUCTORS  ------------------------------------------*/
 
     public Song(){ }
@@ -83,6 +76,9 @@ public class Song implements SongSubject{
 
         if (local){
             this.localPath = url;
+            Database.loadSong(this);
+            try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
+
         }
         else {
             this.songUrl = url;
@@ -92,24 +88,9 @@ public class Song implements SongSubject{
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
-        loadFromDatabase(new dataBaseListener() {
-            @Override
-            public void callback(ArrayList<String> u, ArrayList<HashMap<String,String>> l, String d, String url) {
-
-                if (l!=null && l.size() >= 100){ l = new ArrayList<>(l.subList(l.size()-101, l.size()-1)); }
-                if (u!=null && u.size() >= 100){ u = new ArrayList<>(u.subList(u.size()-101, l.size()-1)); }
-
-                locations = l;
-                userNames = u;
-                date = d;
-                if (songUrl == null){songUrl = "";}
-                songUrl = url;
-//                Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
-            }
-        });
-        try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
-        Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
-        Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
+        
+        //Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+        //Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
     }
 
 //    /* Local song creation */
@@ -214,8 +195,8 @@ public class Song implements SongSubject{
     /* -----------------------------  Default Getters ----------------------------------------- */
 
     public String getTitle(){ return title; }
-    public String getArtist(){ return artist; }
-    public String getAlbum(){ return this.album;}
+    public String getArtist(){ if (artist == null) {return "null";} else {return artist;} }
+    public String getAlbum(){  if (album == null) {return "null";} else {return album;} }
     public String getDate(){ return this.date; }
     public String getDatabaseKey(){ return this.title+this.artist;}
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
@@ -225,9 +206,7 @@ public class Song implements SongSubject{
 
     public Pair<String,String> previousLocation () {
         HashMap<String,String> hm =  locations.get(locations.size()-1);
-        ArrayList<String> lat = new ArrayList<>(hm.keySet());
-        ArrayList<String> lon = new ArrayList<>(hm.values());
-        return new Pair<String,String>(lat.get(0),lon.get(0));
+        return new Pair<String,String>(hm.get("Latitude"),hm.get("Longitude"));
     }
 
     public ArrayList<Pair<String,String>> allLocations(){
@@ -304,74 +283,7 @@ public class Song implements SongSubject{
 
     /* ----------------------------  Database Methods  ---------------------------------------- */
 
-    /** Method called as long as this object is modified.
-     *  The display is responsible to call this method when location/date/user is set.
-     */
-    public void updateDatabase(){
-        Log.println(Log.ERROR, "songURL", "Songurl is: "+songUrl);
-        if (songUrl == null){songUrl = "";}
-        Log.println(Log.ERROR, "Database", "Updating song " + this.title + " in Firebase.");
-        DatabaseReference songDataRef = databaseRef.child("SONGS");
-
-        songDataRef.child(this.databaseKey).child("title").setValue(this.title);
-        songDataRef.child(this.databaseKey).child("artist").setValue(this.artist);
-        songDataRef.child(this.databaseKey).child("databaseKey").setValue(this.databaseKey);
-        songDataRef.child(this.databaseKey).child("album").setValue(this.album);
-        songDataRef.child(this.databaseKey).child("songUrl").setValue(this.songUrl);
-
-        songDataRef.child(this.databaseKey).child("userNames").setValue(this.userNames);
-        songDataRef.child(this.databaseKey).child("locations").setValue(this.locations);
-        songDataRef.child(this.databaseKey).child("date").setValue(this.date);
-
-        for (SongObserver ob : observers){
-            ob.update();
-        }
-    }
-
-    /**
-     * Load from Database.
-     * Once called, will be monitoring the database constantly and will be updating the
-     *          song object once there is a change in database.
-     * @param c dataBaseListener, will be updated when the database changed
-     * */
-    private void loadFromDatabase(final dataBaseListener c){
-        Log.println(Log.ERROR, "GETINSTANCE", "WEEEEEEE");
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        Query queryRef = songRef.orderByChild("databaseKey").equalTo(databaseKey);
-        queryRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot == null || snapshot.getValue() == null) {
-                    Log.println(Log.ERROR, "LoadFromDatabase", "No such song as "+databaseKey);
-
-                } else {
-                    Log.println(Log.ERROR, "LoadFromDatabase", "Found song " + databaseKey);
-
-                    // update current song object
-                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(n),
-                            snapshot.child(databaseKey).child("locations").getValue(t),
-                            snapshot.child(databaseKey).child("date").getValue(String.class),
-                            snapshot.child(databaseKey).child("songUrl").getValue(String.class));
-
-                    // update song observers (refresh Song List)
-                    for (SongObserver ob : observers) { ob.update();}
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Fail to read value
-                Log.w("TAG1", "Failed to read value.", error.toException());
-            }
-        });
-    }
-
-    /**
-     * Database listener
-     */
-    interface dataBaseListener {
-        void callback(ArrayList<String> user, ArrayList<HashMap<String,String>> locations, String date, String url);
-    }
+   
 
     /**
      * Implementing DatabaseListener
@@ -406,10 +318,126 @@ public class Song implements SongSubject{
 
     /* -------------------------  Weighting System  ------------------------------------------- */
     /**
-     * Gets weighted score of song (max 300)
-     * @return
+     * Score for each song, max score 303
+     * @param userLocation
+     * @param presentTime
+     * @return song score
      */
-    public double getScore(Location userLocation, OffsetDateTime presentTime) { return 1; }
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
+
+    /**
+     * Songs not downloaded yet are pushed to the bottom of the queue
+     * @param userLocation
+     * @param presentTime
+     * @return new score
+     */
+    public double getScore2(Location userLocation, OffsetDateTime presentTime) {
+        if (!getDownloadStatus()) {
+            return -5;
+        }
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
+
+    /**
+     * helper for getScore
+     * @return location score
+     */
+    public double getLocationScore(Location userLocation) {
+
+        if (userLocation == null) {
+            return 0;
+        }
+
+        double prevFeetLat = Double.parseDouble(previousLocation().first) * latToFeet;
+        double prevFeetLong = Double.parseDouble(previousLocation().second) * longToFeet;
+        double currFeetLat = userLocation.getLatitude() * latToFeet;
+        double currFeetLong = userLocation.getLongitude() * longToFeet;
+        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
+                Math.pow(currFeetLong - prevFeetLong, 2));
+        // check if song was played within 1000 ft
+        if (distance > locRange) {
+            return 0;
+        }
+        return 102;
+    }
+
+    /**
+     * helper for getScore
+     * @param presentTime
+     * @return week score
+     */
+    public double getWeekScore(OffsetDateTime presentTime) {
+        OffsetDateTime playedTime = OffsetDateTime.parse(getDate());
+        if (playedTime == null) {
+            return 0;
+        }
+        OffsetDateTime lastWeekBegin = presentTime.minusDays(7);
+        // Monday (value 1) to Sunday (value 7) is a week
+        while (lastWeekBegin.getDayOfWeek().getValue() > 1) {
+            lastWeekBegin = lastWeekBegin.minusDays(1);
+        }
+
+        for (int i = 0; i < 7; i++) {
+            if (lastWeekBegin.getYear() == playedTime.getYear() &&
+                    lastWeekBegin.getDayOfYear() == playedTime.getDayOfYear()) {
+                return 101;
+            }
+            lastWeekBegin = lastWeekBegin.plusDays(1);
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getScore
+     * @return friend score
+     */
+    public double getFriendScore() {
+        if (isPlayedByFriend()) {
+            return 100;
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getFriendScore
+     * @return true if song was played by friend, false otherwise
+     */
+    public boolean isPlayedByFriend() {
+
+        ArrayList<String> usersPlayedSong = this.getUserNames();
+        ArrayList<String> friends = user.getFriendlist();
+        if (friends.size() == 0 || usersPlayedSong.size() == 0) {
+            return false;
+        }
+
+        for (String username : usersPlayedSong) {
+            for (String friend : friends) {
+                if (username.equals(friend)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * method for testing
+     */
+    private Location loc;
+    public void setLocation(Location loc) {
+        this.loc = loc;
+    }
+    public void setUser(String string) {
+        this.userNames.add(new String(string));
+    }
 
     @Override
     public String toString(){ return this.title; }
