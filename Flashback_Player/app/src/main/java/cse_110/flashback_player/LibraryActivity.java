@@ -85,7 +85,7 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
     public static SongList songListGen; public static List<Song> songList;
-    private TabSongs tab1; private TabAlbum tab2;
+    private static TabSongs tab1; private static TabAlbum tab2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +115,6 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
             }
         });
         thread.start();
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.

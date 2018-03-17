@@ -60,4 +60,5 @@ public class TabUpcoming extends Fragment implements SongListListener{
     }
 
     public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames){}
+    public void updateDisplayUpcoming(List<Song> list) { }
 }

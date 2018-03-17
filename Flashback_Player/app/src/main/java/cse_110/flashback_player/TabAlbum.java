@@ -199,4 +199,5 @@ public class TabAlbum extends Fragment implements SongListListener{
     }
 
     public void updateDisplay(List<Song> list) { }
+    public void updateDisplayUpcoming(List<Song> list) { }
 }

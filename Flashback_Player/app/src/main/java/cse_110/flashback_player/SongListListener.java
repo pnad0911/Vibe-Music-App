@@ -11,4 +11,5 @@ public interface SongListListener {
 
     public void updateDisplay(List<Song> list);
     public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames);
+    public void updateDisplayUpcoming(List<Song> list);
 }

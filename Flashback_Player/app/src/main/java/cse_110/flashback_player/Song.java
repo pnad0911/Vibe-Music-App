@@ -91,11 +91,12 @@ public class Song implements SongSubject, DatabaseListener{
         else {
             this.songUrl = url;
         }
-        Log.println(Log.ERROR, "SongFirebase: ", songUrl);
 
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
+
+        Log.println(Log.ERROR, "SongFirebase: ", databaseKey);
     }
 
 //    /* Local song creation */
@@ -224,20 +225,27 @@ public class Song implements SongSubject, DatabaseListener{
         return returnV;
     }
 
-    public String getUser(ArrayList<String> friends, String me){
+    public String getUser(ArrayList<Pair<String,String>> friends, String me){
+        ArrayList<String> newFriends = new ArrayList<>();
+        for (Pair<String, String> f : friends){
+            newFriends.add(f.first+f.second);
+        }
         String returnVal = "";
-        for (String a : userNames){
-            if (friends.contains(a)){
-                returnVal = a;
+        try {
+            for (String a : userNames) {
+                if (newFriends.contains(a)) {
+                    returnVal = a;
+                }
             }
-        }
-        if (userNames.contains(me)){
-            returnVal = me;
-        }
-        else{
-            if (returnVal == "") {
-                returnVal = Integer.toString(userNames.get(userNames.size() - 1).hashCode());
+            if (userNames.contains(me)) {
+                returnVal = "you";
+            } else {
+                if (returnVal == "") {
+                    returnVal = Integer.toString(userNames.get(userNames.size() - 1).hashCode());
+                }
             }
+        } catch (Exception e){
+            return "";
         }
         return returnVal;
     }

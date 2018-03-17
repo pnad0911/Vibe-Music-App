@@ -98,7 +98,7 @@ public class SongList implements SongDownloadHelper.DownloadCompleteListener{
             ls.updateDisplay(AlbumSongList,getListOfAlbum());
         }
     }
-
+    public void downloadCompleted(Song song){ }
     //  ---------------------------- HELPER METHOD BEGIN HERE -----------------------------------------
     private void generateAll() {
         getData();

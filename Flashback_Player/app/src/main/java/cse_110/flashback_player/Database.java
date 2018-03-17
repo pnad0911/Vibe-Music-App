@@ -35,7 +35,7 @@ public class Database {
     public static void updateDatabase(Song song){
         Log.println(Log.ERROR, "songURL", "Songurl is: "+song.getSongUrl());
 //        if (songUrl == null){songUrl = "";}
-        Log.println(Log.ERROR, "Database", "Updating song " + song.getTitle() + " in Firebase.");
+        Log.println(Log.ERROR, "Database", "Updating song " + song.getDatabaseKey() + " in Firebase.");
         DatabaseReference songDataRef = databaseRef.child("SONGS");
 
         songDataRef.child(song.getDatabaseKey()).child("title").setValue(song.getTitle());
@@ -62,7 +62,7 @@ public class Database {
 
         DatabaseReference songRef = databaseRef.child("SONGS").getRef();
         Query queryRef = songRef.orderByChild("databaseKey").equalTo(s.getDatabaseKey());
-        queryRef.addValueEventListener(new ValueEventListener() {
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,10 +85,10 @@ public class Database {
                     song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
 
                     // update current song object
-                    s.update(song);
                     Log.println(Log.ERROR, "loadSong", "New date: " + s.getDate());
+                    Log.e("loadSong", "DatabaseKey is: " + song.getDatabaseKey());
 
-
+                    s.update(song);
                 }
             }
 
@@ -106,7 +106,7 @@ public class Database {
         listeners.add(d);
 
         DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        songRef.addValueEventListener(new ValueEventListener() {
+        songRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dsp : snapshot.getChildren()) {
@@ -114,6 +114,7 @@ public class Database {
                     Song song = new Song();
                     song.setTitle(dsp.child("title").getValue(String.class));
                     song.setArtist(dsp.child("artist").getValue(String.class));
+                    song.setDatabaseKey(dsp.child("databaseKey").getValue(String.class));
                     song.setAlbum(dsp.child("album").getValue(String.class));
                     song.setSongUrl(dsp.child("songUrl").getValue(String.class));
                     song.setLocations(dsp.child("locations").getValue(t));
@@ -121,6 +122,7 @@ public class Database {
                     song.setDate(OffsetDateTime.parse(dsp.child("date").getValue(String.class)));
 
                     Log.println(Log.ERROR, "extractFirebase", "Song is:" + song.getSongUrl());
+                    Log.e("extractDatabase", "DatabaseKey is: " + song.getDatabaseKey());
 
                     // update current song object
                     d.update(song);

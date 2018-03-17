@@ -28,6 +28,7 @@ public class SongDownloadHelper {
     String destination = Environment.DIRECTORY_DOWNLOADS;
     DownloadManager downloadManager;
     AppCompatActivity context;
+    Song song;
     private static final String TAG = "SongDownloadHelper";
 
     /**
@@ -37,6 +38,14 @@ public class SongDownloadHelper {
      * @param context     AppCompatActivity to be downloaded in(typically pass the activity)
      */
     public SongDownloadHelper(String url, DownloadCompleteListener listener, AppCompatActivity context) {
+        this.url = url;
+        this.context = context;
+        listeners.add(listener);
+        downloadManager = (DownloadManager) this.context.getSystemService(Context.DOWNLOAD_SERVICE);
+    }
+    public SongDownloadHelper(String url, DownloadCompleteListener listener, AppCompatActivity context, Song song) {
+        this.song = song;
+        Log.e("downLoadHelper", "DatabaseKey is: " + song.getDatabaseKey());
         this.url = url;
         this.context = context;
         listeners.add(listener);
@@ -85,12 +94,14 @@ public class SongDownloadHelper {
         }
         for (DownloadCompleteListener listener : listeners) {
             listener.downloadCompleted(url);
+            listener.downloadCompleted(this.song);
         }
         Log.d(TAG, "Download completed");
     }
 
     public interface DownloadCompleteListener {
         public abstract void downloadCompleted(String url);
+        public abstract void downloadCompleted(Song song);
     }
 
 

@@ -169,6 +169,7 @@ public class TabSongs extends Fragment implements SongListListener {
 
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
+        currSong.addUser(logIn.user.getFirstName(),logIn.user.getLastName());
         Database.updateDatabase(currSong);
     }
 
@@ -189,6 +190,7 @@ public class TabSongs extends Fragment implements SongListListener {
             songTimeView.setText("N/A");
         }
 
+
         //TODO currSong.addUser(userid);
     }
 
@@ -203,4 +205,5 @@ public class TabSongs extends Fragment implements SongListListener {
     }
 
     public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) { }
+    public void updateDisplayUpcoming(List<Song> list) {}
 }
