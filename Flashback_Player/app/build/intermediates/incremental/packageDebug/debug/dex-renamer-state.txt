@@ -1,4 +1,4 @@
-#Wed Mar 14 22:26:56 PDT 2018
+#Fri Mar 16 18:32:15 PDT 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -7,12 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/193
-base.4=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/190
-base.3=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/192
-base.2=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/189
-base.1=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/191
-base.0=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/188
+base.5=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/13
+base.4=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/11
+base.3=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/16
+base.2=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/14
+base.1=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/15
+base.0=/Users/winnieli/Desktop/cse-110-team-project-team-17/Flashback_Player/app/build/intermediates/transforms/dexMerger/debug/12
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex

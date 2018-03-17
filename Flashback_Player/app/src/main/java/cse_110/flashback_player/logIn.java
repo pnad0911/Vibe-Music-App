@@ -154,11 +154,11 @@ public class logIn extends AppCompatActivity{
                 try  {
                     SharedPreferences shared = getSharedPreferences("token", MODE_PRIVATE);
                     Gson gson = new Gson();
-                    String json = shared.getString("current", "");
-                    System.out.println("json------- "+json);
-                    GoogleTokenResponse checktoken = gson.fromJson(json,GoogleTokenResponse.class);
+                    String json = shared.getString("current", "x");
+                    //System.out.println("json------- "+json.equals("x"));
+                   // GoogleTokenResponse checktoken = gson.fromJson(json,GoogleTokenResponse.class);
                     GoogleCredential credential;
-                    if(json.equals("")) {
+                    if(json.equals("x")) {
                         tokenResponse =
                                 new GoogleAuthorizationCodeTokenRequest(
                                         httpTransport, jsonFactory, clientId, clientSecret, code, redirectUrl)
@@ -167,10 +167,10 @@ public class logIn extends AppCompatActivity{
                         SharedPreferences sharedLocation = getSharedPreferences("token", MODE_PRIVATE);
                         SharedPreferences.Editor editor2 = sharedLocation.edit();
                         Gson gson2 = new Gson();
-                        String json2 = tokenResponse.getRefreshToken();
+                        String json2 = tokenResponse.getAccessToken();
                         editor2.putString("current", json2);
                         editor2.commit();
-                        checktoken =tokenResponse;
+                        GoogleTokenResponse checktoken =tokenResponse;
                         credential = new GoogleCredential.Builder()
                                 .setTransport(httpTransport)
                                 .setJsonFactory(jsonFactory)
@@ -184,9 +184,11 @@ public class logIn extends AppCompatActivity{
                                 .setJsonFactory(jsonFactory)
                                 .setClientSecrets(clientId, clientSecret)
                                 .build()
-                                .setRefreshToken(json);
-                        credential.refreshToken();
+                                //.setRefreshToken(json);
+                                .setAccessToken(json);
+                        //credential.refreshToken();
                     }
+
 
 
                     PeopleService peopleService =
@@ -199,6 +201,8 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
+
+                    System.out.println("--------------yolo " + connections.size());
                     ArrayList<Pair<String,String>> friends = new ArrayList<>();
                     for(int i = 0;i<connections.size();i++){
                         String firstName = (connections.get(i).getNames().get(0).getGivenName());
