@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabAlbum extends Fragment {
+public class TabAlbum extends Fragment implements SongListListener{
 
     private int songIdx = 0;
     private ExpandableListView sListView;
@@ -30,7 +30,7 @@ public class TabAlbum extends Fragment {
     private Song currSong;
     private AlbumAdapterExpandable adapter;
     private Map<String, List<Song>> map;
-    public static Map<String,String[]> data;
+    public List<String> albumNames;
     public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
 
     @Override
@@ -54,9 +54,8 @@ public class TabAlbum extends Fragment {
         final TextView songTimeView = (TextView) rootView.findViewById(R.id.timeAl);
 
         // get items from song list
-        final SongList songListGen = new SongList(this.getActivity());
-        List<String> albumNames = songListGen.getListOfAlbum();
-        map = songListGen.getB();
+        albumNames = LibraryActivity.songListGen.getListOfAlbum();
+        map = LibraryActivity.songListGen.getMap();
         sListView = rootView.findViewById(R.id.album_list);
         adapter = new AlbumAdapterExpandable(this.getActivity(), albumNames, map);
         sListView.setAdapter(adapter);
@@ -69,7 +68,7 @@ public class TabAlbum extends Fragment {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 String aName = (String) adapter.getGroup(groupPosition);
                 songIdx = childPosition;
-                songList = songListGen.getListOfSong(aName);
+                songList = LibraryActivity.songListGen.getListOfSong(aName);
                 play(songTitleView, songArtistView, songAlbumView, songTimeView);
                 return false;
             }
@@ -88,17 +87,17 @@ public class TabAlbum extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(songPlayer.isPlaying()) {
-                    songPlayer.pause();
-                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-                }
-                else if (songPlayer.isPaused()) {
-                    songPlayer.resume();
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
-                }
-                else{
-                    play(songTitleView, songArtistView, songAlbumView,songTimeView);
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                if (!songList.isEmpty()) {
+                    if (songPlayer.isPlaying()) {
+                        songPlayer.pause();
+                        playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    } else if (songPlayer.isPaused()) {
+                        songPlayer.resume();
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    } else {
+                        play(songTitleView, songArtistView, songAlbumView, songTimeView);
+                        playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    }
                 }
             }
         });
@@ -113,16 +112,14 @@ public class TabAlbum extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Map<String, List<Song>> a = new HashMap<String, List<Song>>();
-                ArrayList<Song> array = new ArrayList<>();
-                array.add(new Song("aaa",12,"aa","aaa"));
-                a.put("aaa",array);
-                updateDisplay(a);
-//                songIdx = getNextSongIdx();
-//                play(songTitleView, songArtistView, songAlbumView,songTimeView);
+                if (!songList.isEmpty()) {
+                    songIdx = getNextSongIdx();
+                    play(songTitleView, songArtistView, songAlbumView, songTimeView);
+                }
             }
 
         });
+
 
         previousButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -180,26 +177,26 @@ public class TabAlbum extends Fragment {
         songAlbumView.setText(currSong.getAlbum());
         if(!isNullDate(currSong,applicationContext)) {
             OffsetDateTime time = OffsetDateTime.parse(currSong.getDate());
-//            songTimeView.setText(time.getDayOfWeek().toString() + "  " + time.getHour() + " O'clock  at Coordinates ( " +
-//                    currSong.getLocations().get(0).first+
-//                    ":"+currSong.getLocations().get(0).second + " )");
+            songTimeView.setText(currSong.getDate()+ " AT ( " +
+                    currSong.allLocations().get(0).first+
+                    ":"+currSong.allLocations().get(0).second + " )");
         }
         else {
             songTimeView.setText("N/A");
         }
-//        System.out.println("Yolo --------------------" + NormalActivity.getLocation().getLatitude());
         currSong.addLocation(LibraryActivity.getLocation());
         currSong.setDate(OffsetDateTime.now());
+        Database.updateDatabase(currSong);
     }
-
-
     public boolean isNullDate(Song song,Context context) {
         if(song.getDate() == null) return true;
         else return false;
     }
-    public void updateDisplay(Map<String, List<Song>> map) {
-        map.clear();
-        map.putAll(map);
+    public void updateDisplay(Map<String, List<Song>> map, List<String> albumNames) {
+        this.map.clear(); this.albumNames.clear();
+        this.map.putAll(map); this.albumNames.addAll(albumNames);
         adapter.notifyDataSetChanged();
     }
+
+    public void updateDisplay(List<Song> list) { }
 }

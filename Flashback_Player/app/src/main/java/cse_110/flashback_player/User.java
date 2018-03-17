@@ -1,5 +1,7 @@
 package cse_110.flashback_player;
 
+import android.util.Pair;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 public class User {
     private String firstName;
     private String lastName;
-    private ArrayList<Friend> friendsList = new ArrayList<Friend>();
+    private ArrayList<Pair<String, String>> friendsList = new ArrayList<>();
 
     /* GETTER */
     public String getFirstName(){ return firstName; }
@@ -22,12 +24,11 @@ public class User {
         this.lastName = name;
     }
 
-
-    public ArrayList<Friend> getFriendlist(){
+    public ArrayList<Pair<String, String>> getFriendlist(){
         return friendsList;
     }
 
-    public void setFriendsList(ArrayList<Friend> friends){
+    public void setFriendsList(ArrayList<Pair<String,String>> friends){
         friendsList = friends;
     }
 

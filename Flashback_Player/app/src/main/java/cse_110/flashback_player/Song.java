@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,7 +15,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import java.lang.reflect.Array;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,31 +26,27 @@ import static android.content.Context.MODE_PRIVATE;
  * Added new constructor (Mp3 file name)-------- Duy
  */
 
-public class Song implements SongSubject{
-    static FirebaseDatabase database = FirebaseDatabase.getInstance();
-    static DatabaseReference databaseRef = database.getReference();
+public class Song implements SongSubject, DatabaseListener{
+//    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+//    static DatabaseReference databaseRef = database.getReference();
 
-    private boolean downloaded = false;
-    public void setDownloaded() {
-        downloaded = true;
-    }
-    public boolean getDownloadStatus() {
-        return downloaded;
-    }
-    public int getId() {return id;}
+//    private Boolean downloaded = false;
 
-    private GenericTypeIndicator<HashMap<String,String>> t = new GenericTypeIndicator<HashMap<String,String>>() {};
+//    public int getId() {return id;}
+
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
 
     private String title;
-    private String songUrl;
+    private String songUrl = "";
     private String artist;
     private String album;
     private String databaseKey;
 
-    private int id;
+    private Database database = new Database();
+
+    public String localPath; //This can be set directly without calling setters
 
     private ArrayList<SongObserver> observers = new ArrayList<>();
     public void reg(SongObserver ob){
@@ -61,8 +57,8 @@ public class Song implements SongSubject{
 //    private Location previousLocation = null;
 //    private Location currentLocation;
     private String date;
-    private HashMap<String, String> locations = new HashMap<>();
-    private HashMap<String, String> userNames = new HashMap<>();
+    private ArrayList<HashMap<String,String>> locations = new ArrayList<>();
+    private ArrayList<String> userNames = new ArrayList<>();
 
 
 //    private OffsetDateTime previousDate = null;
@@ -77,48 +73,38 @@ public class Song implements SongSubject{
 
 
 
-    // ----- CONSTRUCTORS ------------------------------------------
+    /* -------------------------------  CONSTRUCTORS  ------------------------------------------*/
 
     public Song(){ }
 
     /* If created from local file, the song will not have user, location or date info */
-    public Song (String title, String artist, String url, String album){
+    public Song (String title, String artist, String album, String url, boolean local){
+
         this.title = title;
-        this.songUrl = url;
+
+        if (local){
+            this.localPath = url;
+            Log.println(Log.ERROR, "SongLocal: ", title);
+            Database.loadSong(this);
+            try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
+        }
+        else {
+            this.songUrl = url;
+        }
+        Log.println(Log.ERROR, "SongFirebase: ", songUrl);
+
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
-        loadFromDatabase(new dataBaseCallback() {
-            @Override
-            public void callback(HashMap<String,String> u, HashMap<String,String> l, String d, String url) {
-                locations = l;
-                userNames = u;
-                date = d;
-                songUrl = url;
-            }
-        });
-        try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
-        Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
     }
 
-//    public Song(String title, String songUrl, String artist, String album, Friend user){
+//    /* Local song creation */
+//    public Song(String title, String artist, String album, String path, Boolean local){
 //        this.title = title;
-//        this.songUrl = songUrl;
+//        this.localPath = path;
 //        this.artist = artist;
 //        this.album = album;
-//        this.date = user.getTime();
-//        addLocation(user.getLocation());
-//        addUser(user.getID());
-//        this.databaseKey = this.title+this.artist;
 //    }
-
-    /* Local song creation */
-    public Song(String title, int id, String artist, String album){
-        this.title = title;
-        this.id = id;
-        this.artist = artist;
-        this.album = album;
-    }
 
     private void setSong (Song song){
         Log.println(Log.ERROR, "SETSONG", song.getSongUrl());
@@ -131,35 +117,51 @@ public class Song implements SongSubject{
         this.userNames = song.userNames;
         this.databaseKey = song.title+song.artist;
     }
-    // --- END CONSTRUCTORS --------------------------------------
 
-    //----- SETTERS -------------------------------------------
+    /* ----------------------------- Default Setters ------------------------------------------ */
+
     public void setTitle(String title){
         this.title = title;
     }
-    public void setSongUrl(String songUrl){
-        this.songUrl = songUrl;
-    }
+
     public void setArtist(String artist) {
         this.artist = artist;
     }
+
     public void setAlbum(String album){
         this.album = album;
     }
-    public void setDatabaseKey(String artist, String title) { this.databaseKey = title+artist;}
+
+    public void setDatabaseKey(String key) { this.databaseKey = key;}
+
     public void setDate(Object time){
         this.date = time.toString();
     }
-    public void setLocations(HashMap<String,String> l){
+
+    public void setLocations(ArrayList<HashMap<String,String>> l){
         this.locations = l;
     }
-    public void setUserNames(HashMap<String,String> u) {
+
+    public void setUserNames(ArrayList<String> u) {
         this.userNames = u;
     }
 
-    /* Favorite status is stored locally.*/
-    public void setPreviousLike(int like, Context context){
-        SharedPreferences sharedLocation = context.getSharedPreferences("like", MODE_PRIVATE);
+    /* ------------------------  SharedPreference Setters  ------------------------------------ */
+
+    public void setSongUrl(String songUrl){
+        SharedPreferences sharedLocation = LibraryActivity.getContextOfApplication().getSharedPreferences("songUrl", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedLocation.edit();
+        Gson gson2 = new Gson();
+        String json2 = gson2.toJson(songUrl);
+        editor2.putString(getTitle(),json2);
+        editor2.commit();
+        this.songUrl = songUrl;
+
+    }
+
+    /* Favorite Status*/
+    public void setPreviousLike(int like){
+        SharedPreferences sharedLocation = LibraryActivity.getContextOfApplication().getSharedPreferences("like", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = sharedLocation.edit();
         Gson gson2 = new Gson();
         String json2 = gson2.toJson(like);
@@ -168,64 +170,100 @@ public class Song implements SongSubject{
         this.like = like;
     }
 
-    public void addID (int id){ this.id = id; }
+    public void setDownloaded() {
+        SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedTime.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(true);
+        editor.putString(getTitle(),json);
+        editor.commit();
+    }
 
-    public void addUser(String uid){
-        userNames.put(uid,uid);
+    /* -----------------------------  Database Add  -------------------------------------------- */
+
+    public void addUser(String first, String last){
+        userNames.add(first+last);
     }
 
     public void addLocation(Location location){
-        locations.put(Integer.toString((int) location.getLatitude()), Integer.toString((int) location.getLongitude()));
+        HashMap<String,String> hm = new HashMap<>();
+        hm.put("Latitude", Float.toString((float) location.getLatitude()));
+        hm.put("Longitude", Float.toString((float) location.getLongitude()));
+        locations.add(hm);
     }
 
-    public void like(Context context) { like = 1; setPreviousLike(like, context);}
-    public void dislike(Context context) { like = -1; setPreviousLike(like, context);}
-    public void neutral(Context context) { like = 0; setPreviousLike(like, context); }
-
-    //    public void setPreviousDate(Context context) {
-//        SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedTime.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(OffsetDateTime.now().minusHours(8));
-//        editor.putString(getTitle(),json);
-//        editor.commit();
-//        System.out.println(sharedTime.contains(getTitle()));
-//        this.previousDate = OffsetDateTime.now().minusHours(8);
-//        this.update();
-//    }
-
-//    public void setPreviousLocationShared(Location location) {
-////        this.previousLocation = location;
-//        this.update();
-//    }
+    public void like() { like = 1; setPreviousLike(like);}
+    public void dislike() { like = -1; setPreviousLike(like);}
+    public void neutral() { like = 0; setPreviousLike(like); }
 
 
-    // END SETTER -----------------------------------------------
+    /* -----------------------------  Default Getters ----------------------------------------- */
 
-    //    public void setPreviousDate(OffsetDateTime time) {
-//        this.previousDate = time;
-//    }
-    public String getTitle(){
-        return title;
-    }
-
-    public String getSongUrl(){ return songUrl; }
-
+    public String getTitle(){ return title; }
     public String getArtist(){ return artist; }
+    public String getAlbum(){ return this.album;}
+    public String getDate(){ return this.date; }
+    public String getDatabaseKey(){ return databaseKey;}
+    public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
+    public ArrayList<String> getUserNames(){ return this.userNames; }
 
-    public String getAlbum(){
-        return this.album;
+    /* ----------------------------- Helper Getters ------------------------------------------- */
+
+    public Pair<String,String> previousLocation () {
+        HashMap<String,String> hm =  locations.get(locations.size()-1);
+        ArrayList<String> lat = new ArrayList<>(hm.keySet());
+        ArrayList<String> lon = new ArrayList<>(hm.values());
+        return new Pair<String,String>(lat.get(0),lon.get(0));
     }
 
-    public HashMap<String,String> getUserNames(){ return this.userNames; }
+    public ArrayList<Pair<String,String>> allLocations(){
+        ArrayList<Pair<String,String>> returnV = new ArrayList<>();
+        for (HashMap<String,String>hm : locations){
+            returnV.add(new Pair<>(hm.get("Latitude"),hm.get("Longitude")));
+        }
+        return returnV;
+    }
 
-    public HashMap<String, String> getLocations(){ return locations; }
+    public String getUser(ArrayList<String> friends, String me){
+        String returnVal = "";
+        for (String a : userNames){
+            if (friends.contains(a)){
+                returnVal = a;
+            }
+        }
+        if (userNames.contains(me)){
+            returnVal = me;
+        }
+        else{
+            if (returnVal == "") {
+                returnVal = Integer.toString(userNames.get(userNames.size() - 1).hashCode());
+            }
+        }
+        return returnVal;
+    }
 
-    public int getSongStatus (Context context) { return getPreviousLike(context); }
+    /* ----------------------------- SharePreference Getters ---------------------------------- */
 
-    public int getPreviousLike(Context context){
+    public int getSongStatus () { return getPreviousLike(); }
+
+    public Boolean getDownloadStatus() {
         try {
-            SharedPreferences sharedTime = context.getSharedPreferences("like", MODE_PRIVATE);
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            Boolean down = gson.fromJson(json, Boolean.class);
+            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
+            return down;
+        } catch (Exception e) {
+            Boolean down = false;
+            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
+            return down;
+        }
+    }
+
+    public int getPreviousLike(){
+        try {
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("like", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             Integer liked = gson.fromJson(json, Integer.class);
@@ -236,216 +274,65 @@ public class Song implements SongSubject{
         return this.like;
     }
 
-    public String getDate(){
-        return this.date;
+    public String getSongUrl(){
+        try {
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("songUrl", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedTime.getString(getTitle(), "");
+            String url = gson.fromJson(json, String.class);
+            if (url == null){
+                url = "";
+            }
+            return url;
+        } catch (Exception e) {
+            return this.songUrl;
+        }
     }
 
-    public String getDatabaseKey(){ return this.title+this.artist;}
+    /* ----------------------------  Database Methods  ---------------------------------------- */
 
-    // END GETTER -------------------------------------------------
+    /**
+     * Implementing DatabaseListener
+     */
+    public void update(Song song){
 
-    /* Method called as long as this object is modified. */
-    public void update(){
-        Log.println(Log.INFO, "Database", "Updating song " + this.title + " in Firebase.");
-        DatabaseReference songDataRef = databaseRef.child("SONGS");
-        songDataRef.child(this.databaseKey).setValue(this);
-//        songDataRef.child(this.title+this.artist).child("userNames").setValue(userNames);
+        if (song.getLocations()!=null && song.getLocations().size() >= 100){
+            locations = new ArrayList<>(song.getLocations().subList(song.getLocations().size()-101, song.getLocations().size()-1));
+        } else { locations = song.getLocations(); }
+
+        if (song.getUserNames()!=null && song.getUserNames().size() >= 100){
+            userNames = new ArrayList<>(song.getUserNames().subList(song.getUserNames().size()-101, song.getUserNames().size()-1));
+        } else { userNames = song.getUserNames(); }
+
+        if (song.getSongUrl() == null) {
+            songUrl  = "";
+        } else { this.setSongUrl(song.getSongUrl()); }
+
+        date = song.getDate();
+        title = song.getTitle();
+        artist = song.getArtist();
+        album = song.getAlbum();
+        databaseKey = song.getDatabaseKey();
+
+        Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+        Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
+
         for (SongObserver ob : observers){
             ob.update();
         }
     }
 
-    @Override
-    public String toString(){
-        return this.title;
-    }
-
-    /* Load song from database*/
-    private void loadFromDatabase(final dataBaseCallback c){
-        Log.println(Log.ERROR, "GETINSTANCE", "WEEEEEEE");
-        DatabaseReference songRef = databaseRef.child("SONGS").getRef();
-        Query queryRef = songRef.orderByChild("databaseKey").equalTo(databaseKey);
-        queryRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot == null || snapshot.getValue() == null) {
-                    Log.println(Log.ERROR, "GETINSTANCE", "No such song as "+databaseKey);
-
-                } else {
-                    Log.println(Log.ERROR, "GETINSTANCE", "Found song " + databaseKey);
-
-                    // update current song object
-                    c.callback(snapshot.child(databaseKey).child("userNames").getValue(t),
-                            snapshot.child(databaseKey).child("locations").getValue(t),
-                            snapshot.child(databaseKey).child("date").getValue(String.class),
-                            snapshot.child(databaseKey).child("songUrl").getValue(String.class));
-
-                    // update song observers (refresh Song List)
-                    for (SongObserver ob : observers) { ob.update();}
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Fail to read value
-                Log.w("TAG1", "Failed to read value.", error.toException());
-            }
-        });
-    }
-
-    /* To update database */
-    interface dataBaseCallback {
-        public abstract void callback(HashMap<String, String> user,
-                                      HashMap<String, String> locations,
-                                      String date,
-                                      String url);
-    }
-
-//    public Location getCurrentLocation(){ return this.currentLocation; }
-
-//    public OffsetDateTime getPreviousDate(Context context){
-//        try {
-//            SharedPreferences sharedTime = context.getSharedPreferences("time", MODE_PRIVATE);
-//            Gson gson = new Gson();
-//            String json = sharedTime.getString(getTitle(), "");
-//            OffsetDateTime time = gson.fromJson(json, OffsetDateTime.class);
-//            this.previousDate = OffsetDateTime.now().minusHours(8);
-//        } catch (Exception e) {
-//            this.previousDate = null;
-//        }
-//        return this.previousDate;
-//    }
-//
-
-    //    public Location getPreviousLocation(Context context){
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        Gson gson2 = new Gson();
-//        String json2 = sharedLocation.getString(getTitle(), "");
-//        Location location = gson2.fromJson(json2, Location.class);
-//        setPreviousLocationShared(location);
-//        return location;
-//    }
-
-//    public OffsetDateTime getCurrentDate(){ return this.currentDate; }
-
-//    public void setPreviousLocation(Location loc, Context context){
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(loc);
-//        editor2.putString(getTitle(),json2);
-//        editor2.commit();
-////        this.previousLocation = loc;
-//    }
-//
-
-//    public void setPreviousLocation(Location loc){
-////        this.previousLocation = loc;
-//    }
-//    public void setPreviousTime(OffsetDateTime time){
-//        this.previousDate = time;
-//    }
-//
-//    public void setCurrentLocation(Location loc,Context context){
-//        SharedPreferences sharedLocation = context.getSharedPreferences("location", MODE_PRIVATE);
-//        SharedPreferences.Editor editor2 = sharedLocation.edit();
-//        Gson gson2 = new Gson();
-//        String json2 = gson2.toJson(loc);
-//        editor2.putString(getTitle(),json2);
-//        editor2.commit();
-//        this.currentLocation = loc;
-//    }
-
+    /* -------------------------  Weighting System  ------------------------------------------- */
     /**
      * Gets weighted score of song (max 300)
      * @return
      */
-    public double getScore(Location userLocation, OffsetDateTime presentTime) {
-//        double locScore = getLocationScore(userLocation);
-//        double dateScore = getDateScore(presentTime);
-//        double timeScore = getTimeScore(presentTime);
-//        return locScore + dateScore + timeScore;
-        return 1;
-    }
-//
-//    /**
-//     * helper for getScore
-//     * @return location score
-//     */
-//    public double getLocationScore(Location userLocation) {
-//        /*try {
-//            previousLocation.getLatitude();
-//            previousLocation.getLongitude();
-//            userLocation.getLatitude();
-//            userLocation.getLongitude();
-//        } catch (RuntimeException e) {
-//            System.out.println("failed to get location in getLocationScore");
-//            return 0;
-//        }*/
-////        if (userLocation == null) {
-////            return 0;
-////        }
-////        double prevFeetLat = previousLocation.getLatitude() * latToFeet;
-////        System.out.println(previousLocation.getLatitude());
-////        double prevFeetLong = previousLocation.getLongitude() * longToFeet;
-////        double currFeetLat = userLocation.getLatitude() * latToFeet;
-////        System.out.println(userLocation.getLatitude());
-////        double currFeetLong = userLocation.getLongitude() * longToFeet;
-////        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
-////                Math.pow(currFeetLong - prevFeetLong, 2));
-////        if (distance > locRange) {
-////            return 0;
-////        }
-//        return 100; // - (distance / 10);
-//    }
-//
-//    /**
-//     * helper for getScore
-//     * @return date score
-//     */
-//    public double getDateScore(OffsetDateTime presentTime) {
-//
-////        if (presentTime == null) {
-////            return 0;
-////        }
-////        if (presentTime.getDayOfWeek().getValue() == previousDate.getDayOfWeek().getValue())  {
-////            return 100;
-////        }
-//        return 0;
-//    }
-//
-//    /**
-//     * helper for getDateScore
-//     * @return time score
-//     */
-//    public int getTimeScore(OffsetDateTime presentTime) {
-//        if (presentTime == null || previousDate == null){
-//            return 0;
-//        }
-//        double currentTime = presentTime.getHour()*60 + presentTime.getMinute();
-//        double previousTime = previousDate.getHour()*60 + previousDate.getMinute();
-//        String currentTimeOfDay = getTimeofDay(currentTime);
-//        String previousTimeOfDay = getTimeofDay(previousTime);
-//        if (currentTimeOfDay.equals(previousTimeOfDay)) {
-//            return 100;
-//        }
-//        return 0;
-//    }
-//
-//    /**
-//     * helper for getTimeScore
-//     * @param time
-//     * @return String time of day
-//     */
-//    public String getTimeofDay(double time) {
-//        if (time >= fiveam && time <= elevenam) {
-//            return "morning";
-//        } else if (time > elevenam && time <= fivepm) {
-//            return "afternoon";
-//        } else {
-//            return "evening";
-//        }
-//    }
+    public double getScore(Location userLocation, OffsetDateTime presentTime) { return 1; }
+
+    @Override
+    public String toString(){ return this.title; }
+
+    public int getStatus(){return like;}
 
 }
 

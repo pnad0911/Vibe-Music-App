@@ -20,6 +20,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -112,10 +114,11 @@ public class SongPlayer implements Parcelable{
         mediaPlayer.reset();
 //        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getUrl());
 //        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(123);
-        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getId());
-
+//        AssetFileDescriptor assetFileDescriptor = activity.getResources().openRawResourceFd(song.getId());
         try{
-            mediaPlayer.setDataSource(assetFileDescriptor);
+            FileInputStream f = new FileInputStream(song.localPath);
+            FileDescriptor fd = f.getFD();
+            mediaPlayer.setDataSource(fd);
             mediaPlayer.prepare();
 
         }
@@ -170,12 +173,7 @@ public class SongPlayer implements Parcelable{
         return 0;
     }
 
-    public void writeToParcel(Parcel out, int flags) {
-//        out.writeValue(mediaPlayer);
-//        out.writeValue(activity);
-//        out.writeValue(nextSong);
-//        out.writeInt(paused);
-    }
+    public void writeToParcel(Parcel out, int flags) { }
 
     public static final Parcelable.Creator<SongPlayer> CREATOR
             = new Parcelable.Creator<SongPlayer>() {
@@ -188,10 +186,5 @@ public class SongPlayer implements Parcelable{
         }
     };
 
-    private SongPlayer(Parcel in) {
-//        mediaPlayer = (MediaPlayer) in.readValue(null);
-//        activity = (Activity) in.readValue(null);
-//        nextSong = (Song) in.readValue(null);
-//        paused = in.readInt();
-    }
+    private SongPlayer(Parcel in) { }
 }

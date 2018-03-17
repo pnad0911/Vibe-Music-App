@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -66,22 +67,14 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SongPlayer songPlayer = new SongPlayer(this);
 
-    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String,String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private TabVibe tab1;
-    private String mProviderName;
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
+    private TabVibe tab1; private TabUpcoming tab2;
     private static Location loc;
-    private Context mContext;
-
-    private LocationManager locationManager;
-    private String locationProvider;
 
     private LocationReadyCallback locationCallback;
     private LocationRequest mLocationRequest;
@@ -89,7 +82,12 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
+    private SongDownloadHelper songDownloadHelper;
 
+    public static VibePlaylist vibePlaylist;
+//    public static SongList songListGen;
+    public static List<Song> localSongList;
+    public static List<Song> upcomingList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +97,9 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("current","flashback");
         editor.apply();
+
+        vibePlaylist = new VibePlaylist(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -150,48 +151,53 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
             }
         });
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        final EditText edittext = new EditText(this);
-        edittext.setHint("AM I OUTTA MY HEAD \nAM I OUTTA MY MIND");
-        alert.setTitle("DOWNLOADS");
-        alert.setMessage("Enter Your URL here").setCancelable(false);
-        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                Editable YouEditTextValue = edittext.getText();
-                dialog.cancel();
-                dialog.dismiss();
-                alert.create();
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.cancel();
-                dialog.dismiss();
-                alert.create();
-            }
-        });
-        alert.setView(edittext);
-
-
-        ImageButton download = findViewById(R.id.download);
-        final AlertDialog alertd = alert.create();
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertd.show();
-            }
-        });
-
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-        List<String> sortingOptions = new ArrayList<String>();
-        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setDropDownWidth(552);
-        spinner.setAdapter(dataAdapter);
+//        songListGen = new SongList(this);
+        localSongList = LibraryActivity.songListGen.getAllsong();
+//        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//        final EditText edittext = new EditText(this);
+//        edittext.setHint("Enter URL here");
+//        alert.setTitle("DOWNLOADS");
+//        alert.setMessage("Enter Your URL here").setCancelable(false);
+//        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                String url = edittext.getText().toString();
+////                upcomingList.add(new Song("N/A","N/A","N/A","N/A",false));
+//                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,VibeActivity.this);
+//                songListGen.reg(tab2);
+//                songDownloadHelper2.startDownload();
+//                dialog.cancel();
+//                dialog.dismiss();
+//                alert.create();
+//            }
+//        });
+//
+//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                dialog.cancel();
+//                dialog.dismiss();
+//                alert.create();
+//            }
+//        });
+//        alert.setView(edittext);
+//
+//
+//        ImageButton download = findViewById(R.id.download);
+//        final AlertDialog alertd = alert.create();
+//        download.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                alertd.show();
+//            }
+//        });
+//
+//
+//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//        spinner.setOnItemSelectedListener(this);
+//        List<String> sortingOptions = new ArrayList<String>();
+//        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(dataAdapter);
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -224,7 +230,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
                     tab1.setArguments(bundle);
                     return tab1;
                 case 1:
-                    TabUpcoming tab2 = new TabUpcoming();
+                    tab2 = new TabUpcoming();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);
@@ -253,29 +259,7 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         }
     }
 
-    // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;list[1] = ar;list[2] = al;
-                data.put(f.getName(),list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-
-//   ---------------------------------- Get Location method here  ---------------------------------
+    //   ---------------------------------- Get Location method here  ---------------------------------
     /* Get current Location */
     public static Location getLocation(){
         return loc;
@@ -333,4 +317,3 @@ public class VibeActivity extends AppCompatActivity implements OnItemSelectedLis
         return contextOfApplication;
     }
 }
-

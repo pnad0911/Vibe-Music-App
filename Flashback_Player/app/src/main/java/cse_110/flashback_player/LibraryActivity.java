@@ -1,6 +1,9 @@
 package cse_110.flashback_player;
 
 
+import android.*;
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +13,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -20,7 +24,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.location.Location;
@@ -28,7 +34,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 
@@ -46,7 +57,7 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
  * Created by Yutong on 2/9/2018.
  * Added helper method 2/12/2018 (Duy)
  */
-public class LibraryActivity extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -58,8 +69,6 @@ public class LibraryActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SongPlayer songPlayer = new SongPlayer(this);
-
-    public MediaMetadataRetriever mmr = new MediaMetadataRetriever();
     public static Map<String, String[]> data;
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -68,29 +77,22 @@ public class LibraryActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    private String mProviderName;
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
     private static Location loc;
-    private Context mContext;
-
-    private LocationManager locationManager;
-    private String locationProvider;
-
     private LocationReadyCallback locationCallback;
     private LocationRequest mLocationRequest;
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     public static Context contextOfApplication;
-
+    public static SongList songListGen; public static List<Song> songList;
+    private TabSongs tab1; private TabAlbum tab2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
         contextOfApplication = getApplicationContext();
-
+        tab1 = new TabSongs(); tab2 = new TabAlbum();
         SharedPreferences sharedPreferences = getSharedPreferences("mode", MODE_PRIVATE);
         if (sharedPreferences.getString("current", "").equalsIgnoreCase("flashback")) {
             Intent intent = new Intent(this, VibeActivity.class);
@@ -138,8 +140,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
-        getData();
-
         FloatingActionButton toggle = (FloatingActionButton) findViewById(R.id.mode);
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,9 +149,64 @@ public class LibraryActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-//        createExternalStoragePublicMP3();
-//        hasExternalStoragePublicMP3();
-//        System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString());
+
+        songListGen = new SongList(this);
+        songListGen.reg(tab1); songListGen.reg(tab2);
+        songList = songListGen.getAllsong();
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final EditText edittext = new EditText(this);
+        edittext.setHint("Enter URL here");
+        alert.setTitle("DOWNLOADS");
+        alert.setMessage("Enter Your URL here").setCancelable(false);
+        alert.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String url = edittext.getText().toString();
+                SongDownloadHelper songDownloadHelper2 = new SongDownloadHelper(url,songListGen,LibraryActivity.this);
+                songDownloadHelper2.startDownload();
+                dialog.cancel();
+                dialog.dismiss();
+                alert.create();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+                dialog.dismiss();
+                alert.create();
+            }
+        });
+        alert.setView(edittext);
+
+        ImageButton download = findViewById(R.id.download);
+        final AlertDialog alertd = alert.create();
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertd.show();
+            }
+        });
+
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+        List<String> sortingOptions = new ArrayList<String>();
+        sortingOptions.add("Title"); sortingOptions.add("Artist"); sortingOptions.add("Album"); sortingOptions.add("Favorite");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortingOptions);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        SongListSorter songListSorter = new SongListSorter();
+        List<Song> sort = new ArrayList<>(songList);
+        if(position == 0) tab1.updateDisplay(songListSorter.sortByTitle(sort));
+        if(position == 1) tab1.updateDisplay(songListSorter.sortByArtist(sort));
+        if(position == 2) tab1.updateDisplay(songListSorter.sortByAlbum(sort));
+        if(position == 3) tab1.updateDisplay(songListSorter.sortByStatus(sort));
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -181,13 +236,14 @@ public class LibraryActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    TabSongs tab1 = new TabSongs();
+                    //TabSongs tab1 = new TabSongs();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("songPlayer", songPlayer);
                     tab1.setArguments(bundle);
+//                    tab1.updateDisplay(songListGen.getAllsong());
                     return tab1;
                 case 1:
-                    TabAlbum tab2 = new TabAlbum();
+                    //TabAlbum tab2 = new TabAlbum();
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelable("songPlayer", songPlayer);
                     tab2.setArguments(bundle2);
@@ -215,30 +271,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
         }
     }
-
-    // --------------------------------- Here Is The Reason ------------------------------
-    public void getData() {
-        data = new HashMap<>();
-        Field[] raw = cse_110.flashback_player.R.raw.class.getFields();
-        for (Field f : raw) {
-            try {
-                AssetFileDescriptor afd = this.getResources().openRawResourceFd(f.getInt(null));
-                mmr.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                String al = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                String ti = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String ar = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String[] list = new String[3];
-                list[0] = ti;
-                list[1] = ar;
-                list[2] = al;
-                data.put(f.getName(), list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
 //   ---------------------------------- Get Location method here  ---------------------------------
 
     /* Get current Location */
@@ -284,6 +316,14 @@ public class LibraryActivity extends AppCompatActivity {
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     100);
         }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }
     }
 
     public void setLocationReadyCallback(LocationReadyCallback locationCallback) {
@@ -297,37 +337,4 @@ public class LibraryActivity extends AppCompatActivity {
     public static Context getContextOfApplication() {
         return contextOfApplication;
     }
-//
-//
-//    public void createExternalStoragePublicMP3() {
-//        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
-//        File file = new File(path, "america_religious.mp3");
-//
-//        try {
-//            path.mkdirs();
-//            InputStream is = getResources().openRawResource(R.raw.america_religious);
-//            OutputStream os = new FileOutputStream(file);
-//            byte[] data = new byte[is.available()];
-//            is.read(data);
-//            os.write(data);
-//            is.close();
-//            os.close();
-//            MediaScannerConnection.scanFile(this,
-//                    new String[]{file.toString()}, null,
-//                    new MediaScannerConnection.OnScanCompletedListener() {
-//                        public void onScanCompleted(String path, Uri uri) {
-//                            Log.i("ExternalStorage", "Scanned " + path + ":");
-//                            Log.i("ExternalStorage", "-> uri=" + uri);
-//                        }
-//                    });
-//        } catch (IOException e) {
-//            Log.w("ExternalStorage", "Error writing " + file, e);
-//        }
-//    }
-//    boolean hasExternalStoragePublicMP3() {
-//        File path = Environment.getExternalStoragePublicDirectory(
-//                Environment.DIRECTORY_MUSIC);
-//        File file = new File(path, "america_religious.mp3");
-//        return file.exists();
-//    }
 }

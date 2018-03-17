@@ -63,13 +63,14 @@ public class SongAdapterUpcoming extends BaseAdapter {
 //                update(waiting);
 //            }
 //        });
+
         final Song song = (Song) getItem(position);
         songNameView.setText(song.getTitle());
         artistView.setText(song.getArtist());
         albumView.setText(song.getAlbum());
 
-        boolean downloaded = song.getDownloadStatus();
-        if(!downloaded) {
+        Boolean downloaded = song.getDownloadStatus();
+        if(downloaded == null) {
             Animation rotation = AnimationUtils.loadAnimation(VibeActivity.getContextOfApplication(), R.anim.rotate);
             rotation.setRepeatCount(Animation.INFINITE);
             waiting.startAnimation(rotation);
@@ -79,6 +80,7 @@ public class SongAdapterUpcoming extends BaseAdapter {
         }
         return rowView;
     }
+
 //    public void update(ImageView waiting) {
 //        waiting.clearAnimation();
 //        waiting.setBackgroundResource(R.drawable.ic_check_black_24dp);
