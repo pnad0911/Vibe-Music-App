@@ -194,8 +194,8 @@ public class Song implements SongSubject, DatabaseListener{
     /* -----------------------------  Default Getters ----------------------------------------- */
 
     public String getTitle(){ return title; }
-    public String getArtist(){ return artist; }
-    public String getAlbum(){ return this.album;}
+    public String getArtist(){ if (artist == null) {return "null";} else {return artist;} }
+    public String getAlbum(){  if (album == null) {return "null";} else {return album;} }
     public String getDate(){ return this.date; }
     public String getDatabaseKey(){ return databaseKey;}
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
