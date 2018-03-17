@@ -1,3 +1,4 @@
 *.ogx
 Flashback_Player/app/build
 Flashback_Player/build
+*.json
