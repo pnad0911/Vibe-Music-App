@@ -1,6 +1,7 @@
 package cse_110.flashback_player;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,6 +29,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.people.v1.PeopleService;
 import com.google.api.services.people.v1.model.ListConnectionsResponse;
 import com.google.api.services.people.v1.model.Person;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,8 +40,9 @@ public class logIn extends AppCompatActivity{
     int RC_SIGN_IN = 13;
     GoogleApiClient mGoogleApiClient;
 
-    String clientId = "381331143314-o3f86fnls6l787276v9rghph4eat6p8v.apps.googleusercontent.com";
-    String clientSecret = "_BAEhqmE5xmcGVtqNljvgWCB";
+    String clientId = "831078368581-ip7kdmcc85s96hc2m4d4tmrdjjsaqo3f.apps.googleusercontent.com";
+    String clientSecret = "1F3QJvVDkx7wTxeY38G68cEf";
+
     String code;
     HttpTransport httpTransport;
     JacksonFactory jsonFactory;
@@ -106,6 +110,7 @@ public class logIn extends AppCompatActivity{
     public void updateUI(GoogleSignInAccount account){
         user.setFirstName(account.getGivenName());
         user.setLastName(account.getFamilyName());
+        System.out.println("user + " + user.getFirstName());
         try {
             setUp();
             Intent refresh = new Intent(this, LibraryActivity.class);
@@ -126,18 +131,41 @@ public class logIn extends AppCompatActivity{
             @Override
             public void run() {
                 try  {
-                    tokenResponse =
-                            new GoogleAuthorizationCodeTokenRequest(
-                                    httpTransport, jsonFactory, clientId, clientSecret, code, redirectUrl)
-                                    .execute();
 
-                    GoogleCredential credential = new GoogleCredential.Builder()
-                            .setTransport(httpTransport)
-                            .setJsonFactory(jsonFactory)
-                            .setClientSecrets(clientId, clientSecret)
-                            .build()
-                            .setFromTokenResponse(tokenResponse);
-
+                    SharedPreferences shared = getSharedPreferences("token", MODE_PRIVATE);
+                    Gson gson = new Gson();
+                    String json = shared.getString("current", "");
+                    System.out.println("json------- "+json);
+                    //checktoken = gson.fromJson(json,GoogleTokenResponse.class);
+                    GoogleCredential credential;
+                    if(json.equals("")) {
+                        tokenResponse =
+                                new GoogleAuthorizationCodeTokenRequest(
+                                        httpTransport, jsonFactory, clientId, clientSecret, code, redirectUrl)
+                                        .execute();
+                        SharedPreferences sharedLocation = getSharedPreferences("token", MODE_PRIVATE);
+                        SharedPreferences.Editor editor2 = sharedLocation.edit();
+                        Gson gson2 = new Gson();
+                        String json2 = tokenResponse.getRefreshToken();
+                        editor2.putString("current", json2);
+                        editor2.commit();
+                        GoogleTokenResponse checktoken =tokenResponse;
+                        credential = new GoogleCredential.Builder()
+                                .setTransport(httpTransport)
+                                .setJsonFactory(jsonFactory)
+                                .setClientSecrets(clientId, clientSecret)
+                                .build()
+                                .setFromTokenResponse(checktoken);
+                    }
+                    else{
+                        credential = new GoogleCredential.Builder()
+                                .setTransport(httpTransport)
+                                .setJsonFactory(jsonFactory)
+                                .setClientSecrets(clientId, clientSecret)
+                                .build()
+                                .setRefreshToken(json);
+                        credential.refreshToken();
+                    }
                     PeopleService peopleService =
                             new PeopleService.Builder(httpTransport, jsonFactory, credential)
                                     .setApplicationName("FriendList")
@@ -148,11 +176,12 @@ public class logIn extends AppCompatActivity{
                             .execute();
 
                     List<Person> connections = response.getConnections();
-                    ArrayList<Pair<String,String>> friends = new ArrayList<>();
+                    ArrayList<String> friends = new ArrayList<>();
+
                     for(int i = 0;i<connections.size();i++){
                         String firstName = (connections.get(i).getNames().get(0).getGivenName());
                         String lastName = (connections.get(i).getNames().get(0).getFamilyName());
-                        friends.add(new Pair<String, String>(lastName,firstName));
+                        friends.add(firstName + lastName);
                     }
                     user.setFriendsList(friends);
 
@@ -179,9 +208,14 @@ public class logIn extends AppCompatActivity{
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d("nothing", "handleSignInResult:" + result.isSuccess());
         // Signed in successfolly, show authenticated UI.
-        GoogleSignInAccount acct = result.getSignInAccount();
-        code = acct.getServerAuthCode();
-        updateUI(acct);
+        if(result.isSuccess()){
+            GoogleSignInAccount acct = result.getSignInAccount();
+            code = acct.getServerAuthCode();
+            updateUI(acct);
+        }
+        else{
+            Toast.makeText(this, "login failed", Toast.LENGTH_LONG).show();
+        }
     }
 
     public User getUser(){

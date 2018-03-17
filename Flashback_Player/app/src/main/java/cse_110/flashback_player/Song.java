@@ -19,21 +19,28 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
+import static cse_110.flashback_player.logIn.user;
+import static java.sql.DriverManager.println;
 
 /**
  * Created by Patrick and Yutong on 2/7/2018.
  * Added new constructor (Mp3 file name)-------- Duy
  */
 
-public class Song implements SongSubject, DatabaseListener{
-//    static FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    static DatabaseReference databaseRef = database.getReference();
+public class Song implements SongSubject{
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static DatabaseReference databaseRef = database.getReference();
 
 //    private Boolean downloaded = false;
 
 //    public int getId() {return id;}
 
+
+    private final double locRange = 1000; //feet
+    private final double latToFeet = 365228;
+    private final double longToFeet = 305775;
 
     /* 1 -> favorited, 0 -> neutral, -1 -> disliked */
     private int like = 0;
@@ -43,8 +50,6 @@ public class Song implements SongSubject, DatabaseListener{
     private String artist;
     private String album;
     private String databaseKey;
-
-    private Database database = new Database();
 
     public String localPath; //This can be set directly without calling setters
 
@@ -61,32 +66,19 @@ public class Song implements SongSubject, DatabaseListener{
     private ArrayList<String> userNames = new ArrayList<>();
 
 
-//    private OffsetDateTime previousDate = null;
-//    private OffsetDateTime currentDate;
-//
-//    private final double fiveam = 300; // times are in minutes
-//    private final double elevenam = 660;
-//    private final double fivepm = 1020;
-//    private final double locRange = 1000; // feet
-//    private final double latToFeet = 365228;
-//    private final double longToFeet = 305775;
-
-
-
     /* -------------------------------  CONSTRUCTORS  ------------------------------------------*/
 
     public Song(){ }
 
     /* If created from local file, the song will not have user, location or date info */
     public Song (String title, String artist, String album, String url, boolean local){
-
         this.title = title;
 
         if (local){
             this.localPath = url;
-            Log.println(Log.ERROR, "SongLocal: ", title);
             Database.loadSong(this);
             try{ Thread.sleep(1000); } catch (Exception e){ e.printStackTrace();} //wait for data
+
         }
         else {
             this.songUrl = url;
@@ -96,6 +88,9 @@ public class Song implements SongSubject, DatabaseListener{
         this.artist = artist;
         this.album = album;
         this.databaseKey = title+artist;
+        
+        //Log.println(Log.ERROR, "FROM DATABASE", "New date: " + date);
+        //Log.println(Log.ERROR, "CONSTR", "Songurl is: "+songUrl);
     }
 
 //    /* Local song creation */
@@ -132,7 +127,7 @@ public class Song implements SongSubject, DatabaseListener{
         this.album = album;
     }
 
-    public void setDatabaseKey(String key) { this.databaseKey = key;}
+    public void setDatabaseKey(String artist, String title) { this.databaseKey = title+artist;}
 
     public void setDate(Object time){
         this.date = time.toString();
@@ -200,10 +195,10 @@ public class Song implements SongSubject, DatabaseListener{
     /* -----------------------------  Default Getters ----------------------------------------- */
 
     public String getTitle(){ return title; }
-    public String getArtist(){ return artist; }
-    public String getAlbum(){ return this.album;}
+    public String getArtist(){ if (artist == null) {return "null";} else {return artist;} }
+    public String getAlbum(){  if (album == null) {return "null";} else {return album;} }
     public String getDate(){ return this.date; }
-    public String getDatabaseKey(){ return databaseKey;}
+    public String getDatabaseKey(){ return this.title+this.artist;}
     public ArrayList<HashMap<String,String>> getLocations(){ return this.locations;}
     public ArrayList<String> getUserNames(){ return this.userNames; }
 
@@ -211,9 +206,7 @@ public class Song implements SongSubject, DatabaseListener{
 
     public Pair<String,String> previousLocation () {
         HashMap<String,String> hm =  locations.get(locations.size()-1);
-        ArrayList<String> lat = new ArrayList<>(hm.keySet());
-        ArrayList<String> lon = new ArrayList<>(hm.values());
-        return new Pair<String,String>(lat.get(0),lon.get(0));
+        return new Pair<String,String>(hm.get("Latitude"),hm.get("Longitude"));
     }
 
     public ArrayList<Pair<String,String>> allLocations(){
@@ -248,16 +241,13 @@ public class Song implements SongSubject, DatabaseListener{
 
     public Boolean getDownloadStatus() {
         try {
-            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("download", MODE_PRIVATE);
+            SharedPreferences sharedTime = LibraryActivity.getContextOfApplication().getSharedPreferences("time", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedTime.getString(getTitle(), "");
             Boolean down = gson.fromJson(json, Boolean.class);
-            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
             return down;
         } catch (Exception e) {
-            Boolean down = false;
-            Log.println(Log.ERROR, "getDownload", getTitle() + " " + down.toString());
-            return down;
+            return null;
         }
     }
 
@@ -283,13 +273,17 @@ public class Song implements SongSubject, DatabaseListener{
             if (url == null){
                 url = "";
             }
-            return url;
+            this.songUrl = url;
         } catch (Exception e) {
-            return this.songUrl;
+            this.songUrl = "";
         }
+        Log.println(Log.ERROR, "getSongURL", "Songurl is: "+songUrl);
+        return this.songUrl;
     }
 
     /* ----------------------------  Database Methods  ---------------------------------------- */
+
+   
 
     /**
      * Implementing DatabaseListener
@@ -324,10 +318,126 @@ public class Song implements SongSubject, DatabaseListener{
 
     /* -------------------------  Weighting System  ------------------------------------------- */
     /**
-     * Gets weighted score of song (max 300)
-     * @return
+     * Score for each song, max score 303
+     * @param userLocation
+     * @param presentTime
+     * @return song score
      */
-    public double getScore(Location userLocation, OffsetDateTime presentTime) { return 1; }
+    public double getScore(Location userLocation, OffsetDateTime presentTime) {
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
+
+    /**
+     * Songs not downloaded yet are pushed to the bottom of the queue
+     * @param userLocation
+     * @param presentTime
+     * @return new score
+     */
+    public double getScore2(Location userLocation, OffsetDateTime presentTime) {
+        if (!getDownloadStatus()) {
+            return -5;
+        }
+        double locScore = getLocationScore(userLocation);
+        double weekScore = getWeekScore(presentTime);
+        double friendScore = getFriendScore();
+        return locScore + weekScore + friendScore;
+    }
+
+    /**
+     * helper for getScore
+     * @return location score
+     */
+    public double getLocationScore(Location userLocation) {
+
+        if (userLocation == null) {
+            return 0;
+        }
+
+        double prevFeetLat = Double.parseDouble(previousLocation().first) * latToFeet;
+        double prevFeetLong = Double.parseDouble(previousLocation().second) * longToFeet;
+        double currFeetLat = userLocation.getLatitude() * latToFeet;
+        double currFeetLong = userLocation.getLongitude() * longToFeet;
+        double distance = Math.sqrt(Math.pow(currFeetLat - prevFeetLat, 2) +
+                Math.pow(currFeetLong - prevFeetLong, 2));
+        // check if song was played within 1000 ft
+        if (distance > locRange) {
+            return 0;
+        }
+        return 102;
+    }
+
+    /**
+     * helper for getScore
+     * @param presentTime
+     * @return week score
+     */
+    public double getWeekScore(OffsetDateTime presentTime) {
+        OffsetDateTime playedTime = OffsetDateTime.parse(getDate());
+        if (playedTime == null) {
+            return 0;
+        }
+        OffsetDateTime lastWeekBegin = presentTime.minusDays(7);
+        // Monday (value 1) to Sunday (value 7) is a week
+        while (lastWeekBegin.getDayOfWeek().getValue() > 1) {
+            lastWeekBegin = lastWeekBegin.minusDays(1);
+        }
+
+        for (int i = 0; i < 7; i++) {
+            if (lastWeekBegin.getYear() == playedTime.getYear() &&
+                    lastWeekBegin.getDayOfYear() == playedTime.getDayOfYear()) {
+                return 101;
+            }
+            lastWeekBegin = lastWeekBegin.plusDays(1);
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getScore
+     * @return friend score
+     */
+    public double getFriendScore() {
+        if (isPlayedByFriend()) {
+            return 100;
+        }
+        return 0;
+    }
+
+    /**
+     * helper for getFriendScore
+     * @return true if song was played by friend, false otherwise
+     */
+    public boolean isPlayedByFriend() {
+
+        ArrayList<String> usersPlayedSong = this.getUserNames();
+        ArrayList<String> friends = user.getFriendlist();
+        if (friends.size() == 0 || usersPlayedSong.size() == 0) {
+            return false;
+        }
+
+        for (String username : usersPlayedSong) {
+            for (String friend : friends) {
+                if (username.equals(friend)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * method for testing
+     */
+    private Location loc;
+    public void setLocation(Location loc) {
+        this.loc = loc;
+    }
+    public void setUser(String string) {
+        this.userNames.add(new String(string));
+    }
 
     @Override
     public String toString(){ return this.title; }
